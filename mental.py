@@ -94,19 +94,6 @@ def set_css():
 
     """, unsafe_allow_html=True)
 
-# DATABASE CONFIG
-import pymongo
-
-# Connect to the MongoDB instance running on your machine.
-client = pymongo.MongoClient("mongodb://localhost:27017/")
-
-# Access your database. If it doesn't exist, it'll be created.
-db = client["mental_health_db"]
-
-# Access the 'users' collection from your database. If it doesn't exist, it'll be created.
-users = db["users"]
-
-
 
 
 
@@ -300,24 +287,6 @@ def get_button_labels(selected_language):
         return "Back to main menu", "Submit"
 
 
-
-def store_data_in_database(user_id, age_group, gender, assessment_data):
-    # Check if the user already exists in the database
-    existing_user = users.find_one({'user_id': user_id})
-    
-    if existing_user:
-        # Update the user's assessments
-        users.update_one({'user_id': user_id}, {'$push': {'assessments': assessment_data}})
-    else:
-            # Insert a new user
-        new_user = {
-            'user_id': user_id,
-            'age_group': age_group,
-            'gender': gender,
-            'predicted_condition': st.session_state.get('predicted_condition', None),  # Use get() to provide a default value
-            'assessments': [assessment_data]
-        }
-        users.insert_one(new_user)
 
 
 
@@ -553,7 +522,7 @@ def anxiety_assessment(selected_language):
 
           
             # Store in database
-            store_data_in_database(user_id, age_group, gender, assessment_data)
+           # store_data_in_database(user_id, age_group, gender, assessment_data)
             # Feedback and advice using GPT-3
             gpt3_prompt = f"You are a help full assistant"
             gpt3_prompt = f''' gpt3_prompt = f"""
@@ -723,7 +692,7 @@ def alcohol_addiction_assessment(selected_language):
                 'name': 'AUDIT (Alcohol Use Disorders Identification Test)',
                 'score': total_score
             }
-            store_data_in_database(user_id, age_group, gender, assessment_data)
+           # store_data_in_database(user_id, age_group, gender, assessment_data)
 
                         
             # Creating and displaying the gauge chart
@@ -896,7 +865,7 @@ def ocd_assessment(selected_language):
         'name': 'OCD Assessment (Y-BOCS)',
         'score': total_score
     }
-        store_data_in_database(user_id, age_group, gender, assessment_data)
+        #store_data_in_database(user_id, age_group, gender, assessment_data)
 
         with st.spinner('Processing your answers...'):
             
@@ -1064,7 +1033,7 @@ def ptsd_assessment(selected_language):
                 'name': 'PTSD Assessment (Post-Traumatic Stress Disorder)',
                 'score': total_score
             }
-        store_data_in_database(user_id, age_group, gender, assessment_data)
+        #store_data_in_database(user_id, age_group, gender, assessment_data)
 
         
         with st.spinner('Processing your answers...'):
@@ -1225,7 +1194,7 @@ def drug_use_addiction_assessment(selected_language):
                 'name': 'Drug DAST-10 Assessment',
                 'score': total_score
             }
-            store_data_in_database(user_id, age_group, gender, assessment_data)
+            #store_data_in_database(user_id, age_group, gender, assessment_data)
 
             
             
@@ -1368,7 +1337,7 @@ def adhd_assessment(selected_language):
             'name': 'ADHD Assessment',
             'score': total_score
         }
-        store_data_in_database(user_id, age_group, gender, assessment_data)
+        #store_data_in_database(user_id, age_group, gender, assessment_data)
 
 
         with st.status(state="running", label="Processing your answers..."):
@@ -1503,7 +1472,7 @@ def psq_assessment(selected_language):
             'name': 'Ptsd Assessment',
             'score': total_psq_score
         }
-        store_data_in_database(user_id, age_group, gender, assessment_data)
+        #store_data_in_database(user_id, age_group, gender, assessment_data)
 
         
         with st.spinner('Processing your answers...'):
@@ -1653,7 +1622,7 @@ def depression_assessment(selected_language):
             'name': 'Depression Assessment',
             'score': total_score
         }
-        store_data_in_database(user_id, age_group, gender, assessment_data)
+        #store_data_in_database(user_id, age_group, gender, assessment_data)
 
         with st.spinner('Processing the input and generating predictions...'):
        
@@ -1831,7 +1800,7 @@ def iqcode_assessment(selected_language):
             'name': 'IQCODE Assessment',
             'score': total_score
         }
-        store_data_in_database(user_id, age_group, gender, assessment_data)
+       # store_data_in_database(user_id, age_group, gender, assessment_data)
 
         with st.spinner('Processing the input and generating predictions...'):
             # Creating and displaying the gauge chart
@@ -1997,7 +1966,7 @@ def bipolar_assessment(selected_language):
             'name': 'Bipolar Assesment',
             'score': total_score
         }
-        store_data_in_database(user_id, age_group, gender, assessment_data)
+        #store_data_in_database(user_id, age_group, gender, assessment_data)
 
         with st.spinner('Processing the input and generating predictions...'):
 
