@@ -2260,7 +2260,7 @@ def render_model_prediction_page(selected_language):
     st.subheader(title)
 
     # Collect user's age and gender
-    age = st.number_input('Enter your age:', min_value=13, max_value=100, value=None, step=None)
+    age = st.number_input('Enter your age:', min_value=13, max_value=99, value=13)
 
     gender = st.selectbox('Select your gender:', ['', 'Male', 'Female'])
 
