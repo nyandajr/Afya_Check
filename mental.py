@@ -347,7 +347,8 @@ def sanitize_text(text):
 
 # Initialize the OpenAI API key
 def initialize_openai():
-    openai.api_key = os.environ.get('OPENAI_API_KEY')
+    openai.api_key = st.secrets["general"]["my_api_key"]
+
 
 # Generate GPT-3 response
 def get_gpt3_response(prompt, language="English", temperature=0.7):
