@@ -229,7 +229,14 @@ def set_age_input_style():
     """, unsafe_allow_html=True)
 
 
-
+def navigate_back_to_menu(selected_language):
+    """
+    Display a "Back to main menu" button and handle its click.
+    """
+    back_button_label, _ = get_button_labels(selected_language)
+    if st.button(back_button_label):  # "Back to main menu"
+        st.session_state.page = "menu"  # Set the page state to "menu"
+        st.experimental_rerun()  # Rerun the app to go to the main menu
 
 
     
@@ -465,13 +472,7 @@ def anxiety_assessment(selected_language):
     back_button_label, submit_button_label = get_button_labels(selected_language)
 
     col1, col2 = st.columns(2)
-    
-    # Use the language-specific labels for buttons
-    if col2.button(back_button_label, key = 'back'):  # "Back to main menu"
-        st.session_state.page = "menu"  # Set the page state to "menu"
-        st.experimental_rerun()  # Rerun the app to go to the main menu
-
-
+   
     
     
 
@@ -664,7 +665,7 @@ def alcohol_addiction_assessment(selected_language):
 
     col1, col2 = st.columns(2)
     
-    
+
 
 
    
@@ -835,7 +836,12 @@ def ocd_assessment(selected_language):
       # Get the button labels based on the language
     back_button_label, submit_button_label = get_button_labels(selected_language)
     
-   
+     # Use the language-specific labels for buttons
+    if col2.button(back_button_label, key = 'back'):  # "Back to main menu"
+        st.session_state.page = "menu"  # Set the page state to "menu"
+        st.experimental_rerun()  # Rerun the app to go to the main menu
+
+
 
     if col1.button(submit_button_label):  # Place the "Submit" button in the left column
         # The rest of your existing logic for processing the form submission remains here...
@@ -2062,7 +2068,11 @@ def render_assessments_page(selected_language):
 
         col1, col2, col3 = st.columns([1, 2, 1])
 
-      
+        # Check the selected_language and set the appropriate button label
+        if selected_language == "English":
+            back_button_label = "Back to Main Menu"
+        else:
+            back_button_label = "Rudi kwenye Menu Kuu"
 
         # Use the set button label
         if col2.button(back_button_label):
@@ -2078,7 +2088,10 @@ def render_assessments_page(selected_language):
                 st.session_state.selected_assessment = assessments[i+1][1]
                 st.experimental_rerun()
 
-      
+        # Add the Back to Main Menu button at the end
+        if st.button("Back to Main Menu"):
+            st.session_state.page = "menu"
+            st.experimental_rerun()
     # Display the chosen assessment based on session state
     if 'selected_assessment' in st.session_state and st.session_state.selected_assessment:
         if 'selected_assessment' in st.session_state:
