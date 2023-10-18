@@ -211,8 +211,43 @@ def register():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     
-    flash("The username laizer already exists")
-    return render_template('register.html', title='Register')
+    if request.method == "GET":
+        return render_template('register.html', title='Register')
+    
+    # post method
+    username = request.form.get("username").strip()
+    age = request.form.get("age")
+    gender = request.form.get("gender")
+    password = request.form.get("password")
+    confirm_password = request.form.get("confirm_password")
+
+    if password != confirm_password:
+        flash("Passwords do not match")
+        return render_template('register.html', title='Register')
+    
+    user = User.query.filter_by(username=username).first()
+    if user:
+        flash(f"The username {user.username} already exists")
+        return render_template('register.html', title='Register')
+    
+    if len(username) < 4:
+        flash("Username must be at least 4 characters")
+        return render_template('register.html', title='Register')
+    
+    if len(password) < 6:
+        flash("Password must be at least 6 characters")
+        return render_template('register.html', title='Register')
+    
+    if int(age) < 13:
+        flash("You must be at least 13 years old to register")
+        return render_template('register.html', title='Register')
+    
+    user = User(username=username, age=age, gender=gender, password=password)
+    db.session.add(user)
+    db.session.commit()
+    
+    flash(f"Welcome, {username}. Please login to continue.")
+    return redirect(url_for('login'))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

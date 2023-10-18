@@ -7,7 +7,7 @@
 <div class="mb-3">
     <small class="text-warning">
         <strong>Disclaimer:</strong>
-        We dont collect any personal information. Use a non-identifying but 
+        We do not collect any personal information. Use a non-identifying but 
         unique username and a strong password
     </small>
 </div>
@@ -18,18 +18,29 @@
         </div>
     {% endfor %}
     
-    <form action="{{url_for('register')}}">
+    <form method="post" action="{{url_for('register')}}">
         <div class="mb-3">
             <label for="username" class="form-label subtext">Username</label>
-            <input type="text" name="username" id="username" class="custom-form-control" placeholder="George Russel">
+            <input type="text" name="username" id="username" class="custom-form-control" placeholder="George Russel" required>
+        </div>
+        <div class="mb-3">
+            <label for="age" class="form-label subtext">Enter your age:</label>
+            <input type="text" class="custom-form-control" name="age" id="age" inputmode="numeric" placeholder="26" required>
+        </div>
+        <div class="mb-3">
+            <label for="gender" class="form-label subtext">Select your gender:</label>
+            <select name="gender" id="gender" class="custom-form-select" required>
+                <option value="Female" selected>Female</option>
+                <option value="Male">Male</option>
+            </select>
         </div>
         <div class="mb-3">
             <label for="password" class="form-label subtext">Password</label>
-            <input type="password" name="password" id="password" class="custom-form-control" placeholder="password">
+            <input type="password" name="password" id="password" class="custom-form-control" placeholder="password" required>
         </div>
         <div class="mb-3">
             <label for="confirm_password" class="form-label subtext">Confirm Password</label>
-            <input type="password" name="confirm_password" id="confirm_password" class="custom-form-control" placeholder="password">
+            <input type="password" name="confirm_password" id="confirm_password" class="custom-form-control" placeholder="password" required>
         </div>
         <div class="mb-3 text-center">
             <input type="submit" value="Register" class="custom-btn px-4 text">
