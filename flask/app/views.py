@@ -1,6 +1,7 @@
 from app import app, db
 from flask import render_template, flash, request, redirect, url_for
 import plotly.graph_objs as go
+from plotly.graph_objects import Layout
 from flask_login import login_user, logout_user, current_user, login_required
 from app.schema import User
 
@@ -156,10 +157,11 @@ def create_gauge_chart(score, max_score=27, assessment_name="Assessment"):
     else:
         tick_interval = 10
 
+    layout = Layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font=dict(color='white'))
     fig = go.Figure(go.Indicator(
         mode="gauge+number",
         value=score,
-        title={'text': f"Your {assessment_name} Score", 'font': {'size': 24}},
+        title={'text': f"Your {assessment_name} Score", 'font': {'size': 24, 'color': 'white'}},
         domain={'x': [0, 1], 'y': [0, 1]},
         gauge={
             'axis': {'range': [0, max_score], 'tickvals': list(range(0, max_score + 1, tick_interval)), 'ticktext': [str(i) for i in range(0, max_score + 1, tick_interval)]},
@@ -170,9 +172,9 @@ def create_gauge_chart(score, max_score=27, assessment_name="Assessment"):
             ],
             'bar': {'color': 'black'}
         }
-    ))
-
-    fig.update_layout(plot_bgcolor='rgb(45, 52, 65)')
+    ),
+    layout=layout
+    )
 
     # Enhancements
     if score <= 0.3 * max_score:
@@ -182,7 +184,7 @@ def create_gauge_chart(score, max_score=27, assessment_name="Assessment"):
     else:
         level = "High"
     
-    fig.add_annotation(dict(font=dict(color="black", size=30),
+    fig.add_annotation(dict(font=dict(color="white", size=30),
         x=0.5,
         y=0.5,
         showarrow=False,
