@@ -1,5 +1,5 @@
 from app import app, db
-from flask import render_template
+from flask import render_template, flash
 import plotly.graph_objs as go
 
 @app.route('/')
@@ -206,8 +206,10 @@ def results():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    flash("The username laizer already exists")
     return render_template('register.html', title='Register')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    flash("Incorrect username or password")
     return render_template('login.html', title='Login')

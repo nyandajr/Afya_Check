@@ -12,9 +12,11 @@
     </small>
 </div>
 <div>
-    <div class="text-danger my-2 text-center">
-        The username xpxs has already been taken
-    </div>
+    {% for msg in get_flashed_messages() %}
+        <div class="text-danger my-2 text-center">
+            {{msg}}        
+        </div>
+    {% endfor %}
     
     <form action="{{url_for('register')}}">
         <div class="mb-3">

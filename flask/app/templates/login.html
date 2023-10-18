@@ -6,9 +6,11 @@
 </div>
 
 <div>
-    <div class="text-danger my-2 text-center">
-        Incorrect username or password
-    </div>
+    {% for msg in get_flashed_messages() %}
+        <div class="text-danger my-2 text-center">
+            {{msg}}        
+        </div>
+    {% endfor %}
     
     <form action="{{url_for('login')}}">
         <div class="mb-3">
