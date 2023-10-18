@@ -118,4 +118,28 @@ def assessments():
 
 @app.route('/assessment/<string:option>')
 def assessment(option):
-    return render_template('assessment.html', title=f"{option} Assessment")
+    ass = {
+        "title": "IQCODE Assessment",
+        "code": "IQCODE_Assessment",
+        "options": [
+            {
+                "id": 1,
+                "name": "IQCODE_Assessment_1", # f"{code}_{id}"
+                "prompt": "Does the individual forget recent events?"
+            },
+            {
+                "id": 1,
+                "name": "IQCODE_Assessment_1", # f"{code}_{id}"
+                "prompt": "Does the individual forget recent events?"
+            }
+        ]
+    }
+    return render_template(
+        'assessment.html', 
+        title=f"{option} Assessment",
+        ass=ass
+    )
+
+@app.route('/results', methods=["POST"])
+def results():
+    return render_template('results.html')

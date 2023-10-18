@@ -2,7 +2,30 @@
 
 {% block content %}
 <div class="subtitle text-center">
+    {{ ass.title }}
+</div>
+<div class="my-3">
+    <strong>Disclaimer:</strong> 
+    This tool is for informational purposes and is not a diagnostic tool. The results 
+    from this tool do not replace professional medical advice. Always consult with a 
+    healthcare professional for a comprehensive assessment.
 </div>
 <div class="row my-4">
+    <form action="{{url_for('results')}}" method="post">
+        {% for opt in ass.options %}
+            <div class="mb-3">
+                <label for="{{opt.name}}" class="form-label subtext">{{ opt.prompt }}</label>
+                <select name="{{opt.name}}" id="{{opt.name}}" class="custom-form-select">
+                    <option value="Never" selected>Never</option>
+                    <option value="Rarely">Rarely</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Often">Often</option>
+                </select>
+            </div>
+        {% endfor %}
+        <div class="mb-3">
+            <input type="submit" value="Submit" class="custom-btn px-4 subtext">
+        </div>
+    </form>
 </div>
 {% endblock content %}
