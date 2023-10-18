@@ -126,12 +126,14 @@ def assessment(option):
             {
                 "id": 1,
                 "name": "IQCODE_Assessment_1", # f"{code}_{id}"
-                "prompt": "Does the individual forget recent events?"
+                "prompt": "Does the individual forget recent events?",
+                "choices": ["Never", "Rarely", "Sometimes", "Often"]
             },
             {
                 "id": 1,
                 "name": "IQCODE_Assessment_1", # f"{code}_{id}"
-                "prompt": "Does the individual forget recent events?"
+                "prompt": "Does the individual forget recent events?",
+                "choices": ["13-24", "25-30", "31-40", "41-45", "45+"]
             }
         ]
     }

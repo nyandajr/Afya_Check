@@ -16,10 +16,9 @@
             <div class="mb-3">
                 <label for="{{opt.name}}" class="form-label subtext">{{ opt.prompt }}</label>
                 <select name="{{opt.name}}" id="{{opt.name}}" class="custom-form-select">
-                    <option value="Never" selected>Never</option>
-                    <option value="Rarely">Rarely</option>
-                    <option value="Sometimes">Sometimes</option>
-                    <option value="Often">Often</option>
+                    {% for c in opt.choices %}
+                        <option value="{{c}}">{{c}}</option>
+                    {% endfor %}
                 </select>
             </div>
         {% endfor %}
