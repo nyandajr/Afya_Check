@@ -208,6 +208,9 @@ def results():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    
     flash("The username laizer already exists")
     return render_template('register.html', title='Register')
 
