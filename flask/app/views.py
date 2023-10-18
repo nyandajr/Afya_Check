@@ -1,6 +1,8 @@
 from app import app, db
-from flask import render_template, flash
+from flask import render_template, flash, request, redirect, url_for
 import plotly.graph_objs as go
+from flask_login import login_user, logout_user, current_user, login_required
+from app.schema import User
 
 @app.route('/')
 @app.route('/home')
@@ -211,5 +213,20 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    flash("Incorrect username or password")
-    return render_template('login.html', title='Login')
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    
+    if request.method == "GET":
+        return render_template('login.html', title='Login')
+    
+    # post method
+    username = request.form.get("username")
+    password = request.form.get("password")
+    user = User.query.filter_by(username=username).first()
+
+    if user and user.password == password:
+        login_user(user)
+        return render_template('index.html', title='Welcome')
+    else:
+        flash("Incorrect username or password")
+        return render_template('login.html', title='Login')

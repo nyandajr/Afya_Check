@@ -12,7 +12,7 @@
         </div>
     {% endfor %}
     
-    <form action="{{url_for('login')}}">
+    <form method="post" action="{{url_for('login')}}">
         <div class="mb-3">
             <label for="username" class="form-label subtext">Username</label>
             <input type="text" name="username" id="username" class="custom-form-control" placeholder="George Russel">
