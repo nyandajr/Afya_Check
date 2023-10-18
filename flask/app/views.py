@@ -108,6 +108,14 @@ def check_in():
     ]
     return render_template('checkin.html', title='Early Check-In', items=items)
 
-@app.route('/assessment')
-def assessment():
-    return render_template('assessment.html', title='Assessment')
+@app.route('/assessments')
+def assessments():
+    ass = [
+        "ADHD", "Alcohol", "Anxiety", "Bipolar", "Depression",
+        "Dementia", "Drug", "OCD", "PSQ", "PTSD"
+    ]
+    return render_template('assessments.html', title='Assessment', ass=ass)
+
+@app.route('/assessment/<string:option>')
+def assessment(option):
+    return render_template('assessment.html', title=f"{option} Assessment")

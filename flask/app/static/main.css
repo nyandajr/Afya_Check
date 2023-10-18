@@ -85,3 +85,13 @@ input[type="checkbox"]:checked{
     background-color: #4CAF50;
     border: #4CAF50;
 }
+
+.link {
+    /* text-decoration: none; */
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.link:hover{
+    color: #3e8e41;
+}
