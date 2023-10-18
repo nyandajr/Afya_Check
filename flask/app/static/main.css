@@ -95,3 +95,7 @@ input[type="checkbox"]:checked{
 .link:hover{
     color: #3e8e41;
 }
+
+.text-green {
+    color: #4CAF50;
+}
