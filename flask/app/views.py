@@ -258,7 +258,7 @@ def login():
         return render_template('login.html', title='Login')
     
     # post method
-    username = request.form.get("username")
+    username = request.form.get("username").strip()
     password = request.form.get("password")
     user = User.query.filter_by(username=username).first()
 

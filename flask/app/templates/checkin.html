@@ -5,17 +5,19 @@
     Early Check-in
 </div>
 <form action="" method="post">
-    <div class="mt-3">
-        <label for="age" class="form-label subtext">Enter your age:</label>
-        <input type="text" class="custom-form-control" name="age" id="age" placeholder="0">
-    </div>
-    <div class="mt-3">
-        <label for="language" class="form-label subtext">Select your gender:</label>
-        <select name="language" id="language" class="custom-form-select">
-            <option value="female" selected>Female</option>
-            <option value="male">Male</option>
-        </select>
-    </div>
+    {% if not current_user.is_authenticated %}
+        <div class="mt-3">
+            <label for="age" class="form-label subtext">Enter your age:</label>
+            <input type="text" class="custom-form-control" name="age" id="age" placeholder="0">
+        </div>
+        <div class="mt-3">
+            <label for="language" class="form-label subtext">Select your gender:</label>
+            <select name="language" id="language" class="custom-form-select">
+                <option value="female" selected>Female</option>
+                <option value="male">Male</option>
+            </select>
+        </div>
+    {% endif %}
     <!-- check-in options -->
     <div class="my-4 text">
         {% for item in items %}

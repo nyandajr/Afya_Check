@@ -24,7 +24,7 @@
 			{% if current_user.is_authenticated %}
 				<a href="{{url_for('index')}}" class="nv-link text {% if curr_page=='profile' %}active{% endif %}">
 					<i class="bi bi-file-check-fill"></i>
-					scores
+					Scores
 				</a>
 				<span class="mx-2 fw-bold">|</span>
 				<a href="{{url_for('logout')}}" class="nv-link text {% if curr_page=='logout' %}active{% endif %}">
