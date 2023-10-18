@@ -19,13 +19,23 @@
 				Welcome
 			</a>
 			<span class="mx-2 fw-bold">|</span>
-			<a href="{{url_for('login')}}" class="nv-link text {% if curr_page=='login' %}active{% endif %}">
-				Login
-			</a>
-			<span class="mx-2 fw-bold">|</span>
-			<a href="{{url_for('register')}}" class="nv-link text {% if curr_page=='register' %}active{% endif %}">
-				Register
-			</a>
+			{% if current_user.is_authenticated %}
+				<a href="{{url_for('index')}}" class="nv-link text {% if curr_page=='profile' %}active{% endif %}">
+					Results
+				</a>
+				<span class="mx-2 fw-bold">|</span>
+				<a href="{{url_for('logout')}}" class="nv-link text {% if curr_page=='logout' %}active{% endif %}">
+					Logout
+				</a>
+			{% else %}
+				<a href="{{url_for('login')}}" class="nv-link text {% if curr_page=='login' %}active{% endif %}">
+					Login
+				</a>
+				<span class="mx-2 fw-bold">|</span>
+				<a href="{{url_for('register')}}" class="nv-link text {% if curr_page=='register' %}active{% endif %}">
+					Register
+				</a>
+			{% endif %}
 		</div>
 		<div class="my-3">
 			<div class="border-green flexy">
