@@ -22,7 +22,7 @@
 			</a>
 			<span class="mx-2 fw-bold">|</span>
 			{% if current_user.is_authenticated %}
-				<a href="{{url_for('index')}}" class="nv-link text {% if curr_page=='profile' %}active{% endif %}">
+				<a href="{{url_for('scores')}}" class="nv-link text {% if curr_page=='scores' %}active{% endif %}">
 					<i class="bi bi-file-check-fill"></i>
 					Scores
 				</a>

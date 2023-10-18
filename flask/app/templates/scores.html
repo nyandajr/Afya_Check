@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="subtitle text-center my-2">
+    Previous Assessment Scores
+</div>
+<div>
+    <p>
+        Hello, {{ current_user.username }}. Here is a summary of the assessments you've taken so far:
+    </p>
+</div>
+{% endblock content %}
+
+{% set curr_page="scores" %}

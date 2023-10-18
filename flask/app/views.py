@@ -274,3 +274,8 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+@app.route('/scores')
+@login_required
+def scores():
+    return render_template('scores.html', title='Scores')
