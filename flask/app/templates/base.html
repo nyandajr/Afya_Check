@@ -13,10 +13,24 @@
 
 <body class="custom-bg-dark text-white mx-2">
 	<div class="col-lg-6 mt-5 mx-auto">
+		<div class="text-center">
+			<h1 class="title">Akili Check</h1>
+			<a href="" class="nv-link text {% if curr_page=='home' %}active{% endif %}">
+				Welcome
+			</a>
+			<span class="mx-2 fw-bold">|</span>
+			<a href="" class="nv-link text {% if curr_page=='login' %}active{% endif %}">
+				Login
+			</a>
+			<span class="mx-2 fw-bold">|</span>
+			<a href="" class="nv-link text {% if curr_page=='register' %}active{% endif %}">
+				Register
+			</a>
+		</div>
 		<div class="my-3">
-			<label for="language" class="form-label subtext">Choose your language:</label>
-			<div class="border-green">
-				<select name="language" id="language" class="custom-form-select">
+			<div class="border-green flexy">
+				<label for="language" class="form-label subtext">Choose your language:</label>
+				<select name="language" id="language" class="custom-form-select-sm">
 					<option value="en" selected>English</option>
 					<option value="sw">Kiswahili</option>
 				</select>

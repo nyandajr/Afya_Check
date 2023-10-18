@@ -32,6 +32,18 @@
     outline: none;
 }
 
+.custom-form-select-sm {
+    background-color: rgb(45, 52, 65);
+    color: white;
+    border: 1px solid #d1d1d1;
+    font-size: 0.9rem;
+    width: 100%;
+    padding: 5px;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+}
+
 .custom-form-control {
     background-color: rgb(45, 52, 65);
     color: white;
@@ -96,6 +108,31 @@ input[type="checkbox"]:checked{
     color: #3e8e41;
 }
 
+.nv-link {
+    text-decoration: none;
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.nv-link:hover {
+    color: #327434;
+}
+
+.active {
+    color: #327434 !important;
+}
+
 .text-green {
     color: #4CAF50;
+}
+
+.flexy {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+}
+
+.flexy label {
+    white-space: nowrap;
 }

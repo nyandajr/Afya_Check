@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="text-center fw-bold">
-	<h1 class="title">Akili Check</h1>
+<div class="text-center">
 	<h3 class="subtitle">Welcome to Akili Check</h3>
 </div>
 <div class="text">
@@ -29,3 +28,5 @@
 	<a href="{{url_for('assessments')}}" class="col text-center custom-btn">Assessment</a>
 </div>
 {% endblock content %}
+
+{% set curr_page="home" %}
