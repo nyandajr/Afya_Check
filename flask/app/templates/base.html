@@ -15,15 +15,15 @@
 	<div class="col-lg-6 mt-5 mx-auto">
 		<div class="text-center">
 			<h1 class="title">Akili Check</h1>
-			<a href="" class="nv-link text {% if curr_page=='home' %}active{% endif %}">
+			<a href="{{url_for('index')}}" class="nv-link text {% if curr_page=='home' %}active{% endif %}">
 				Welcome
 			</a>
 			<span class="mx-2 fw-bold">|</span>
-			<a href="" class="nv-link text {% if curr_page=='login' %}active{% endif %}">
+			<a href="{{url_for('login')}}" class="nv-link text {% if curr_page=='login' %}active{% endif %}">
 				Login
 			</a>
 			<span class="mx-2 fw-bold">|</span>
-			<a href="" class="nv-link text {% if curr_page=='register' %}active{% endif %}">
+			<a href="{{url_for('register')}}" class="nv-link text {% if curr_page=='register' %}active{% endif %}">
 				Register
 			</a>
 		</div>

@@ -203,3 +203,11 @@ def results():
         res=res,
         plot=create_gauge_chart(10, max_score=27, assessment_name="ADHD")
     )
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    return render_template('register.html', title='Register')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    return render_template('login.html', title='Login')
