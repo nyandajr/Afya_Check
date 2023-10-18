@@ -1,6 +1,39 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="subtitle text-center">
+    Registration
+</div>
+<div class="mb-3">
+    <small class="text-warning">
+        <strong>Disclaimer:</strong>
+        We dont collect any personal information. Use a non-identifying but 
+        unique username and a strong password
+    </small>
+</div>
+<div>
+    <div class="text-danger my-2 text-center">
+        The username xpxs has already been taken
+    </div>
+    
+    <form action="{{url_for('register')}}">
+        <div class="mb-3">
+            <label for="username" class="form-label subtext">Username</label>
+            <input type="text" name="username" id="username" class="custom-form-control" placeholder="George Russel">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label subtext">Password</label>
+            <input type="password" name="password" id="password" class="custom-form-control" placeholder="password">
+        </div>
+        <div class="mb-3">
+            <label for="confirm_password" class="form-label subtext">Confirm Password</label>
+            <input type="password" name="confirm_password" id="confirm_password" class="custom-form-control" placeholder="password">
+        </div>
+        <div class="mb-3 text-center">
+            <input type="submit" value="Register" class="custom-btn px-4 text">
+        </div>
+    </form>
+</div>
 {% endblock content %}
 
 {% set curr_page="register" %}
