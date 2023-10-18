@@ -1,5 +1,6 @@
 from app import app, db
 from flask import render_template
+import plotly.graph_objs as go
 
 @app.route('/')
 @app.route('/home')
@@ -140,6 +141,63 @@ def assessment(option):
         ass=ass
     )
 
+def create_gauge_chart(score, max_score=27, assessment_name="Assessment"):
+    # Determine tick interval based on max_score
+    if max_score <= 10:
+        tick_interval = 1
+    elif max_score <= 20:
+        tick_interval = 2
+    elif max_score <= 50:
+        tick_interval = 5
+    else:
+        tick_interval = 10
+
+    fig = go.Figure(go.Indicator(
+        mode="gauge+number",
+        value=score,
+        title={'text': f"Your {assessment_name} Score", 'font': {'size': 24}},
+        domain={'x': [0, 1], 'y': [0, 1]},
+        gauge={
+            'axis': {'range': [0, max_score], 'tickvals': list(range(0, max_score + 1, tick_interval)), 'ticktext': [str(i) for i in range(0, max_score + 1, tick_interval)]},
+            'steps': [
+                {'range': [0, 0.3*max_score], 'color': 'green'},
+                {'range': [0.3*max_score, 0.7*max_score], 'color': 'yellow'},
+                {'range': [0.7*max_score, max_score], 'color': 'red'}
+            ],
+            'bar': {'color': 'black'}
+        }
+    ))
+
+    fig.update_layout(plot_bgcolor='rgb(45, 52, 65)')
+
+    # Enhancements
+    if score <= 0.3 * max_score:
+        level = "Low"
+    elif score <= 0.7 * max_score:
+        level = "Medium"
+    else:
+        level = "High"
+    
+    fig.add_annotation(dict(font=dict(color="black", size=30),
+        x=0.5,
+        y=0.5,
+        showarrow=False,
+        text=f"{level} Level",
+        textangle=0,
+        xanchor="center",
+        yanchor="middle"
+    ))
+    
+    return fig.to_html(full_html=False)
+
 @app.route('/results', methods=["POST"])
 def results():
-    return render_template('results.html')
+    res = {
+        "title": "ADHD Assessment Score"
+    }
+    return render_template(
+        'results.html', 
+        title="Assessment Score", 
+        res=res,
+        plot=create_gauge_chart(10, max_score=27, assessment_name="ADHD")
+    )
