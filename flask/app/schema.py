@@ -66,7 +66,8 @@ class Assessment(db.Model):
     def to_dict(self):
         return dict(
             id=self.id, 
-            title=self.title
+            title=self.title,
+            questions=[question.to_dict() for question in self.questions]
         )
 
 
@@ -83,7 +84,8 @@ class AssessmentQuestion(db.Model):
         return dict(
             id=self.id, 
             text=self.text, 
-            assessment_id=self.assessment_id
+            assessment_id=self.assessment_id,
+            options=[option.to_dict() for option in self.options]
         )
     
 

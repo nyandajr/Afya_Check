@@ -1,7 +1,7 @@
 from app import app, db
 from flask import render_template, flash, request, redirect, url_for, jsonify
 from flask_login import login_user, logout_user, current_user, login_required
-from app.schema import User, CheckIn
+from app.schema import User, CheckIn, Assessment, AssessmentOption, AssessmentQuestion
 from app.utils import create_gauge_chart, get_predicted_condition, get_recommended_assessment
 
 @app.route('/')
@@ -49,29 +49,8 @@ def assessments():
 
 @app.route('/assessment/<string:option>')
 def assessment(option):
-    ass = {
-        "title": "IQCODE Assessment",
-        "code": "IQCODE_Assessment",
-        "options": [
-            {
-                "id": 1,
-                "name": "IQCODE_Assessment_1", # f"{code}_{id}"
-                "prompt": "Does the individual forget recent events?",
-                "choices": ["Never", "Rarely", "Sometimes", "Often"]
-            },
-            {
-                "id": 1,
-                "name": "IQCODE_Assessment_1", # f"{code}_{id}"
-                "prompt": "Does the individual forget recent events?",
-                "choices": ["13-24", "25-30", "31-40", "41-45", "45+"]
-            }
-        ]
-    }
-    return render_template(
-        'assessment.html', 
-        title=f"{option} Assessment",
-        ass=ass
-    )
+    ass = Assessment.query.filter(Assessment.title.like(f"%{option}%")).first()
+    return render_template('assessment.html', title=f"{option} Assessment", ass=ass)
 
 @app.route('/results', methods=["POST"])
 def results():
@@ -158,3 +137,25 @@ def logout():
 @login_required
 def scores():
     return render_template('scores.html', title='Scores')
+
+@app.route('/fill', methods=['POST'])
+def fill():
+    data = request.json
+    title = data["title"]
+    questions = data["questions"]
+
+    assessment = Assessment(title=title)
+    db.session.add(assessment)
+    db.session.commit()
+
+    for q in questions:
+        question = AssessmentQuestion(text=q["text"], assessment_id=assessment.id)
+        db.session.add(question)
+        db.session.commit()
+
+        for o in q["options"]:
+            option = AssessmentOption(text=o, assessment_question_id=question.id)
+            db.session.add(option)
+            db.session.commit()
+
+    return jsonify("Assessment filled successfully")

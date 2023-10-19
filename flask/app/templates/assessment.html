@@ -31,12 +31,12 @@
                 </select>
             </div>
         {% endif %}
-        {% for opt in ass.options %}
+        {% for qn in ass.questions %}
             <div class="mb-3">
-                <label for="{{opt.name}}" class="form-label subtext">{{ opt.prompt }}</label>
-                <select name="{{opt.name}}" id="{{opt.name}}" class="custom-form-select">
-                    {% for c in opt.choices %}
-                        <option value="{{c}}">{{c}}</option>
+                <label for="id_{{qn.id}}" class="form-label subtext">{{ qn.text }}</label>
+                <select name="id_{{qn.id}}" id="id_{{qn.id}}" class="custom-form-select">
+                    {% for o in qn.options %}
+                        <option value="{{o.text}}">{{o.text}}</option>
                     {% endfor %}
                 </select>
             </div>
