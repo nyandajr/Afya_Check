@@ -4,15 +4,15 @@
 <div class="subtitle text-center">
     Early Check-in
 </div>
-<form action="" method="post">
+<form action="{{url_for('check_in')}}" method="post">
     {% if not current_user.is_authenticated %}
         <div class="mt-3">
             <label for="age" class="form-label subtext">Enter your age:</label>
-            <input type="text" class="custom-form-control" name="age" id="age" placeholder="0">
+            <input type="text" class="custom-form-control" name="age" id="age" placeholder="0" required>
         </div>
         <div class="mt-3">
-            <label for="language" class="form-label subtext">Select your gender:</label>
-            <select name="language" id="language" class="custom-form-select">
+            <label for="gender" class="form-label subtext">Select your gender:</label>
+            <select name="gender" id="gender" class="custom-form-select" required>
                 <option value="female" selected>Female</option>
                 <option value="male">Male</option>
             </select>
@@ -25,7 +25,13 @@
                 <strong>{{ item.title }}:</strong>
                 {% for opt in item.options %}
                     <div class="form-check mt-3">
-                        <input class="form-check-input" type="checkbox" value="{{opt.text}}" id="{{item.id}}-{{opt.id}}">
+                        <input 
+                            class="form-check-input" 
+                            type="checkbox" 
+                            value="{{opt.text}}" 
+                            name="symptoms" 
+                            id="{{item.id}}-{{opt.id}}"
+                        >
                         <label class="form-check-label ms-2" for="{{item.id}}-{{opt.id}}">
                             {{ opt.text }}
                         </label>

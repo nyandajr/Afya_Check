@@ -1,5 +1,5 @@
 from app import app, db
-from flask import render_template, flash, request, redirect, url_for
+from flask import render_template, flash, request, redirect, url_for, jsonify
 import plotly.graph_objs as go
 from plotly.graph_objects import Layout
 from flask_login import login_user, logout_user, current_user, login_required
@@ -10,14 +10,23 @@ from app.schema import User, CheckIn, CheckInOption
 def index():
     return render_template('index.html', title='Welcome')
 
-@app.route('/check-in')
+@app.route('/check-in', methods=['GET', 'POST'])
 def check_in():
-    items = []
-    ci = CheckIn.query.all()
-    for c in ci:
-        items.append(c.to_dict())
+    if request.method == "GET":
+        items = []
+        ci = CheckIn.query.all()
+        for c in ci:
+            items.append(c.to_dict())
+        return render_template('checkin.html', title='Early Check-In', items=items)
+    
+    # post method
+    data = request.form
+    age = data.get("age")
+    gender = data.get("gender")
+    symptoms = data.getlist("symptoms")
 
-    return render_template('checkin.html', title='Early Check-In', items=items)
+    print(age, gender, symptoms)
+    return jsonify(symptoms)
 
 @app.route('/assessments')
 def assessments():
