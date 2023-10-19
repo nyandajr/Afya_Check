@@ -24,6 +24,10 @@ def check_in():
     gender = data.get("gender")
     symptoms = data.getlist("symptoms")
 
+    if current_user.is_authenticated:
+        age = current_user.age
+        gender = current_user.gender
+
     if int(age) < 13:
         return jsonify({"error": "You must be at least 13 years old to register"})
     
