@@ -12,6 +12,48 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return f"<User {self.username}>"
+    
+    def to_dict(self):
+        return dict(
+            id=self.id, 
+            username=self.username, 
+            age=self.age, 
+            gender=self.gender, 
+            date_registered=self.date_registered
+        )
+
+
+class CheckIn(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(), nullable=False)
+    options = db.relationship('CheckInOption', backref='check_in', lazy=True)
+
+    def __repr__(self):
+        return f"<CheckIn {self.title}>"
+    
+    def to_dict(self):
+        return dict(
+            id=self.id, 
+            title=self.title, 
+            options=[option.to_dict() for option in self.options]
+        )
+    
+
+class CheckInOption(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.String(), nullable=False)
+    checkin_id = db.Column(db.Integer, db.ForeignKey('check_in.id'), nullable=False)
+
+    def __repr__(self):
+        return f"<CheckInOption {self.text}>"
+    
+    def to_dict(self):
+        return dict(
+            id=self.id, 
+            text=self.text, 
+            checkin_id=self.checkin_id
+        )
+
 
 @login_manager.user_loader
 def load_user(user_id):

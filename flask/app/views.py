@@ -3,7 +3,7 @@ from flask import render_template, flash, request, redirect, url_for
 import plotly.graph_objs as go
 from plotly.graph_objects import Layout
 from flask_login import login_user, logout_user, current_user, login_required
-from app.schema import User
+from app.schema import User, CheckIn
 
 @app.route('/')
 @app.route('/home')
@@ -110,6 +110,11 @@ def check_in():
             ]
         }
     ]
+    
+    ci = CheckIn.query.all()
+    for c in ci:
+        items.append(c.to_dict())
+
     return render_template('checkin.html', title='Early Check-In', items=items)
 
 @app.route('/assessments')
