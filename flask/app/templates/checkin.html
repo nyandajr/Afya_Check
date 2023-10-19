@@ -4,7 +4,7 @@
 <div class="subtitle text-center">
     Early Check-in
 </div>
-<form action="{{url_for('check_in')}}" method="post">
+<form action="{{url_for('check_in')}}" method="post" id="checkInForm">
     {% if not current_user.is_authenticated %}
         <div class="mt-3">
             <label for="age" class="form-label subtext">Enter your age:</label>
@@ -40,15 +40,14 @@
             </div>
         {% endfor %}
     </div>
+    <div id="alert" class="alert alert-success p-2 mb-3"></div>
     <div class="mb-3 text-center">
-        <input type="submit" value="Check" class="custom-btn px-4 text">
+        <button type="submit" class="custom-btn px-4 text" id="checkButton">Check</button>
     </div>
 </form>
-<div class="mb-3 border-green text rounded-5">
+<div class="mb-3 border-green text rounded-5" id="results">
     Based on your symptoms, we recommend taking the following assessment(s) for a more 
     comprehensive evaluation: &nbsp;
-    <a href="{{url_for('assessment', option='Depression')}}" class="link">Depression</a>
-    , &nbsp;
-    <a href="{{url_for('assessment', option='Bipolar')}}" class="link">Bipolar</a>
+    <div id="resultsLink"></div>
 </div>
 {% endblock content %}
