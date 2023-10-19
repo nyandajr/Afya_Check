@@ -12,6 +12,25 @@
 </div>
 <div class="row my-4">
     <form action="{{url_for('results')}}" method="post">
+        {% if not current_user.is_authenticated %}
+            <div class="mb-3">
+                <label for="age" class="form-label subtext">Select Age Group:</label>
+                <select name="age" id="age" class="custom-form-select" required>
+                    <option value="15-24" selected>15-24</option>
+                    <option value="25-34">25-34</option>
+                    <option value="35-44">35-44</option>
+                    <option value="45-54">45-54</option>
+                    <option value="55+">55+</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="gender" class="form-label subtext">Select Gender:</label>
+                <select name="gender" id="gender" class="custom-form-select" required>
+                    <option value="female" selected>Female</option>
+                    <option value="male">Male</option>
+                </select>
+            </div>
+        {% endif %}
         {% for opt in ass.options %}
             <div class="mb-3">
                 <label for="{{opt.name}}" class="form-label subtext">{{ opt.prompt }}</label>
