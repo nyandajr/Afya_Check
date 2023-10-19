@@ -1,9 +1,8 @@
 from app import app, db
 from flask import render_template, flash, request, redirect, url_for, jsonify
-import plotly.graph_objs as go
-from plotly.graph_objects import Layout
 from flask_login import login_user, logout_user, current_user, login_required
-from app.schema import User, CheckIn, CheckInOption
+from app.schema import User, CheckIn
+from app.utils import create_gauge_chart, get_predicted_condition, get_recommended_assessment
 
 @app.route('/')
 @app.route('/home')
@@ -25,8 +24,16 @@ def check_in():
     gender = data.get("gender")
     symptoms = data.getlist("symptoms")
 
-    print(age, gender, symptoms)
-    return jsonify(symptoms)
+    if int(age) < 13:
+        return jsonify({"error": "You must be at least 13 years old to register"})
+    
+    if len(symptoms) < 1:
+        return jsonify({"error": "You must select at least one symptom"})
+
+    selected_language = "English"
+    predicted_condition = get_predicted_condition(age, gender, selected_language, symptoms)
+    recommended_assessments = get_recommended_assessment(predicted_condition)
+    return jsonify(recommended_assessments)
 
 @app.route('/assessments')
 def assessments():
@@ -61,56 +68,6 @@ def assessment(option):
         title=f"{option} Assessment",
         ass=ass
     )
-
-def create_gauge_chart(score, max_score=27, assessment_name="Assessment"):
-    # Determine tick interval based on max_score
-    if max_score <= 10:
-        tick_interval = 1
-    elif max_score <= 20:
-        tick_interval = 2
-    elif max_score <= 50:
-        tick_interval = 5
-    else:
-        tick_interval = 10
-
-    layout = Layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font=dict(color='white'))
-    fig = go.Figure(go.Indicator(
-        mode="gauge+number",
-        value=score,
-        title={'text': f"Your {assessment_name} Score", 'font': {'size': 24, 'color': 'white'}},
-        domain={'x': [0, 1], 'y': [0, 1]},
-        gauge={
-            'axis': {'range': [0, max_score], 'tickvals': list(range(0, max_score + 1, tick_interval)), 'ticktext': [str(i) for i in range(0, max_score + 1, tick_interval)]},
-            'steps': [
-                {'range': [0, 0.3*max_score], 'color': 'green'},
-                {'range': [0.3*max_score, 0.7*max_score], 'color': 'yellow'},
-                {'range': [0.7*max_score, max_score], 'color': 'red'}
-            ],
-            'bar': {'color': 'black'}
-        }
-    ),
-    layout=layout
-    )
-
-    # Enhancements
-    if score <= 0.3 * max_score:
-        level = "Low"
-    elif score <= 0.7 * max_score:
-        level = "Medium"
-    else:
-        level = "High"
-    
-    fig.add_annotation(dict(font=dict(color="white", size=30),
-        x=0.5,
-        y=0.5,
-        showarrow=False,
-        text=f"{level} Level",
-        textangle=0,
-        xanchor="center",
-        yanchor="middle"
-    ))
-    
-    return fig.to_html(full_html=False)
 
 @app.route('/results', methods=["POST"])
 def results():
