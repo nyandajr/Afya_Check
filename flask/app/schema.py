@@ -55,6 +55,54 @@ class CheckInOption(db.Model):
         )
 
 
+class Assessment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(), nullable=False)
+    questions = db.relationship('AssessmentQuestion', backref='assessment', lazy=True)
+
+    def __repr__(self):
+        return f"<Assessment {self.title}>"
+    
+    def to_dict(self):
+        return dict(
+            id=self.id, 
+            title=self.title
+        )
+
+
+class AssessmentQuestion(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.String(), nullable=False)
+    assessment_id = db.Column(db.Integer, db.ForeignKey('assessment.id'), nullable=False)
+    options = db.relationship('AssessmentOption', backref='assessment_question', lazy=True)
+
+    def __repr__(self):
+        return f"<AssessmentQuestion {self.text}>"
+    
+    def to_dict(self):
+        return dict(
+            id=self.id, 
+            text=self.text, 
+            assessment_id=self.assessment_id
+        )
+    
+
+class AssessmentOption(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.String(), nullable=False)
+    assessment_question_id = db.Column(db.Integer, db.ForeignKey('assessment_question.id'), nullable=False)
+
+    def __repr__(self):
+        return f"<AssessmentOption {self.text}>"
+    
+    def to_dict(self):
+        return dict(
+            id=self.id, 
+            text=self.text, 
+            assessment_question_id=self.assessment_question_id
+        )
+
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
