@@ -1,10 +1,19 @@
+:root {
+    --bg-color: rgb(14, 17, 23);
+    --primary-color: #4CAF50;
+    --primary-color-dark: #327434;
+    --white-color: white;
+    --input-bg-color: rgb(45, 52, 65);
+    --input-border-color: #d1d1d1;
+}
+
 .custom-bg-dark {
-    background-color: rgb(14, 17, 23);
+    background-color: var(--bg-color);
 }
 
 .custom-btn {
-    background-color: #4CAF50;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--white-color);
     text-decoration: none;
     padding: 0.6rem;
     border: none;
@@ -16,14 +25,14 @@
 }
 
 .custom-btn:hover {
-    background-color: #3e8e41;
-    color: white;
+    background-color: var(--primary-color-dark);
+    color: var(--white-color);
 }
 
 .custom-form-select {
-    background-color: rgb(45, 52, 65);
-    color: white;
-    border: 1px solid #d1d1d1;
+    background-color: var(--input-bg-color);
+    color: var(--white-color);
+    border: 1px solid var(--input-border-color);
     font-size: 1.1rem;
     width: 100%;
     padding: 10px;
@@ -33,9 +42,9 @@
 }
 
 .custom-form-select-sm {
-    background-color: rgb(45, 52, 65);
-    color: white;
-    border: 1px solid #d1d1d1;
+    background-color: var(--input-bg-color);
+    color: var(--white-color);
+    border: 1px solid var(--input-border-color);
     font-size: 0.9rem;
     width: 100%;
     padding: 5px;
@@ -45,8 +54,8 @@
 }
 
 .custom-form-control {
-    background-color: rgb(45, 52, 65);
-    color: white;
+    background-color: var(--input-bg-color);
+    color: var(--white-color);
     font-size: 1.1rem;
     width: 100%;
     padding: 8px;
@@ -56,11 +65,11 @@
 }
 
 .custom-form-control:focus {
-    outline: #4CAF50 solid 1px;
+    outline: var(--primary-color) solid 1px;
 }
 
 .border-green {
-    border: 2px solid #4CAF50;
+    border: 2px solid var(--primary-color);
     padding: 10px;
     border-radius: 10px;
     margin: 4px 0px;
@@ -89,41 +98,41 @@
 input[type="checkbox"]{
     width: 18px;
     height: 18px;
-    background-color: rgb(45, 52, 65);
-    border-color: #a1a1a1;
+    background-color: var(--input-bg-color);
+    border-color: var(--input-border-color);
 }
 
 input[type="checkbox"]:checked{
-    background-color: #4CAF50;
-    border: #4CAF50;
+    background-color: var(--primary-color);
+    border: var(--primary-color);
 }
 
 .link {
     /* text-decoration: none; */
-    color: #4CAF50;
+    color: var(--primary-color);
     font-weight: bold;
 }
 
 .link:hover{
-    color: #3e8e41;
+    color: var(--primary-color-dark);
 }
 
 .nv-link {
     text-decoration: none;
-    color: #4CAF50;
+    color: var(--primary-color);
     font-weight: bold;
 }
 
 .nv-link:hover {
-    color: #327434;
+    color: var(--primary-color-dark);
 }
 
 .active {
-    color: #327434 !important;
+    color: var(--primary-color-dark) !important;
 }
 
 .text-green {
-    color: #4CAF50;
+    color: var(--primary-color);
 }
 
 .flexy {
@@ -135,4 +144,13 @@ input[type="checkbox"]:checked{
 
 .flexy label {
     white-space: nowrap;
+}
+
+.theme-switch {
+    margin: 12px 12px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    float: right;
 }

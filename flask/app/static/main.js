@@ -44,4 +44,29 @@ $(document).ready(function(){
         });
         
     })
+
+    // deal with theme switching
+    themeState = localStorage.getItem("theme", "dark")
+    if (themeState == "dark"){
+        $("#themeIcon").addClass("bi-brightness-high-fill")
+        $("#themeIcon").removeClass("bi-moon-stars-fill")
+    }
+    else{
+        $("#themeIcon").addClass("bi-moon-stars-fill")
+        $("#themeIcon").removeClass("bi-brightness-high-fill")
+    }
+
+    $("#themeSwitch").click(()=>{
+        themeState = localStorage.getItem("theme", "dark")
+        if (themeState == "dark"){
+            localStorage.setItem("theme", "light")
+            $("#themeIcon").addClass("bi-moon-stars-fill")
+            $("#themeIcon").removeClass("bi-brightness-high-fill")
+        }
+        else{
+            localStorage.setItem("theme", "dark")
+            $("#themeIcon").removeClass("bi-moon-stars-fill")
+            $("#themeIcon").addClass("bi-brightness-high-fill")
+        }
+    })
 })
