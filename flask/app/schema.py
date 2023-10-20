@@ -58,6 +58,7 @@ class CheckInOption(db.Model):
 class Assessment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(), nullable=False)
+    max_score = db.Column(db.Integer, nullable=False)
     questions = db.relationship('AssessmentQuestion', backref='assessment', lazy=True)
 
     def __repr__(self):
@@ -67,6 +68,7 @@ class Assessment(db.Model):
         return dict(
             id=self.id, 
             title=self.title,
+            max_score=self.max_score,
             questions=[question.to_dict() for question in self.questions]
         )
 
@@ -92,6 +94,7 @@ class AssessmentQuestion(db.Model):
 class AssessmentOption(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(), nullable=False)
+    value = db.Column(db.Integer, nullable=False) # 0, 1, 2, 3...
     assessment_question_id = db.Column(db.Integer, db.ForeignKey('assessment_question.id'), nullable=False)
 
     def __repr__(self):
@@ -101,6 +104,7 @@ class AssessmentOption(db.Model):
         return dict(
             id=self.id, 
             text=self.text, 
+            value=self.value,
             assessment_question_id=self.assessment_question_id
         )
 

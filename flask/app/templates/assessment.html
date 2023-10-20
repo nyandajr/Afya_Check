@@ -12,6 +12,7 @@
 </div>
 <div class="row my-4">
     <form action="{{url_for('results')}}" method="post">
+        <input type="hidden" name="title" value="{{ass.title}}">
         {% if not current_user.is_authenticated %}
             <div class="mb-3">
                 <label for="age" class="form-label subtext">Select Age Group:</label>
@@ -36,7 +37,7 @@
                 <label for="id_{{qn.id}}" class="form-label subtext">{{ qn.text }}</label>
                 <select name="id_{{qn.id}}" id="id_{{qn.id}}" class="custom-form-select">
                     {% for o in qn.options %}
-                        <option value="{{o.text}}">{{o.text}}</option>
+                        <option value="{{o.value}}">{{o.text}}</option>
                     {% endfor %}
                 </select>
             </div>

@@ -100,3 +100,15 @@ def get_predicted_condition(age, gender, selected_language, selected_symptoms):
     svm_predicted_condition = label_encoder.inverse_transform(svm_prediction)[0]
 
     return svm_predicted_condition
+
+def age_group_from_age(age:int):
+    if age >= 15 and age <= 24:
+        return "15-24"
+    elif age >= 25 and age <= 34:
+        return "25-34"
+    elif age >= 35 and age <= 44:
+        return "35-44"
+    elif age >= 45 and age <= 54:
+        return "45-54"
+    elif age >= 55:
+        return "55+"
