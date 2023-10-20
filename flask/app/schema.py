@@ -116,6 +116,8 @@ class UserScores(db.Model):
     user_id = db.Column(db.Integer, nullable=True)
     assessment_id = db.Column(db.Integer, nullable=False)
     score = db.Column(db.Integer, nullable=False)
+    age_group = db.Column(db.String(6), nullable=False)
+    gender = db.Column(db.String(6), nullable=False)
     date_taken = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
     def __repr__(self):
