@@ -7,29 +7,15 @@
 <div>
     {{ plot | safe }}
 </div>
-<div class="text my-4">
-    Your score suggests Low level of alcohol problems or dependence.
-    <ol type="1" class="my-2">
-        <li>
-            It's great that you have completed the AUDIT assessment and received a low score of 0 out of 40. It shows
-            that you
-            are taking your mental health seriously and are making an effort to stay healthy.
-        </li>
-        <li>
-            Substance Alcohol Use Disorder, also known as alcohol addiction, is a chronic and progressive condition
-            characterized by the excessive and compulsive use of alcohol despite the negative consequences. Early signs
-            of this
-            problem include drinking more than intended, experiencing cravings or withdrawal symptoms when not drinking,
-            neglecting responsibilities, and continuing to drink despite social or legal problems.
-        </li>
-    </ol>
-</div>
-<div class="text text-green my-4">
-    <p>
-        <strong>Reminder: </strong>
-        These insights are based on the provided conversation and are for informational
-        purposes only. They are not a definitive diagnosis. Please consult with a healthcare
-        professional for a comprehensive assessment.
-    </p>
+<div id="loading" class="alert alert-warning p-2">
+    Loading... <i class="bi bi-arrow-repeat"></i>
 </div>
 {% endblock content %}
+
+{% block script %}
+<script>
+    $(window).on('load', function() {
+        $("#loading").hide()
+    })
+</script>
+{% endblock script %}

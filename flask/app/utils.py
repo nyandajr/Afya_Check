@@ -2,6 +2,7 @@
 
 import os
 import joblib
+import openai
 import plotly.graph_objs as go
 from plotly.graph_objects import Layout
 from app import app
@@ -112,3 +113,48 @@ def age_group_from_age(age:int):
         return "45-54"
     elif age >= 55:
         return "55+"
+
+def initialize_openai():
+    openai.api_key = "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"
+
+def get_gpt3_response(prompt, language="English", temperature=0.7):
+    if language == "Swahili":
+        prompt += " Please respond in Swahili."
+
+    try:
+        # Use the chat model endpoint for GPT-3.5 Turbo
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo-0301",
+            temperature=temperature,
+            messages=[
+                {"role": "system", "content": "You are a mental health assistant with knowledge about various mental health conditions. Provide responses that are sensitive, empathetic, and non-diagnostic."},
+                {"role": "user", "content": prompt}
+            ]
+        )
+        return response.choices[0].message['content'].strip()
+    except openai.error.OpenAIError as e:
+        return "Sorry, there was an issue fetching a response. Please try again later."
+    
+def gpt_response_to_html(gpt_response):
+    # Split the GPT response into paragraphs based on the numbers (e.g., "1. ", "2. ", etc.)
+    paragraphs = gpt_response.split('\n')
+    
+    # Initialize the HTML content
+    html_content = "<div>"
+    
+    # Iterate through the paragraphs and add them to the HTML content
+    for paragraph in paragraphs:
+        if paragraph.strip():
+            # Extract the number and text content
+            parts = paragraph.split('. ', 1)
+            if len(parts) == 2:
+                number, text = parts
+                html_content += f"<p><strong>{number}. </strong>{text}</p>"
+            else:
+                # If there's no number, just add the text
+                html_content += f"<p>{paragraph}</p>"
+    
+    # Close the HTML container
+    html_content += "</div>"
+    
+    return html_content
