@@ -113,12 +113,12 @@ class AssessmentOption(db.Model):
 
 class UserScores(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, nullable=True)
-    assessment_id = db.Column(db.Integer, nullable=False)
     score = db.Column(db.Integer, nullable=False)
     age_group = db.Column(db.String(6), nullable=False)
     gender = db.Column(db.String(6), nullable=False)
     date_taken = db.Column(db.DateTime, nullable=False, default=datetime.now())
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    assessment_id = db.Column(db.Integer, db.ForeignKey('assessment.id'), nullable=False)
 
     def __repr__(self):
         return f"<UserScores {self.user_id} {self.assessment_id}>"

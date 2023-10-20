@@ -2,7 +2,7 @@ from time import sleep
 from app import app, db
 from flask import render_template, flash, request, redirect, url_for, jsonify, Response, stream_with_context
 from flask_login import login_user, logout_user, current_user, login_required
-from app.schema import User, CheckIn, Assessment, AssessmentOption, AssessmentQuestion
+from app.schema import User, CheckIn, Assessment, UserScores
 from app.utils import (
     create_gauge_chart, get_predicted_condition, get_recommended_assessment, 
     age_group_from_age, get_gpt3_response, initialize_openai, gpt_response_to_html,
@@ -82,7 +82,7 @@ def results():
     gpt3_prompt = create_gpt_prompt(ass, score, result_text)
     
     def generate_content():
-        # Initially, send the loading page HTML
+        # Initially, send html page
         yield render_template(
             'results.html', 
             title="Assessment Score", 
@@ -93,11 +93,12 @@ def results():
         initialize_openai()
         # TODO: uncomment gpt api calls in production env, now commented in order
         # to save api calls, emulate gpt response with 3 seconds sleep
-        # sleep(3)
-        # gpt_text = "placeholder text"
-        gpt3_response = get_gpt3_response(gpt3_prompt)
-        gpt_text = gpt_response_to_html(gpt3_response)
+        sleep(3)
+        gpt_text = "placeholder text"
+        # gpt3_response = get_gpt3_response(gpt3_prompt)
+        # gpt_text = gpt_response_to_html(gpt3_response)
 
+        # Finally: send gpt response
         yield f'<div class="text my-2 col-lg-6 mx-auto"> \
                {gpt_text} \
             </div>'
@@ -109,6 +110,20 @@ def results():
                     professional for a comprehensive assessment. \
                 </p> \
             </div>'
+
+    # save score in db
+    user_id = None
+    if current_user.is_authenticated:
+        user_id = current_user.id
+
+    us = UserScores(
+        user_id=user_id, 
+        assessment_id=ass["id"], 
+        score=score, 
+        age_group=age_group, 
+        gender=gender)
+    db.session.add(us)
+    db.session.commit()    
 
     return Response(generate_content(), content_type='text/html')
 
