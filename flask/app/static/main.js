@@ -48,25 +48,33 @@ $(document).ready(function(){
     // deal with theme switching
     themeState = localStorage.getItem("theme", "dark")
     if (themeState == "dark"){
-        $("#themeIcon").addClass("bi-brightness-high-fill")
-        $("#themeIcon").removeClass("bi-moon-stars-fill")
+        darkThemeOn()
     }
     else{
-        $("#themeIcon").addClass("bi-moon-stars-fill")
-        $("#themeIcon").removeClass("bi-brightness-high-fill")
+        darkThemeOff()
     }
 
     $("#themeSwitch").click(()=>{
         themeState = localStorage.getItem("theme", "dark")
         if (themeState == "dark"){
-            localStorage.setItem("theme", "light")
-            $("#themeIcon").addClass("bi-moon-stars-fill")
-            $("#themeIcon").removeClass("bi-brightness-high-fill")
+            darkThemeOff()
         }
         else{
-            localStorage.setItem("theme", "dark")
-            $("#themeIcon").removeClass("bi-moon-stars-fill")
-            $("#themeIcon").addClass("bi-brightness-high-fill")
+            darkThemeOn()
         }
     })
 })
+
+function darkThemeOn(){
+    localStorage.setItem("theme", "dark")
+    $("#themeIcon").removeClass("bi-moon-stars-fill")
+    $("#themeIcon").addClass("bi-brightness-high-fill")
+    $("body").removeClass("theme-light")
+}
+
+function darkThemeOff(){
+    localStorage.setItem("theme", "light")
+    $("#themeIcon").addClass("bi-moon-stars-fill")
+    $("#themeIcon").removeClass("bi-brightness-high-fill")
+    $("body").addClass("theme-light")
+}

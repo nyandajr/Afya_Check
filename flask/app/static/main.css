@@ -7,6 +7,19 @@
     --input-border-color: #d1d1d1;
 }
 
+.theme-light {
+    --bg-color: rgb(247, 247, 247);
+    --primary-color: #4CAF50;
+    --primary-color-dark: #327434;
+    --white-color: rgb(14, 13, 13);
+    --input-bg-color: rgb(223, 226, 231);
+    --input-border-color: #d1d1d1;
+}
+
+body {
+    color: var(--white-color) !important;
+}
+
 .custom-bg-dark {
     background-color: var(--bg-color);
 }
@@ -153,4 +166,8 @@ input[type="checkbox"]:checked{
     right: 0;
     display: flex;
     float: right;
+}
+
+.annotation-text {
+    color: #327434 !important;
 }
