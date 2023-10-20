@@ -9,6 +9,7 @@ class User(UserMixin, db.Model):
     gender = db.Column(db.String(6), nullable=False)
     password = db.Column(db.String(128), nullable=False)
     date_registered = db.Column(db.DateTime, nullable=False, default=datetime.now())
+    scores = db.relationship('UserScores', backref='user', lazy=True)
 
     def __repr__(self):
         return f"<User {self.username}>"
@@ -60,6 +61,7 @@ class Assessment(db.Model):
     title = db.Column(db.String(), nullable=False)
     max_score = db.Column(db.Integer, nullable=False)
     questions = db.relationship('AssessmentQuestion', backref='assessment', lazy=True)
+    scores = db.relationship('UserScores', backref='assessment', lazy=True)
 
     def __repr__(self):
         return f"<Assessment {self.title}>"
@@ -106,6 +108,26 @@ class AssessmentOption(db.Model):
             text=self.text, 
             value=self.value,
             assessment_question_id=self.assessment_question_id
+        )
+
+
+class UserScores(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, nullable=True)
+    assessment_id = db.Column(db.Integer, nullable=False)
+    score = db.Column(db.Integer, nullable=False)
+    date_taken = db.Column(db.DateTime, nullable=False, default=datetime.now())
+
+    def __repr__(self):
+        return f"<UserScores {self.user_id} {self.assessment_id}>"
+    
+    def to_dict(self):
+        return dict(
+            id=self.id, 
+            user_id=self.user_id, 
+            assessment_id=self.assessment_id,
+            score=self.score,
+            date_taken=self.date_taken
         )
 
 
