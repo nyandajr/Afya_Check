@@ -5,7 +5,8 @@ from flask_login import login_user, logout_user, current_user, login_required
 from app.schema import User, CheckIn, Assessment, AssessmentOption, AssessmentQuestion
 from app.utils import (
     create_gauge_chart, get_predicted_condition, get_recommended_assessment, 
-    age_group_from_age, get_gpt3_response, initialize_openai, gpt_response_to_html
+    age_group_from_age, get_gpt3_response, initialize_openai, gpt_response_to_html,
+    create_gpt_prompt
 )
 
 @app.route('/')
@@ -78,35 +79,27 @@ def results():
     result_text = "Your score suggests Minimal issues"
 
     gpt3_prompt = f"You are a help full assistant"
-    gpt3_prompt = f'''gpt3_prompt = f"""
-        As a knowledgeable mental health assistant:
-        I have completed the bipolar assessment, scoring {score} out of {ass['max_score']}, indicating: '{result_text}'.
-        1. Provide an empathetic response based on my  score and tell me if my score is high or low.
-        2. Define bipolar disorder in a broader scope.
-        3. List negative symptoms of bipolar disorder and explain how it affects daily life.
-        4. Offer insights and coping strategies and natural ways for managing bipolar disorder.
-        5. Commend me for undertaking the assessment.
-        6. If my score is high encourage me to go to the hospital.
-        """
-        gpt3_response = get_gpt3_response(gpt3_prompt, selected_language)
-        '''
+    gpt3_prompt = create_gpt_prompt(ass, score, result_text)
     
     def generate_content():
         # Initially, send the loading page HTML
         yield render_template(
             'results.html', 
             title="Assessment Score", 
-            res=None,
+            res={"title": ass["title"]},
             plot=create_gauge_chart(score, max_score=ass["max_score"], assessment_name="")
         )
 
         initialize_openai()
+        # TODO: uncomment gpt api calls in production env, now commented in order
+        # to save api calls, emulate gpt response with 3 seconds sleep
+        sleep(3)
+        gpt_text = "placeholder text"
         # gpt3_response = get_gpt3_response(gpt3_prompt)
         # gpt_text = gpt_response_to_html(gpt3_response)
-        sleep(2)
 
         yield f'<div class="text my-2 col-lg-6 mx-auto"> \
-               {"gpt_text"} \
+               {gpt_text} \
             </div>'
         yield '<div class="text text-green my-3 col-lg-6 mx-auto"> \
                 <p>\

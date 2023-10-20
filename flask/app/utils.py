@@ -158,3 +158,125 @@ def gpt_response_to_html(gpt_response):
     html_content += "</div>"
     
     return html_content
+
+def create_gpt_prompt(assessment, score, result_text, selected_language="English"):
+    if assessment["title"] == "Bipolar Assessment (YMRS)":
+        return f'''gpt3_prompt = f"""
+        As a knowledgeable mental health assistant:
+        I have completed the bipolar assessment, scoring {score} out of {assessment['max_score']}, indicating: '{result_text}'.
+        1. Provide an empathetic response based on my  score and tell me if my score is high or low.
+        2. Define bipolar disorder in a broader scope.
+        3. List negative symptoms of bipolar disorder and explain how it affects daily life.
+        4. Offer insights and coping strategies and natural ways for managing bipolar disorder.
+        5. Commend me for undertaking the assessment.
+        6. If my score is high encourage me to go to the hospital.
+        """
+        gpt3_response = get_gpt3_response(gpt3_prompt, selected_language)
+        '''
+    elif assessment["title"] == "Anxiety Assessment (GAD-7)":
+        return f''' gpt3_prompt = f"""
+        As a knowledgeable mental health assistant:
+        I have taken an anxiety assessment, scoring {score} out of a maximum of {assessment['max_score']}, suggesting: '{result_text}'.
+        1. Provide an empathetic response based on my score, mentioning the score out of 21.
+        2. Explain the nature of anxiety and the examples people with anxieties experience
+        3. List detailed negative impacts of untreated anxiety.
+        4. Offer coping strategies and natural ways  into managing anxiety.
+
+        5. Mention actions one should and shouldn't undertake when interacting with someone experiencing anxiety.
+        """
+        '''
+    elif assessment["title"] == "AUDIT (Alcohol Use Disorders Identification Test)":
+        return f'''gpt3_prompt = f"""
+        As a knowledgeable mental health assistant:
+        I have completed the AUDIT assessment, scoring {score} out of {assessment['max_score']}, indicating: '{result_text}'.
+        1. Offer an empathetic response based on my score, and acknowledge my score out of 40.
+        2. Explain Substance Alcohol Use Disorder. and early signs of this problem.
+        3. List detailed negative consequences of untreated alcohol addiction in daily life.
+        4. Offer coping strategies, natural ways and insights into managing alcohol addiction.
+        5. Commend me for undertaking the assessment.
+        7. Advise and encourage me to seek hospital help if my score is high.
+        """
+        gpt3_response = get_gpt3_response(gpt3_prompt, selected_language)
+        '''
+    elif assessment["title"] == "OCD Assessment (Y-BOCS)":
+        return f'''gpt3_prompt = f"""
+        As a knowledgeable mental health assistant:
+        I have completed the OCD assessment, achieving a score of {score}, leading to the interpretation: '{result_text}'.
+        1. Based on my score, provide an appropriate empathetic response. And tell me if my score is high or low or moderate. If it is high advise me to go to the hospital.
+        2. Define Obsessive-Compulsive Disorder (OCD) and provide an example of its symptoms especially early symptoms.
+        3. Detail negative  impacts of OCD on daily life if not addressed.
+        4. Suggest detailed natural coping mechanisms and strategies for managing OCD.
+        5. Acknowledge me on my  efforts in taking the assessment.
+        """
+        gpt3_response = get_gpt3_response(gpt3_prompt, selected_language)
+        '''
+    elif assessment["title"] == "PTSD Assessment (Post-Traumatic Stress Disorder)":
+        return f'''gpt3_prompt = f"""
+        As a knowledgeable mental health assistant:
+        I have completed the PTSD assessment, achieving a score of {score}, which suggests: '{result_text}'.
+        1. Define Post-Traumatic Stress Disorder (PTSD) and provide examples of its symptoms especially early signs.
+        2. Detail negative significant impacts of untreated PTSD on an individual's daily life.
+        3. Offer insights and advice tailored for the user's score and potential condition.
+        4. Acknowledge the user's initiative in taking the assessment.
+        5. Provide 10 guidelines on supporting individuals with PTSD, keeping in mind Tanzanian cultural contexts.
+        6. Recommend dos and don'ts when interacting with someone diagnosed with PTSD.
+        """
+        gpt3_response = get_gpt3_response(gpt3_prompt, selected_language)
+        '''
+    elif assessment["title"] == "DAST-10 Assessment (Drug Abuse Screening Test)":
+        return f"""
+            As an informed mental health assistant:
+            I have completed the DAST-10 drug abuse assessment, obtaining a score of {score} out of {assessment['max_score']}. 
+            1. Greet me and Tell me if my score is high or low or moderate.
+            2. Define Drug Abuse Disorder and provide a brief overview and early signs and symptoms.
+            3. List detailed negative significant impacts of unchecked drug abuse on one's daily life and health.
+            4. Offer insights, coping strategies, and advice tailored to the  score and potential condition.
+            5. Acknowledge the my  effort and initiative in taking the assessment.
+            6.If my score is too high advise me to vist hospital immediately
+            """
+    elif assessment["title"] == "ASRS-v1.1 Assessment (Adult ADHD Self-Report Scale)":
+        return f"""
+            As an informed mental health assistant:
+            I have completed ADHD assessment, obtaining a score of {score} out of {assessment['max_score']}.
+            1. Based on the score tell me if my score is high or low
+            2. Define ADHD  and provide a brief overview.
+            3. List negative significant impacts of unchecked ADHD on one's daily life and health.
+            4. Offer insights, natural coping strategies, and advice tailored to the user's score and potential condition.
+            5. Acknowledge my effort and initiative in taking the assessment.
+            6. Suggest  strategies to support individuals struggling with drug addiction.
+            """
+    elif assessment["title"] == "Psychosis Screening Questionnaire (PSQ) Assessment":
+        return f'''
+        As a knowledgeable mental health assistant:
+        I have taken  a Shizophrenia assessment and achieved a score of {score} out of a maximum possible score of {assessment['max_score']}. 
+
+        1) Tell me if my score is high or low
+        2) What is Shizophrenia and what are the symptoms and early signs.
+        3)Encourage me to go to the hospital for detailed check up
+
+        Lastly, acknowledge my  initiative in taking the assessment and emphasize the importance of mental well-being.
+        '''
+    elif assessment["title"] == "Depression Assessment (PHQ-9)":
+        return f'''As a helpful mental health assistant, consider the following: 
+        I have taken a depression assessment and scored {score} out of a maximum of {assessment['max_score']}, suggesting: '{result_text}'.
+        1. Provide an empathetic response based on my  score and tell me if my score is high, low or moderate.
+        2. Explain what depression is and its potential consequences if not addressed.
+        3. Offer coping natural strategies and insights.
+        4. List pieces of advice on supporting individuals with depression, reflecting Tanzanian culture.
+        5. Mention things one should and shouldn't do when interacting with someone struggling with depression.
+        6.Congratulate me for taking this test. And if my score is high advice me to go to the hospital.
+        '''
+    elif assessment["title"] == "IQCODE Assessment":
+        return f'''gpt3_prompt = f"""
+        As a knowledgeable mental health assistant:
+        I have completed the IQCODE(Cognitive Decline)  assessment for my relative, scoring {score} out of {assessment['max_score']}, indicating: '{result_text}'.
+        1. Provide an empathetic response based on their score.
+        2. Explain the concept of cognitive decline.
+        3. List  common signs especially early signs of cognitive decline and their impact on daily life.
+        4. Offer tips for maintaining cognitive health.
+        5. Commend the user for taking the assessment.
+        6. Suggest 10 strategies for supporting individuals with cognitive decline.
+        7. Highlight dos and don'ts when interacting with someone experiencing cognitive decline and emphasize on going to the hospital
+        """
+        gpt3_response = get_gpt3_response(gpt3_prompt, selected_language)
+        '''
