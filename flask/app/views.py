@@ -199,4 +199,5 @@ def logout():
 @app.route('/scores')
 @login_required
 def scores():
-    return render_template('scores.html', title='Scores')
+    scores = UserScores.query.filter_by(user_id=current_user.id).order_by(UserScores.date_taken.desc()).all()
+    return render_template('scores.html', title='Scores', scores=scores)

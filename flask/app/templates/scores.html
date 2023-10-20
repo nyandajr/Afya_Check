@@ -6,8 +6,22 @@
 </div>
 <div>
     <p>
-        Hello, {{ current_user.username }}. Here is a summary of the assessments you've taken so far:
+        Hello, {{ current_user.username }}. 
+        {% if scores %}
+            Here is a summary of the assessments you've taken so far:
+        {% else %}
+            You have not taken any assessments yet.
+        {% endif %}
     </p>
+    {% for score in scores %}
+        <div class="border-green mb-3">
+            <strong>Assessment: </strong>{{ score.assessment.title }}
+            <br>
+            <strong>Score: </strong>{{ score.score }}/{{ score.assessment.max_score }}
+            <br>
+            <strong>Time Taken: </strong>{{ score.date_taken }}
+        </div>
+    {% endfor %}
 </div>
 {% endblock content %}
 
