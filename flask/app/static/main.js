@@ -30,6 +30,11 @@ $(document).ready(function(){
                             $("#resultsLink").append(", &nbsp;")
                         }
                     })
+
+                    // scroll to page bottom
+                    $('html, body').animate({
+                        scrollTop: $(document).height()
+                    }, 500);
                 }
             },
             error: function (error){
