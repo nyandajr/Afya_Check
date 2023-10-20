@@ -3,6 +3,7 @@
 import os
 import joblib
 import openai
+from dotenv import load_dotenv
 import plotly.graph_objs as go
 from plotly.graph_objects import Layout
 from app import app
@@ -115,7 +116,9 @@ def age_group_from_age(age:int):
         return "55+"
 
 def initialize_openai():
-    openai.api_key = "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"
+    path = os.path.join(app.root_path, '.env')
+    load_dotenv(path)
+    openai.api_key = os.getenv("API_KEY")
 
 def get_gpt3_response(prompt, language="English", temperature=0.7):
     if language == "Swahili":
@@ -283,7 +286,24 @@ def create_gpt_prompt(assessment, score, result_text, selected_language="English
 
 def create_result_text(assessment, score, selected_language="English"):
     if assessment["title"] == "Bipolar Assessment (YMRS)":
-        return
+        if selected_language == "English":
+            if score <= 12:
+                return "Your score suggests Minimal or no manic symptoms."
+            elif score <= 20:
+                return "Your score suggests Mild manic symptoms."
+            elif score <= 30:
+                return "Your score suggests Moderate manic symptoms."
+            else:
+                return "Your score suggests Severe manic symptoms."
+        elif selected_language == "Swahili":
+            if score <= 12:
+                return "Alama zako zinaonyesha dalili ndogo au hakuna dalili za bipolar."
+            elif score <= 20:
+                return "Alama zako zinaonyesha dalili za wastani za bipolar."
+            elif score <= 30:
+                return "Alama zako zinaonyesha dalili kali za bipolar."
+            else:
+                return "Alama zako zinaonyesha dalili kali sana za bipolar."
 
 
     elif assessment["title"] == "Anxiety Assessment (GAD-7)":
