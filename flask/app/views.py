@@ -6,7 +6,7 @@ from app.schema import User, CheckIn, Assessment, AssessmentOption, AssessmentQu
 from app.utils import (
     create_gauge_chart, get_predicted_condition, get_recommended_assessment, 
     age_group_from_age, get_gpt3_response, initialize_openai, gpt_response_to_html,
-    create_gpt_prompt
+    create_gpt_prompt, create_result_text
 )
 
 @app.route('/')
@@ -76,7 +76,7 @@ def results():
     for qn in questions:
         score += int(data.get(f"id_{qn['id']}"))
 
-    result_text = "Your score suggests Minimal issues"
+    result_text = create_result_text(ass, score)
 
     gpt3_prompt = f"You are a help full assistant"
     gpt3_prompt = create_gpt_prompt(ass, score, result_text)
@@ -86,17 +86,17 @@ def results():
         yield render_template(
             'results.html', 
             title="Assessment Score", 
-            res={"title": ass["title"]},
+            res={"title": ass["title"], "result_text": result_text},
             plot=create_gauge_chart(score, max_score=ass["max_score"], assessment_name="")
         )
 
         initialize_openai()
         # TODO: uncomment gpt api calls in production env, now commented in order
         # to save api calls, emulate gpt response with 3 seconds sleep
-        sleep(3)
-        gpt_text = "placeholder text"
-        # gpt3_response = get_gpt3_response(gpt3_prompt)
-        # gpt_text = gpt_response_to_html(gpt3_response)
+        # sleep(3)
+        # gpt_text = "placeholder text"
+        gpt3_response = get_gpt3_response(gpt3_prompt)
+        gpt_text = gpt_response_to_html(gpt3_response)
 
         yield f'<div class="text my-2 col-lg-6 mx-auto"> \
                {gpt_text} \
