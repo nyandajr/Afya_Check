@@ -2,13 +2,23 @@
 
 {% block content %}
 <div class="subtitle text-center">
-    Registration
+    {% if session['lang'] == "sw" %}
+        Jisajili
+    {% else %}
+        Registration
+    {% endif %}
 </div>
 <div class="mb-3">
     <small class="text-warning">
-        <strong>Disclaimer:</strong>
-        We do not collect any personal information. Use a non-identifying but 
-        unique username and a strong password
+        {% if session['lang'] == "sw" %}
+            <strong>Zingatia:</strong>
+            Hatukusanyi taarifa binafsi. 
+            Tafadhali tumia jina lisilo kutambulisha ila la kipekee na nenosiri imara
+        {% else %}
+            <strong>Disclaimer:</strong>
+            We do not collect any personal information. Use a non-identifying but 
+            unique username and a strong password
+        {% endif %}
     </small>
 </div>
 <div>
@@ -20,30 +30,75 @@
     
     <form method="post" action="{{url_for('register')}}">
         <div class="mb-3">
-            <label for="username" class="form-label subtext">Username</label>
+            <label for="username" class="form-label subtext">
+                {% if session['lang'] == "sw" %}
+                    Jina la mtumiaji
+                {% else %}
+                    Username
+                {% endif %}
+            </label>
             <input type="text" name="username" id="username" class="custom-form-control" placeholder="George Russel" required>
         </div>
         <div class="mb-3">
-            <label for="age" class="form-label subtext">Enter your age:</label>
+            <label for="age" class="form-label subtext">
+                {% if session['lang'] == "sw" %}
+                    Ingiza umri wako:
+                {% else %}
+                    Enter your age:
+                {% endif %}
+            </label>
             <input type="text" class="custom-form-control" name="age" id="age" inputmode="numeric" placeholder="26" required>
         </div>
         <div class="mb-3">
-            <label for="gender" class="form-label subtext">Select your gender:</label>
+            <label for="gender" class="form-label subtext">
+                {% if session['lang'] == "sw" %}
+                    Chagua jinsia yako:
+                {% else %}
+                    Select your gender:
+                {% endif %}
+            </label>
             <select name="gender" id="gender" class="custom-form-select" required>
-                <option value="Female" selected>Female</option>
-                <option value="Male">Male</option>
+                <option value="Female" selected>
+                    {% if session['lang'] == "sw" %}
+                        Mwanamke
+                    {% else %}
+                        Female
+                    {% endif %}
+                </option>
+                <option value="Male">
+                    {% if session['lang'] == "sw" %}
+                        Mwanaume
+                    {% else %}
+                        Male
+                    {% endif %}
+                </option>
             </select>
         </div>
         <div class="mb-3">
-            <label for="password" class="form-label subtext">Password</label>
+            <label for="password" class="form-label subtext">
+                {% if session['lang'] == "sw" %}
+                    Nenosiri
+                {% else %}
+                    Password
+                {% endif %}
+            </label>
             <input type="password" name="password" id="password" class="custom-form-control" placeholder="password" required>
         </div>
         <div class="mb-3">
-            <label for="confirm_password" class="form-label subtext">Confirm Password</label>
+            <label for="confirm_password" class="form-label subtext">
+                {% if session['lang'] == "sw" %}
+                    Thibitisha Nenosiri
+                {% else %}
+                    Confirm Password
+                {% endif %}
+            </label>
             <input type="password" name="confirm_password" id="confirm_password" class="custom-form-control" placeholder="password" required>
         </div>
         <div class="mb-3 text-center">
-            <input type="submit" value="Register" class="custom-btn px-4 text">
+            <input 
+                type="submit" 
+                value="{% if session['lang'] == 'sw' %}Jisajili{% else %}Register{% endif %}" 
+                class="custom-btn px-4 text">
         </div>
     </form>
 </div>
