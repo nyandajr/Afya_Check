@@ -51,59 +51,59 @@ This is AI powered solution mental health solution that helps people to check th
     ```
 
 
-You'll need OpenAI's API Key as we are going to use Langauge model(GPT-3), to curate responses. 
 
-#Setting up OpenAI API Key:
-To use this app, you'll need an API key from OpenAI as the app utilizes the GPT-3 model to generate responses.
+To use this app, you'll need an API key from OpenAI, as the application relies on the GPT-3 model to generate responses.
 
-Locally:
-Using Environment Variables:
+### Local Setup
 
-Set your OpenAI API key as an environment variable:
+1. **Using Environment Variables**:
 
-Linux/macOS:
+    Set your OpenAI API key as an environment variable:
 
-´´´bash
-Copy code
-export OPENAI_API_KEY='your_openai_api_key_here'
-´´´
+    - **Linux/macOS**:
+      ```bash
+      export OPENAI_API_KEY='your_openai_api_key_here'
+      ```
 
-Windows (Command Prompt):
+    - **Windows (Command Prompt)**:
+      ```cmd
+      set OPENAI_API_KEY=your_openai_api_key_here
+      ```
 
-cmd
-Copy code
-set OPENAI_API_KEY=your_openai_api_key_here
-Windows (PowerShell):
+    - **Windows (PowerShell)**:
+      ```powershell
+      $env:OPENAI_API_KEY='your_openai_api_key_here'
+      ```
 
-powershell
-Copy code
-´´´$env:OPENAI_API_KEY='your_openai_api_key_here' ´´´
+2. **Accessing the API Key in Streamlit**:
 
-In your Streamlit application (mental.py), you can access this environment variable:
-
-
-python
-Copy code
-import os
-api_key = os.environ.get("OPENAI_API_KEY")
-Online (e.g., deploying with Streamlit sharing):
-Using Streamlit Sharing:
-
-Deploy your app on Streamlit sharing.
-
-Under the app's settings, find the 'Secrets' section.
-
-Add your OpenAI API key as a secret with the name OPENAI_API_KEY.
-
-In your app, you can access this secret as you would locally:
-
-python
-Copy code
-import os
-api_key = os.environ.get("OPENAI_API_KEY")
-
-#Run the App:
-Now, with everything set up, you can run your Streamlit app:
-    ```bash
-    streamlit run mental.py
+    In your Streamlit application (`mental.py`), you can access this environment variable:
+    ```python
+    import os
+    api_key = os.environ.get("OPENAI_API_KEY")
     ```
+
+### Deployment (e.g., Streamlit Sharing)
+
+1. **Using Streamlit Sharing**:
+
+    If you're deploying with Streamlit sharing:
+
+    - Deploy your app on Streamlit sharing.
+    - Navigate to the app's settings and find the 'Secrets' section.
+    - Add your OpenAI API key as a secret with the name `OPENAI_API_KEY`.
+
+    You can access the secret in your app the same way as in the local setup:
+
+    ```python
+    import os
+    api_key = os.environ.get("OPENAI_API_KEY")
+    ```
+
+## Running the App
+
+Once you've set everything up, you can run the Streamlit app using the following command:
+
+```bash
+streamlit run mental.py
+
