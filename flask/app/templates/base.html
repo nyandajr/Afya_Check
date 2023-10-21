@@ -22,37 +22,47 @@
 			<h1 class="title">Akili Check</h1>
 			<a href="{{url_for('index')}}" class="nv-link text {% if curr_page=='home' %}active{% endif %}">
 				<i class="bi bi-house-door-fill"></i>
-				Welcome
+				{% if session['lang'] == "sw" %} Karibu {% else %} Welcome {% endif %}
 			</a>
 			<span class="mx-2 fw-bold">|</span>
 			{% if current_user.is_authenticated %}
 				<a href="{{url_for('scores')}}" class="nv-link text {% if curr_page=='scores' %}active{% endif %}">
 					<i class="bi bi-file-check-fill"></i>
-					Scores
+					{% if session['lang'] == "sw" %} Majibu {% else %} Scores {% endif %}
 				</a>
 				<span class="mx-2 fw-bold">|</span>
 				<a href="{{url_for('logout')}}" class="nv-link text {% if curr_page=='logout' %}active{% endif %}">
 					<i class="bi bi-box-arrow-right"></i>
-					Logout
+					{% if session['lang'] == "sw" %} Ondoka {% else %} Logout {% endif %}
 				</a>
 			{% else %}
 				<a href="{{url_for('register')}}" class="nv-link text {% if curr_page=='register' %}active{% endif %}">
 					<i class="bi bi-person-plus-fill"></i>
-					Register
+					{% if session['lang'] == "sw" %} Jisajili {% else %} Register {% endif %}
 				</a>
 				<span class="mx-2 fw-bold">|</span>
 				<a href="{{url_for('login')}}" class="nv-link text {% if curr_page=='login' %}active{% endif %}">
 					<i class="bi bi-box-arrow-in-right"></i>
-					Login
+					{% if session['lang'] == "sw" %} Ingia {% else %} Login {% endif %}
 				</a>
 			{% endif %}
 		</div>
 		<div class="my-3">
 			<div class="border-green flexy">
-				<label for="language" class="form-label subtext">Choose your language:</label>
+				<label for="language" class="form-label subtext">
+					{% if session['lang'] == "sw" %}
+						Chagua lugha yako:
+					{% else %}
+						Choose your language:
+					{% endif %}
+				</label>
 				<select name="language" id="language" class="custom-form-select-sm">
-					<option value="en" selected>English</option>
-					<option value="sw">Kiswahili</option>
+					<option value="en" {% if session['lang'] == "en" %} selected {%endif%}>
+						English
+					</option>
+					<option value="sw" {% if session['lang'] == "sw" %} selected {%endif%}>
+						Kiswahili
+					</option>
 				</select>
 			</div>
 		</div>

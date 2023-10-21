@@ -1,6 +1,9 @@
 from time import sleep
 from app import app, db
-from flask import render_template, flash, request, redirect, url_for, jsonify, Response, stream_with_context
+from flask import (
+    render_template, flash, request, redirect, url_for, jsonify, Response, 
+    stream_with_context, session
+)
 from flask_login import login_user, logout_user, current_user, login_required
 from app.schema import User, CheckIn, Assessment, UserScores
 from app.utils import (
@@ -13,6 +16,11 @@ from app.utils import (
 @app.route('/home')
 def index():
     return render_template('index.html', title='Welcome')
+
+@app.route('/lang/<string:lang>')
+def lang(lang):
+    session['lang'] = lang
+    return jsonify({"status": "success", "lang": session['lang']})
 
 @app.route('/check-in', methods=['GET', 'POST'])
 def check_in():

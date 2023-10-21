@@ -46,8 +46,7 @@ $(document).ready(function(){
             complete: function(){
                 $("#checkButton").html("Check In")
             }
-        });
-        
+        });  
     })
 
     // deal with theme switching
@@ -68,6 +67,11 @@ $(document).ready(function(){
             darkThemeOn()
         }
     })
+
+    // detect language change
+    $("#language").change(()=>{
+        switchLang($("#language").val());
+    })
 })
 
 function darkThemeOn(){
@@ -82,4 +86,10 @@ function darkThemeOff(){
     $("#themeIcon").addClass("bi-moon-stars-fill")
     $("#themeIcon").removeClass("bi-brightness-high-fill")
     $("body").addClass("theme-light")
+}
+
+function switchLang(lang){
+    $.get(`/lang/${lang}`, (data)=>{
+        location.reload()
+    })
 }
