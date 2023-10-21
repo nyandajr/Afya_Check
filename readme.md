@@ -56,5 +56,5 @@ This is AI powered solution mental health solution that helps people to check th
 
 
     ```bash
-    stream lit run mental.py
+    streamlit run mental.py
     ```
