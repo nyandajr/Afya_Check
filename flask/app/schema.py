@@ -27,6 +27,7 @@ class User(UserMixin, db.Model):
 class CheckIn(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(), nullable=False)
+    title_sw = db.Column(db.String(), nullable=False)
     options = db.relationship('CheckInOption', backref='check_in', lazy=True)
 
     def __repr__(self):
@@ -43,6 +44,7 @@ class CheckIn(db.Model):
 class CheckInOption(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(), nullable=False)
+    text_sw = db.Column(db.String(), nullable=False)
     checkin_id = db.Column(db.Integer, db.ForeignKey('check_in.id'), nullable=False)
 
     def __repr__(self):
@@ -59,6 +61,7 @@ class CheckInOption(db.Model):
 class Assessment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(), nullable=False)
+    title_sw = db.Column(db.String(), nullable=False)
     max_score = db.Column(db.Integer, nullable=False)
     questions = db.relationship('AssessmentQuestion', backref='assessment', lazy=True)
     scores = db.relationship('UserScores', backref='assessment', lazy=True)
@@ -78,6 +81,7 @@ class Assessment(db.Model):
 class AssessmentQuestion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(), nullable=False)
+    text_sw = db.Column(db.String(), nullable=False)
     assessment_id = db.Column(db.Integer, db.ForeignKey('assessment.id'), nullable=False)
     options = db.relationship('AssessmentOption', backref='assessment_question', lazy=True)
 
@@ -96,6 +100,7 @@ class AssessmentQuestion(db.Model):
 class AssessmentOption(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(), nullable=False)
+    text_sw = db.Column(db.String(), nullable=False)
     value = db.Column(db.Integer, nullable=False) # 0, 1, 2, 3...
     assessment_question_id = db.Column(db.Integer, db.ForeignKey('assessment_question.id'), nullable=False)
 
