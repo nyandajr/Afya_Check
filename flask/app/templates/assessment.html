@@ -5,17 +5,29 @@
     {{ ass.title }}
 </div>
 <div class="my-3">
-    <strong>Disclaimer:</strong> 
-    This tool is for informational purposes and is not a diagnostic tool. The results 
-    from this tool do not replace professional medical advice. Always consult with a 
-    healthcare professional for a comprehensive assessment.
+    {% if session['lang'] == "sw" %}
+        <strong>Onyo:</strong> Zana hii ni kwa madhumuni ya taarifa na sio zana ya utambuzi. 
+        Matokeo kutoka kwa zana hii hayachukui nafasi ya ushauri wa matibabu wa kitaalamu. 
+        Shauriana daima na mtaalamu wa afya kwa tathmini kamili.
+    {% else %}
+        <strong>Disclaimer:</strong> 
+        This tool is for informational purposes and is not a diagnostic tool. The results 
+        from this tool do not replace professional medical advice. Always consult with a 
+        healthcare professional for a comprehensive assessment.
+    {% endif %}
 </div>
 <div class="row my-4">
     <form action="{{url_for('results')}}" method="post">
         <input type="hidden" name="title" value="{{ass.title}}">
         {% if not current_user.is_authenticated %}
             <div class="mb-3">
-                <label for="age" class="form-label subtext">Select Age Group:</label>
+                <label for="age" class="form-label subtext">
+                    {% if session['lang'] == "sw" %}
+                        Chagua kundi la Umri:
+                    {% else %}
+                        Select Age Group:
+                    {% endif %}
+                </label>
                 <select name="age" id="age" class="custom-form-select" required>
                     <option value="15-24" selected>15-24</option>
                     <option value="25-34">25-34</option>
@@ -25,10 +37,28 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label for="gender" class="form-label subtext">Select Gender:</label>
+                <label for="gender" class="form-label subtext">
+                    {% if session['lang'] == "sw" %}
+                        Chagua Jinsia:
+                    {% else %}
+                        Select Gender:
+                    {% endif %}
+                </label>
                 <select name="gender" id="gender" class="custom-form-select" required>
-                    <option value="Female" selected>Female</option>
-                    <option value="Male">Male</option>
+                    <option value="Female" selected>
+                        {% if session['lang'] == "sw" %}
+                            Mwanamke
+                        {% else %}
+                            Female
+                        {% endif %}
+                    </option>
+                    <option value="Male">
+                        {% if session['lang'] == "sw" %}
+                            Mwanaume
+                        {% else %}
+                            Male
+                        {% endif %}
+                    </option>
                 </select>
             </div>
         {% endif %}
@@ -43,7 +73,10 @@
             </div>
         {% endfor %}
         <div class="mb-3 text-center">
-            <input type="submit" value="Submit" class="custom-btn px-4 text">
+            <input 
+                type="submit" 
+                value="{% if session['lang'] == 'sw' %}Wasilisha{% else %}Submit{% endif %}" 
+                class="custom-btn px-4 text">
         </div>
     </form>
 </div>

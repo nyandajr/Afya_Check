@@ -2,7 +2,11 @@
 
 {% block content %}
 <div class="subtitle text-center">
-    Choose an Assessment
+    {% if session['lang'] == "sw" %}
+        Chagua Tathmini
+    {% else %}
+        Choose an Assessment
+    {% endif %}
 </div>
 <div class="row my-4">
     {% for a in ass %}
