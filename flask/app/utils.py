@@ -144,6 +144,8 @@ def get_gpt3_response(prompt, language="English", temperature=0.7):
         )
         return response.choices[0].message['content'].strip()
     except openai.error.OpenAIError as e:
+        if language == "Swahili":
+            return "Samahani, tatizo limejitokeza. Tafadhali jaribu tena baadae."
         return "Sorry, there was an issue fetching a response. Please try again later."
     
 def gpt_response_to_html(gpt_response):
