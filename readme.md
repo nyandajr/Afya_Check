@@ -50,11 +50,60 @@ This is AI powered solution mental health solution that helps people to check th
     pip install -r requirements.txt
     ```
 
-- Run the app
 
-    You'll need OpenAI's API Key as we are going to use Langauge model(GPT-3), to curate responses. 
+You'll need OpenAI's API Key as we are going to use Langauge model(GPT-3), to curate responses. 
+
+#Setting up OpenAI API Key:
+To use this app, you'll need an API key from OpenAI as the app utilizes the GPT-3 model to generate responses.
+
+Locally:
+Using Environment Variables:
+
+Set your OpenAI API key as an environment variable:
+
+Linux/macOS:
+
+´´´bash
+Copy code
+export OPENAI_API_KEY='your_openai_api_key_here'
+´´´
+
+Windows (Command Prompt):
+
+cmd
+Copy code
+set OPENAI_API_KEY=your_openai_api_key_here
+Windows (PowerShell):
+
+powershell
+Copy code
+´´´$env:OPENAI_API_KEY='your_openai_api_key_here' ´´´
+
+In your Streamlit application (mental.py), you can access this environment variable:
 
 
+python
+Copy code
+import os
+api_key = os.environ.get("OPENAI_API_KEY")
+Online (e.g., deploying with Streamlit sharing):
+Using Streamlit Sharing:
+
+Deploy your app on Streamlit sharing.
+
+Under the app's settings, find the 'Secrets' section.
+
+Add your OpenAI API key as a secret with the name OPENAI_API_KEY.
+
+In your app, you can access this secret as you would locally:
+
+python
+Copy code
+import os
+api_key = os.environ.get("OPENAI_API_KEY")
+
+#Run the App:
+Now, with everything set up, you can run your Streamlit app:
     ```bash
     streamlit run mental.py
     ```
