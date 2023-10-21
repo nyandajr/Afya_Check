@@ -5,21 +5,50 @@
     Previous Assessment Scores
 </div>
 <div>
-    <p>
-        Hello, {{ current_user.username }}. 
-        {% if scores %}
-            Here is a summary of the assessments you've taken so far:
-        {% else %}
-            You have not taken any assessments yet.
-        {% endif %}
-    </p>
+    {% if session['lang'] == "sw" %}
+        <p>
+            Habari, {{ current_user.username }}.
+            {% if scores %}
+                Ufuatao ni  ufupisho wa tathmini ulizofanya hadi sasa:
+            {% else %}
+                Hujafanya tathmini yeyote bado.
+            {% endif %}
+        </p>
+    {% else %}
+        <p>
+            Hello, {{ current_user.username }}. 
+            {% if scores %}
+                Here is a summary of the assessments you've taken so far:
+            {% else %}
+                You have not taken any assessments yet.
+            {% endif %}
+        </p>
+    {% endif %}
     {% for score in scores %}
         <div class="border-green mb-3">
-            <strong>Assessment: </strong>{{ score.assessment.title }}
+            <strong>
+                {% if session['lang'] == "sw" %}
+                    Tathmini: 
+                {% else %}
+                    Assessment: 
+                {% endif %}
+            </strong>{{ score.assessment.title }}
             <br>
-            <strong>Score: </strong>{{ score.score }}/{{ score.assessment.max_score }}
+            <strong>
+                {% if session['lang'] == "sw" %}
+                    Alama: 
+                {% else %}
+                    Score: 
+                {% endif %}
+            </strong>{{ score.score }}/{{ score.assessment.max_score }}
             <br>
-            <strong>Time Taken: </strong>{{ score.date_taken }}
+            <strong>
+                {% if session['lang'] == "sw" %}
+                    Muda: 
+                {% else %}
+                    Time: 
+                {% endif %}
+            </strong>{{ score.date_taken }}
         </div>
     {% endfor %}
 </div>
