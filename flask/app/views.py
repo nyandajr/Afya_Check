@@ -15,6 +15,9 @@ from app.utils import (
 @app.route('/')
 @app.route('/home')
 def index():
+    if session.get("lang") is None:
+        session["lang"] = "en"
+    
     title = "Welcome"
     if session["lang"] == "sw":
         title = "Karibu"
@@ -29,6 +32,9 @@ def lang(lang):
 @app.route('/check-in', methods=['GET', 'POST'])
 def check_in():
     if request.method == "GET":
+        if session.get("lang") is None:
+            session["lang"] = "en"
+
         title = "Early Check-In"
         if session["lang"] == "sw":
             title = "Tathmini ya Awali"
@@ -62,6 +68,9 @@ def check_in():
 
 @app.route('/assessments')
 def assessments():
+    if session.get("lang") is None:
+        session["lang"] = "en"
+
     title = "Assessment"
     if session["lang"] == "sw":
         title = "Tathmini"
@@ -74,6 +83,8 @@ def assessments():
 
 @app.route('/assessment/<string:option>')
 def assessment(option):
+    if session.get("lang") is None:
+        session["lang"] = "en"
     # TODO: db translation
     ass = Assessment.query.filter(Assessment.title.like(f"%{option}%")).first()
     return render_template('assessment.html', title=f"{option} Assessment", ass=ass)
@@ -81,6 +92,9 @@ def assessment(option):
 @app.route('/results', methods=["POST"])
 @stream_with_context
 def results():
+    if session.get("lang") is None:
+        session["lang"] = "en"
+
     data = request.form
     age_group = data.get("age")
     gender = data.get("gender")
@@ -161,6 +175,9 @@ def register():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     
+    if session.get("lang") is None:
+        session["lang"] = "en"
+    
     title = "Register"
     if session["lang"] == "sw":
         title = "Jisajili"
@@ -226,6 +243,9 @@ def login():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     
+    if session.get("lang") is None:
+        session["lang"] = "en"
+    
     title = "Login"
     if session["lang"] == "sw":
         title = "Ingia"
@@ -257,6 +277,9 @@ def logout():
 @app.route('/scores')
 @login_required
 def scores():
+    if session.get("lang") is None:
+        session["lang"] = "en"
+    
     title = "Scores"
     if session["lang"] == "sw":
         title = "Majibu"
