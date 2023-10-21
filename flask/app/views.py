@@ -15,7 +15,11 @@ from app.utils import (
 @app.route('/')
 @app.route('/home')
 def index():
-    return render_template('index.html', title='Welcome')
+    title = "Welcome"
+    if session["lang"] == "sw":
+        title = "Karibu"
+    
+    return render_template('index.html', title=title)
 
 @app.route('/lang/<string:lang>')
 def lang(lang):
@@ -25,11 +29,15 @@ def lang(lang):
 @app.route('/check-in', methods=['GET', 'POST'])
 def check_in():
     if request.method == "GET":
+        title = "Early Check-In"
+        if session["lang"] == "sw":
+            title = "Tathmini ya Awali"
+        
         items = []
         ci = CheckIn.query.all()
         for c in ci:
             items.append(c.to_dict())
-        return render_template('checkin.html', title='Early Check-In', items=items)
+        return render_template('checkin.html', title=title, items=items)
     
     # post method
     data = request.form
@@ -54,14 +62,19 @@ def check_in():
 
 @app.route('/assessments')
 def assessments():
+    title = "Assessment"
+    if session["lang"] == "sw":
+        title = "Tathmini"
+    
     ass = [
         "ADHD", "Alcohol", "Anxiety", "Bipolar", "Depression",
         "Dementia", "Drug", "OCD", "PSQ", "PTSD"
     ]
-    return render_template('assessments.html', title='Assessment', ass=ass)
+    return render_template('assessments.html', title=title, ass=ass)
 
 @app.route('/assessment/<string:option>')
 def assessment(option):
+    # TODO: db translation
     ass = Assessment.query.filter(Assessment.title.like(f"%{option}%")).first()
     return render_template('assessment.html', title=f"{option} Assessment", ass=ass)
 
@@ -93,7 +106,7 @@ def results():
         # Initially, send html page
         yield render_template(
             'results.html', 
-            title="Assessment Score", 
+            title="Majibu ya Tathmini" if session["lang"]=="sw" else "Assessment Score", 
             res={"title": ass["title"], "result_text": result_text},
             plot=create_gauge_chart(score, max_score=ass["max_score"], assessment_name="")
         )
@@ -111,6 +124,14 @@ def results():
                {gpt_text} \
             </div>'
         yield '<div class="text text-green my-3 col-lg-6 mx-auto"> \
+                <p>\
+                <strong>Kumbusho: </strong> \
+                    Kumbuka kwamba mazungumzo yaliyotolewa na ni kwa madhumuni ya taarifa pekee. \
+                    Hayawakilishi utambuzi wala tathmini kamili ya kitabibu. Tafadhali shauriana na \
+                    mtaalamu wa afya kwa tathmini kamili \
+                </p> \
+            </div>\
+        ' if session["lang"] == "sw" else '<div class="text text-green my-3 col-lg-6 mx-auto"> \
                 <p>\
                     <strong>Reminder: </strong> \
                     These insights are based on the provided conversation and are for informational \
@@ -140,8 +161,12 @@ def register():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     
+    title = "Register"
+    if session["lang"] == "sw":
+        title = "Jisajili"
+    
     if request.method == "GET":
-        return render_template('register.html', title='Register')
+        return render_template('register.html', title=title)
     
     # post method
     username = request.form.get("username").strip()
@@ -151,31 +176,49 @@ def register():
     confirm_password = request.form.get("confirm_password")
 
     if password != confirm_password:
-        flash("Passwords do not match")
-        return render_template('register.html', title='Register')
+        if session["lang"] == "sw":
+            flash("Nenosiri halifanani")
+        else:
+            flash("Passwords do not match")
+        return render_template('register.html', title=title)
     
     user = User.query.filter_by(username=username).first()
     if user:
-        flash(f"The username {user.username} already exists")
-        return render_template('register.html', title='Register')
+        if session["lang"] == "sw":
+            flash(f"Jina la mtumiaji {user.username} tayari lipo")
+        else:
+            flash(f"The username {user.username} already exists")
+        return render_template('register.html', title=title)
     
     if len(username) < 4:
-        flash("Username must be at least 4 characters")
-        return render_template('register.html', title='Register')
+        if session["lang"] == "sw":
+            flash("Jina la mtumiaji liwe na angalau herufi 4")
+        else:
+            flash("Username must be at least 4 characters")
+        return render_template('register.html', title=title)
     
     if len(password) < 6:
-        flash("Password must be at least 6 characters")
-        return render_template('register.html', title='Register')
+        if session["lang"] == "sw":
+            flash("Nenosiri liwe na herufi angalau 6")
+        else:
+            flash("Password must be at least 6 characters")
+        return render_template('register.html', title=title)
     
     if int(age) < 13:
-        flash("You must be at least 13 years old to register")
-        return render_template('register.html', title='Register')
+        if session["lang"] == "sw":
+            flash("Lazima uwe angalau na miaka 13 kujisajili")
+        else:
+            flash("You must be at least 13 years old to register")
+        return render_template('register.html', title=title)
     
     user = User(username=username, age=age, gender=gender, password=password)
     db.session.add(user)
     db.session.commit()
     
-    flash(f"Welcome, {username}. Please login to continue.")
+    if session["lang"] == "sw":
+        flash(f"Karibu, {username}. Tafadhali ingia kudendelea.")
+    else:
+        flash(f"Welcome, {username}. Please login to continue.")
     return redirect(url_for('login'))
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -183,8 +226,12 @@ def login():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     
+    title = "Login"
+    if session["lang"] == "sw":
+        title = "Ingia"
+    
     if request.method == "GET":
-        return render_template('login.html', title='Login')
+        return render_template('login.html', title=title)
     
     # post method
     username = request.form.get("username").strip()
@@ -193,10 +240,13 @@ def login():
 
     if user and user.password == password:
         login_user(user)
-        return render_template('index.html', title='Welcome')
+        return redirect(url_for("index"))
     else:
-        flash("Incorrect username or password")
-        return render_template('login.html', title='Login')
+        if session["lang"] == "sw":
+            flash("Jina la mtumiaji au Nenosiri sio sahihi")
+        else:
+            flash("Incorrect username or password")
+        return redirect(url_for("login"))
 
 @app.route('/logout')
 @login_required
@@ -207,5 +257,9 @@ def logout():
 @app.route('/scores')
 @login_required
 def scores():
+    title = "Scores"
+    if session["lang"] == "sw":
+        title = "Majibu"
+    
     scores = UserScores.query.filter_by(user_id=current_user.id).order_by(UserScores.date_taken.desc()).all()
-    return render_template('scores.html', title='Scores', scores=scores)
+    return render_template('scores.html', title=title, scores=scores)
