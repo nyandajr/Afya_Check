@@ -64,10 +64,22 @@
         {% endif %}
         {% for qn in ass.questions %}
             <div class="mb-3">
-                <label for="id_{{qn.id}}" class="form-label subtext">{{ qn.text }}</label>
+                <label for="id_{{qn.id}}" class="form-label subtext">
+                    {% if session['lang'] == "sw" %}
+                        {{qn.text_sw}}
+                    {% else %}
+                        {{ qn.text }}
+                    {% endif %}
+                </label>
                 <select name="id_{{qn.id}}" id="id_{{qn.id}}" class="custom-form-select">
                     {% for o in qn.options %}
-                        <option value="{{o.value}}">{{o.text}}</option>
+                        <option value="{{o.value}}">
+                            {% if session['lang'] == "sw" %}
+                                {{o.text_sw}}
+                            {% else %}
+                                {{o.text}}
+                            {% endif %}
+                        </option>
                     {% endfor %}
                 </select>
             </div>

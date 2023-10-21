@@ -24,7 +24,7 @@ def create_gauge_chart(score, max_score=27, assessment_name="Assessment", select
         mode="gauge+number",
         value=score,
         title={
-            'text': f"Alama zako za {assessment_name}" if selected_language=="Swahili" else f"Your {assessment_name} Score", 
+            'text': f"Alama zako {assessment_name}" if selected_language=="Swahili" else f"Your {assessment_name} Score", 
             'font': {'size': 24, 'color': 'var(--white-color)'}},
         domain={'x': [0, 1], 'y': [0, 1]},
         gauge={
@@ -43,22 +43,22 @@ def create_gauge_chart(score, max_score=27, assessment_name="Assessment", select
     # Enhancements
     if score <= 0.3 * max_score:
         level = "Low"
-        if selected_language == "SWahili":
+        if selected_language == "Swahili":
             level = "Chini"
     elif score <= 0.7 * max_score:
         level = "Medium"
-        if selected_language == "SWahili":
+        if selected_language == "Swahili":
             level = "Kati"
     else:
         level = "High"
-        if selected_language == "SWahili":
+        if selected_language == "Swahili":
             level = "Juu"
     
     fig.add_annotation(dict(font=dict(color="var(--white-color)", size=30),
         x=0.5,
         y=0.5,
         showarrow=False,
-        text=f"Kiwango cha {level}" if selected_language=="SWahili" else f"{level} Level",
+        text=f"Kiwango cha {level}" if selected_language=="Swahili" else f"{level} Level",
         textangle=0,
         xanchor="center",
         yanchor="middle"

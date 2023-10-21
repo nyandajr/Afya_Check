@@ -50,7 +50,13 @@
     <div class="my-4 text">
         {% for item in items %}
             <div class="mb-4">
-                <strong>{{ item.title }}:</strong>
+                <strong>
+                    {% if session['lang'] == "sw" %}
+                        {{ item.title_sw }}:
+                    {% else %}
+                        {{ item.title }}:
+                    {% endif %}
+                </strong>
                 {% for opt in item.options %}
                     <div class="form-check mt-3">
                         <input 
@@ -61,7 +67,11 @@
                             id="{{item.id}}-{{opt.id}}"
                         >
                         <label class="form-check-label ms-2" for="{{item.id}}-{{opt.id}}">
-                            {{ opt.text }}
+                            {% if session['lang'] == "sw" %}
+                                {{ opt.text_sw }}
+                            {% else %}
+                                {{ opt.text }}
+                            {% endif %}
                         </label>
                     </div>
                 {% endfor %}

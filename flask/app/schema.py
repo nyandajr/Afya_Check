@@ -37,6 +37,7 @@ class CheckIn(db.Model):
         return dict(
             id=self.id, 
             title=self.title, 
+            title_sw=self.title_sw,
             options=[option.to_dict() for option in self.options]
         )
     
@@ -54,6 +55,7 @@ class CheckInOption(db.Model):
         return dict(
             id=self.id, 
             text=self.text, 
+            text_sw=self.text_sw,
             checkin_id=self.checkin_id
         )
 
@@ -73,6 +75,7 @@ class Assessment(db.Model):
         return dict(
             id=self.id, 
             title=self.title,
+            title_sw=self.title_sw,
             max_score=self.max_score,
             questions=[question.to_dict() for question in self.questions]
         )
@@ -92,6 +95,7 @@ class AssessmentQuestion(db.Model):
         return dict(
             id=self.id, 
             text=self.text, 
+            text_sw=self.text_sw,
             assessment_id=self.assessment_id,
             options=[option.to_dict() for option in self.options]
         )
@@ -111,6 +115,7 @@ class AssessmentOption(db.Model):
         return dict(
             id=self.id, 
             text=self.text, 
+            text_sw=self.text_sw,
             value=self.value,
             assessment_question_id=self.assessment_question_id
         )
