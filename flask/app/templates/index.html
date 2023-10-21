@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="text-center">
+	<h3 class="subtitle my-3">Welcome to Akili Check</h3>
+</div>
+<div class="text">
+	<p>
+		This tool is designed to help you gain insights into your mental well-being based on the 
+		symptoms you report.
+	</p>
+	<p>
+		<strong>Please note:</strong> The insights provided by this tool are based on general 
+		patterns and should not be considered definitive conclusions. Always consult with a medical 
+		professional for an accurate diagnosis and treatment.
+	</p>
+	<p>
+		<strong>We advise</strong> you to begin with the EARLY CHECK-IN. After that, you will be 
+		directed to the respective assessments.
+	</p>
+	<p>
+		<strong>Please be informed:</strong> This tool does not collect any personally identifiable 
+		information as it aims to maintain your anonymity. <br>
+		<i>
+			You can opt for registration inorder to keep a record of your assessments for personal future reference.
+		</i>
+	</p>
+</div>
+<div class="row mx-auto my-4">
+	<a href="{{url_for('check_in')}}" class="col text-center custom-btn">Early Check-in</a>
+	<a href="{{url_for('assessments')}}" class="col text-center custom-btn">Assessment</a>
+</div>
+{% endblock content %}
+
+{% set curr_page="home" %}

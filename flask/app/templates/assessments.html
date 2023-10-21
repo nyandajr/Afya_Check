@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="subtitle text-center">
+    Choose an Assessment
+</div>
+<div class="row my-4">
+    {% for a in ass %}
+        <a href="{{url_for('assessment', option=a)}}" 
+            class="custom-btn col-11 col-lg-5 mx-auto my-3 text-center">
+            {{ a }}
+        </a>
+    {% endfor %}
+</div>
+{% endblock content %}
