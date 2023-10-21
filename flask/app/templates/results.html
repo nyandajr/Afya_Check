@@ -11,7 +11,12 @@
     {{res.result_text}}
 </div>
 <div id="loading" class="alert alert-warning p-2">
-    Loading... <i class="bi bi-arrow-repeat"></i>
+    {% if session['lang'] == "sw" %}
+        Inapakua...
+    {% else %}
+        Loading... 
+    {% endif %}
+    <i class="bi bi-arrow-repeat"></i>
 </div>
 {% endblock content %}
 
