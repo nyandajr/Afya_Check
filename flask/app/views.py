@@ -111,10 +111,14 @@ def results():
     for qn in questions:
         score += int(data.get(f"id_{qn['id']}"))
 
-    result_text = create_result_text(ass, score)
+    language = "English"
+    if session["lang"] == "sw":
+        language = "Swahili"
+
+    result_text = create_result_text(ass, score, selected_language=language)
 
     gpt3_prompt = f"You are a help full assistant"
-    gpt3_prompt = create_gpt_prompt(ass, score, result_text)
+    gpt3_prompt = create_gpt_prompt(ass, score, result_text, selected_language=language)
     
     def generate_content():
         # Initially, send html page
@@ -122,7 +126,12 @@ def results():
             'results.html', 
             title="Majibu ya Tathmini" if session["lang"]=="sw" else "Assessment Score", 
             res={"title": ass["title"], "result_text": result_text},
-            plot=create_gauge_chart(score, max_score=ass["max_score"], assessment_name="")
+            plot=create_gauge_chart(
+                score, 
+                max_score=ass["max_score"], 
+                assessment_name="",
+                selected_language=language
+            )
         )
 
         initialize_openai()
@@ -130,7 +139,7 @@ def results():
         # to save api calls, emulate gpt response with 3 seconds sleep
         sleep(3)
         gpt_text = "placeholder text"
-        # gpt3_response = get_gpt3_response(gpt3_prompt)
+        # gpt3_response = get_gpt3_response(gpt3_prompt, language=language)
         # gpt_text = gpt_response_to_html(gpt3_response)
 
         # Finally: send gpt response
