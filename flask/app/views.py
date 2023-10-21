@@ -154,10 +154,10 @@ def results():
         initialize_openai()
         # TODO: uncomment gpt api calls in production env, now commented in order
         # to save api calls, emulate gpt response with 3 seconds sleep
-        sleep(3)
-        gpt_text = "placeholder text"
-        # gpt3_response = get_gpt3_response(gpt3_prompt, language=language)
-        # gpt_text = gpt_response_to_html(gpt3_response)
+        # sleep(3)
+        # gpt_text = "placeholder text"
+        gpt3_response = get_gpt3_response(gpt3_prompt, language=language)
+        gpt_text = gpt_response_to_html(gpt3_response)
 
         # Finally: send gpt response
         yield f'<div class="text my-2 col-lg-6 mx-auto"> \
