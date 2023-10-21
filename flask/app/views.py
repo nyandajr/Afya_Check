@@ -31,14 +31,14 @@ def lang(lang):
 
 @app.route('/check-in', methods=['GET', 'POST'])
 def check_in():
-    if request.method == "GET":
-        if session.get("lang") is None:
-            session["lang"] = "en"
+    if session.get("lang") is None:
+        session["lang"] = "en"
 
-        title = "Early Check-In"
-        if session["lang"] == "sw":
-            title = "Tathmini ya Awali"
-        
+    title = "Early Check-In"
+    if session["lang"] == "sw":
+        title = "Tathmini ya Awali"
+    
+    if request.method == "GET":
         items = []
         ci = CheckIn.query.all()
         for c in ci:
@@ -56,9 +56,13 @@ def check_in():
         gender = current_user.gender
 
     if int(age) < 13:
+        if session["lang"] == "sw":
+            return jsonify({"error": "Lazima uwe na angalau miaka 13 kujisajili"})
         return jsonify({"error": "You must be at least 13 years old to register"})
     
     if len(symptoms) < 1:
+        if session["lang"] == "sw":
+            return jsonify({"error": "Chagua angalau dalili moja"})   
         return jsonify({"error": "You must select at least one symptom"})
 
     selected_language = "English"
@@ -85,9 +89,17 @@ def assessments():
 def assessment(option):
     if session.get("lang") is None:
         session["lang"] = "en"
-    # TODO: db translation
-    ass = Assessment.query.filter(Assessment.title.like(f"%{option}%")).first()
-    return render_template('assessment.html', title=f"{option} Assessment", ass=ass)
+    
+    title = f"{option} Assessment"
+    ass = None
+    if session["lang"] == "sw":
+        title = f"Tathmini ya {option}"
+        ass = Assessment.query.filter(Assessment.title_sw.like(f"%{option}%")).first()
+    else:
+        title = title = f"{option} Assessment"
+        ass = Assessment.query.filter(Assessment.title.like(f"%{option}%")).first()
+
+    return render_template('assessment.html', title=title, ass=ass)
 
 @app.route('/results', methods=["POST"])
 @stream_with_context
@@ -105,9 +117,14 @@ def results():
         gender = current_user.gender
 
     score = 0
-    ass = Assessment.query.filter(Assessment.title.like(f"%{title}%")).first().to_dict()
-    questions = ass["questions"]
+    ass = None
 
+    if session["lang"] == "sw":
+        ass = Assessment.query.filter(Assessment.title_sw.like(f"%{title}%")).first().to_dict()
+    else:
+        ass = Assessment.query.filter(Assessment.title.like(f"%{title}%")).first().to_dict()
+
+    questions = ass["questions"]
     for qn in questions:
         score += int(data.get(f"id_{qn['id']}"))
 
