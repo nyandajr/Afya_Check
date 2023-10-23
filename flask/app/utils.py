@@ -127,15 +127,22 @@ def initialize_openai():
     path = os.path.join(app.root_path, '.env')
     load_dotenv(path)
     openai.api_key = os.getenv("API_KEY")
+    
+    load_dotenv(path)
+    api_key = os.getenv("API_KEY")
+    print(f"API Key Value: {api_key}")  # This will print the fetched API key value
 
-def get_gpt3_response(prompt, language="English", temperature=0.7):
+    openai.api_key = api_key
+
+
+def get_gpt3_response(prompt, language="English", temperature=0.3):
     if language == "Swahili":
         prompt += " Please respond in Swahili."
 
     try:
         # Use the chat model endpoint for GPT-3.5 Turbo
         response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo-0301",
+            model="gpt-3.5-turbo",
             temperature=temperature,
             messages=[
                 {"role": "system", "content": "You are a mental health assistant with knowledge about various mental health conditions. Provide responses that are sensitive, empathetic, and non-diagnostic."},

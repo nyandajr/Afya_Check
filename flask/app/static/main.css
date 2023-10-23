@@ -171,3 +171,11 @@ input[type="checkbox"]:checked{
 .annotation-text {
     color: #327434 !important;
 }
+
+#loading .fa-spinner {
+    font-size: 30px;  /* Change as needed */
+    margin-right: 10px; /* Space between spinner and text */
+    color: #008000; /* This is a standard green color */
+
+}
+

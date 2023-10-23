@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
 {% extends 'base.html' %}
 
 {% block content %}
@@ -11,13 +13,14 @@
     {{res.result_text}}
 </div>
 <div id="loading" class="alert alert-warning p-2">
+    <i class="fa fa-spinner fa-spin"></i>
     {% if session['lang'] == "sw" %}
         Inapakua...
     {% else %}
-        Loading... 
+        Loading...
     {% endif %}
-    <i class="bi bi-arrow-repeat"></i>
 </div>
+
 {% endblock content %}
 
 {% block script %}
