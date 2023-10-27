@@ -206,18 +206,16 @@ def create_gpt_prompt(assessment, score, result_text, selected_language="English
         """
         '''
     elif assessment["title"] == "AUDIT (Alcohol Use Disorders Identification Test)":
-        return f'''gpt3_prompt = f"""
-        As a knowledgeable mental health assistant:
-        I have completed the AUDIT assessment, scoring {score} out of {assessment['max_score']}, indicating: '{result_text}'.
-        1. Offer an empathetic response based on my score, and acknowledge my score out of 40.
-        2. Explain Substance Alcohol Use Disorder. and early signs of this problem.
-        3. List detailed negative consequences of untreated alcohol addiction in daily life.
-        4. Offer coping strategies, natural ways and insights into managing alcohol addiction.
-        5. Commend me for undertaking the assessment.
-        7. Advise and encourage me to seek hospital help if my score is high.
-        """
-        gpt3_response = get_gpt3_response(gpt3_prompt, selected_language)
-        '''
+        if selected_language == "Swahili":
+            if score <= 7:
+                return "Alama zako zinaonyesha kiwango cha chini cha uraibu wa pombe."
+            elif score <= 15:
+                return "Alama zako zinaonyesha kiwango cha wastani cha uraibu wa pombe."
+            elif score <= 19:
+                return "Alama zako zinaonyesha kiwango cha juu cha uraibu wa pombe."
+            else:
+                return "Alama zako zinaonyesha kiwango cha juu sana cha uraibu wa pombe."
+
     elif assessment["title"] == "OCD Assessment (Y-BOCS)":
         return f'''gpt3_prompt = f"""
         As a knowledgeable mental health assistant:
@@ -341,11 +339,9 @@ def create_result_text(assessment, score, selected_language="English"):
         boundaries = [4, 9, 14]
 
         for i, boundary in enumerate(boundaries):
-            if assessment["max_score"] <= boundary:
-                return interpretations[selected_language][i]
-        else:
-            return interpretations[selected_language][3]
-        
+          if score <= boundary:
+             return interpretations[selected_language][i]
+
 
     elif assessment["title"] == "AUDIT (Alcohol Use Disorders Identification Test)":
         if selected_language == "English":
@@ -383,16 +379,15 @@ def create_result_text(assessment, score, selected_language="English"):
                 
         elif selected_language == "Swahili":
             if score <= 7:
-                return "Matokeo: Subkliniki"
+                return "Matokeo: Hali isiyo dhahiri"
             elif score <= 15:
-                return "Matokeo: Nyepesi"
+                return "Matokeo: Hali ya chini"
             elif score <= 23:
-                return "Matokeo: Wastani"
+                return "Matokeo: Hali ya wastani"
             elif score <= 31:
-                return "Matokeo: Kali"
+                return "Matokeo: Hali mbaya"
             else:
-                return "Matokeo: Kali mno"
-
+                return "Matokeo: Hali mbaya sana"
 
     elif assessment["title"] == "PTSD Assessment (Post-Traumatic Stress Disorder)":
         if score >= 3:
@@ -407,9 +402,42 @@ def create_result_text(assessment, score, selected_language="English"):
                 return "Alama zako zinaonyesha kuwa PTSD ni chini ya uwezekano. Fuatilia na tathmini tena ikiwa ni lazima."
 
 
+    elif assessment["title"] == "PTSD Assessment (Post-Traumatic Stress Disorder)":
+            if score >= 3:
+                if selected_language == "English":
+                    return "Your score suggests that PTSD is likely. Further assessment is warranted."
+                elif selected_language == "Swahili":
+                    return "Alama zako zinaonyesha kuwa PTSD inawezekana. Uchunguzi zaidi unahitajika."
+            else:
+             if selected_language == "English":
+                return "Your score suggests that PTSD is less likely. Monitor and re-assess if necessary."
+             elif selected_language == "Swahili":
+                return "Alama zako zinaonyesha kuwa PTSD ni chini ya uwezekano. Fuatilia na tathmini tena ikiwa ni lazima."
+
     elif assessment["title"] == "DAST-10 Assessment (Drug Abuse Screening Test)":
-        return ""
-    
+        if selected_language == "English":
+            if score == 0:
+                return "Your score suggests no problem related to drug abuse."
+            elif score <= 2:
+                return "Your score suggests a low level of drug abuse."
+            elif score <= 5:
+                return "Your score suggests a moderate level of drug abuse."
+            elif score <= 8:
+                return "Your score suggests a substantial level of drug abuse."
+            else:
+                return "Your score suggests a severe level of drug abuse."
+        elif selected_language == "Swahili":
+            if score == 0:
+                return "Alama zako zinaonyesha hakuna tatizo linalohusiana na matumizi ya dawa za kulevya."
+            elif score <= 2:
+                return "Alama zako zinaonyesha kiwango cha chini cha matumizi ya dawa za kulevya."
+            elif score <= 5:
+                return "Alama zako zinaonyesha kiwango cha wastani cha matumizi ya dawa za kulevya."
+            elif score <= 8:
+                return "Alama zako zinaonyesha kiwango kikubwa cha matumizi ya dawa za kulevya."
+            else:
+                return "Alama zako zinaonyesha kiwango cha juu sana cha matumizi ya dawa za kulevya."
+
 
     elif assessment["title"] == "ASRS-v1.1 Assessment (Adult ADHD Self-Report Scale)":
         if score == 0:
@@ -424,9 +452,9 @@ def create_result_text(assessment, score, selected_language="English"):
 
     elif assessment["title"] == "Psychosis Screening Questionnaire (PSQ) Assessment":
         if score >= 2:
-            return "Your score suggests the presence of significant psychotic symptoms. Further assessment by a mental health professional is recommended." if selected_language == "English" else "Alama zako zinaonyesha uwepo wa dalili kubwa za wazimu. Inapendekezwa kufanyiwa tathmini zaidi na mtaalamu wa afya ya akili."
+            return "Your score suggests the presence of significant psychotic symptoms. Further assessment by a mental health professional is recommended." if selected_language == "English" else "Alama zako zinaonyesha uwepo wa dalili kubwa za shizofrenia. Inapendekezwa kufanyiwa tathmini zaidi na mtaalamu wa afya ya akili."
         else:
-            return "Your score suggests no significant psychotic symptoms. Continue to monitor your well-being." if selected_language == "English" else "Alama zako zinaonyesha hakuna dalili kubwa za wazimu. Endelea kufuatilia ustawi wako."
+            return "Your score suggests no significant psychotic symptoms. Continue to monitor your well-being." if selected_language == "English" else "Alama zako zinaonyesha hakuna dalili kubwa za shizofrenia. Endelea kufuatilia ustawi wako."
 
 
     elif assessment["title"] == "Depression Assessment (PHQ-9)":
@@ -467,11 +495,10 @@ def create_result_text(assessment, score, selected_language="English"):
                 return "Your score suggests severe cognitive decline."
         elif selected_language == "Swahili":
             if score <= 15:
-                return "Alama zako zinaonyesha dalili ndogo au hakuna upungufu wa kiakili."
+                return "Kiwango cha chini au kisicho na kuzorota kwa akili."
             elif score <= 30:
-                return "Alama zako zinaonyesha upungufu wa kiakili wa wastani."
+                return "Kuzorota kwa wastani kwa akili."
             elif score <= 45:
-                return "Alama zako zinaonyesha upungufu wa kiakili wa kati."
+                return "Kuzorota kwa akili kwa kiasi kikubwa."
             else:
-                return "Alama zako zinaonyesha upungufu wa kiakili mkali."
-
+                return "Kuzorota kwa akili kwa kiasi kikubwa sana."

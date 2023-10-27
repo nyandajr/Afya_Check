@@ -9,11 +9,13 @@
 
 .theme-light {
     --bg-color: rgb(247, 247, 247);
-    --primary-color: #4CAF50;
-    --primary-color-dark: #327434;
-    --white-color: rgb(14, 13, 13);
+    --primary-color: hsl(197, 77%, 36%);
+    --primary-color-dark: hsl(128, 71%, 53%);
+    --white-color: rgb(0, 0, 0);
     --input-bg-color: rgb(223, 226, 231);
     --input-border-color: #d1d1d1;
+    --primary-color-hover: hsl(197, 77%, 26%); /* reduced the lightness from 36% to 26% */
+
 }
 
 body {
@@ -31,16 +33,17 @@ body {
     padding: 0.6rem;
     border: none;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 80px;
     font-size: 1.1rem;
     font-weight: bold;
     margin: 4px;
 }
 
 .custom-btn:hover {
-    background-color: var(--primary-color-dark);
-    color: var(--white-color);
+    background-color: var(--primary-color-hover);
+    color: white !important;
 }
+
 
 .custom-form-select {
     background-color: var(--input-bg-color);
@@ -57,12 +60,12 @@ body {
 .custom-form-select-sm {
     background-color: var(--input-bg-color);
     color: var(--white-color);
-    border: 1px solid var(--input-border-color);
+    border: 3px solid var(--input-border-color);
     font-size: 0.9rem;
     width: 100%;
-    padding: 5px;
+    padding: 7px;
     border: none;
-    border-radius: 4px;
+    border-radius: 46px;
     outline: none;
 }
 
@@ -85,11 +88,11 @@ body {
     border: 2px solid var(--primary-color);
     padding: 10px;
     border-radius: 10px;
-    margin: 4px 0px;
+    margin: 5px 0px;
 }
 
 .title {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     font-weight: bolder;
     margin: 24px 0px;
 }
@@ -175,7 +178,47 @@ input[type="checkbox"]:checked{
 #loading .fa-spinner {
     font-size: 30px;  /* Change as needed */
     margin-right: 10px; /* Space between spinner and text */
-    color: #008000; /* This is a standard green color */
+    color: #16b4db; /* This is a standard green color */
 
 }
 
+
+/* Add these classes to your CSS file */
+.main-heading {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-color-dark);
+}
+
+.main-text {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: #333;  /* A shade of grey for better readability */
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+.disclaimer-text {
+    font-size: 0.9rem;
+    color: #555;  /* Slightly lighter grey for disclaimers */
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+
+
+.highlighted-text {
+    font-size: 1.4rem; /* Adjust the size as per your requirement */
+    font-weight: 500;  /* This will make the font a bit bolder */
+    color: var(--primary-color);
+}
+
+
+.text-center .main-heading.bold-black-text {
+    color: black;
+    font-weight: bold;
+}

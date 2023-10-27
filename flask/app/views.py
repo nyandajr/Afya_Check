@@ -66,6 +66,8 @@ def check_in():
         return jsonify({"error": "You must select at least one symptom"})
 
     selected_language = "English"
+
+ 
     predicted_condition = get_predicted_condition(age, gender, selected_language, symptoms)
     recommended_assessments = get_recommended_assessment(predicted_condition)
     return jsonify(recommended_assessments)
@@ -81,7 +83,7 @@ def assessments():
     
     ass = [
         "ADHD", "Alcohol", "Anxiety", "Bipolar", "Depression",
-        "Dementia", "Drug", "OCD", "PSQ", "PTSD"
+        "Dementia", "Drug", "OCD", "PSQ", "PTSD",
     ]
     return render_template('assessments.html', title=title, ass=ass)
 

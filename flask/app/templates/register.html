@@ -9,7 +9,7 @@
     {% endif %}
 </div>
 <div class="mb-3">
-    <small class="text-warning">
+    <small style="font-weight: bold; color: hsl(197, 77%, 36%);">
         {% if session['lang'] == "sw" %}
             <strong>Onyo:</strong>
             Hatukusanyi taarifa binafsi. 
@@ -21,6 +21,8 @@
         {% endif %}
     </small>
 </div>
+
+
 <div>
     {% for msg in get_flashed_messages() %}
         <div class="text-danger my-2 text-center">
