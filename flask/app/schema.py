@@ -9,6 +9,8 @@ class User(UserMixin, db.Model):
     gender = db.Column(db.String(6), nullable=False)
     password = db.Column(db.String(128), nullable=False)
     date_registered = db.Column(db.DateTime, nullable=False, default=datetime.now())
+    # roles: user, admin
+    role = db.Column(db.String(16), nullable=False, default='user')
     scores = db.relationship('UserScores', backref='user', lazy=True)
 
     def __repr__(self):

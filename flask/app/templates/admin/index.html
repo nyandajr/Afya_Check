@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Akili Check | Admin</title>
+
+	<link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
+	{% block styles %}
+	{% endblock styles %}
+</head>
+
+<body class="custom-bg-dark mx-2 theme-light">
+	<div class="theme-switch" id="themeSwitch">
+		<!-- <i class="bi bi-moon-stars-fill"></i> -->
+		<i class="bi bi-brightness-high-fill" id="themeIcon"></i>
+	</div>
+	<div class="col-lg-6 mt-5 mx-auto">
+		<div class="text-center">
+			<h1 class="title">Akili Check</h1>
+			<a href="{{url_for('index')}}" class="nv-link text {% if curr_page=='home' %}active{% endif %}">
+				<i class="bi bi-house-door-fill"></i>
+				{% if session['lang'] == "sw" %} Karibu {% else %} Home{% endif %}
+			</a>
+			<span class="mx-2 fw-bold">|</span>
+			{% if current_user.is_authenticated %}
+                {% if current_user.role == "admin" %}
+                    <a href="{{url_for('scores')}}" class="nv-link text {% if curr_page=='scores' %}active{% endif %}">
+                        <i class="bi bi-graph-down-arrow"></i>
+                        {% if session['lang'] == "sw" %} Fuatilia {% else %} Follow up {% endif %}
+                    </a>
+                    <span class="mx-2 fw-bold">|</span>
+                    <a href="{{url_for('logout')}}" class="nv-link text {% if curr_page=='logout' %}active{% endif %}">
+                        <i class="bi bi-box-arrow-right"></i>
+                        {% if session['lang'] == "sw" %} Ondoka {% else %} Logout {% endif %}
+                    </a>
+                {% endif %}
+			{% endif %}
+		</div>
+		<div class="my-3">
+			<div class="border-green flexy">
+				<label for="language" class="form-label subtext">
+					{% if session['lang'] == "sw" %}
+						Chagua lugha yako:
+					{% else %}
+						Choose your language:
+					{% endif %}
+				</label>
+				<select name="language" id="language" class="custom-form-select-sm">
+					<option value="en" {% if session['lang'] == "en" %} selected {%endif%}>
+						English
+					</option>
+					<option value="sw" {% if session['lang'] == "sw" %} selected {%endif%}>
+						Kiswahili
+					</option>
+				</select>
+			</div>
+		</div>
+		{% block content %}
+		{% endblock content %}
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	<script src="{{url_for('static', filename='main.js')}}"></script>
+	{% block script %}
+	{% endblock script %}
+</body>
+</html>

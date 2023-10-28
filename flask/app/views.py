@@ -17,6 +17,10 @@ from app.utils import (
 def index():
     if session.get("lang") is None:
         session["lang"] = "en"
+
+    if current_user.is_authenticated:
+        if current_user.role == "admin":
+            return redirect(url_for("admin"))
     
     title = "Welcome"
     if session["lang"] == "sw":
@@ -33,6 +37,10 @@ def lang(lang):
 def check_in():
     if session.get("lang") is None:
         session["lang"] = "en"
+
+    if current_user.is_authenticated:
+        if current_user.role == "admin":
+            return redirect(url_for("admin"))
 
     title = "Early Check-In"
     if session["lang"] == "sw":
@@ -77,6 +85,10 @@ def assessments():
     if session.get("lang") is None:
         session["lang"] = "en"
 
+    if current_user.is_authenticated:
+        if current_user.role == "admin":
+            return redirect(url_for("admin"))
+
     title = "Assessment"
     if session["lang"] == "sw":
         title = "Tathmini"
@@ -91,6 +103,10 @@ def assessments():
 def assessment(option):
     if session.get("lang") is None:
         session["lang"] = "en"
+
+    if current_user.is_authenticated:
+        if current_user.role == "admin":
+            return redirect(url_for("admin"))
     
     title = f"{option} Assessment"
     ass = None
@@ -108,6 +124,10 @@ def assessment(option):
 def results():
     if session.get("lang") is None:
         session["lang"] = "en"
+    
+    if current_user.is_authenticated:
+        if current_user.role == "admin":
+            return redirect(url_for("admin"))
 
     data = request.form
     age_group = data.get("age")
@@ -288,6 +308,8 @@ def login():
 
     if user and user.password == password:
         login_user(user)
+        if user.role == "admin":
+            return redirect(url_for("admin"))
         return redirect(url_for("index"))
     else:
         if session["lang"] == "sw":
@@ -307,6 +329,10 @@ def logout():
 def scores():
     if session.get("lang") is None:
         session["lang"] = "en"
+
+    if current_user.is_authenticated:
+        if current_user.role == "admin":
+            return redirect(url_for("admin"))
     
     title = "Scores"
     if session["lang"] == "sw":
@@ -314,3 +340,19 @@ def scores():
     
     scores = UserScores.query.filter_by(user_id=current_user.id).order_by(UserScores.date_taken.desc()).all()
     return render_template('scores.html', title=title, scores=scores)
+
+
+@app.route('/admin')
+@login_required
+def admin():
+    if session.get("lang") is None:
+        session["lang"] = "en"
+    
+    title = "Admin"
+    if session["lang"] == "sw":
+        title = "Msimamizi"
+    
+    if current_user.role != "admin":
+        return redirect(url_for("index"))
+    
+    return render_template("admin/index.html")
