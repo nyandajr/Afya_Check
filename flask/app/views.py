@@ -355,4 +355,7 @@ def admin():
     if current_user.role != "admin":
         return redirect(url_for("index"))
     
-    return render_template("admin/index.html")
+    users = User.query.all()
+    user_count = len(users)
+    return render_template("admin/index.html", users=users, user_count=user_count)
+
