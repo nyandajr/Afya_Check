@@ -1,4 +1,5 @@
 from time import sleep
+from datetime import datetime, timedelta
 from app import app, db
 from flask import (
     render_template, flash, request, redirect, url_for, jsonify, Response, 
@@ -372,6 +373,18 @@ def admin_scores():
     if current_user.role != "admin":
         return redirect(url_for("index"))
     
-    scores = UserScores.query.order_by(UserScores.date_taken.desc()).all()
-    return render_template("admin/scores.html", scores=scores)
+    per_page = 10
+    page = request.args.get("page", 1, type=int)
+    std = request.args.get("start_date") or (datetime.now()-timedelta(weeks=1)).strftime("%Y-%m-%d")
+    edt = request.args.get("end_date") or datetime.now().strftime("%Y-%m-%d")
+    # paginate the scores
+    pagination = UserScores.query.filter(
+            UserScores.date_taken.between(std, edt)
+        ).order_by(
+            UserScores.date_taken.desc()
+        ).paginate(page=page, per_page=per_page, error_out=False)
+    scores = pagination.items
+    return render_template(
+        "admin/scores.html", scores=scores, pagination=pagination,
+        start_date=std, end_date=edt)
 

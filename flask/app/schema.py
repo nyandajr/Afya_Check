@@ -141,7 +141,7 @@ class UserScores(db.Model):
             user_id=self.user_id, 
             assessment_id=self.assessment_id,
             score=self.score,
-            date_taken=self.date_taken
+            date_taken=self.date_taken.strftime("%Y-%m-%d")
         )
 
 
