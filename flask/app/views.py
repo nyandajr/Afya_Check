@@ -428,7 +428,7 @@ def admin_export():
     writer.writerows(data_list)
 
     output.seek(0)
-    filename = f"{std}-{edt}.csv"
+    filename = f"{std} to {edt}.csv"
     return Response(
         output, mimetype="text/csv", 
-        headers={"Content-Disposition":f"attachment;filename=filename.csv"})
+        headers={"Content-Disposition":f"attachment;filename={filename}"})
