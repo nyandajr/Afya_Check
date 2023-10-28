@@ -13,9 +13,27 @@
         <table class="table text-dark">
             <thead>
                 <tr>
-                    <th scope="col">Username</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Gender</th>
+                    <th scope="col">
+                        {% if session['lang'] == "sw" %}
+                            Jina la mtumiaji
+                        {% else %}
+                            Username
+                        {% endif %}
+                    </th>
+                    <th scope="col">
+                        {% if session['lang'] == "sw" %}
+                            Umri
+                        {% else %}
+                            Age
+                        {% endif %}
+                    </th>
+                    <th scope="col">
+                        {% if session['lang'] == "sw" %}
+                            Jinsia
+                        {% else %}
+                            Gender
+                        {% endif %}
+                    </th>
                 </tr>
             </thead>
             <tbody>

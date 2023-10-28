@@ -22,12 +22,12 @@
 			<h1 class="title">Akili Check</h1>
 			{% if current_user.is_authenticated %}
                 {% if current_user.role == "admin" %}
-					<a href="{{url_for('scores')}}" class="nv-link text {% if curr_page=='users' %}active{% endif %}">
+					<a href="{{url_for('admin')}}" class="nv-link text {% if curr_page=='users' %}active{% endif %}">
 						<i class="bi bi-person-fill"></i>
 						{% if session['lang'] == "sw" %} Watumiaji {% else %} Users {% endif %}
 					</a>
 					<span class="mx-2 fw-bold">|</span>
-                    <a href="{{url_for('scores')}}" class="nv-link text {% if curr_page=='scores' %}active{% endif %}">
+                    <a href="{{url_for('admin_scores')}}" class="nv-link text {% if curr_page=='scores' %}active{% endif %}">
                         <i class="bi bi-graph-down-arrow"></i>
                         {% if session['lang'] == "sw" %} Majibu {% else %} Scores {% endif %}
                     </a>

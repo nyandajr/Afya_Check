@@ -359,3 +359,19 @@ def admin():
     user_count = len(users)
     return render_template("admin/index.html", users=users, user_count=user_count)
 
+@app.route('/admin/scores')
+@login_required
+def admin_scores():
+    if session.get("lang") is None:
+        session["lang"] = "en"
+    
+    title = "Scores"
+    if session["lang"] == "sw":
+        title = "Majibu"
+    
+    if current_user.role != "admin":
+        return redirect(url_for("index"))
+    
+    scores = UserScores.query.order_by(UserScores.date_taken.desc()).all()
+    return render_template("admin/scores.html", scores=scores)
+
