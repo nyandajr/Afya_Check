@@ -12,14 +12,14 @@
                     {% endif %}
                 </div>
                 <div class="col-auto">
-                    <button type="submit" class="btn btn-sm btn-primary mt-3">
+                    <a href="{{url_for('admin_export', type='csv', start_date=start_date, end_date=end_date)}}" class="btn btn-sm btn-primary mt-3">
                         {% if session['lang'] == "sw" %}
                             Pakua kama CSV
                         {% else %}
                             Download as CSV
                         {% endif %}
                         <i class="bi bi-download"></i>
-                    </button>
+                    </a>
                 </div>
             </div>
             <div class="row mt-2 mb-3">

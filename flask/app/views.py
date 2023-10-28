@@ -1,3 +1,5 @@
+import csv
+from io import StringIO
 from time import sleep
 from datetime import datetime, timedelta
 from app import app, db
@@ -388,3 +390,45 @@ def admin_scores():
         "admin/scores.html", scores=scores, pagination=pagination,
         start_date=std, end_date=edt)
 
+@app.route('/admin/export')
+@login_required
+def admin_export():
+    if session.get("lang") is None:
+        session["lang"] = "en"
+    
+    title = "Export"
+    if session["lang"] == "sw":
+        title = "Hamisha"
+    
+    if current_user.role != "admin":
+        return redirect(url_for("index"))
+    
+    std = request.args.get("start_date") or (datetime.now()-timedelta(weeks=1)).strftime("%Y-%m-%d")
+    edt = request.args.get("end_date") or datetime.now().strftime("%Y-%m-%d")
+    scores = UserScores.query.filter(
+            UserScores.date_taken.between(std, edt)
+        ).order_by(
+            UserScores.date_taken.desc()
+        ).all()
+    
+    data_list = []
+    for score in scores:
+        data_list.append({
+            "Assessment Name": score.assessment.title,
+            "User's Score": score.score,
+            "Total Score": score.assessment.max_score,
+            "Age Group": score.age_group,
+            "Gender": score.gender,
+            "Date Taken": score.date_taken.strftime("%Y-%m-%d %H:%M")
+        })
+
+    output = StringIO()
+    writer = csv.DictWriter(output, fieldnames=data_list[0].keys())
+    writer.writeheader()
+    writer.writerows(data_list)
+
+    output.seek(0)
+    filename = f"{std}-{edt}.csv"
+    return Response(
+        output, mimetype="text/csv", 
+        headers={"Content-Disposition":f"attachment;filename=filename.csv"})
