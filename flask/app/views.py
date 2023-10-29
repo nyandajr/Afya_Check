@@ -8,7 +8,7 @@ from flask import (
     stream_with_context, session
 )
 from flask_login import login_user, logout_user, current_user, login_required
-from app.schema import User, CheckIn, Assessment, UserScores
+from app.schema import User, CheckIn, Assessment, UserScores, SecurityQuestion, UserSecurityQuestion
 from app.utils import (
     create_gauge_chart, get_predicted_condition, get_recommended_assessment, 
     age_group_from_age, get_gpt3_response, initialize_openai, gpt_response_to_html,
@@ -234,7 +234,8 @@ def register():
         title = "Jisajili"
     
     if request.method == "GET":
-        return render_template('register.html', title=title)
+        qns = SecurityQuestion.query.all()
+        return render_template('register.html', title=title, qns=qns)
     
     # post method
     username = request.form.get("username").strip()
@@ -242,13 +243,16 @@ def register():
     gender = request.form.get("gender")
     password = request.form.get("password")
     confirm_password = request.form.get("confirm_password")
+    ans1 = request.form.get("qn-1").lower()
+    ans2 = request.form.get("qn-2").lower()
+    ans3 = request.form.get("qn-3").lower()
 
     if password != confirm_password:
         if session["lang"] == "sw":
             flash("Nenosiri halifanani")
         else:
             flash("Passwords do not match")
-        return render_template('register.html', title=title)
+        return redirect(url_for('register'))
     
     user = User.query.filter_by(username=username).first()
     if user:
@@ -256,31 +260,57 @@ def register():
             flash(f"Jina la mtumiaji {user.username} tayari lipo")
         else:
             flash(f"The username {user.username} already exists")
-        return render_template('register.html', title=title)
+        return redirect(url_for('register'))
     
     if len(username) < 4:
         if session["lang"] == "sw":
             flash("Jina la mtumiaji liwe na angalau herufi 4")
         else:
             flash("Username must be at least 4 characters")
-        return render_template('register.html', title=title)
+        return redirect(url_for('register'))
     
     if len(password) < 6:
         if session["lang"] == "sw":
             flash("Nenosiri liwe na herufi angalau 6")
         else:
             flash("Password must be at least 6 characters")
-        return render_template('register.html', title=title)
+        return redirect(url_for('register'))
     
     if int(age) < 13:
         if session["lang"] == "sw":
             flash("Lazima uwe angalau na miaka 13 kujisajili")
         else:
             flash("You must be at least 13 years old to register")
-        return render_template('register.html', title=title)
+        return redirect(url_for('register'))
+    
+    if len(ans1) < 3 or len(ans2) < 3 or len(ans3) < 3:
+        if session["lang"] == "sw":
+            flash("Majibu yote yanatakiwa yawe na angalau herufi 3")
+        else:
+            flash("All answers must be at least 3 characters long")
+        return redirect(url_for('register'))
     
     user = User(username=username, age=age, gender=gender, password=password)
     db.session.add(user)
+    db.session.commit()
+
+    usq = UserSecurityQuestion(
+        user_id=user.id, 
+        security_question_id=1, 
+        answer=ans1)
+    db.session.add(usq)
+
+    usq = UserSecurityQuestion(
+        user_id=user.id, 
+        security_question_id=2, 
+        answer=ans2)
+    db.session.add(usq)
+
+    usq = UserSecurityQuestion(
+        user_id=user.id, 
+        security_question_id=3, 
+        answer=ans3)
+    db.session.add(usq)
     db.session.commit()
     
     if session["lang"] == "sw":
