@@ -108,7 +108,11 @@
         {% for qn in qns %}
             <div class="mb-3">
                 <label for="qn{{qn.id}}" class="form-label subtext">
-                    {{qn}}
+                    {% if session["lang"] == "sw" %}
+                        {{qn.text_sw}}
+                    {% else %}
+                        {{qn.text}}
+                    {% endif %}
                 </label>
                 <input type="text" name="qn{{qn.id}}" id="qn{{qn.id}}" class="custom-form-control" placeholder="answer" required>
             </div>
