@@ -284,7 +284,7 @@ def create_gpt_prompt(assessment, score, result_text, selected_language="English
         5. Mention things one should and shouldn't do when interacting with someone struggling with depression.
         6.Congratulate me for taking this test. And if my score is high advice me to go to the hospital.
         '''
-    elif assessment["title"] == "IQCODE Assessment":
+    elif assessment["title"] == "IQCODE (Dementia) Assessment":
         return f'''gpt3_prompt = f"""
         As a knowledgeable mental health assistant:
         I have completed the IQCODE(Cognitive Decline)  assessment for my relative, scoring {score} out of {assessment['max_score']}, indicating: '{result_text}'.
