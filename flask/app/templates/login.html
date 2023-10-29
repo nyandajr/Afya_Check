@@ -38,9 +38,9 @@
         </div>
         <div class="mb-3">
             {% if session["lang"] == "sw" %}
-                Umesahau nenosiri? <a href="{{url_for('forgot_password')}}">Bofya hapa</a>
+                Umesahau nenosiri? &nbsp;<a href="{{url_for('forgot_password')}}" class="link">Bofya hapa</a>
             {% else %}
-                Forgot password? <a href="{{url_for('forgot_password')}}">Click here</a>
+                Forgot password? &nbsp;<a href="{{url_for('forgot_password')}}" class="link">Click here</a>
             {% endif %}
         </div>
         <div class="mb-3 text-center">

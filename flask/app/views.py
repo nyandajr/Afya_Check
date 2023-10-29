@@ -352,7 +352,6 @@ def login():
         return redirect(url_for("login"))
 
 @app.route('/forgot-password', methods=["GET", "POST"])
-@login_required
 def forgot_password():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
@@ -365,7 +364,8 @@ def forgot_password():
         title = "Rudisha Nenosiri"
     
     if request.method == "GET":
-        return render_template('forgot-password.html', title=title)
+        qns = SecurityQuestion.query.all()
+        return render_template('forgot-password.html', title=title, qns=qns)
     
     # POST method
     username = request.form.get("username").strip()
@@ -396,6 +396,13 @@ def forgot_password():
             flash("Majibu sio sahihi")
         else:
             flash("Incorrect answers")
+        return redirect(url_for('forgot_password'))
+    
+    if len(new_password) < 6:
+        if session["lang"] == "sw":
+            flash("Nenosiri liwe na angalau herufi 6")
+        else:
+            flash("Password must be at least 6 characters")
         return redirect(url_for('forgot_password'))
     
     user.password = new_password
