@@ -351,6 +351,62 @@ def login():
             flash("Incorrect username or password")
         return redirect(url_for("login"))
 
+@app.route('/forgot-password', methods=["GET", "POST"])
+@login_required
+def forgot_password():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    
+    if session.get("lang") is None:
+        session["lang"] = "en"
+    
+    title = "Recover Password"
+    if session["lang"] == "sw":
+        title = "Rudisha Nenosiri"
+    
+    if request.method == "GET":
+        return render_template('forgot-password.html', title=title)
+    
+    # POST method
+    username = request.form.get("username").strip()
+    ans1 = request.form.get("qn-1").lower()
+    ans2 = request.form.get("qn-2").lower()
+    ans3 = request.form.get("qn-3").lower()
+    new_password = request.form.get("new_password")
+    confirm_password = request.form.get("confirm_password")
+
+    if new_password != confirm_password:
+        if session["lang"] == "sw":
+            flash("Nenosiri halifanani")
+        else:
+            flash("Passwords do not match")
+        return redirect(url_for('forgot_password'))
+    
+    user = User.query.filter_by(username=username).first()
+    if not user:
+        if session["lang"] == "sw":
+            flash(f"Jina la mtumiaji {username} halipo")
+        else:
+            flash(f"The username {username} does not exist")
+        return redirect(url_for('forgot_password'))
+        
+    usq = UserSecurityQuestion.query.filter_by(user_id=user.id).all()    
+    if ans1 != usq[0].answer or ans2 != usq[1].answer or ans3 != usq[2].answer:
+        if session["lang"] == "sw":
+            flash("Majibu sio sahihi")
+        else:
+            flash("Incorrect answers")
+        return redirect(url_for('forgot_password'))
+    
+    user.password = new_password
+    db.session.commit()
+
+    if session["lang"] == "sw":
+        flash(f"Nenosiri limebadilishwa kwa {username}")
+    else:
+        flash(f"Password changed for {username}")
+    return redirect(url_for('login'))
+
 @app.route('/logout')
 @login_required
 def logout():

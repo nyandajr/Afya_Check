@@ -36,6 +36,13 @@
             </label>
             <input type="password" name="password" id="password" class="custom-form-control" placeholder="password">
         </div>
+        <div class="mb-3">
+            {% if session["lang"] == "sw" %}
+                Umesahau nenosiri? <a href="{{url_for('forgot_password')}}">Bofya hapa</a>
+            {% else %}
+                Forgot password? <a href="{{url_for('forgot_password')}}">Click here</a>
+            {% endif %}
+        </div>
         <div class="mb-3 text-center">
             <input 
                 type="submit" 
