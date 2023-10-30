@@ -1,0 +1,53 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+    {% if session['lang'] == "sw" %}
+        Mfumo una jumla ya watumiaji <strong>{{ user_count }}</strong> <br />
+        Orodha ya watumiaji wa mfumo huu
+    {% else %}
+        The system has a total of <strong>{{ user_count }}</strong> users<br />
+        List of users of this system
+    {% endif %}
+    
+    <div class="table-responsive mt-3">
+        <table class="table text-dark">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        {% if session['lang'] == "sw" %}
+                            Jina la mtumiaji
+                        {% else %}
+                            Username
+                        {% endif %}
+                    </th>
+                    <th scope="col">
+                        {% if session['lang'] == "sw" %}
+                            Umri
+                        {% else %}
+                            Age
+                        {% endif %}
+                    </th>
+                    <th scope="col">
+                        {% if session['lang'] == "sw" %}
+                            Jinsia
+                        {% else %}
+                            Gender
+                        {% endif %}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr class="">
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.age }}</td>
+                        <td>{{ user.gender }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+{% endblock content %}
+
+{% set curr_page = "users" %}

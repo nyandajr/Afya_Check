@@ -9,7 +9,10 @@ class User(UserMixin, db.Model):
     gender = db.Column(db.String(6), nullable=False)
     password = db.Column(db.String(128), nullable=False)
     date_registered = db.Column(db.DateTime, nullable=False, default=datetime.now())
+    # roles: user, admin
+    role = db.Column(db.String(16), nullable=False, default='user')
     scores = db.relationship('UserScores', backref='user', lazy=True)
+    security_questions = db.relationship('UserSecurityQuestion', backref='user', lazy=True)
 
     def __repr__(self):
         return f"<User {self.username}>"
@@ -139,7 +142,42 @@ class UserScores(db.Model):
             user_id=self.user_id, 
             assessment_id=self.assessment_id,
             score=self.score,
-            date_taken=self.date_taken
+            date_taken=self.date_taken.strftime("%Y-%m-%d %H:%M")
+        )
+
+
+class SecurityQuestion(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.String(), nullable=False)
+    text_sw = db.Column(db.String(), nullable=False)
+    user_security_questions = db.relationship('UserSecurityQuestion', backref='security_question', lazy=True)
+
+    def __repr__(self):
+        return f"<SecurityQuestion {self.text}>"
+    
+    def to_dict(self):
+        return dict(
+            id=self.id,
+            text=self.text,
+            text_sw=self.text_sw
+        )
+
+
+class UserSecurityQuestion(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    answer = db.Column(db.String(), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    security_question_id = db.Column(db.Integer, db.ForeignKey('security_question.id'), nullable=False)
+
+    def __repr__(self):
+        return f"<UserSecurityQuestion {self.user_id} {self.security_question_id}>"
+    
+    def to_dict(self):
+        return dict(
+            id=self.id,
+            user_id=self.user_id,
+            security_question_id=self.security_question_id,
+            answer=self.answer
         )
 
 
