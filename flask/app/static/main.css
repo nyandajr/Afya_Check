@@ -222,3 +222,146 @@ input[type="checkbox"]:checked{
     color: black;
     font-weight: bold;
 }
+
+
+/* For screens larger than 992px */
+@media (min-width: 992px) {
+    .img-fluid {
+        max-width: 200px;
+    }
+}
+
+/* For screens smaller than 992px */
+@media (max-width: 992px) {
+    .img-fluid {
+        max-width: 100px;
+    }
+}
+
+
+.img-fluid {
+    max-width: 150px; 
+}
+
+
+.navbar {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbar li {
+    margin: 0 10px;  
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #333; 
+    padding: 10px 20px;
+    border: 1px solid #333;
+    border-radius: 4px; 
+    transition: background-color 0.3s;
+}
+
+.navbar a:hover {
+    background-color: #f5f5f5; 
+}
+
+
+@media only screen and (max-width: 600px) {
+    .nv-link {
+        display: block;
+        margin-bottom: 20px;
+    }
+}
+
+.highlighted-text {
+    border: 1px solid #000; /* 1px solid black border */
+    padding: 5px; /* Add some padding for better appearance */
+    border-radius: 5px; /* Add rounded corners */
+}
+
+.disclaimer-text {
+    border: 1px solid #000; /* Add your desired border style */
+    padding: 10px; /* Add padding to the text */
+    /* Add other desired styles */
+}
+
+
+.text-green {
+    color: green;
+    font-weight: bold;
+    /* Add any other styles you want */
+}
+
+@media (max-width: 768px) {
+    .main-text p {
+        font-size: 14px;
+    }
+}
+
+/* For your main headings (h1, h2, etc.) */
+.main-heading {
+    font-family: "Your Chosen Font", sans-serif;
+}
+
+/* For paragraphs and regular text */
+.main-text {
+    font-family: "Your Chosen Font", sans-serif;
+}
+
+/* For highlighted text or disclaimer-text */
+.highlighted-text {
+    font-family: "Your Chosen Font", sans-serif;
+}
+
+/* For navigation links */
+.nv-link {
+    font-family: "Your Chosen Font", sans-serif;
+}
+
+/* For custom buttons */
+.custom-btn {
+    font-family: "Your Chosen Font", sans-serif;
+}
+
+
+/* For your main headings */
+.main-heading {
+    font-size: 24px; 
+}
+
+/* For main text */
+.main-text {
+    font-size: 20px; 
+}
+
+/* For custom buttons */
+.custom-btn {
+    font-size: 18px; 
+}
+
+
+/* For the bordered texts with a smaller font size */
+.disclaimer-text {
+    font-size: 20px; 
+}
+
+
+/* CSS for the marquee effect */
+.marquee-text {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}

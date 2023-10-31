@@ -1,2 +1,5 @@
 flask/afya_check_venv
 *.env
+
+__pycache__/
+afya_check_venv/
