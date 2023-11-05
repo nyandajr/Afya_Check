@@ -8,13 +8,13 @@
 }
 
 .theme-light {
-    --bg-color: rgb(247, 247, 247);
-    --primary-color: hsl(197, 77%, 36%);
+    --bg-color: white;
+    --primary-color: rgb(5, 152, 238) ;
     --primary-color-dark: hsl(128, 71%, 53%);
     --white-color: rgb(0, 0, 0);
     --input-bg-color: rgb(223, 226, 231);
     --input-border-color: #d1d1d1;
-    --primary-color-hover: hsl(197, 77%, 26%); /* reduced the lightness from 36% to 26% */
+    --primary-color-hover: rgb(5, 152, 238) ; /* reduced the lightness from 36% to 26% */
 
 }
 
@@ -183,7 +183,7 @@ input[type="checkbox"]:checked{
 }
 
 
-/* Add these classes to your CSS file */
+/
 .main-heading {
     font-size: 2rem;
     font-weight: bold;
@@ -212,8 +212,8 @@ input[type="checkbox"]:checked{
 
 
 .highlighted-text {
-    font-size: 1.4rem; /* Adjust the size as per your requirement */
-    font-weight: 500;  /* This will make the font a bit bolder */
+    font-size: 1.4rem; 
+    font-weight: 500;  
     color: var(--primary-color);
 }
 
@@ -277,15 +277,15 @@ input[type="checkbox"]:checked{
 }
 
 .highlighted-text {
-    border: 1px solid #000; /* 1px solid black border */
-    padding: 5px; /* Add some padding for better appearance */
-    border-radius: 5px; /* Add rounded corners */
+    border: 1px solid #000; 
+    padding: 5px; 
+    border-radius: 5px; 
 }
 
 .disclaimer-text {
-    border: 1px solid #000; /* Add your desired border style */
-    padding: 10px; /* Add padding to the text */
-    /* Add other desired styles */
+    border: 1px solid #000; /
+    padding: 10px; 
+   
 }
 
 
@@ -303,31 +303,31 @@ input[type="checkbox"]:checked{
 
 /* For your main headings (h1, h2, etc.) */
 .main-heading {
-    font-family: "Your Chosen Font", sans-serif;
+    font-family: sans-serif;
 }
 
 /* For paragraphs and regular text */
 .main-text {
-    font-family: "Your Chosen Font", sans-serif;
+    font-family: sans-serif;
 }
 
 /* For highlighted text or disclaimer-text */
 .highlighted-text {
-    font-family: "Your Chosen Font", sans-serif;
+    font-family:  sans-serif;
 }
 
 /* For navigation links */
 .nv-link {
-    font-family: "Your Chosen Font", sans-serif;
+    font-family:  sans-serif;
 }
 
 /* For custom buttons */
 .custom-btn {
-    font-family: "Your Chosen Font", sans-serif;
+    font-family:  sans-serif;
 }
 
 
-/* For your main headings */
+/* For  main headings */
 .main-heading {
     font-size: 24px; 
 }
@@ -364,4 +364,100 @@ input[type="checkbox"]:checked{
     100% {
         transform: translateX(-100%);
     }
+}
+
+
+
+
+
+/* CSS class for the custom background color */
+.custom-bg-color {
+
+    padding: 10px; 
+    border-radius: 40px; 
+    text-align: center; 
+    color: #ffffff; 
+}
+
+    .custom-bg-color {
+        background-color: rgb(5, 152, 238) !important;
+        position: bottom;
+        left: 00;
+        right: 0;
+        top: 0;
+        height: 180px; 
+      
+    
+    }
+
+    .marquee {
+        overflow: hidden;
+        white-space: nowrap;
+        animation: marquee 30s linear infinite;
+    }
+    
+    @keyframes marquee {
+        0% {
+            transform: translateX(100%);
+            font-size: 28px; 
+        }
+        100% {
+            transform: translateX(-100%);
+            font-size: 28px; 
+        }
+    }
+    
+/* Position the Login button at the top right */
+.text-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+/* custom.css */
+.login-button {
+    position: absolute;
+    top: -10px;
+    right: 10px;
+}
+
+
+
+
+/* custom.css */
+.home-button {
+    position: absolute;
+    top: -100px;
+    left: -340px;
+}
+
+
+
+/* custom.css */
+.title-top {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 20px; 
+}
+
+
+
+
+.footer {
+    background-color: rgb(255, 255, 255);
+    color: #000000;
+    padding: 20px 0;
+}
+
+.features {
+    padding: 30px 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 20px;
 }

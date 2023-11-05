@@ -93,3 +93,28 @@ function switchLang(lang){
         location.reload()
     })
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const categories = new Set();
+
+    checkboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            const category = this.getAttribute('data-category');
+
+            if (this.checked) {
+                categories.add(category);
+            } else {
+                categories.delete(category);
+            }
+
+            checkboxes.forEach(function(otherCheckbox) {
+                if (!categories.has(otherCheckbox.getAttribute('data-category'))) {
+                    otherCheckbox.disabled = categories.size > 0;
+                } else {
+                    otherCheckbox.disabled = false;
+                }
+            });
+        });
+    });
+});

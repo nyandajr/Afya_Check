@@ -124,28 +124,30 @@ def age_group_from_age(age:int):
         return "55+"
 
 def initialize_openai():
-    path = os.path.join(app.root_path, '.env')
-    load_dotenv(path)
-    openai.api_key = os.getenv("API_KEY")
-    
-    load_dotenv(path)
-    api_key = os.getenv("API_KEY")
-    print(f"API Key Value: {api_key}")  # This will print the fetched API key value
-
+    api_key = os.environ.get("API_KEY")
+    print("API Key from os.environ:", api_key)  # Debugging line
     openai.api_key = api_key
+
+
 
 
 def get_gpt3_response(prompt, language="English", temperature=0.3):
     if language == "Swahili":
         prompt += " Please respond in Swahili."
 
+   
     try:
         # Use the chat model endpoint for GPT-3.5 Turbo
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             temperature=temperature,
             messages=[
-                {"role": "system", "content": "You are a mental health assistant with knowledge about various mental health conditions. Provide responses that are sensitive, empathetic, and non-diagnostic."},
+                {"role": "system", "content":'''You are a mental health assistant with knowledge about various mental health conditions. Provide responses that are sensitive, empathetic, and non-diagnostic
+                 in your responses don't forget to encourage users to seek help from mental facilities and hospitals in tanzania such as , Mirembe hospital, Amana Hospital, 
+                 Temeke, Muhimbili and you must mention other therapy facilities in Tanzania. 
+                 
+                 Encourage me that the condition am facing can be cured so i should not feel stigmatized
+                 And for a particula condition mention some practical examples of the symptoms of that condition'''},
                 {"role": "user", "content": prompt}
             ]
         )
@@ -154,6 +156,8 @@ def get_gpt3_response(prompt, language="English", temperature=0.3):
         if language == "Swahili":
             return "Samahani, tatizo limejitokeza. Tafadhali jaribu tena baadae."
         return "Sorry, there was an issue fetching a response. Please try again later."
+    
+
     
 def gpt_response_to_html(gpt_response):
     # Split the GPT response into paragraphs based on the numbers (e.g., "1. ", "2. ", etc.)
@@ -182,109 +186,99 @@ def gpt_response_to_html(gpt_response):
 def create_gpt_prompt(assessment, score, result_text, selected_language="English"):
     if assessment["title"] == "Bipolar Assessment (YMRS)":
         return f'''gpt3_prompt = f"""
-        As a knowledgeable mental health assistant:
-        I have completed the bipolar assessment, scoring {score} out of {assessment['max_score']}, indicating: '{result_text}'.
-        1. Provide an empathetic response based on my  score and tell me if my score is high or low.
-        2. Define bipolar disorder in a broader scope.
-        3. List negative symptoms of bipolar disorder and explain how it affects daily life.
-        4. Offer insights and coping strategies and natural ways for managing bipolar disorder.
-        5. Commend me for undertaking the assessment.
-        6. If my score is high encourage me to go to the hospital.
+  "After completing the YMRS (Young Mania Rating Scale) for bipolar disorder, my score is {score} out of 60 indicating: '{result_text}'. Please provide:
+1. An empathetic response that assesses the severity of my score, offering specific advice, and if high, recommending a hospital visit.
+2. A brief explanation of bipolar disorder, its early symptoms, and its impact on life.
+3. Coping strategies for bipolar disorder and positive recognition of my effort in taking the YMRS assessment."
+
+Your response should be compassionate and actionable, guiding me towards the appropriate next steps, especially if my score suggests an urgent need for professional medical assistance.
+
+        
         """
         gpt3_response = get_gpt3_response(gpt3_prompt, selected_language)
         '''
     elif assessment["title"] == "Anxiety Assessment (GAD-7)":
         return f''' gpt3_prompt = f"""
-        As a knowledgeable mental health assistant:
-        I have taken an anxiety assessment, scoring {score} out of a maximum of {assessment['max_score']}, suggesting: '{result_text}'.
-        1. Provide an empathetic response based on my score, mentioning the score out of 21.
-        2. Explain the nature of anxiety and the examples people with anxieties experience
-        3. List detailed negative impacts of untreated anxiety.
-        4. Offer coping strategies and natural ways  into managing anxiety.
+       As an expert mental health assistant, after completing the GAD-7 anxiety assessment with a score of {score} out of 21, I need a response that:
+        1. Provides empathetic support reflecting on the anxiety score and briefly describes anxiety, including typical experiences.
+        2. Outlines the risks of untreated anxiety and natural coping strategies in a concise manner.
+        3. Lists notable mental health facilities in Tanzania, like Mirembe, Amana, and Temeke hospitals, for additional help.
 
-        5. Mention actions one should and shouldn't undertake when interacting with someone experiencing anxiety.
+        The response should be swift yet empathetic, combining comfort with essential guidance, and highlight the importance of professional health advice.
+
+
         """
         '''
     elif assessment["title"] == "AUDIT (Alcohol Use Disorders Identification Test)":
-        if selected_language == "Swahili":
-            if score <= 7:
-                return "Alama zako zinaonyesha kiwango cha chini cha uraibu wa pombe."
-            elif score <= 15:
-                return "Alama zako zinaonyesha kiwango cha wastani cha uraibu wa pombe."
-            elif score <= 19:
-                return "Alama zako zinaonyesha kiwango cha juu cha uraibu wa pombe."
-            else:
-                return "Alama zako zinaonyesha kiwango cha juu sana cha uraibu wa pombe."
-
+       return f''' gpt3_prompt = f"""
+     As an experienced mental health assistant, I've taken the AUDIT assessment score of {score} out of 40:
+    1. Analyse or Interpret my score, with a straightforward categorization as high, moderate, or low, including a strong recommendation for a hospital visit if the score is high. Combine this with a clear definition of Substance Alcohol Use Disorder and its early signs.
+    2. Highlight the negative impacts of unchecked alcohol addiction.
+    3. Suggest a range of coping strategies to combat alcohol addiction, commend the proactive step of taking the assessment.'''
+    
     elif assessment["title"] == "OCD Assessment (Y-BOCS)":
         return f'''gpt3_prompt = f"""
-        As a knowledgeable mental health assistant:
-        I have completed the OCD assessment, achieving a score of {score}, leading to the interpretation: '{result_text}'.
-        1. Based on my score, provide an appropriate empathetic response. And tell me if my score is high or low or moderate. If it is high advise me to go to the hospital.
-        2. Define Obsessive-Compulsive Disorder (OCD) and provide an example of its symptoms especially early symptoms.
-        3. Detail negative  impacts of OCD on daily life if not addressed.
-        4. Suggest detailed natural coping mechanisms and strategies for managing OCD.
-        5. Acknowledge me on my  efforts in taking the assessment.
+       As an expert mental health assistant, I've scored {score} on the OCD assessment out of the maximum 40 . Please provide a response that:
+        1. Combines an empathetic acknowledgement of my score level (high, moderate, or low) with clear guidance, especially advising hospital visitation if the score is high.
+        2. Offers a concise explanation of Obsessive-Compulsive Disorder, including typical early symptoms with exampleskjl and briefly touches on the potential daily life impacts if left unmanaged.
+        3. Proposes natural coping strategies for OCD and commends my proactive approach in taking the assessment.
+
+Your reply should be empathetic, succinct, and directive, prioritizing immediate understanding and action where necessary.
+
         """
         gpt3_response = get_gpt3_response(gpt3_prompt, selected_language)
         '''
     elif assessment["title"] == "PTSD Assessment (Post-Traumatic Stress Disorder)":
         return f'''gpt3_prompt = f"""
-        As a knowledgeable mental health assistant:
-        I have completed the PTSD assessment, achieving a score of {score}, which suggests: '{result_text}'.
-        1. Define Post-Traumatic Stress Disorder (PTSD) and provide examples of its symptoms especially early signs.
-        2. Detail negative significant impacts of untreated PTSD on an individual's daily life.
-        3. Offer insights and advice tailored for the user's score and potential condition.
-        4. Acknowledge the user's initiative in taking the assessment.
-        5. Provide 10 guidelines on supporting individuals with PTSD, keeping in mind Tanzanian cultural contexts.
-        6. Recommend dos and don'ts when interacting with someone diagnosed with PTSD.
+        "Upon completing the PTSD assessment, I received a score of {score}, which suggests: '{result_text}'. I need guidance on:
+        1. An evaluation of my score as high or low, and if it's high, a gentle encouragement to seek help at a hospital.
+        2. A general overview of PTSD, including its early symptoms and the potential consequences if it remains untreated.
+        3. Reassurance to alleviate any fears or hesitations about visiting a hospital for further assistance.
+
+        Please offer a supportive response that helps me understand my situation and encourages appropriate steps while reducing any anxiety about seeking professional help."
+
         """
         gpt3_response = get_gpt3_response(gpt3_prompt, selected_language)
         '''
     elif assessment["title"] == "DAST-10 Assessment (Drug Abuse Screening Test)":
         return f"""
-            As an informed mental health assistant:
-            I have completed the DAST-10 drug abuse assessment, obtaining a score of {score} out of {assessment['max_score']}. 
-            1. Greet me and Tell me if my score is high or low or moderate.
-            2. Define Drug Abuse Disorder and provide a brief overview and early signs and symptoms.
-            3. List detailed negative significant impacts of unchecked drug abuse on one's daily life and health.
-            4. Offer insights, coping strategies, and advice tailored to the  score and potential condition.
-            5. Acknowledge the my  effort and initiative in taking the assessment.
-            6.If my score is too high advise me to vist hospital immediately
+            "Having completed the DAST-10 drug abuse assessment with a score of {score} out of {assessment['max_score']}, I'm seeking:
+            1. An immediate understanding of whether my score is considered high, moderate, or low, including direct advice on whether a hospital visit is necessary.
+            2. A succinct definition of Drug Abuse Disorder, with an overview of early signs and potential health and life implications if left unaddressed.
+            3. Recognition of my initiative in taking this assessment and personalized guidance on coping strategies tailored to my score.
+
+Please provide a response that is both informative and supportive, guiding me towards the best course of action for my health."
+
             """
     elif assessment["title"] == "ASRS-v1.1 Assessment (Adult ADHD Self-Report Scale)":
         return f"""
-            As an informed mental health assistant:
-            I have completed ADHD assessment, obtaining a score of {score} out of {assessment['max_score']}.
-            1. Based on the score tell me if my score is high or low
-            2. Define ADHD  and provide a brief overview.
-            3. List negative significant impacts of unchecked ADHD on one's daily life and health.
-            4. Offer insights, natural coping strategies, and advice tailored to the user's score and potential condition.
-            5. Acknowledge my effort and initiative in taking the assessment.
-            6. Suggest  strategies to support individuals struggling with drug addiction.
+            "After completing the ASRS-v1.1 (Adult ADHD Self-Report Scale) assessment, my score is {score} out of {assessment['max_score']}. I'm seeking:
+1. An interpretation of my ASRS-v1.1 score to understand if it is high, moderate, or low, and the implications for my ADHD symptoms.
+2. An explanation of ADHD, its symptoms in adults, and the potential consequences of leaving it unmanaged.
+3. Acknowledgment of my initiative in taking the ASRS-v1.1 assessment and personalized advice for coping with ADHD.
+
+Your response should be prompt and provide me with clear, empathetic guidance based on my score and the proactive steps I've already taken."
+
             """
     elif assessment["title"] == "Psychosis Screening Questionnaire (PSQ) Assessment":
         return f'''
         As a knowledgeable mental health assistant:
-        I have taken  a Shizophrenia assessment and achieved a score of {score} out of a maximum possible score of {assessment['max_score']}. 
+        I have taken  a schizophrenia assessment and achieved a score of {score} out of a maximum possible score of {assessment['max_score']}. 
 
         1) Tell me if my score is high or low
-        2) What is Shizophrenia and what are the symptoms and early signs.
+        2) What is schizophrenia and what are the symptoms and early signs.
         3)Encourage me to go to the hospital for detailed check up
 
         Lastly, acknowledge my  initiative in taking the assessment and emphasize the importance of mental well-being.
         '''
     elif assessment["title"] == "Depression Assessment (PHQ-9)":
-        return f'''As a helpful mental health assistant, consider the following: 
-        I have taken a depression assessment and scored {score} out of a maximum of {assessment['max_score']}, suggesting: '{result_text}'.
-        1. Provide an empathetic response based on my  score and tell me if my score is high, low or moderate.
-        2. Explain what depression is and its potential consequences if not addressed.
-        3. Offer coping natural strategies and insights.
-        4. List pieces of advice on supporting individuals with depression, reflecting Tanzanian culture.
-        5. Mention things one should and shouldn't do when interacting with someone struggling with depression.
-        6.Congratulate me for taking this test. And if my score is high advice me to go to the hospital.
+        return f'''"Having completed the Depression(sonona) PHQ-9 assessment, my score is {score} out of a potential 27. Could you:
+                        1. Interpret my PHQ-9 score with empathy, indicating if it's considered high, moderate, or low, and explain the nature of depression along with its potential consequences if neglected.
+                        2. Provide natural coping strategies and culturally sensitive advice for supporting someone with depression in Tanzania.
+                        3. Recognize my effort in taking this step towards mental wellness, and if necessary, guide me on seeking professional help, especially if my score is on the higher end."
+
         '''
-    elif assessment["title"] == "IQCODE (Dementia) Assessment":
+    elif assessment["title"] == "IQCODE Assessment":
         return f'''gpt3_prompt = f"""
         As a knowledgeable mental health assistant:
         I have completed the IQCODE(Cognitive Decline)  assessment for my relative, scoring {score} out of {assessment['max_score']}, indicating: '{result_text}'.

@@ -64,6 +64,7 @@
                             type="checkbox" 
                             value="{{opt.text}}" 
                             name="symptoms" 
+                            data-category="{{ item.id }}"
                             id="{{item.id}}-{{opt.id}}"
                         >
                         <label class="form-check-label ms-2" for="{{item.id}}-{{opt.id}}">
@@ -102,4 +103,32 @@
     &nbsp;
     <div id="resultsLink"></div>
 </div>
+
+<!-- JavaScript to enforce checking symptoms from the same category -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        const categories = new Set();
+        
+        checkboxes.forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                const category = this.getAttribute('data-category');
+                
+                if (this.checked) {
+                    categories.add(category);
+                } else {
+                    categories.delete(category);
+                }
+                
+                checkboxes.forEach(function(otherCheckbox) {
+                    if (!categories.has(otherCheckbox.getAttribute('data-category'))) {
+                        otherCheckbox.disabled = categories.size > 0;
+                    } else {
+                        otherCheckbox.disabled = false;
+                    }
+                });
+            });
+        });
+    });
+</script>
 {% endblock content %}

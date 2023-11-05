@@ -11,11 +11,11 @@
 <div>
     {% for msg in get_flashed_messages() %}
         <div class="text-danger my-2 text-center">
-            {{msg}}        
+            {{ msg }}        
         </div>
     {% endfor %}
     
-    <form method="post" action="{{url_for('login')}}">
+    <form method="post" action="{{ url_for('login') }}">
         <div class="mb-3">
             <label for="username" class="form-label subtext">
                 {% if session['lang'] == "sw" %}
@@ -27,7 +27,7 @@
             <input type="text" name="username" id="username" class="custom-form-control" placeholder="George Russel">
         </div>
         <div class="mb-3">
-            <label for="password" class="form-label subtext">
+            <label for "password" class="form-label subtext">
                 {% if session['lang'] == "sw" %}
                     Nenosiri
                 {% else %}
@@ -38,9 +38,9 @@
         </div>
         <div class="mb-3">
             {% if session["lang"] == "sw" %}
-                Umesahau nenosiri? &nbsp;<a href="{{url_for('forgot_password')}}" class="link">Bofya hapa</a>
+                Umesahau nenosiri? &nbsp;<a href="{{ url_for('forgot_password') }}" class="link">Bofya hapa</a>
             {% else %}
-                Forgot password? &nbsp;<a href="{{url_for('forgot_password')}}" class="link">Click here</a>
+                Forgot password? &nbsp;<a href="{{ url_for('forgot_password') }}" class="link">Click here</a>
             {% endif %}
         </div>
         <div class="mb-3 text-center">
@@ -48,9 +48,14 @@
                 type="submit" 
                 value="{% if session['lang'] == 'sw' %}Ingia{% else %}Login{% endif %}" 
                 class="custom-btn px-4 text">
+            {% if session["lang"] == "sw" %}
+                Au &nbsp;<a href="{{ url_for('register') }}" class="custom-btn px-4 text">Jisajili</a>
+            {% else %}
+                Or &nbsp;<a href="{{ url_for('register') }}" class="custom-btn px-4 text">Register</a>
+            {% endif %}
         </div>
     </form>
 </div>
 {% endblock content %}
 
-{% set curr_page="login" %}
+{% set curr_page = "login" %}

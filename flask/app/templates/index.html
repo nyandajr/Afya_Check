@@ -1,94 +1,71 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="text-center">
-    <h3 class="main-heading bold-black-text">
-        <span class="marquee-text" id="marquee">
+<div class="main-text" style="padding: 20px;">
+    <h1 class="title marquee">
+        {% if session['lang'] == "sw" %}
+            Afya Yako ya Akili ni ya muhimu
+        {% else %}
+            Your Mental Well-being matters
+        {% endif %}
+    </h1>
+    
+    <p class="text">
+        {% if session['lang'] == "sw" %}
+            <span class="text-black">Hello, Karibu Akili Check, zana hii inaendeshwa na teknolojia ya AI</span>, imeundwa kukusaidia kuelewa afya yako ya akili. Inatumia uchambuzi wa hali ya juu kutathmini dalili zako na kutoa maoni yanayoweza kukusaidia kuboresha hali yako ya akili.
+        {% else %}
+            <span class="text-black">Hello, Welcome to Akili Check, this tool is powered by advanced AI technology</span>, is designed to help you gain insights into your mental well-being. It employs sophisticated analysis to assess your symptoms and offer insights that can assist in enhancing your mental state.
+        {% endif %}
+    </p>
+    
+    <!-- Disclaimer 1 -->
+    <div class="disclaimer-box">
+        <p class="disclaimer-text">
             {% if session['lang'] == "sw" %}
-                Karibu Akili Check
+                <strong style="color: #000;">1. Tafadhali kumbuka: Chombo hiki cha Uchunguzi ni kwa ajili ya kupata muhtasari wa haraka wa afya yako ya akili. Ikiwa matokeo yako yanaonyesha kuwa unaweza kupata dalili za ugonjwa wa akili, fikiria kuyashiriki matokeo yako na mtu. Mtaalamu wa afya ya akili (kama vile daktari au mtaalamu wa tiba ya akili) anaweza kukupa tathmini kamili na kuzungumza nawe kuhusu chaguzi za jinsi ya kujisikia vizuri zaidi.</strong>
             {% else %}
-                Welcome to Akili Check
+                <strong style="color: #000;">1. Please note: This Screening tool is meant to be a quick snapshot of your mental health. If your results indicate you may be experiencing symptoms of a mental illness, consider sharing your results with someone. A mental health provider (such as a doctor or a therapist) can give you a full assessment and talk to you about options for how to feel better.</strong>
             {% endif %}
-        </span>
-    </h3>
+        </p>
+    </div>
+
+    <!-- Disclaimer 2 -->
+    <div class="disclaimer-box" style="padding: 10px;">
+        <p class="disclaimer-text">
+            {% if session['lang'] == "sw" %}
+                <strong style="color: #000;">2. Tafadhali kumbuka: Kuwa tovuti hii ni kwa ajili ya kueneza ufahamu wa changamoto za akili. Haitumiki kwa msaada wa dharura mara moja. Kwa hali za dharura, kama zile zinazohusiana na kujiua au dharura nyingine, tunakushauri kufikia mamlaka husika kwa msaada wa haraka. Unaweza kuwasiliana na Lifeline ya Kujitoa kwa Kujiua na Dharura kwa kuita 112 au kuwasiliana nao kwa +255 787 668 306.</strong>
+            {% else %}
+                <strong style="color: #000;">2. Please be aware: This website serves as an informational resource. It is not intended for immediate crisis support. In case of urgent situations, such as those related to suicide or crises, we strongly advise you to reach out to the appropriate authorities for immediate assistance. You can contact the Suicide & Crisis Lifeline by calling 112 or reaching them at +255 787 668 306.</strong>
+            {% endif %}
+        </p>
+    </div>
+
+    <!-- Disclaimer 3 -->
+    <div class="disclaimer-box" style="padding: 10px;">
+        <p class="disclaimer-text">
+            {% if session['lang'] == "sw" %}
+                <strong style="color: #000;">3. Tafadhali kumbuka: Chombo hiki hakikusanyi taarifa binafsi kama majina yako, sehemu unapoishi wala chochote kinachokutambua. Ikiwa haujui nitathmini ipi ya kuchagua, tunashauri uanze na Tathmini ya wa Awali, na unaweza kufikiria kujisajili ili kuweka kumbukumbu ya vipimo vyako kwa ajili ya marejeo yako binafsi baadaye.</strong>
+            {% else %}
+                <strong style="color: #000;">3. Please be informed: This tool does not collect any personally identifiable information as it aims to maintain your anonymity. If you are uncertain about which assessment to choose, we advise starting with the Early Check-in, and you might consider registering to keep a record of your assessments for future personal reference.</strong>
+            {% endif %}
+        </p>
+    </div>
+
+    <div class="row mx-auto my-4">
+        <a href="{{url_for('check_in')}}" class="col text-center custom-btn" style="margin: 10px; padding: 10px;">
+            {% if session['lang'] == "sw" %}
+                Tathmini ya Awali
+            {% else %}
+                Early Check-in
+            {% endif %}
+        </a>
+        <a href="{{url_for('assessments')}}" class="col text-center custom-btn" style="margin: 10px; padding: 10px;">
+            {% if session['lang'] == "sw" %}
+                Tathmini Zaidi
+            {% else %}
+                Assessment
+            {% endif %}
+        </a>
+    </div>
 </div>
-
-
-<div class="main-text">
-    <p>
-        {% if session['lang'] == "sw" %}
-            Zana hii, <span class="text-black">iliyoendeshwa na teknolojia ya AI</span>, imeundwa kukusaidia kuelewa afya yako ya akili. Inatumia uchambuzi wa hali ya juu kutathmini dalili zako na kutoa maoni yanayoweza kukusaidia kuboresha hali yako ya akili.
-        {% else %}
-            This tool, <span class="text-black">powered by advanced AI technology</span>, is designed to help you gain insights into your mental well-being. It employs sophisticated analysis to assess your symptoms and offer insights that can assist in enhancing your mental state.
-        {% endif %}
-    </p>
-
-    <p>
-        {% if session['lang'] == "sw" %}
-            Tafadhali kumbuka kuwa ufahamu uliotolewa na zana hii unategemea mifumo ya jumla na haipaswi kuchukuliwa kama hitimisho thabiti. Daima washauriane na mtaalamu wa matibabu kwa utambuzi sahihi na matibabu.
-        {% else %}
-            Please note: The insights provided by this tool are based on general patterns and should not be considered definitive conclusions. Always consult with a medical professional for an accurate diagnosis and treatment.
-        {% endif %}
-    </p>
-
-   <!-- ... other code ... -->
-
-<!-- Disclaimer 1 -->
-<p class="disclaimer-text highlighted-text">
-    {% if session['lang'] == "sw" %}
-    Tafadhali kumbuka: Chombo hiki cha Uchunguzi ni kwa ajili ya kupata muhtasari wa haraka wa afya yako ya akili. Ikiwa matokeo yako yanaonyesha kuwa unaweza kupata dalili za ugonjwa wa akili, fikiria kuyashiriki matokeo yako na mtu. Mtaalamu wa afya ya akili (kama vile daktari au mtaalamu wa tiba ya akili) anaweza kukupa tathmini kamili na kuzungumza nawe kuhusu chaguzi za jinsi ya kujisikia vizuri zaidi.
-
-
-    {% else %}
-        Please note: This Screening tool is  meant to be a quick snapshot of your mental health. If your results indicate you may be experiencing symptoms of a mental illness, consider sharing your results with someone. A mental health provider (such as a doctor or a therapist) can give you a full assessment and talk to you about options for how to feel better.
-    {% endif %}
-</p>
-
-<!-- Disclaimer 2 -->
-<p class="disclaimer-text highlighted-text">
-    {% if session['lang'] == "sw" %}
-    Tafadhali kumbuka kuwa tovuti hii ni kwa ajili ya kueneza ufahamu wa  changamoto za akili. Haitumiki kwa msaada wa dharura mara moja. Kwa hali za dharura, kama zile zinazohusiana na kujiua au dharura nyingine, tunakushauri kufikia mamlaka husika kwa msaada wa haraka. Unaweza kuwasiliana na Lifeline ya Kujitoa kwa Kujiua na Dharura kwa kuita 112 au kuwasiliana nao kwa +255 787 668 306.
-    {% else %}
-    Please be aware that this website serves as an informational resource. It is not intended for immediate crisis support. In case of urgent situations, such as those related to suicide or crises, we strongly advise you to reach out to the appropriate authorities for immediate assistance. You can contact the Suicide & Crisis Lifeline by calling 112 or reaching them at +255 787 668 306
-    {% endif %}
-</p>
-
-
-<!-- ... other code ... -->
-
-    <p>
-        {% if session['lang'] == "sw" %}
-            <strong class="text-black">Tafadhali</strong> unashauriwa kuanza na tathmini ya awali kisha tathmini ya awali itakupeleka kwenye tathmini zaidi kulingana na tathminiya awali.
-        {% else %}
-            <strong class="text-black">We advise</strong> you to begin with the EARLY CHECK-IN. After that, you will be directed to the respective assessments.
-        {% endif %}
-    </p>
-
-    <p>
-        {% if session['lang'] == "sw" %}
-            <strong class="text-black">Zingatia pia</strong> kwamba hatukusanyi taarifa binafsi kama majina yako, sehemu unapoishi wala chochote kinachokutambua. <i><b>ikiwa haujui nitathmini ipi ya kuchagua, tunashauri uanze na Tathmini ya wa Awali, na unaweza kufikiria kujisajili ili kuweka kumbukumbu ya vipimo vyako kwa ajili ya marejeo yako binafsi baadaye.</b></i>
-        {% else %}
-            <strong class="text-black">Please be informed:</strong> This tool does not collect any personally identifiable information as it aims to maintain your anonymity. <i><b>If you are uncertain about which assessment to choose, we advise starting with the Early Check-in, and you might consider registering to keep a record of your assessments for future personal reference.</b></i>
-        {% endif %}
-    </p>
-</div>
-
-<div class="row mx-auto my-4">
-    <a href="{{url_for('check_in')}}" class="col text-center custom-btn">
-        {% if session['lang'] == "sw" %}
-            Tathmini ya Awali
-        {% else %}
-            Early Check-in
-        {% endif %}
-    </a>
-    <a href="{{url_for('assessments')}}" class="col text-center custom-btn">
-        {% if session['lang'] == "sw" %}
-            Tathmini Zaidi
-        {% else %}
-            Assessment
-        {% endif %}
-    </a>
-</div>
-{% endblock content %}
-
-{% set curr_page="home" %}
+{% endblock %}
