@@ -204,6 +204,27 @@ def results():
                     professional for a comprehensive assessment. \
                 </p> \
             </div>'
+        
+        # sponsors block to be returned after gpt response
+        yield f'''
+            <div class="mt-4 border-top col-lg-8 mx-auto">
+                <!-- sponsors -->
+                <p class="text pt-1">Sponsored By:</p>
+                <div class="sponsors">
+                    <div class="sponsor-item">
+                        <img src="{url_for('static', filename='images/udom-logo.png')}" alt="UDOM Logo">
+                        <a href="https://udom.ac.tz/" target="_blank">UDOM</a>
+                    </div>
+                    <div class="sponsor-item">
+                        <img src="{url_for('static', filename='images/ai4dlab.png')}" alt="AI4D Labs Logo">
+                        <a href="https://ai4dlab.or.tz/" target="_blank">AI4D Labs</a>
+                    </div>
+                    <div class="sponsor-item">
+                        <img src="{url_for('static', filename='images/mandela-logo.png')}" alt="NM-AIST Logo">
+                        <a href="https://nm-aist.ac.tz/" target="_blank">NM-AIST</a>
+                    </div>
+                </div>
+            </div>'''
 
     # save score in db
     user_id = None
