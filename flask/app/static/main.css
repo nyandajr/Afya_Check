@@ -464,3 +464,28 @@ input[type="checkbox"]:checked{
 .logo {
     width: 128px;
 }
+
+.sponsors {
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+    margin: 24px 0px;
+    overflow: scroll;
+}
+
+.sponsor-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sponsor-item img {
+    width: 128px;
+}
+
+.sponsor-item a {
+    margin-top: 12px;
+    text-decoration: none;
+    font-weight: bold;
+}
