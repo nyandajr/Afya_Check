@@ -14,7 +14,10 @@
    
     {% endblock styles %}
 </head>
-<body class="custom-bg-dark mx-2 theme-light">
+<body class="custom-bg-dark mx-2 theme-light pt-0 mt-0">
+    <span class="bg-dark">
+        <img src="{{url_for('static', filename='images/akili-logo.png')}}" class="logo" alt="Akili Check Logo">
+    </span>
     <div class="theme-switch" id="themeSwitch">
         <i class="bi bi-brightness-high-fill" id="themeIcon"></i>
     </div>

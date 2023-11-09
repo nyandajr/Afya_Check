@@ -183,7 +183,6 @@ input[type="checkbox"]:checked{
 }
 
 
-/
 .main-heading {
     font-size: 2rem;
     font-weight: bold;
@@ -283,7 +282,7 @@ input[type="checkbox"]:checked{
 }
 
 .disclaimer-text {
-    border: 1px solid #000; /
+    border: 1px solid #000; 
     padding: 10px; 
    
 }
@@ -460,4 +459,11 @@ input[type="checkbox"]:checked{
 .section-title {
     text-align: center;
     margin-bottom: 20px;
+}
+
+.logo {
+    width: 72px;
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
 }
