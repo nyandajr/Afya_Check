@@ -56,7 +56,7 @@ def create_gauge_chart(score, max_score=27, assessment_name="Assessment", select
     
     fig.add_annotation(dict(font=dict(color="var(--white-color)", size=30),
         x=0.5,
-        y=0.5,
+        y=0.34,
         showarrow=False,
         text=f"Kiwango cha {level}" if selected_language=="Swahili" else f"{level} Level",
         textangle=0,
