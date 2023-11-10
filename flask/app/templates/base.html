@@ -14,12 +14,13 @@
    
     {% endblock styles %}
 </head>
-<body class="custom-bg-dark mx-2 theme-light">
+<body class="custom-bg-dark mx-2 theme-light pt-0 mt-0">
     <div class="theme-switch" id="themeSwitch">
         <i class="bi bi-brightness-high-fill" id="themeIcon"></i>
     </div>
     <div class="col-12 col-md-10 col-lg-8 mx-auto">
         <div class="text-center">
+            <img src="{{url_for('static', filename='images/akili-logo.png')}}" class="logo mt-3" alt="Akili Check Logo">
             <h1 class="title">Akili Check</h1>
             <nav>
                 <ul class="navbar">
@@ -72,6 +73,27 @@
         </div>
         {% block content %}
         {% endblock content %}
+        
+        {% block sponsors %}
+            <div class="mt-4 border-top">
+                <!-- sponsors -->
+                <p class="text pt-1">Sponsored By:</p>
+                <div class="sponsors">
+                    <div class="sponsor-item">
+                        <img src="{{url_for('static', filename='images/udom-logo.png')}}" alt="UDOM Logo">
+                        <a href="https://udom.ac.tz/" target="_blank">UDOM</a>
+                    </div>
+                    <div class="sponsor-item">
+                        <img src="{{url_for('static', filename='images/ai4dlab.png')}}" alt="AI4D Labs Logo">
+                        <a href="https://ai4dlab.or.tz/" target="_blank">AI4D Labs</a>
+                    </div>
+                    <div class="sponsor-item">
+                        <img src="{{url_for('static', filename='images/mandela-logo.png')}}" alt="NM-AIST Logo">
+                        <a href="https://nm-aist.ac.tz/" target="_blank">NM-AIST</a>
+                    </div>
+                </div>
+            </div>
+        {% endblock sponsors %}
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
