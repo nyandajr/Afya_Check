@@ -1,18 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-	
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	
     <title>Akili Check | {{ title }}</title>
     <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
-    {% block styles %}
-   
-    {% endblock styles %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    {% block styles %}{% endblock %}
 </head>
 <body class="custom-bg-dark mx-2 theme-light pt-0 mt-0">
     <div class="theme-switch" id="themeSwitch">
@@ -24,29 +19,40 @@
             <h1 class="title">Akili Check</h1>
             <nav>
                 <ul class="navbar">
-                    <li><a href="{{url_for('index')}}" class="nv-link text {% if curr_page=='home' %}active{% endif %} custom-btn" style="background-color: rgb(5, 152, 238); color: #000;">
-                        <i class="bi bi-house-door-fill"></i>
-                        {% if session['lang'] == "sw" %} Karibu {% else %} Home{% endif %}
-                    </a></li>
-                    
-                    {% if current_user.is_authenticated %}
-                        <!-- If user is logged in, show Scores and Logout links -->
-                        <li><a href="{{url_for('scores')}}" class="nv-link text {% if curr_page=='scores' %}active{% endif %} custom-btn">
-                            <i class="bi bi-file-check-fill"></i>
-                            {% if session['lang'] == "sw" %} Majibu {% else %} Scores {% endif %}
-                        </a></li>
+                 <!-- Home link with inline style for border-radius -->
+<li>
+    <a href="{{ url_for('index') }}" class="nv-link text custom-btn {% if curr_page=='home' %}active{% endif %}" style="border-radius: 100px;">
+        <i class="bi bi-house-door-fill"></i>
+        {% if session['lang'] == "sw" %}Karibu{% else %}Home{% endif %}
+    </a>
+</li>
 
-                        <li><a href="{{url_for('login')}}" class="nv-link text {% if curr_page=='login' %}active{% endif %} custom-btn login-button" style="background-color: rgb(5, 152, 238) !important; color: #000;">
-                            <i class="bi bi-box-arrow-in-right"></i>
-                            {% if session['lang'] == "sw" %} Ingia {% else %} Login {% endif %}
-                        </a></li>
-                        
-                        
+
+<li>
+    <a href="{{ url_for('login') }}" class="nv-link text custom-btn {% if curr_page=='login' %}active{% endif %}" style="border-radius: 100px;">
+        <i class="bi bi-box-arrow-in-right"></i>
+        {% if session['lang'] == "sw" %}Ingia{% else %}Login{% endif %}
+    </a>
+</li>
+
+
+                    <!-- Conditional links based on authentication status -->
+                    {% if current_user.is_authenticated %}
+                        <!-- Scores and Logout links for logged-in users -->
+                        <li>
+                            <a href="{{url_for('scores')}}" class="nv-link text custom-btn {% if curr_page=='scores' %}active{% endif %}">
+                                <i class="bi bi-file-check-fill"></i>
+                                {% if session['lang'] == "sw" %}Majibu{% else %}Scores{% endif %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{url_for('logout')}}" class="nv-link text custom-btn" style="color: #000;">
+                                <i class="bi bi-box-arrow-right"></i>
+                                {% if session['lang'] == "sw" %}Ondoka{% else %}Logout{% endif %}
+                            </a>
+                        </li>
                     {% else %}
-                    <li><a href="{{url_for('login')}}" class="nv-link text {% if curr_page=='login' %}active{% endif %} custom-btn login-button">
-                        <i class="bi bi-box-arrow-in-right"></i>
-                        {% if session['lang'] == "sw" %} Ingia {% else %} Login {% endif %}
-                    </a></li>
+
                     {% endif %}
                 </ul>
             </nav>
@@ -55,52 +61,41 @@
         <div class="my-3">
             <div class="border-green flexy">
                 <label for="language" class="form-label subtext">
-                    {% if session['lang'] == "sw" %}
-                        Chagua lugha yako:
-                    {% else %}
-                        Choose your language:
-                    {% endif %}
+                    {% if session['lang'] == "sw" %}Chagua lugha yako:{% else %}Choose your language:{% endif %}
                 </label>
                 <select name="language" id="language" class="custom-form-select-sm">
-                    <option value="en" {% if session['lang'] == "en" %} selected {%endif%}>
-                        English
-                    </option>
-                    <option value="sw" {% if session['lang'] == "sw" %} selected {%endif%}>
-                        Kiswahili
-                    </option>
+                    <option value="en" {% if session['lang'] == "en" %}selected{% endif %}>English</option>
+                    <option value="sw" {% if session['lang'] == "sw" %}selected{% endif %}>Kiswahili</option>
                 </select>
             </div>
         </div>
-        {% block content %}
-        {% endblock content %}
-        
+
+        {% block content %}{% endblock %}
+
         {% block sponsors %}
-            <div class="mt-4 border-top">
-                <!-- sponsors -->
-                <p class="text pt-1">Sponsored By:</p>
-                <div class="sponsors">
-                    <div class="sponsor-item">
-                        <img src="{{url_for('static', filename='images/udom-logo.png')}}" alt="UDOM Logo">
-                        <a href="https://udom.ac.tz/" target="_blank">UDOM</a>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="{{url_for('static', filename='images/ai4dlab.png')}}" alt="AI4D Labs Logo">
-                        <a href="https://ai4dlab.or.tz/" target="_blank">AI4D Labs</a>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="{{url_for('static', filename='images/mandela-logo.png')}}" alt="NM-AIST Logo">
-                        <a href="https://nm-aist.ac.tz/" target="_blank">NM-AIST</a>
-                    </div>
+        <div class="mt-4 border-top">
+            <p class="text pt-1">Sponsored By:</p>
+            <div class="sponsors">
+                <div class="sponsor-item">
+                    <img src="{{url_for('static', filename='images/udom-logo.png')}}" alt="UDOM Logo">
+                    <a href="https://udom.ac.tz/" target="_blank">UDOM</a>
+                </div>
+                <div class="sponsor-item">
+                    <img src="{{url_for('static', filename='images/ai4dlab.png')}}" alt="AI4D Labs Logo">
+                    <a href="https://ai4dlab.or.tz/" target="_blank">AI4D Labs</a>
+                </div>
+                <div class="sponsor-item">
+                    <img src="{{url_for('static', filename='images/mandela-logo.png')}}" alt="NM-AIST Logo">
+                    <a href="https://nm-aist.ac.tz/" target="_blank">NM-AIST</a>
                 </div>
             </div>
+        </div>
         {% endblock sponsors %}
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="{{url_for('static', filename='main.js')}}"></script>
-    {% block script %}
-    {% endblock script %}
-	
-
+    {% block script %}{% endblock %}
 </body>
 </html>

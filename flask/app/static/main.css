@@ -1,31 +1,33 @@
 :root {
-    --bg-color: rgb(14, 17, 23);
-    --primary-color: #4CAF50;
-    --primary-color-dark: #327434;
-    --white-color: white;
-    --input-bg-color: rgb(45, 52, 65);
-    --input-border-color: #d1d1d1;
+    --bg-color: rgb(14, 17, 23); /* Dark background */
+    --primary-color: #4CAF50; /* Primary color */
+    --primary-color-dark: #327434; /* Darker primary color */
+    --white-color: #ffffff; /* White text color */
+    --input-bg-color: rgb(45, 52, 65); /* Input field background */
+    --input-border-color: #d1d1d1; /* Input field border */
 }
 
 .theme-light {
-    --bg-color: white;
-    --primary-color: rgb(5, 152, 238) ;
-    --primary-color-dark: hsl(128, 71%, 53%);
-    --white-color: rgb(0, 0, 0);
-    --input-bg-color: rgb(223, 226, 231);
-    --input-border-color: #d1d1d1;
-    --primary-color-hover: rgb(5, 152, 238) ; /* reduced the lightness from 36% to 26% */
-
+    --bg-color: white; /* Light background for light theme */
+    --primary-color: rgb(5, 152, 238); /* Primary color for light theme */
+    --primary-color-dark: hsl(128, 71%, 53%); /* Darker primary color for light theme */
+    --white-color: rgb(0, 0, 0); /* Text color for light theme, which is black */
+    --input-bg-color: rgb(223, 226, 231); /* Input field background for light theme */
+    --input-border-color: #d1d1d1; /* Input field border for light theme */
+    --primary-color-hover: rgb(5, 152, 238); /* Hover color for light theme */
 }
 
 body {
-    color: var(--white-color) !important;
+    color: var(--white-color) !important; /* Ensures all text uses the white color variable */
 }
 
 .custom-bg-dark {
-    background-color: var(--bg-color);
+    background-color: var(--bg-color); /* Dark background for elements with this class */
+    color: var(--white-color); /* Ensures text is white in dark mode elements */
 }
 
+
+/* Existing style for custom-btn */
 .custom-btn {
     background-color: var(--primary-color);
     color: var(--white-color);
@@ -33,11 +35,13 @@ body {
     padding: 0.6rem;
     border: none;
     cursor: pointer;
-    border-radius: 80px;
+    border-radius: 100px; /* This will make the corners very rounded */
     font-size: 1.1rem;
     font-weight: bold;
     margin: 4px;
 }
+
+
 
 .custom-btn:hover {
     background-color: var(--primary-color-hover);
@@ -467,25 +471,160 @@ input[type="checkbox"]:checked{
 
 .sponsors {
     display: flex;
-    gap: 8px;
-    justify-content: space-between;
-    margin: 24px 0px;
-    overflow: scroll;
+    flex-wrap: wrap; /* This allows sponsor logos to wrap onto the next line on smaller screens */
+    justify-content: center; /* This centers the logos on the page */
+    align-items: center;
+    gap: 10px; /* Adjust the gap to ensure that it looks good on small screens */
 }
 
 .sponsor-item {
+    flex: 1; /* Allow each item to grow and take up equal space */
+    text-align: center; /* Center the content of each item */
+    padding: 0 10px; /* Optional: Add some padding if needed */
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center-align items horizontally */
 }
-
 .sponsor-item img {
-    width: 128px;
+    width: 100%; /* This makes the image responsive */
+    max-width: 120px; /* Adjust this to set the maximum width for logos */
+    height: auto; /* This maintains the aspect ratio */
 }
 
-.sponsor-item a {
-    margin-top: 12px;
+
+.sponsor-item a,
+.sponsor-item p, /* If the text is within paragraph tags */
+.sponsor-item span { /* If the text is within span tags */
+    display: block; /* Force the text to appear on a new line below the image */
+    margin-top: 10px; /* Add some space between the image and the text */
     text-decoration: none;
     font-weight: bold;
+    color: inherit; /* Use the color that's been inherited from the parent */
+}
+
+@media (max-width: 768px) {
+    .sponsor-item {
+        /* On small screens, make each logo take full width of its container */
+        flex-basis: 100%;
+    }
+}
+
+.disclaimer-box {
+    background-color: #f8f9fa; /* light grey background */
+    border-left: 4px solid var(--primary-color); /* a colored line on the left */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* subtle shadow */
+    padding: 16px; /* more padding */
+    margin-bottom: 16px; /* space between boxes */
+    border-radius: 8px; /* rounded corners */
+}
+
+.disclaimer-title {
+    font-weight: bold;
+    margin-bottom: 8px; /* space after title */
+}
+
+.disclaimer-text {
+    line-height: 1.6; /* improved line spacing */
+}
+
+.disclaimer-action {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px; /* rounded button */
+    text-align: center;
+    margin-top: 8px; /* space before button/link */
+    text-decoration: none; /* remove underline from links */
+}
+
+/* Example for icon usage */
+.disclaimer-icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px; /* space after the icon */
+}
+
+/* Use in HTML like this:
+<div class="disclaimer-box">
+    <i class="disclaimer-icon fas fa-exclamation-circle"></i>
+    <div class="disclaimer-title">Please note:</div>
+    <p class="disclaimer-text">This Screening tool is meant to be a quick snapshot...</p>
+</div>
+*/
+
+
+/* Base layout for buttons */
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* Allow items to wrap if needed */
+    gap: 10px;
+}
+
+.navbar li {
+    list-style-type: none; /* Remove bullet points */
+    flex-basis: 100%; /* Forces each button to full width */
+}
+
+.navbar a.custom-btn {
+    display: block; /* Make the anchor fill the li element */
+    padding: 0.6rem 1.2rem; /* Adjust padding as needed */
+    font-size: 1rem; /* Adjust font size as needed */
+    text-align: center; /* Center text in the button */
+    width: 100%; /* Force the buttons to be full width */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}/* Base layout for buttons */
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* Allow items to wrap if needed */
+    gap: 10px;
+}
+
+.navbar li {
+    list-style-type: none; /* Remove bullet points */
+}
+
+/* Specific styles for non-logged in state */
+.navbar.logged-out a.custom-btn {
+    padding: 0.6rem 1.2rem; /* Adjust padding as needed */
+    font-size: 1rem; /* Adjust font size as needed */
+    text-align: center; /* Center text in the button */
+    margin-bottom: 10px; /* Space between buttons */
+}
+
+/* Styles for logged-in state with vertical buttons */
+.navbar.logged-in li {
+    width: 100%; /* Forces each button to full width */
+}
+
+.navbar.logged-in a.custom-btn {
+    display: block; /* Make the anchor fill the li element */
+    width: 100%; /* Force the buttons to be full width */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+/* Media query for larger screens */
+@media (min-width: 769px) {
+    .navbar {
+        justify-content: flex-start; /* Aligns buttons to the start of the navbar */
+    }
+
+    .navbar li {
+        flex-basis: auto; /* Allows button width to auto adjust */
+    }
+
+    .navbar a.custom-btn {
+        width: auto; /* Allow the width to be auto-adjusted */
+    }
+}
+
+
+.custom-bg-dark .main-text,
+.custom-bg-dark .main-text h1,
+.custom-bg-dark .main-text p {
+    color: var(--white-color) !important; /* Ensures text is white in elements with this class */
 }
