@@ -16,3 +16,5 @@ migrate = Migrate(app, db)
 login_manager = LoginManager(app)
 
 from app import views
+
+

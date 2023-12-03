@@ -1,7 +1,7 @@
 :root {
-    --bg-color: rgb(14, 17, 23); /* Dark background */
-    --primary-color: #4CAF50; /* Primary color */
-    --primary-color-dark: #327434; /* Darker primary color */
+    --bg-color: rgb(70, 82, 107); /* Dark background */
+    --primary-color: rgb(5, 152, 238); /* Primary color */
+    --primary-color-dark: rgb(5, 152, 238); /* Darker primary color */
     --white-color: #ffffff; /* White text color */
     --input-bg-color: rgb(45, 52, 65); /* Input field background */
     --input-border-color: #d1d1d1; /* Input field border */
@@ -10,7 +10,7 @@
 .theme-light {
     --bg-color: white; /* Light background for light theme */
     --primary-color: rgb(5, 152, 238); /* Primary color for light theme */
-    --primary-color-dark: hsl(128, 71%, 53%); /* Darker primary color for light theme */
+    --primary-color-dark: rgb(5, 152, 238); /* Darker primary color for light theme */
     --white-color: rgb(0, 0, 0); /* Text color for light theme, which is black */
     --input-bg-color: rgb(223, 226, 231); /* Input field background for light theme */
     --input-border-color: #d1d1d1; /* Input field border for light theme */
@@ -27,7 +27,6 @@ body {
 }
 
 
-/* Existing style for custom-btn */
 .custom-btn {
     background-color: var(--primary-color);
     color: var(--white-color);
@@ -35,19 +34,17 @@ body {
     padding: 0.6rem;
     border: none;
     cursor: pointer;
-    border-radius: 100px; /* This will make the corners very rounded */
+    border-radius: 100px;
     font-size: 1.1rem;
     font-weight: bold;
     margin: 4px;
+
 }
-
-
 
 .custom-btn:hover {
     background-color: var(--primary-color-hover);
     color: white !important;
 }
-
 
 .custom-form-select {
     background-color: var(--input-bg-color);
@@ -596,16 +593,7 @@ input[type="checkbox"]:checked{
     margin-bottom: 10px; /* Space between buttons */
 }
 
-/* Styles for logged-in state with vertical buttons */
-.navbar.logged-in li {
-    width: 100%; /* Forces each button to full width */
-}
 
-.navbar.logged-in a.custom-btn {
-    display: block; /* Make the anchor fill the li element */
-    width: 100%; /* Force the buttons to be full width */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
-}
 
 /* Media query for larger screens */
 @media (min-width: 769px) {
