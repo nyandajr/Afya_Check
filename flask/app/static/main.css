@@ -468,43 +468,46 @@ input[type="checkbox"]:checked{
 
 .sponsors {
     display: flex;
-    flex-wrap: wrap; /* This allows sponsor logos to wrap onto the next line on smaller screens */
-    justify-content: center; /* This centers the logos on the page */
+    flex-wrap: wrap;
+    justify-content: space-around; /* This will spread the logos evenly */
     align-items: center;
-    gap: 10px; /* Adjust the gap to ensure that it looks good on small screens */
+    gap: 10px;
 }
 
 .sponsor-item {
-    flex: 1; /* Allow each item to grow and take up equal space */
-    text-align: center; /* Center the content of each item */
-    padding: 0 10px; /* Optional: Add some padding if needed */
     display: flex;
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center-align items horizontally */
-}
-.sponsor-item img {
-    width: 100%; /* This makes the image responsive */
-    max-width: 120px; /* Adjust this to set the maximum width for logos */
-    height: auto; /* This maintains the aspect ratio */
+    flex-direction: column;
+    align-items: center;
+    padding: 0 10px;
+    margin: 0 20px; /* This gives space on the left and right of each logo */
 }
 
+.sponsor-item img {
+    width: 100%;
+    max-width: 120px; /* Adjust as necessary */
+    height: auto;
+}
 
 .sponsor-item a,
-.sponsor-item p, /* If the text is within paragraph tags */
-.sponsor-item span { /* If the text is within span tags */
-    display: block; /* Force the text to appear on a new line below the image */
-    margin-top: 10px; /* Add some space between the image and the text */
+.sponsor-item p,
+.sponsor-item span {
+    display: block;
+    margin-top: 10px;
     text-decoration: none;
     font-weight: bold;
-    color: inherit; /* Use the color that's been inherited from the parent */
+    color: inherit;
 }
 
 @media (max-width: 768px) {
+    .sponsors {
+        justify-content: space-between; /* This maintains spacing on smaller screens */
+    }
     .sponsor-item {
-        /* On small screens, make each logo take full width of its container */
-        flex-basis: 100%;
+        flex: 0 1 auto; /* This prevents the item from growing to take the full width */
+        margin: 0 10px; /* Reduced margin for smaller screens */
     }
 }
+
 
 .disclaimer-box {
     background-color: #f8f9fa; /* light grey background */
@@ -615,4 +618,10 @@ input[type="checkbox"]:checked{
 .custom-bg-dark .main-text h1,
 .custom-bg-dark .main-text p {
     color: var(--white-color) !important; /* Ensures text is white in elements with this class */
+}
+
+/* main.css */
+.custom-form-control:invalid, .custom-form-select:invalid {
+    border: 2px solid red; /* Adjust as needed */
+    /* You can add other styles like background-color or box-shadow if required */
 }
