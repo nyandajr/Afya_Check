@@ -3,3 +3,9 @@ flask/afya_check_venv
 
 __pycache__/
 afya_check_venv/
+
+# SQLite database file
+instance/afya_check.db
+
+# Commit log
+/commit log
