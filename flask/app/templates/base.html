@@ -35,16 +35,19 @@
                     {% if current_user.is_authenticated %}
                         <!-- Scores and Logout links for logged-in users -->
 <li>
-    <a href="{{url_for('scores')}}" class="nv-link text custom-btn {% if curr_page=='scores' %}active{% endif %}" style="border-radius: 100px; background-color: rgb(5, 152, 238); color: black !important;">
-        <i class="bi bi-file-check-fill"></i>
-        {% if session['lang'] == "sw" %}Majibu{% else %}Scores{% endif %}
-    </a>
-</li>
-<li>
-    <a href="{{url_for('logout')}}" class="nv-link text custom-btn {% if curr_page=='logout' %}active{% endif %}" style="border-radius: 100px; background-color: rgb(5, 152, 238); color: black;">
-        <i class="bi bi-box-arrow-right"></i>
-        {% if session['lang'] == "sw" %}Ondoka{% else %}Logout{% endif %}
-    </a>
+    <li>
+        <a href="{{url_for('scores')}}" class="nv-link text custom-btn {% if curr_page=='scores' %}active{% endif %}" style="border-radius: 100px; background-color: #007bff; color: black !important;">
+            <i class="bi bi-file-check-fill"></i>
+            {% if session['lang'] == "sw" %}Majibu{% else %}Scores{% endif %}
+        </a>
+    </li>
+    <li>
+        <a href="{{url_for('logout')}}" class="nv-link text custom-btn {% if curr_page=='logout' %}active{% endif %}" style="border-radius: 100px; background-color: #007bff; color: black;">
+            <i class="bi bi-box-arrow-right"></i>
+            {% if session['lang'] == "sw" %}Ondoka{% else %}Logout{% endif %}
+        </a>
+    </li>
+    
 </li>
 
                     {% else %}

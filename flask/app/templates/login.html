@@ -24,17 +24,17 @@
                     Username
                 {% endif %}
             </label>
-            <input type="text" name="username" id="username" class="custom-form-control" placeholder="">
+            <input type="text" name="username" id="username" class="custom-form-control" placeholder="" required>
         </div>
         <div class="mb-3">
-            <label for "password" class="form-label subtext">
+            <label for="password" class="form-label subtext">
                 {% if session['lang'] == "sw" %}
                     Nenosiri
                 {% else %}
                     Password
                 {% endif %}
             </label>
-            <input type="password" name="password" id="password" class="custom-form-control" placeholder="password">
+            <input type="password" name="password" id="password" class="custom-form-control" placeholder="password" required>
         </div>
         <div class="mb-3">
             {% if session["lang"] == "sw" %}
