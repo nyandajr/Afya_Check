@@ -1,7 +1,7 @@
 :root {
     --bg-color: rgb(21, 32, 43) ;/* Dark background */
-    --primary-color: rgb(5, 152, 238); /* Primary color */
-    --primary-color-dark: rgb(5, 152, 238); /* Darker primary color */
+    --primary-color:#007bff; /* Primary color */
+    --primary-color-dark: #007bff; /* Darker primary color */
     --white-color: #ffffff; /* White text color */
     --input-bg-color: rgb(45, 52, 65); /* Input field background */
     --input-border-color: #d1d1d1; /* Input field border */
@@ -9,12 +9,12 @@
 
 .theme-light {
     --bg-color: white; /* Light background for light theme */
-    --primary-color: rgb(5, 152, 238); /* Primary color for light theme */
-    --primary-color-dark: rgb(5, 152, 238); /* Darker primary color for light theme */
+    --primary-color: #007bff; /* Primary color for light theme */
+    --primary-color-dark: #007bff; /* Darker primary color for light theme */
     --white-color: rgb(0, 0, 0); /* Text color for light theme, which is black */
     --input-bg-color: rgb(223, 226, 231); /* Input field background for light theme */
     --input-border-color: #d1d1d1; /* Input field border for light theme */
-    --primary-color-hover: rgb(5, 152, 238); /* Hover color for light theme */
+    --primary-color-hover: #007bff; /* Hover color for light theme */
 }
 
 body {
@@ -379,16 +379,15 @@ input[type="checkbox"]:checked{
     color: #ffffff; 
 }
 
-    .custom-bg-color {
-        background-color: rgb(5, 152, 238) !important;
-        position: bottom;
-        left: 00;
-        right: 0;
-        top: 0;
-        height: 180px; 
-      
-    
-    }
+.custom-bg-color {
+    background-color: #007bff !important;
+    position: bottom;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 180px;
+}
+
 
     .marquee {
         overflow: hidden;
@@ -545,13 +544,6 @@ input[type="checkbox"]:checked{
     margin-right: 8px; /* space after the icon */
 }
 
-/* Use in HTML like this:
-<div class="disclaimer-box">
-    <i class="disclaimer-icon fas fa-exclamation-circle"></i>
-    <div class="disclaimer-title">Please note:</div>
-    <p class="disclaimer-text">This Screening tool is meant to be a quick snapshot...</p>
-</div>
-*/
 
 
 /* Base layout for buttons */
@@ -624,4 +616,110 @@ input[type="checkbox"]:checked{
 .custom-form-control:invalid, .custom-form-select:invalid {
     border: 2px solid red; /* Adjust as needed */
     /* You can add other styles like background-color or box-shadow if required */
+}
+.custom-btn {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    /* Rest of your styles */
+    border-radius: 30px; /* Adjust as necessary for roundness */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+}
+
+.custom-btn:hover {
+    background-color: var(--primary-color-dark); /* Darken the button on hover */
+    color: var(--white-color); /* Keep text white on hover */
+    /* Rest of your styles */
+}
+
+
+.custom-btn.active {
+    background-color: var(--primary-color-dark); /* Optionally darken button color */
+    color: var(--white-color); /* Keep text color white */
+}
+
+.nv-link {
+    background-color: #007bff;
+    color: var(--white-color); /* Assuming you want the text to be white */
+    padding: 10px 15px; /* Or any other padding you prefer */
+    border-radius: 50px; /* If you want rounded corners */
+    display: inline-block; /* If you want padding to take effect */
+    margin-right: 80px;
+    
+}
+
+/* To maintain the background color change when hovering */
+.nv-link:hover {
+    background-color: rgb(255, 255, 255); /* Same background color on hover */
+    /* ... any other hover styles ... */
+}
+
+
+
+/* Table Base Styling */
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+}
+
+/* Zebra Striping for Rows */
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(237, 242, 247, 0.5); /* Lighter shade for odd rows */
+}
+
+/* Table Header Styling */
+.table thead th {
+    background-color: #007bff; /* Primary color for header */
+    color: white; /* White text for header */
+    padding: 10px;
+    border-bottom: 2px solid #dee2e6; /* Solid bottom border */
+}
+
+/* Table Row and Cell Styling */
+.table td, .table th {
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+/* Hover Effect on Rows */
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.1); /* Subtle blue on hover */
+}
+
+/* Responsive Table */
+@media screen and (max-width: 600px) {
+    .table-responsive {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Enhance Text Readability */
+.table td, .table th {
+    text-align: left;
+    font-size: 0.9rem; /* Adjust font size */
+    color: #333; /* Dark text for better readability */
+}
+
+/* Right align for numeric values */
+.table td.numeric, .table th.numeric {
+    text-align: right;
+}
+
+/* Adjusting for smaller screens */
+@media (max-width: 768px) {
+    .table td, .table th {
+        padding: 10px; /* More padding on smaller screens */
+    }
+}
+.nv-link.active {
+    color: black !important;
+}
+
+.custom-btn-hover:hover {
+    background-color: #ffffff !important; /* White background on hover */
+    color: #007bff !important; /* Primary blue text on hover */
 }

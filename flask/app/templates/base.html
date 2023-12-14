@@ -24,10 +24,11 @@
                     
                     </li><!-- Home link with inline style for border-radius -->
                     <li>
-                        <a href="{{ url_for('index') }}" class="nv-link text custom-btn {% if curr_page=='home' %}active{% endif %}" style="border-radius: 100px; background-color: rgb(5, 152, 238); color: black;">
+                        <a href="{{ url_for('index') }}" class="nv-link text custom-btn {% if curr_page=='home' %}active{% endif %}" style="border-radius: 100px; background-color: #007bff; color: black;">
                             <i class="bi bi-house-door-fill"></i>
                             {% if session['lang'] == "sw" %}Karibu{% else %}Home{% endif %}
                         </a>
+                        
                     </li>
 
                     <!-- Conditional links based on authentication status -->
@@ -49,13 +50,18 @@
                     {% else %}
                         <!-- Login link for users who are not logged in -->
                         <li>
-                            <a href="{{ url_for('login') }}" class="nv-link text custom-btn {% if curr_page=='login' %}active{% endif %}" style="border-radius: 100px; background-color: rgb(5, 152, 238); color: black !important;">
-
-
-                           
+                            <li>
+                                <li>
+                                    <a href="{{ url_for('login') }}" class="nv-link text custom-btn custom-btn-hover {% if curr_page=='login' %}active{% endif %}"
+                                       style="border-radius: 100px; background-color: #007bff; color: black;">
+                                        <i class="bi bi-box-arrow-in-right"></i> {% if session['lang'] == "sw" %}Ingia{% else %}Login{% endif %}
+                                    </a>
+                                </li>
                                 
-                                <i class="bi bi-box-arrow-in-right"></i>
-                                {% if session['lang'] == "sw" %}Ingia{% else %}Login{% endif %}
+                            </li>
+                            
+                        </li>
+                        
                             </a>
                         </li>
                         
