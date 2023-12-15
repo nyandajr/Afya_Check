@@ -81,7 +81,13 @@ def check_in():
  
     predicted_condition = get_predicted_condition(age, gender, selected_language, symptoms)
     recommended_assessments = get_recommended_assessment(predicted_condition)
-    return jsonify(recommended_assessments)
+
+    response_data = {
+        "predicted_condition": predicted_condition,
+        "recommended_assessments": recommended_assessments
+    }
+    return jsonify(response_data)
+
 
 @app.route('/assessments')
 def assessments():

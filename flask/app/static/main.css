@@ -6,9 +6,7 @@
     --input-bg-color: rgb(45, 52, 65); /* Input field background */
     --input-border-color: #d1d1d1; /* Input field border */
 }
-.nv-link:hover {
-    color: black; /* This uses the white color defined in the root */
-}
+
 
 .theme-light {
     --bg-color: white; /* Light background for light theme */
@@ -182,7 +180,7 @@ input[type="checkbox"]:checked{
 #loading .fa-spinner {
     font-size: 30px;  /* Change as needed */
     margin-right: 10px; /* Space between spinner and text */
-    color: #16b4db; /* This is a standard green color */
+    color:#007bff; /* This is a standard green color */
 
 }
 
@@ -513,7 +511,7 @@ input[type="checkbox"]:checked{
 
 .disclaimer-box {
     background-color: #eef3f8; /* A light blue background */
-    border-left: 4px solid #0096d6; /* A softer primary color for the border */
+    border-left: 4px solid #007bff; /* A softer primary color for the border */
     box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* Slightly more pronounced shadow */
     padding: 20px; /* Increased padding */
     margin-bottom: 20px; /* Slightly more bottom margin */
@@ -744,7 +742,7 @@ input[type="checkbox"]:checked{
 
 .welcome-box {
     background-color: #eef3f8; /* A light blue background */
-    border-left: 4px solid #0096d6; /* A softer primary color for the border */
+    border-left: 4px solid #007bff; /* A softer primary color for the border */
     box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* Slightly more pronounced shadow */
     padding: 20px; /* Increased padding */
     margin-bottom: 20px; /* Slightly more bottom margin */

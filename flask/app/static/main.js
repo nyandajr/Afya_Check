@@ -14,29 +14,45 @@ $(document).ready(function(){
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             success: function (response) {
                 if (response.error){
-                    $("#alert").removeClass("alert-success")
-                    $("#alert").addClass("alert-danger")
-                    $("#alert").text(response.error)
-                    $("#alert").show()
-                    $("#results").hide()
-                }
-                else {
-                    $("#alert").hide()
-                    $("#results").show()
-                    $("#resultsLink").empty()
-                    response.map((item, i)=> {
-                        $("#resultsLink").append(`<a href='/assessment/${item}' class='link'>${item}</a>`)
-                        if (i != response.length - 1){
-                            $("#resultsLink").append(", &nbsp;")
-                        }
-                    })
-
-                    // scroll to page bottom
+                    // Handle error
+                    $("#alert").removeClass("alert-success");
+                    $("#alert").addClass("alert-danger");
+                    $("#alert").text(response.error);
+                    $("#alert").show();
+                    $("#results").hide();
+                } else {
+                    // Check the current language and set the message accordingly
+                    var language = $("#language").val(); // Assuming you have a language selector with ID 'language'
+                    var messagePrefix = language === "sw" ? "Huenda ukawa na dalili za " : "You might be showing signs of ";
+            
+                    // Display the predicted condition
+                    if (response.predicted_condition) {
+                        $("#predictedCondition").html(`<strong>${messagePrefix}${response.predicted_condition}.</strong>`);
+                    }
+            
+                    // Display the recommended assessments
+                    if (response.recommended_assessments && response.recommended_assessments.length > 0) {
+                        $("#results").show();
+                        $("#resultsLink").empty();
+                        response.recommended_assessments.forEach((item, i) => {
+                            $("#resultsLink").append(`<a href='/assessment/${item}' class='link'>${item}</a>`);
+                            if (i != response.recommended_assessments.length - 1){
+                                $("#resultsLink").append(", &nbsp;");
+                            }
+                        });
+                    } else {
+                        $("#results").hide();
+                    }
+            
+                    // Scroll to page bottom
                     $('html, body').animate({
                         scrollTop: $(document).height()
                     }, 500);
                 }
             },
+            
+            
+            
             error: function (error){
                 $("#alert").removeClass("alert-success")
                 $("#alert").addClass("alert-danger")
