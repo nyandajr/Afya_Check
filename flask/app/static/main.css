@@ -1,10 +1,13 @@
 :root {
-    --bg-color: rgb(21, 32, 43) ;/* Dark background */
-    --primary-color:#007bff; /* Primary color */
+    --bg-color: rgb(21, 32, 43); /* Dark background */
+    --primary-color: #007bff; /* Primary color */
     --primary-color-dark: #007bff; /* Darker primary color */
     --white-color: #ffffff; /* White text color */
     --input-bg-color: rgb(45, 52, 65); /* Input field background */
     --input-border-color: #d1d1d1; /* Input field border */
+}
+.nv-link:hover {
+    color: black; /* This uses the white color defined in the root */
 }
 
 .theme-light {
@@ -509,13 +512,28 @@ input[type="checkbox"]:checked{
 
 
 .disclaimer-box {
-    background-color: #f8f9fa; /* light grey background */
-    border-left: 4px solid var(--primary-color); /* a colored line on the left */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* subtle shadow */
-    padding: 16px; /* more padding */
-    margin-bottom: 16px; /* space between boxes */
-    border-radius: 8px; /* rounded corners */
+    background-color: #eef3f8; /* A light blue background */
+    border-left: 4px solid #0096d6; /* A softer primary color for the border */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* Slightly more pronounced shadow */
+    padding: 20px; /* Increased padding */
+    margin-bottom: 20px; /* Slightly more bottom margin */
+    border-radius: 50px; /* Slightly more rounded corners */
+    font-size: 1.1rem; /* Slightly larger font size */
+    font-weight: 500; /* Semi-bold font weight */
 }
+
+.disclaimer-box::before {
+    content: '⚠️'; /* Example: Adding a warning icon */
+    padding-right: 8px; /* Space between icon and text */
+    font-size: 1.2em; /* Slightly larger icon size */
+}
+
+@media (max-width: 768px) {
+    .disclaimer-box {
+        padding: 15px; /* Adjust padding for mobile screens */
+    }
+}
+
 
 .disclaimer-title {
     font-weight: bold;
@@ -722,4 +740,19 @@ input[type="checkbox"]:checked{
 .custom-btn-hover:hover {
     background-color: #ffffff !important; /* White background on hover */
     color: #007bff !important; /* Primary blue text on hover */
+}
+
+.welcome-box {
+    background-color: #eef3f8; /* A light blue background */
+    border-left: 4px solid #0096d6; /* A softer primary color for the border */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* Slightly more pronounced shadow */
+    padding: 20px; /* Increased padding */
+    margin-bottom: 20px; /* Slightly more bottom margin */
+    border-radius: 50px; /* Slightly more rounded corners */
+    font-size: 1.1rem; /* Slightly larger font size */
+    font-weight: 500; /* Semi-bold font weight */
+}
+
+.welcome-box strong {
+    color: #000; /* Black text for strong emphasis */
 }
