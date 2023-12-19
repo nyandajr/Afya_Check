@@ -19,7 +19,7 @@
 	</div>
 	<div class="col-lg-8 col-md-10 mt-5 mx-auto">
 		<div class="text-center">
-			<h1 class="title">Akili Check</h1>
+			<h1 class="title">Akili Check Admin Panel</h1>
 			{% if current_user.is_authenticated %}
                 {% if current_user.role == "admin" %}
 					<a href="{{url_for('admin')}}" class="nv-link text {% if curr_page=='users' %}active{% endif %}">
@@ -66,5 +66,29 @@
 	<script src="{{url_for('static', filename='main.js')}}"></script>
 	{% block script %}
 	{% endblock script %}
+
+	{% block sponsors %}
+	<div class="mt-4 border-top">
+		<p class="text pt-1">Sponsored By:</p>
+		<div class="sponsors">
+			<div class="sponsor-item">
+				<img src="{{url_for('static', filename='images/udom-logo.png')}}" alt="UDOM Logo">
+				<a href="https://udom.ac.tz/" target="_blank">UDOM</a>
+			</div>
+			<div class="sponsor-item">
+				<img src="{{url_for('static', filename='images/ai4dlab.png')}}" alt="AI4D Labs Logo">
+				<a href="https://ai4dlab.or.tz/" target="_blank">AI4D Labs</a>
+			</div>
+			<div class="sponsor-item">
+				<img src="{{url_for('static', filename='images/mandela-logo.png')}}" alt="NM-AIST Logo">
+				<a href="https://nm-aist.ac.tz/" target="_blank">NM-AIST</a>
+			</div>
+			<div class="sponsor-item">
+				<img src="{{url_for('static', filename='images/Amana logo.png')}}" alt="Amana hospital Logo">
+				<a href="http://amanarrh.go.tz" target="_blank">Amana </a>
+			</div>
+		</div>
+	</div>
+	{% endblock sponsors %}
 </body>
 </html>
