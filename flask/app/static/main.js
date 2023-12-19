@@ -23,7 +23,7 @@ $(document).ready(function(){
                 } else {
                     // Check the current language and set the message accordingly
                     var language = $("#language").val(); // Assuming you have a language selector with ID 'language'
-                    var messagePrefix = language === "sw" ? "Huenda ukawa na dalili za " : "You might be showing signs of ";
+                    var messagePrefix = language === "sw" ? "Huenda ukawa nadalili za " : "You might be showing signs of ";
             
                     // Display the predicted condition
                     if (response.predicted_condition) {
@@ -91,18 +91,17 @@ $(document).ready(function(){
 })
 
 function darkThemeOn(){
-    localStorage.setItem("theme", "dark")
-    $("#themeIcon").removeClass("bi-moon-stars-fill")
-    $("#themeIcon").addClass("bi-brightness-high-fill")
-    $("body").removeClass("theme-light")
+    localStorage.setItem("theme", "dark");
+    $("#themeIcon").removeClass("bi-brightness-high-fill").addClass("bi-moon-stars-fill");
+    $("body").removeClass("theme-light").addClass("theme-dark"); // Add 'theme-dark' class
 }
 
 function darkThemeOff(){
-    localStorage.setItem("theme", "light")
-    $("#themeIcon").addClass("bi-moon-stars-fill")
-    $("#themeIcon").removeClass("bi-brightness-high-fill")
-    $("body").addClass("theme-light")
+    localStorage.setItem("theme", "light");
+    $("#themeIcon").removeClass("bi-moon-stars-fill").addClass("bi-brightness-high-fill");
+    $("body").removeClass("theme-dark").addClass("theme-light"); // Remove 'theme-dark' class
 }
+
 
 function switchLang(lang){
     $.get(`/lang/${lang}`, (data)=>{

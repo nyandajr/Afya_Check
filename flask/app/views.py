@@ -81,13 +81,7 @@ def check_in():
  
     predicted_condition = get_predicted_condition(age, gender, selected_language, symptoms)
     recommended_assessments = get_recommended_assessment(predicted_condition)
-
-    response_data = {
-        "predicted_condition": predicted_condition,
-        "recommended_assessments": recommended_assessments
-    }
-    return jsonify(response_data)
-
+    return jsonify(recommended_assessments)
 
 @app.route('/assessments')
 def assessments():
@@ -552,3 +546,25 @@ def admin_export():
     return Response(
         output, mimetype="text/csv", 
         headers={"Content-Disposition":f"attachment;filename={filename}"})
+    
+@app.route('/admin/delete_account/<int:user_id>', methods=['POST'])
+@login_required
+def delete_account(user_id):
+    if current_user.role != "admin":
+        return redirect(url_for("index"))
+
+    user = User.query.get(user_id)
+
+    if not user:
+        flash("User not found")
+    else:
+        if request.method == "POST":
+            # Delete associated records in user_security_question table
+            UserSecurityQuestion.query.filter_by(user_id=user.id).delete()
+
+            db.session.delete(user)
+            db.session.commit()
+
+    return redirect(url_for("admin"))
+
+

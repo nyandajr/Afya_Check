@@ -1,61 +1,129 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="subtitle text-center">
-    {% if session['lang'] == "sw" %}
-        Ingia
-    {% else %}
-        Login
-    {% endif %}
-</div>
-<div>
-    {% for msg in get_flashed_messages() %}
-        <div class="text-danger my-2 text-center">
-            {{ msg }}        
-        </div>
-    {% endfor %}
-    
-    <form method="post" action="{{ url_for('login') }}">
-        <div class="mb-3">
-            <label for="username" class="form-label subtext">
-                {% if session['lang'] == "sw" %}
-                    Jina la mtumiaji
+<div class="login-container">
+    <div class="subtitle text-center">
+        {% if session['lang'] == "sw" %}
+            Ingia
+        {% else %}
+            Login
+        {% endif %}
+    </div>
+    <div class="login-box">
+        {% for msg in get_flashed_messages() %}
+            <div class="alert alert-danger my-2 text-center">
+                {{ msg }}        
+            </div>
+        {% endfor %}
+        
+        <form method="post" action="{{ url_for('login') }}">
+            <!-- Username Field -->
+            <div class="mb-3">
+                <label for="username" class="form-label">
+                    {% if session['lang'] == "sw" %}
+                        Jina la mtumiaji
+                    {% else %}
+                        Username
+                    {% endif %}
+                </label>
+                <input type="text" name="username" id="username" class="custom-form-control" placeholder="" required>
+            </div>
+
+            <!-- Password Field -->
+            <div class="mb-3">
+                <label for="password" class="form-label">
+                    {% if session['lang'] == "sw" %}
+                        Nenosiri
+                    {% else %}
+                        Password
+                    {% endif %}
+                </label>
+                <div class="password-wrapper">
+                    <input type="password" name="password" id="password" class="custom-form-control" placeholder="password" required>
+                    <i class="fas fa-eye password-icon" onclick="togglePasswordVisibility()"></i>
+                </div>
+            </div>
+
+            <!-- Submission and Additional Links -->
+            <div class="mb-3 text-center">
+                <input type="submit" value="{% if session['lang'] == 'sw' %}Ingia{% else %}Login{% endif %}" class="custom-btn">
+                {% if session["lang"] == "sw" %}
+                    Au &nbsp;<a href="{{ url_for('register') }}" class="custom-btn text">Jisajili</a>
                 {% else %}
-                    Username
+                    Or &nbsp;<a href="{{ url_for('register') }}" class="custom-btn text">Register</a>
                 {% endif %}
-            </label>
-            <input type="text" name="username" id="username" class="custom-form-control" placeholder="" required>
-        </div>
-        <div class="mb-3">
-            <label for="password" class="form-label subtext">
-                {% if session['lang'] == "sw" %}
-                    Nenosiri
-                {% else %}
-                    Password
-                {% endif %}
-            </label>
-            <input type="password" name="password" id="password" class="custom-form-control" placeholder="password" required>
-        </div>
-        <div class="mb-3">
-            {% if session["lang"] == "sw" %}
-                Umesahau nenosiri? &nbsp;<a href="{{ url_for('forgot_password') }}" class="link">Bofya hapa</a>
-            {% else %}
-                Forgot password? &nbsp;<a href="{{ url_for('forgot_password') }}" class="link">Click here</a>
-            {% endif %}
-        </div>
-        <div class="mb-3 text-center">
-            <input 
-                type="submit" 
-                value="{% if session['lang'] == 'sw' %}Ingia{% else %}Login{% endif %}" 
-                class="custom-btn px-4 text">
-            {% if session["lang"] == "sw" %}
-                Au &nbsp;<a href="{{ url_for('register') }}" class="custom-btn px-4 text">Jisajili</a>
-            {% else %}
-                Or &nbsp;<a href="{{ url_for('register') }}" class="custom-btn px-4 text">Register</a>
-            {% endif %}
-        </div>
-    </form>
+            </div>
+        </form>
+    </div>
 </div>
+
+<script>
+    function togglePasswordVisibility() {
+        var passwordInput = document.getElementById("password");
+        var passwordIcon = document.querySelector(".password-wrapper i");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            passwordIcon.classList.add("fa-eye-slash");
+            passwordIcon.classList.remove("fa-eye");
+        } else {
+            passwordInput.type = "password";
+            passwordIcon.classList.remove("fa-eye-slash");
+            passwordIcon.classList.add("fa-eye");
+        }
+    }
+</script>
+
+<style>
+    .login-container {
+        max-width: 400px;
+        margin: auto;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        background-color: #fff;
+    }
+
+    .login-box {
+        margin: 20px 0;
+    }
+
+    .custom-form-control {
+        width: calc(100% - 40px);
+        padding: 10px 20px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .custom-btn {
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .custom-btn:hover {
+        background-color: #0056b3;
+    }
+
+    .password-wrapper {
+        position: relative;
+    }
+
+    .password-icon {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+</style>
+
 {% endblock content %}
 
 {% set curr_page = "login" %}

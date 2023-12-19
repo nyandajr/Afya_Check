@@ -754,3 +754,210 @@ input[type="checkbox"]:checked{
 .welcome-box strong {
     color: #000; /* Black text for strong emphasis */
 }
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.custom-form-control {
+    flex-grow: 1;
+    padding-right: 30px; /* Make space for the icon */
+}
+
+.password-icon {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+
+/* Define your color variables for light mode */
+:root {
+    --background-color: #fff; /* white background */
+    --text-color: rgb(21, 32, 43); /* dark text */
+    --input-background-color: #eee; /* light grey input background */
+    --input-text-color:rgb(21, 32, 43); /* dark text for input */
+    --button-background-color: #007bff; /* blue button background */
+    --button-text-color: #fff; /* white text for buttons */
+    --alert-background-color: #f8d7da; /* light red for alert background */
+    --alert-text-color: #721c24; /* dark red for alert text */
+}
+
+/* Define color variables for dark mode */
+.theme-dark {
+    --background-color: rgb(21, 32, 43); /* very dark grey background */
+    --text-color: #ffffff; /* light grey text */
+    --input-background-color: rgb(21, 32, 43); /* dark grey input background */
+    --input-text-color: #ddd; /* light grey text for input */
+    --button-background-color: #0d6efd; /* brighter blue button background */
+    --button-text-color: #fff; /* white text for buttons */
+    --alert-background-color: #c12f2f; /* dark red for alert background */
+    --alert-text-color: #f5c2c7; /* light red for alert text */
+}
+
+.login-box {
+  
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 20px !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    background-color: var(--input-bg-color) !important; /* Adjust according to your theme */
+}
+
+@media (max-width: 768px) {
+    .login-box {
+        max-width: 100% !important;
+        padding: 15px !important;
+    }
+}
+
+
+/* Styles for the custom form controls */
+.custom-form-control {
+    background-color: var(--input-background-color);
+    color: var(--input-text-color);
+    /* Add other styles as needed */
+}
+
+/* Styles for custom buttons */
+.custom-btn {
+    background-color: var(--button-background-color);
+    color: var(--button-text-color);
+    /* Add other styles as needed */
+}
+
+/* Styles for alerts */
+.alert {
+    background-color: var(--alert-background-color);
+    color: var(--alert-text-color);
+    /* Add other styles as needed */
+}
+
+/* Specific icon styles within the password field */
+.password-icon {
+    cursor: pointer;
+    /* Style as needed, e.g., positioning inside the input */
+}
+/* ADMIN DASHBOARD STYLES */
+
+/* Style for the content area */
+.content {
+    background-color: #f0f0f0; /* Light theme background color */
+    padding: 20px;
+    border: 1px solid #4d1212;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Style for the table */
+  .table-responsive {
+    overflow-x: auto;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table th, .table td {
+    padding: 8px 12px;
+    text-align: left;
+    border: 1px solid #ddd; /* Light theme cell borders */
+  }
+  
+  /* Changes for improved dark mode readability: */
+  
+  /* Use a lighter text color for dark theme */
+  .theme-dark .table th, .theme-dark .table td {
+    color: #eee;
+  }
+  
+  /* Increase font size slightly for better legibility */
+  .table th, .table td {
+    font-size: 18px;
+  }
+  
+  /* Apply the above changes to header */
+  .theme-dark .table th {
+    background-color: #222; /* Dark theme header background */
+    color: #eee;
+  }
+  
+  /* Zebra striping for even rows */
+  .table tbody tr:nth-child(even) {
+    background-color: #737883; /* Light theme even rows */
+  }
+  
+  /* Style table rows on hover */
+  .table tbody tr:hover {
+    background-color: #187db7; /* Light theme hover color */
+  }
+  
+  /* Dark theme styles */
+  .theme-dark .content {
+    background-color: #341f1f; /* Dark theme background color */
+    border-color: #555; /* Dark theme border color */
+  }
+  
+  /* Zebra striping for even rows */
+  .theme-dark .table tbody tr:nth-child(even) {
+    background-color: #444; /* Dark theme even rows */
+  }
+  
+  .theme-dark .table tbody tr:hover {
+    background-color: #666; /* Dark theme hover color */
+  }
+  /* Style for the "Delete Account" button */
+
+.delete-account {
+    text-align: center; /* Center align the button */
+}
+
+.delete-account button {
+    background-color: red; /* Set the background color to red */
+    color: white; /* Set the text color to white */
+    border: none; /* Remove the button border */
+    padding: 5px 10px; /* Add some padding to the button */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.delete-account button:hover {
+    background-color: darkred; /* Change background color on hover */
+}
+
+
+
+.content-description {
+    font-size: 18px; /* Adjust the font size to your preference */
+    font-weight: bold; /* Make the text bold */
+    margin-bottom: 20px; /* Add some space below the text */
+    position: center;
+    
+}
+
+.user-count {
+    color: #007bff; /* Set the text color to a shade of blue */
+    font-size: 24px; /* Increase the font size for emphasis */
+}
+
+@media (max-width: 768px) {
+    /* Responsive style for smaller screens (e.g., mobile) */
+    .content-description {
+        font-size: 16px;
+    }
+}
