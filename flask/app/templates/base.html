@@ -15,7 +15,7 @@
     <div class="theme-switch" id="themeSwitch">
         <i class="bi bi-brightness-high-fill" id="themeIcon"></i>
     </div>
-    <div class="col-12 col-md-10 col-lg-8 mx-auto">
+    <div class="col-12 col-md-10 col-lg-9 mx-auto">
         <div class="text-center">
             <img src="{{url_for('static', filename='images/akili-logo.png')}}" class="logo mt-3" alt="Akili Check Logo">
             <h1 class="title">Akili Check</h1>
@@ -24,7 +24,7 @@
                     
                     </li><!-- Home link with inline style for border-radius -->
                     <li>
-                        <a href="{{ url_for('index') }}" class="nv-link text custom-btn {% if curr_page=='home' %}active{% endif %}" style="border-radius: 100px; background-color: #007bff; color: black;">
+                        <a href="{{ url_for('index') }}" class="nv-link text custom-btn {% if curr_page=='home' %}active{% endif %}" style="border-radius: 100px; background-color: #007bff; color: white;">
                             <i class="bi bi-house-door-fill"></i>
                             {% if session['lang'] == "sw" %}Karibu{% else %}Home{% endif %}
                         </a>
@@ -56,10 +56,11 @@
                         <li>
                             <li>
                                 <li>
-                                    <a href="{{ url_for('login') }}" class="nv-link text custom-btn custom-btn-hover {% if curr_page=='login' %}active{% endif %}"
-                                       style="border-radius: 100px; background-color: #007bff; color: black;">
-                                        <i class="bi bi-box-arrow-in-right"></i> {% if session['lang'] == "sw" %}Ingia{% else %}Login{% endif %}
+                                    <a href="{{ url_for('login') }}" class="nv-link text custom-btn {% if curr_page=='login' %}active{% endif %}"
+                                    style="border-radius: 100px; background-color: #007bff; color: white;">
+                                    <i class="bi bi-box-arrow-in-right"></i> {% if session['lang'] == "sw" %}Ingia{% else %}Login{% endif %}
                                     </a>
+
                                 </li>
                                 
                             </li>

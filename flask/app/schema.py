@@ -1,6 +1,7 @@
 from app import db, login_manager
 from datetime import datetime
 from flask_login import UserMixin
+import bcrypt  # Import bcrypt library for password hashing
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -26,6 +27,14 @@ class User(UserMixin, db.Model):
             date_registered=self.date_registered
         )
 
+    # Method to set and hash the password
+    def set_password(self, password):
+        password_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+        self.password = password_hash.decode('utf-8')
+
+    # Method to check if a provided password matches the hashed password
+    def check_password(self, password):
+        return bcrypt.checkpw(password.encode('utf-8'), self.password.encode('utf-8'))
 
 class CheckIn(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -62,7 +71,6 @@ class CheckInOption(db.Model):
             checkin_id=self.checkin_id
         )
 
-
 class Assessment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(), nullable=False)
@@ -82,7 +90,6 @@ class Assessment(db.Model):
             max_score=self.max_score,
             questions=[question.to_dict() for question in self.questions]
         )
-
 
 class AssessmentQuestion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -144,8 +151,6 @@ class UserScores(db.Model):
             score=self.score,
             date_taken=self.date_taken.strftime("%Y-%m-%d %H:%M")
         )
-
-
 class SecurityQuestion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(), nullable=False)

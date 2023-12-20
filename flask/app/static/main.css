@@ -15,7 +15,7 @@
     --white-color: rgb(0, 0, 0); /* Text color for light theme, which is black */
     --input-bg-color: rgb(223, 226, 231); /* Input field background for light theme */
     --input-border-color: #d1d1d1; /* Input field border for light theme */
-    --primary-color-hover: #007bff; /* Hover color for light theme */
+    --primary-color-hover: #000000; /* Hover color for light theme */
 }
 
 body {
@@ -44,7 +44,7 @@ body {
 
 .custom-btn:hover {
     background-color: var(--primary-color-hover);
-    color: white !important;
+    color: rgb(0, 0, 0) !important;
 }
 
 .custom-form-select {
