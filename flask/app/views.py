@@ -15,6 +15,10 @@ from app.utils import (
     create_gpt_prompt, create_result_text
 )
 
+from flask_bcrypt import Bcrypt
+
+bcrypt = Bcrypt(app)  # Initialize Flask-Bcrypt with your Flask app
+
 @app.route('/')
 @app.route('/home')
 def index():
@@ -246,18 +250,18 @@ def results():
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
-    
+
     if session.get("lang") is None:
         session["lang"] = "en"
-    
+
     title = "Register"
     if session["lang"] == "sw":
         title = "Jisajili"
-    
+
     if request.method == "GET":
         qns = SecurityQuestion.query.all()
         return render_template('register.html', title=title, qns=qns)
-    
+
     # post method
     username = request.form.get("username").strip()
     age = request.form.get("age")
@@ -274,7 +278,7 @@ def register():
         else:
             flash("Passwords do not match")
         return redirect(url_for('register'))
-    
+
     user = User.query.filter_by(username=username).first()
     if user:
         if session["lang"] == "sw":
@@ -282,85 +286,89 @@ def register():
         else:
             flash(f"The username {user.username} already exists")
         return redirect(url_for('register'))
-    
+
     if len(username) < 4:
         if session["lang"] == "sw":
             flash("Jina la mtumiaji liwe na angalau herufi 4")
         else:
             flash("Username must be at least 4 characters")
         return redirect(url_for('register'))
-    
+
     if len(password) < 6:
         if session["lang"] == "sw":
             flash("Nenosiri liwe na herufi angalau 6")
         else:
             flash("Password must be at least 6 characters")
         return redirect(url_for('register'))
-    
+
     if int(age) < 13:
         if session["lang"] == "sw":
             flash("Lazima uwe angalau na miaka 13 kujisajili")
         else:
             flash("You must be at least 13 years old to register")
         return redirect(url_for('register'))
-    
+
     if len(ans1) < 3 or len(ans2) < 3 or len(ans3) < 3:
         if session["lang"] == "sw":
             flash("Majibu yote yanatakiwa yawe na angalau herufi 3")
         else:
             flash("All answers must be at least 3 characters long")
         return redirect(url_for('register'))
-    
-    user = User(username=username, age=age, gender=gender, password=password)
+
+    # Hash the password before saving it to the database
+    hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+
+    user = User(username=username, age=age, gender=gender, password=hashed_password)
     db.session.add(user)
     db.session.commit()
 
     usq = UserSecurityQuestion(
-        user_id=user.id, 
-        security_question_id=1, 
+        user_id=user.id,
+        security_question_id=1,
         answer=ans1)
     db.session.add(usq)
 
     usq = UserSecurityQuestion(
-        user_id=user.id, 
-        security_question_id=2, 
+        user_id=user.id,
+        security_question_id=2,
         answer=ans2)
     db.session.add(usq)
 
     usq = UserSecurityQuestion(
-        user_id=user.id, 
-        security_question_id=3, 
+        user_id=user.id,
+        security_question_id=3,
         answer=ans3)
     db.session.add(usq)
     db.session.commit()
-    
+
     if session["lang"] == "sw":
-        flash(f"Karibu, {username}. Tafadhali ingia kudendelea.")
+        flash(f"Karibu, {username}. Tafadhali ingia kuendelea.")
     else:
         flash(f"Welcome, {username}. Please login to continue.")
     return redirect(url_for('login'))
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
-    
+
     if session.get("lang") is None:
         session["lang"] = "en"
-    
+
     title = "Login"
     if session["lang"] == "sw":
         title = "Ingia"
-    
+
     if request.method == "GET":
         return render_template('login.html', title=title)
-    
+
     # post method
     username = request.form.get("username").strip()
     password = request.form.get("password")
     user = User.query.filter_by(username=username).first()
 
-    if user and user.password == password:
+    if user and bcrypt.check_password_hash(user.password, password):
         login_user(user)
         if user.role == "admin":
             return redirect(url_for("admin"))

@@ -13,7 +13,7 @@
 <div class="mb-3">
     <small style="font-weight: bold; color: hsl(197, 77%, 36%);">
         {% if session['lang'] == "sw" %}
-            <strong>Onyo:</strong>
+            <strong>Usiogope:</strong>
             Hatukusanyi taarifa binafsi. 
             Tafadhali tumia jina lisilo kutambulisha ila la kipekee na nenosiri imara
         {% else %}
@@ -53,7 +53,7 @@
                     Enter your age:
                 {% endif %}
             </label>
-            <input type="text" class="custom-form-control" name="age" id="age" inputmode="numeric" placeholder="26" required>
+            <input type="text" class="custom-form-control" name="age" id="age" inputmode="numeric" placeholder="" required>
         </div>
         <div class="mb-3">
             <label for="gender" class="form-label subtext">
@@ -64,7 +64,7 @@
                 {% endif %}
             </label>
             <select name="gender" id="gender" class="custom-form-select" required>
-                <option value="Female" selected>
+                <option value="" selected>
                     {% if session['lang'] == "sw" %}
                         Mwanamke
                     {% else %}

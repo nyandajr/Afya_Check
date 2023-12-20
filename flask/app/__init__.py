@@ -3,6 +3,7 @@ from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
+from flask_bcrypt import Bcrypt  # Import Bcrypt
 
 app = Flask(__name__)
 
@@ -14,7 +15,6 @@ CORS(app)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login_manager = LoginManager(app)
+bcrypt = Bcrypt(app)  # Initialize Bcrypt with the app
 
 from app import views
-
-
