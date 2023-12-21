@@ -735,11 +735,6 @@ input[type="checkbox"]:checked{
     color: black !important;
 }
 
-.custom-btn-hover:hover {
-    background-color: #ffffff !important; /* White background on hover */
-    color: #007bff !important; /* Primary blue text on hover */
-}
-
 .welcome-box {
     background-color: #eef3f8; /* A light blue background */
     border-left: 4px solid #007bff; /* A softer primary color for the border */
@@ -960,4 +955,20 @@ input[type="checkbox"]:checked{
     .content-description {
         font-size: 16px;
     }
+}
+
+
+/* Define the keyframes for the spin animation */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Apply the animation to elements with the animate-spin class */
+.animate-spin {
+    animation: spin 1s linear infinite;
 }
