@@ -1,69 +1,66 @@
-$(document).ready(function(){
+$(document).ready(function() {
     // hide results and alert divs
-    $("#results").hide()
-    $("#alert").hide()
+    $("#results").hide();
+    $("#alert").hide();
 
-    $("#checkInForm").submit((e)=>{
-        e.preventDefault()
-        $("#checkButton").html("Checking...")
+    var lang = $("#checkInContainer").data('lang'); // Get the current language
+
+    // Messages for different languages
+    var messages = {
+        en: {
+            symptomMessage: 'Based on your symptoms, you might be showing signs of ',
+            recommendation: 'We recommend taking the following assessments for a more comprehensive evaluation.'
+        },
+        sw: {
+            symptomMessage: 'Kulingana na dalili zako, unaweza kuwa unaonyesha dalili za ',
+            recommendation: 'Tunapendekeza ufanye tathmini zifuatazo kwa tathmini kamili zaidi.'
+        }
+    };
+
+    $("#checkInForm").submit((e) => {
+        e.preventDefault();
+        $("#checkButton").html(lang === "sw" ? "Inatathmini..." : "Checking...");
 
         $.ajax({
-            url: '',
+            url: '', // Update with your endpoint
             type: 'POST',
             data: $("#checkInForm").serialize(),
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            success: function (response) {
-                if (response.error){
-                    // Handle error
-                    $("#alert").removeClass("alert-success");
-                    $("#alert").addClass("alert-danger");
-                    $("#alert").text(response.error);
-                    $("#alert").show();
+            success: function(response) {
+                if (response.error) {
+                    $("#alert").removeClass("alert-success").addClass("alert-danger").text(response.error).show();
                     $("#results").hide();
                 } else {
-                    // Check the current language and set the message accordingly
-                    var language = $("#language").val(); // Assuming you have a language selector with ID 'language'
-                    var messagePrefix = language === "sw" ? "Huenda ukawa nadalili za " : "You might be showing signs of ";
-            
-                    // Display the predicted condition
-                    if (response.predicted_condition) {
-                        $("#predictedCondition").html(`<strong>${messagePrefix}${response.predicted_condition}.</strong>`);
-                    }
-            
-                    // Display the recommended assessments
-                    if (response.recommended_assessments && response.recommended_assessments.length > 0) {
-                        $("#results").show();
-                        $("#resultsLink").empty();
-                        response.recommended_assessments.forEach((item, i) => {
-                            $("#resultsLink").append(`<a href='/assessment/${item}' class='link'>${item}</a>`);
-                            if (i != response.recommended_assessments.length - 1){
-                                $("#resultsLink").append(", &nbsp;");
-                            }
-                        });
-                    } else {
-                        $("#results").hide();
-                    }
-            
-                    // Scroll to page bottom
+                    $("#alert").hide();
+
+                    const predictedCondition = response.predicted_condition;
+                    const recommendedAssessments = response.recommended_assessments;
+
+                    let resultsMessage = `${messages[lang].symptomMessage}<strong>${predictedCondition}</strong>. ${messages[lang].recommendation}`;
+                    $("#resultsContent").html(resultsMessage); // Dynamically set the message
+                    
+                    $("#resultsLink").empty(); // Clear previous content
+                    recommendedAssessments.forEach(assessment => {
+                        $("#resultsLink").append(`<a href='/assessment/${assessment}' class='link'>${assessment}</a><br>`);
+                    });
+
+                    $("#results").show(); // Show the results div
+
+                    // scroll to page bottom
                     $('html, body').animate({
                         scrollTop: $(document).height()
                     }, 500);
                 }
             },
-            
-            
-            
-            error: function (error){
-                $("#alert").removeClass("alert-success")
-                $("#alert").addClass("alert-danger")
-                $("#alert").text("Something went wrong. Please try again later.")
-                $("#alert").show()
+            error: function (error) {
+                $("#alert").removeClass("alert-success").addClass("alert-danger").text("Something went wrong. Please try again later.").show();
             },
-            complete: function(){
-                $("#checkButton").html("Check In")
+            complete: function() {
+                $("#checkButton").html(lang === "sw" ? "Tathmini" : "Check In");
             }
         });  
-    })
+    });
+});
 
     // deal with theme switching
     themeState = localStorage.getItem("theme", "dark")
@@ -88,20 +85,21 @@ $(document).ready(function(){
     $("#language").change(()=>{
         switchLang($("#language").val());
     })
-})
+
 
 function darkThemeOn(){
-    localStorage.setItem("theme", "dark");
-    $("#themeIcon").removeClass("bi-brightness-high-fill").addClass("bi-moon-stars-fill");
-    $("body").removeClass("theme-light").addClass("theme-dark"); // Add 'theme-dark' class
+    localStorage.setItem("theme", "dark")
+    $("#themeIcon").removeClass("bi-moon-stars-fill")
+    $("#themeIcon").addClass("bi-brightness-high-fill")
+    $("body").removeClass("theme-light")
 }
 
 function darkThemeOff(){
-    localStorage.setItem("theme", "light");
-    $("#themeIcon").removeClass("bi-moon-stars-fill").addClass("bi-brightness-high-fill");
-    $("body").removeClass("theme-dark").addClass("theme-light"); // Remove 'theme-dark' class
+    localStorage.setItem("theme", "light")
+    $("#themeIcon").addClass("bi-moon-stars-fill")
+    $("#themeIcon").removeClass("bi-brightness-high-fill")
+    $("body").addClass("theme-light")
 }
-
 
 function switchLang(lang){
     $.get(`/lang/${lang}`, (data)=>{

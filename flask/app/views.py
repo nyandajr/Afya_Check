@@ -52,15 +52,15 @@ def check_in():
     title = "Early Check-In"
     if session["lang"] == "sw":
         title = "Tathmini ya Awali"
-    
+
     if request.method == "GET":
         items = []
         ci = CheckIn.query.all()
         for c in ci:
             items.append(c.to_dict())
         return render_template('checkin.html', title=title, items=items)
-    
-    # post method
+
+    # POST request handling
     data = request.form
     age = data.get("age")
     gender = data.get("gender")
@@ -74,18 +74,24 @@ def check_in():
         if session["lang"] == "sw":
             return jsonify({"error": "Lazima uwe na angalau miaka 13 kujisajili"})
         return jsonify({"error": "You must be at least 13 years old to register"})
-    
+
     if len(symptoms) < 1:
         if session["lang"] == "sw":
-            return jsonify({"error": "Chagua angalau dalili moja"})   
+            return jsonify({"error": "Chagua angalau dalili moja"})
         return jsonify({"error": "You must select at least one symptom"})
 
-    selected_language = "English"
+    selected_language = "English"  # Ensure this is set correctly based on language preference
 
- 
     predicted_condition = get_predicted_condition(age, gender, selected_language, symptoms)
     recommended_assessments = get_recommended_assessment(predicted_condition)
-    return jsonify(recommended_assessments)
+
+    response_data = {
+        "predicted_condition": predicted_condition,
+        "recommended_assessments": recommended_assessments
+    }
+
+    return jsonify(response_data)
+
 
 @app.route('/assessments')
 def assessments():
