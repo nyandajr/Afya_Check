@@ -80,9 +80,7 @@ def check_in():
             return jsonify({"error": "Chagua angalau dalili moja"})
         return jsonify({"error": "You must select at least one symptom"})
 
-    selected_language = "English"  # Ensure this is set correctly based on language preference
-
-    predicted_condition = get_predicted_condition(age, gender, selected_language, symptoms)
+    predicted_condition = get_predicted_condition(age, gender, symptoms)  # Updated line
     recommended_assessments = get_recommended_assessment(predicted_condition)
 
     response_data = {
@@ -187,33 +185,23 @@ def results():
         )
 
         initialize_openai()
-        # TODO: uncomment gpt api calls in production env, now commented in order
-        # to save api calls, emulate gpt response with 3 seconds sleep
-        # sleep(3)
-        # gpt_text = "placeholder text"
+        
         gpt3_response = get_gpt3_response(gpt3_prompt, language=language)
         gpt_text = gpt_response_to_html(gpt3_response)
 
-        # Finally: send gpt response
-        yield f'<div class="text my-2 col-lg-6 mx-auto"> \
-               {gpt_text} \
-            </div>'
-        yield '<div class="text text-green my-3 col-lg-6 mx-auto"> \
-                <p>\
-                <strong>Kumbusho: </strong> \
-                    Kumbuka kwamba mazungumzo yaliyotolewa na ni kwa madhumuni ya taarifa pekee. \
-                    Hayawakilishi utambuzi wala tathmini kamili ya kitabibu. Tafadhali shauriana na \
-                    mtaalamu wa afya kwa tathmini kamili \
-                </p> \
-            </div>\
-        ' if session["lang"] == "sw" else '<div class="text text-green my-3 col-lg-6 mx-auto"> \
-                <p>\
-                    <strong>Reminder: </strong> \
-                    These insights are based on the provided conversation and are for informational \
-                    purposes only. They are not a definitive diagnosis. Please consult with a healthcare \
-                    professional for a comprehensive assessment. \
-                </p> \
-            </div>'
+        yield f'''
+        <div class="gpt3-response-container mt-4 border-top col-lg-8 mx-auto">
+            <div class="gpt3-response-content">
+                {gpt_text}
+            </div>
+            <div class="reminder-content">
+                {'<p><strong>Zingatio: Kumbuka kwamba mazungumzo yaliyotolewa na ni kwa madhumuni ya taarifa pekee. Hayawakilishi utambuzi wala tathmini kamili ya kitabibu. Tafadhali shauriana na mtaalamu wa afya kwa tathmini kamili.</strong></p>' 
+                if session["lang"] == "sw" else 
+                '<p><strong>Reminder: insights are based on the provided conversation and are for informational purposes only. They are not a definitive diagnosis. Please consult with a healthcare professional for a comprehensive assessment.</strong></p>'}
+            </div>
+        </div>
+        '''
+
         
         # sponsors block to be returned after gpt response
         yield f'''
@@ -232,6 +220,10 @@ def results():
                     <div class="sponsor-item">
                         <img src="{url_for('static', filename='images/mandela-logo.png')}" alt="NM-AIST Logo">
                         <a href="https://nm-aist.ac.tz/" target="_blank">NM-AIST</a>
+                    </div>
+                     <div class="sponsor-item">
+                        <img src="{url_for('static', filename='images/Amana logo.png')}" alt="Amana Logo">
+                        <a href="http://amanarrh.go.tz" target="_blank">Amana </a>
                     </div>
                 </div>
             </div>'''
@@ -268,7 +260,7 @@ def register():
         qns = SecurityQuestion.query.all()
         return render_template('register.html', title=title, qns=qns)
 
-    # post method
+    # POST method
     username = request.form.get("username").strip()
     age = request.form.get("age")
     gender = request.form.get("gender")
@@ -278,47 +270,41 @@ def register():
     ans2 = request.form.get("qn-2").lower()
     ans3 = request.form.get("qn-3").lower()
 
+    # Server-side validation
+    errors = []
+
     if password != confirm_password:
-        if session["lang"] == "sw":
-            flash("Nenosiri halifanani")
-        else:
-            flash("Passwords do not match")
-        return redirect(url_for('register'))
+        errors.append("Passwords do not match" if session["lang"] != "sw" else "Nenosiri halifanani")
+
+    if len(password) < 6:
+        errors.append("Password must be at least 6 characters" if session["lang"] != "sw" else "Nenosiri liwe na angalau herufi 6")
+
+    if not any(char.isdigit() for char in password):
+        errors.append("Password must contain at least one digit" if session["lang"] != "sw" else "Nenosiri lazima liwe na nambari angalau moja")
+
+    if not any(char.isalpha() for char in password):
+        errors.append("Password must contain at least one letter" if session["lang"] != "sw" else "Nenosiri lazima liwe na herufi angalau moja")
+
+    if len(password) >= 64:
+        errors.append("Password length should be less than 64 characters" if session["lang"] != "sw" else "Urefu wa nenosiri usizidi herufi 64")
 
     user = User.query.filter_by(username=username).first()
     if user:
-        if session["lang"] == "sw":
-            flash(f"Jina la mtumiaji {user.username} tayari lipo")
-        else:
-            flash(f"The username {user.username} already exists")
-        return redirect(url_for('register'))
+        errors.append(f"The username {user.username} already exists" if session["lang"] != "sw" else f"Jina la mtumiaji {user.username} tayari lipo")
 
     if len(username) < 4:
-        if session["lang"] == "sw":
-            flash("Jina la mtumiaji liwe na angalau herufi 4")
-        else:
-            flash("Username must be at least 4 characters")
-        return redirect(url_for('register'))
-
-    if len(password) < 6:
-        if session["lang"] == "sw":
-            flash("Nenosiri liwe na herufi angalau 6")
-        else:
-            flash("Password must be at least 6 characters")
-        return redirect(url_for('register'))
+        errors.append("Username must be at least 4 characters" if session["lang"] != "sw" else "Jina la mtumiaji liwe na angalau herufi 4")
 
     if int(age) < 13:
-        if session["lang"] == "sw":
-            flash("Lazima uwe angalau na miaka 13 kujisajili")
-        else:
-            flash("You must be at least 13 years old to register")
-        return redirect(url_for('register'))
+        errors.append("You must be at least 13 years old to register" if session["lang"] != "sw" else "Lazima uwe angalau na miaka 13 kujisajili")
 
     if len(ans1) < 3 or len(ans2) < 3 or len(ans3) < 3:
-        if session["lang"] == "sw":
-            flash("Majibu yote yanatakiwa yawe na angalau herufi 3")
-        else:
-            flash("All answers must be at least 3 characters long")
+        errors.append("All answers must be at least 3 characters long" if session["lang"] != "sw" else "Majibu yote yanatakiwa yawe na angalau herufi 3")
+
+    # Check if there are any errors
+    if errors:
+        for error in errors:
+            flash(error)
         return redirect(url_for('register'))
 
     # Hash the password before saving it to the database
@@ -328,30 +314,22 @@ def register():
     db.session.add(user)
     db.session.commit()
 
-    usq = UserSecurityQuestion(
-        user_id=user.id,
-        security_question_id=1,
-        answer=ans1)
-    db.session.add(usq)
+    # Assuming you have the UserSecurityQuestion model imported and defined in your application
 
-    usq = UserSecurityQuestion(
-        user_id=user.id,
-        security_question_id=2,
-        answer=ans2)
-    db.session.add(usq)
+    # Create UserSecurityQuestion records for each security question and answer
+    usq1 = UserSecurityQuestion(user_id=user.id, security_question_id=1, answer=ans1)
+    usq2 = UserSecurityQuestion(user_id=user.id, security_question_id=2, answer=ans2)
+    usq3 = UserSecurityQuestion(user_id=user.id, security_question_id=3, answer=ans3)
 
-    usq = UserSecurityQuestion(
-        user_id=user.id,
-        security_question_id=3,
-        answer=ans3)
-    db.session.add(usq)
+    # Add the records to the database session and commit
+    db.session.add(usq1)
+    db.session.add(usq2)
+    db.session.add(usq3)
     db.session.commit()
 
-    if session["lang"] == "sw":
-        flash(f"Karibu, {username}. Tafadhali ingia kuendelea.")
-    else:
-        flash(f"Welcome, {username}. Please login to continue.")
+    flash(f"Welcome, {username}. Please login to continue." if session["lang"] != "sw" else f"Karibu, {username}. Tafadhali ingia kuendelea.")
     return redirect(url_for('login'))
+
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -514,6 +492,7 @@ def admin_scores():
             UserScores.date_taken.desc()
         ).paginate(page=page, per_page=per_page, error_out=False)
     scores = pagination.items
+    
     return render_template(
         "admin/scores.html", scores=scores, pagination=pagination,
         start_date=std, end_date=edt)

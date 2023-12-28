@@ -8,6 +8,10 @@ import plotly.graph_objs as go
 from plotly.graph_objects import Layout
 from app import app
 
+import plotly.graph_objects as go
+
+import plotly.graph_objects as go
+
 def create_gauge_chart(score, max_score=27, assessment_name="Assessment", selected_language="English"):
     # Determine tick interval based on max_score
     if max_score <= 10:
@@ -19,22 +23,22 @@ def create_gauge_chart(score, max_score=27, assessment_name="Assessment", select
     else:
         tick_interval = 10
 
-    layout = Layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font=dict(color='var(--white-color)'))
+    layout = go.Layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font=dict(color='#f27100'))
     fig = go.Figure(go.Indicator(
         mode="gauge+number",
         value=score,
         title={
-            'text': f"Alama zako {assessment_name}" if selected_language=="Swahili" else f"Your {assessment_name} Score", 
-            'font': {'size': 24, 'color': 'var(--white-color)'}},
+            'text': f"Alama zako {assessment_name}" if selected_language == "Swahili" else f"Your {assessment_name} Score",
+            'font': {'size': 24, 'color': '#f27100'}},
         domain={'x': [0, 1], 'y': [0, 1]},
         gauge={
             'axis': {'range': [0, max_score], 'tickvals': list(range(0, max_score + 1, tick_interval)), 'ticktext': [str(i) for i in range(0, max_score + 1, tick_interval)]},
             'steps': [
-                {'range': [0, 0.3*max_score], 'color': 'green'},
-                {'range': [0.3*max_score, 0.7*max_score], 'color': 'yellow'},
-                {'range': [0.7*max_score, max_score], 'color': 'red'}
+                {'range': [0, 0.3 * max_score], 'color': 'green'},
+                {'range': [0.3 * max_score, 0.7 * max_score], 'color': 'yellow'},
+                {'range': [0.7 * max_score, max_score], 'color': 'red'}
             ],
-            'bar': {'color': 'black'}
+            'bar': {'color': '#f27100'}
         }
     ),
     layout=layout
@@ -42,29 +46,34 @@ def create_gauge_chart(score, max_score=27, assessment_name="Assessment", select
 
     # Enhancements
     if score <= 0.3 * max_score:
-        level = "Low"
+        level_text = "Low Level Score"
+        emoji = "👏👏👏"  # Sad emoji for low score
         if selected_language == "Swahili":
-            level = "Chini"
+            level_text = "Alama ya  Chini"
     elif score <= 0.7 * max_score:
-        level = "Medium"
+        level_text = "Medium Level Score"
+        emoji = "😓😓😓"  # Neutral emoji for average score
         if selected_language == "Swahili":
-            level = "Kati"
+            level_text = "Alama ya  Kati"
     else:
-        level = "High"
+        level_text = "High Level Score"
+        emoji = "😢😢😢😢😢😢😢"  # Happy emoji for high score
         if selected_language == "Swahili":
-            level = "Juu"
-    
-    fig.add_annotation(dict(font=dict(color="var(--white-color)", size=30),
-        x=0.5,
-        y=0.34,
-        showarrow=False,
-        text=f"Kiwango cha {level}" if selected_language=="Swahili" else f"{level} Level",
-        textangle=0,
-        xanchor="center",
-        yanchor="middle"
-    ))
-    
-    return fig.to_html(full_html=False)
+            level_text = "Alama ya Juu"
+
+    fig.add_annotation(dict(font=dict(color="#f27100", size=15),
+                             x=0.5,
+                             y=0.34,
+                             showarrow=False,
+                             text=f"{score}/{max_score} - {level_text} {emoji}",  # Emoji included
+                             textangle=0,
+                             xanchor="center",
+                             yanchor="middle"
+                             ))
+
+    return fig.to_html(full_html=False)  # Example using ID
+
+
 
 def get_recommended_assessment(predicted_condition):
     # Mapping of predicted conditions to recommended assessments with lowercase keys
@@ -79,7 +88,7 @@ def get_recommended_assessment(predicted_condition):
     
     return condition_to_assessment_map.get(predicted_condition, [])
 
-def get_predicted_condition(age, gender, selected_language, selected_symptoms):
+def get_predicted_condition(age, gender, selected_symptoms):
     """
     Use the provided information to predict the mental health condition.
     """

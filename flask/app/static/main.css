@@ -100,13 +100,14 @@ body {
 }
 
 .subtitle{
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     font-weight: bold;
     margin: 6px 0px;
+    
 }
 
 .text{
-    font-size: 1.1rem;
+    font-size: 1.2rem;
 }
 
 .subtext{
@@ -629,10 +630,18 @@ input[type="checkbox"]:checked{
 }
 
 /* main.css */
-.custom-form-control:invalid, .custom-form-select:invalid {
-    border: 2px solid red; /* Adjust as needed */
-    /* You can add other styles like background-color or box-shadow if required */
+.required-field {
+    color: red; /* Change the color to match your design */
+    margin-left: 5px; /* Adjust the spacing as needed */
 }
+/* main.css */
+.gender-select {
+    border: 2px solid #3498db; /* Customize the border color as needed */
+    border-radius: 5px; /* Add rounded corners if desired */
+    padding: 5px; /* Adjust padding for spacing */
+    /* You can add other styles as needed */
+}
+
 .custom-btn {
     background-color: var(--primary-color);
     color: var(--white-color);
@@ -857,6 +866,7 @@ input[type="checkbox"]:checked{
     padding: 20px;
     border: 1px solid #4d1212;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    
   }
   
   /* Style for the table */
@@ -890,12 +900,12 @@ input[type="checkbox"]:checked{
   /* Apply the above changes to header */
   .theme-dark .table th {
     background-color: #222; /* Dark theme header background */
-    color: #eee;
+    color: #ffffff;
   }
   
   /* Zebra striping for even rows */
   .table tbody tr:nth-child(even) {
-    background-color: #737883; /* Light theme even rows */
+    background-color: #117f83; /* Light theme even rows */
   }
   
   /* Style table rows on hover */
@@ -956,19 +966,65 @@ input[type="checkbox"]:checked{
         font-size: 16px;
     }
 }
-
-
-/* Define the keyframes for the spin animation */
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+.spinner {
+    animation: spin 5s linear infinite;
 }
 
-/* Apply the animation to elements with the animate-spin class */
-.animate-spin {
-    animation: spin 1s linear infinite;
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+
+.custom-container {
+    width: 90%; /* or 100vw */
+    max-width: 1200px; /* a larger max-width than before */
+    margin: 0 auto; /* this will center the container */
+    padding: 1em; /* adjust padding as needed */
+}
+
+/* GPT responses stylings */
+/* Light Theme Styles */
+.gpt3-response-container {
+    border: 2px solid #ccc; /* Solid border for the box */
+    background-color: #f9f9f9; /* Light background for the content */
+    padding: 20px; /* Padding inside the box */
+    margin-top: 20px; /* Margin above the box */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    color: #333; /* Dark text for readability */
+}
+
+.gpt3-response-content,
+.reminder-content {
+    margin-bottom: 15px; /* Space at the bottom of each section */
+}
+
+/* Styles for special 'text-green' class in light mode */
+.text-green {
+    color: #4caf50; /* Green color for the text */
+}
+
+/* Dark Theme Styles */
+.dark-theme .gpt3-response-container {
+    border-color: #555; /* Lighter border color for visibility in dark mode */
+    background-color: #2c2f33; /* Dark background for the content in dark mode */
+    color: #f8f8f8; /* Brighter text color for readability in dark mode */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* More pronounced shadow for depth in dark mode */
+}
+
+.dark-theme .gpt3-response-content,
+.dark-theme .reminder-content {
+    color: #ccc; /* Lighter text color for readability in dark mode */
+}
+
+/* Ensure strong text stands out in dark mode */
+.dark-theme .gpt3-response-container strong {
+    color: #00bcd4; /* Bright color for strong text in dark mode */
+}
+
+/* Adjusting the color for text-green class in dark mode for better visibility */
+.dark-theme .text-green {
+    color: #7ed957; /* Lighter shade of green to stand out on dark background */
 }

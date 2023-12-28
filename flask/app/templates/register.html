@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
 
-
-
 {% block content %}
 <div class="subtitle text-center">
     {% if session['lang'] == "sw" %}
@@ -10,8 +8,8 @@
         Registration
     {% endif %}
 </div>
-<div class="mb-3">
-    <small style="font-weight: bold; color: BLUE;">
+<div class="mb-3" style="background-color: #f0f0f0; padding: 10px; border-radius: 5px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);">
+    <small style="font-weight: bold; color: #333;">
         {% if session['lang'] == "sw" %}
             <strong>Usiogope:</strong>
             Hatukusanyi taarifa binafsi. 
@@ -32,137 +30,122 @@
         </div>
     {% endfor %}
     <div class="login-box">
-    <form method="post" action="{{url_for('register')}}">
-        <div class="mb-3">
-            <label for="username" class="form-label subtext">
-                {% if session['lang'] == "sw" %}
-                    Jina la mtumiaji
-                {% else %}
-                    Username
-                {% endif %}
-            </label>
-            <input type="text" name="username" id="username" class="custom-form-control" placeholder="{% if session['lang'] == 'sw' %}Jina la mtumiaji{% else %}Username{% endif %}" required>
-
-
-        </div>
-        <div class="mb-3">
-            <label for="age" class="form-label subtext">
-                {% if session['lang'] == "sw" %}
-                    Ingiza umri wako:
-                {% else %}
-                    Enter your age:
-                {% endif %}
-            </label>
-            <input type="text" class="custom-form-control" name="age" id="age" inputmode="numeric" placeholder="" required>
-        </div>
-        <div class="mb-3">
-            <label for="gender" class="form-label subtext">
-                {% if session['lang'] == "sw" %}
-                    Chagua jinsia yako:
-                {% else %}
-                    Select your gender:
-                {% endif %}
-            </label>
-            <select name="gender" id="gender" class="custom-form-select" required>
-                <option value="" selected>
-                    {% if session['lang'] == "sw" %}
-                        Mwanamke
-                    {% else %}
-                        Female
-                    {% endif %}
-                </option>
-                <option value="Male">
-                    {% if session['lang'] == "sw" %}
-                        Mwanaume
-                    {% else %}
-                        Male
-                    {% endif %}
-                </option>
-            </select>
-        </div>
-    <!-- Password field with toggle icon -->
-<div class="mb-3 password-wrapper">
-    <label for="password" class="form-label subtext">
-        {% if session['lang'] == "sw" %}Nenosiri{% else %}Password{% endif %}
-    </label>
-    <input type="password" name="password" id="password" class="custom-form-control" placeholder="{% if session['lang'] == 'sw' %}nenosiri{% else %}Password{% endif %}" minlength="6" maxlength="128" required>
-    <i class="fas fa-eye password-icon" onclick="togglePasswordVisibility('password', this)"></i>
-</div>
-
-<!-- Confirm Password field with toggle icon -->
-<div class="mb-3 password-wrapper">
-    <label for="confirm_password" class="form-label subtext">
-        {% if session['lang'] == "sw" %}Thibitisha Nenosiri{% else %}Confirm Password{% endif %}
-    </label>
-    <input type="password" name="confirm_password" id="confirm_password" class="custom-form-control" placeholder="{% if session['lang'] == 'sw' %}thibitisha nenosiri{% else %}Confirm Password{% endif %}" minlength="6" maxlength="128" required>
-    <i class="fas fa-eye password-icon" onclick="togglePasswordVisibility('confirm_password', this)"></i>
-</div>
-
-
-    <div class="mb-3">
-
-          
-        </label>
-        
-        
-    </div>
-        <div class="mb-3">
-            {% if session["lang"] == "sw" %}
-                Jibu maswali yafuatayo. Maswali haya yatatumika kurejesha nenosiri lako
-                iwapo utalipoteza.
-            {% else %}
-                Answer the following questions. These questions will be used to recover your password
-                incase you loose it.
-            {% endif %}
-        </div>
-        {% for qn in qns %}
+        <form method="post" action="{{url_for('register')}}">
             <div class="mb-3">
-                <label for="qn{{qn.id}}" class="form-label subtext">
-                    {% if session["lang"] == "sw" %}
-                        {{qn.text_sw}}
+                <label for="username" class="form-label subtext">
+                    {% if session['lang'] == "sw" %}
+                        Jina la mtumiaji<span class="required-field">*</span>
                     {% else %}
-                        {{qn.text}}
+                        Username<span class="required-field">*</span>
                     {% endif %}
                 </label>
-                <input type="text" name="qn-{{qn.id}}" id="qn{{qn.id}}" class="custom-form-control" placeholder="answer" required>
+                <input type="text" name="username" id="username" class="custom-form-control" placeholder="{% if session['lang'] == 'sw' %}Jina la mtumiaji{% else %}Username{% endif %}" required>
             </div>
-        {% endfor %}
-        <div class="mb-3 text-center">
-            <input 
-                type="submit" 
-                value="{% if session['lang'] == 'sw' %}Jisajili{% else %}Register{% endif %}" 
-                class="custom-btn px-4 text">
-        </div>
-    </form>
+            <div class="mb-3">
+                <label for="age" class="form-label subtext">
+                    {% if session['lang'] == "sw" %}
+                        Ingiza umri wako<span class="required-field">*</span>
+                    {% else %}
+                        Enter your age<span class="required-field">*</span>
+                    {% endif %}
+                </label>
+                <input type="text" class="custom-form-control" name="age" id="age" inputmode="numeric" placeholder="" required>
+            </div>
+            <div class="mb-3">
+                <label for="gender" class="form-label subtext">
+                    {% if session['lang'] == "sw" %}
+                        Chagua jinsia yako<span class="required-field">*</span>
+                    {% else %}
+                        Select your gender<span class="required-field">*</span>
+                    {% endif %}
+                </label>
+                <select name="gender" id="gender" class="custom-form-select gender-select" required>
+                    <option value="" selected>
+                        {% if session['lang'] == "sw" %}
+                            Mwanamke
+                        {% else %}
+                            Female
+                        {% endif %}
+                    </option>
+                    <option value="Male">
+                        {% if session['lang'] == "sw" %}
+                            Mwanaume
+                        {% else %}
+                            Male
+                        {% endif %}
+                    </option>
+                </select>
+            </div>
+            
 
+            <!-- Password field with toggle icon -->
+            <div class="mb-3">
+                <label for="password" class="form-label subtext">
+                    {% if session['lang'] == "sw" %}
+                        Nenosiri<span class="required-field">*</span>
+                    {% else %}
+                        Password<span class="required-field">*</span>
+                    {% endif %}
+                </label>
+                <div class="password-wrapper">
+                    <input type="password" name="password" id="password" class="custom-form-control" placeholder="{% if session['lang'] == 'sw' %}nenosiri{% else %}Password{% endif %}" minlength="6" maxlength="128" required>
+                    <i class="fas fa-eye password-icon" onclick="togglePasswordVisibility('password', this)"></i>
+                </div>
+            </div>
+
+            <!-- Confirm Password field with toggle icon -->
+            <div class="mb-3">
+                <label for="confirm_password" class="form-label subtext">
+                    {% if session['lang'] == "sw" %}
+                        Thibitisha Nenosiri<span class="required-field">*</span>
+                    {% else %}
+                        Confirm Password<span class="required-field">*</span>
+                    {% endif %}
+                </label>
+                <div class="password-wrapper">
+                    <input type="password" name="confirm_password" id="confirm_password" class="custom-form-control" placeholder="{% if session['lang'] == 'sw' %}thibitisha nenosiri{% else %}Confirm Password{% endif %}" minlength="6" maxlength="128" required>
+                    <i class="fas fa-eye password-icon" onclick="togglePasswordVisibility('confirm_password', this)"></i>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <!-- Additional form fields can be added here -->
+            </div>
+
+            <div class="mb-3">
+                {% if session["lang"] == "sw" %}
+                    Jibu maswali yafuatayo. Maswali haya yatatumika kurejesha nenosiri lako
+                    iwapo utalipoteza.
+                {% else %}
+                    Answer the following questions. These questions will be used to recover your password
+                    in case you lose it.
+                {% endif %}
+            </div>
+            {% for qn in qns %}
+                <div class="mb-3">
+                    <label for="qn{{qn.id}}" class="form-label subtext">
+                        {% if session["lang"] == "sw" %}
+                            {{qn.text_sw}}
+                        {% else %}
+                            {{qn.text}}
+                        {% endif %}
+                    </label>
+                    <input type="text" name="qn-{{qn.id}}" id="qn{{qn.id}}" class="custom-form-control" placeholder="answer" required>
+                </div>
+            {% endfor %}
+            <div class="mb-3 text-center">
+                <input 
+                    type="submit" 
+                    value="{% if session['lang'] == 'sw' %}Jisajili{% else %}Register{% endif %}" 
+                    class="custom-btn px-4 text">
+            </div>
+        </form>
+    </div>
 </div>
-</div>
-
-
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var form = document.querySelector('form');
-        form.onsubmit = function () {
-            // Password validation
-            var password = document.getElementById('password').value;
-            var confirm_password = document.getElementById('confirm_password').value;
-            var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
-
-            if (!passwordRegex.test(password)) {
-                alert("{% if session['lang'] == 'sw' %}Nenosiri lazima liwe na urefu wa angalau herufi 6, na liwe na mchanganyiko wa herufi kubwa, herufi ndogo, na nambari.{% else %}Password must be at least 6 characters long, and include a mix of upper and lower case letters, and numbers.{% endif %}");
-                return false; // Prevent form submission
-            }
-
-            if (password !== confirm_password) {
-                alert("{% if session['lang'] == 'sw' %}Nenosiri na uthibitisho wa nenosiri lazima ziwe sawa.{% else %}Password and confirmation password must match.{% endif %}");
-                return false; // Prevent form submission
-            }
-
-            // If we get here, everything is fine
-            return true; // Allow form submission
-        };
-    });
+    
+        
     function togglePasswordVisibility(fieldId, icon) {
         var field = document.getElementById(fieldId);
         if (field.type === "password") {
