@@ -1021,10 +1021,11 @@ input[type="checkbox"]:checked{
 
 /* Ensure strong text stands out in dark mode */
 .dark-theme .gpt3-response-container strong {
-    color: #00bcd4; /* Bright color for strong text in dark mode */
+    color: #007bff; /* Bright color for strong text in dark mode */
 }
 
 /* Adjusting the color for text-green class in dark mode for better visibility */
 .dark-theme .text-green {
     color: #7ed957; /* Lighter shade of green to stand out on dark background */
 }
+

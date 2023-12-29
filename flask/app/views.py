@@ -244,6 +244,9 @@ def results():
 
     return Response(generate_content(), content_type='text/html')
 
+
+
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
@@ -274,7 +277,7 @@ def register():
     errors = []
 
     if password != confirm_password:
-        errors.append("Passwords do not match" if session["lang"] != "sw" else "Nenosiri halifanani")
+        errors.append("Passwords do not match" if session["lang"] != "sw" else "Nenosiri hazilingani")
 
     if len(password) < 6:
         errors.append("Password must be at least 6 characters" if session["lang"] != "sw" else "Nenosiri liwe na angalau herufi 6")

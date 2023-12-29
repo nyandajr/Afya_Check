@@ -17,20 +17,26 @@
         {% else %}
             <strong>Disclaimer:</strong>
             We do not collect any personal information. Use a non-identifying but 
-            unique username and a strong password
+            unique username and a strong password.
         {% endif %}
     </small>
 </div>
 
-
 <div>
-    {% for msg in get_flashed_messages() %}
-        <div class="text-danger my-2 text-center">
-            {{msg}}        
-        </div>
-    {% endfor %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    {% endwith %}
+    
     <div class="login-box">
-        <form method="post" action="{{url_for('register')}}">
+        <form method="post" action="{{ url_for('register') }}">
             <div class="mb-3">
                 <label for="username" class="form-label subtext">
                     {% if session['lang'] == "sw" %}
@@ -49,7 +55,14 @@
                         Enter your age<span class="required-field">*</span>
                     {% endif %}
                 </label>
-                <input type="text" class="custom-form-control" name="age" id="age" inputmode="numeric" placeholder="" required>
+                <input type="number" class="custom-form-control" name="age" id="age" inputmode="numeric" placeholder="" required>
+                <div id="age-error" class="text-danger" style="display: none;">
+                    {% if session['lang'] == "sw" %}
+                        Umri haupaswi kuwa chini ya 13 au zaidi ya 99.
+                    {% else %}
+                        Age should not be less than 13 or more than 99.
+                    {% endif %}
+                </div>
             </div>
             <div class="mb-3">
                 <label for="gender" class="form-label subtext">
@@ -60,7 +73,14 @@
                     {% endif %}
                 </label>
                 <select name="gender" id="gender" class="custom-form-select gender-select" required>
-                    <option value="" selected>
+                    <option value="">
+                        {% if session['lang'] == "sw" %}
+                            -- Chagua jinsia yako --
+                        {% else %}
+                            -- Select your gender --
+                        {% endif %}
+                    </option>
+                    <option value="Female">
                         {% if session['lang'] == "sw" %}
                             Mwanamke
                         {% else %}
@@ -77,40 +97,69 @@
                 </select>
             </div>
             
+          <!-- Password field with toggle icon -->
+<div class="mb-3">
+    <label for="password" class="form-label subtext">
+        {% if session['lang'] == "sw" %}Nenosiri{% else %}Password{% endif %}
+    </label>
+    <div class="password-wrapper">
+        <input type="password" name="password" id="password" class="custom-form-control" placeholder="{% if session['lang'] == 'sw' %}nenosiri{% else %}Password{% endif %}" minlength="6" maxlength="128" required>
+        <i class="fas fa-eye toggle-password" onclick="togglePasswordVisibility('password')"></i>
+    </div>
+    <div id="password-length-error" class="text-danger" style="display: none;">
+        {% if session['lang'] == "sw" %}
+            Nenosiri linapaswa kuwa angalau herufi 6.
+        {% else %}
+            Password should be at least 6 characters.
+        {% endif %}
+    </div>
+    <div id="password-number-error" class="text-danger" style="display: none;">
+        {% if session['lang'] == "sw" %}
+            Nenosiri linapaswa kuwa na angalau nambari moja.
+        {% else %}
+            Password should contain at least one number.
+        {% endif %}
+    </div>
+    <div id="password-uppercase-error" class="text-danger" style="display: none;">
+        {% if session['lang'] == "sw" %}
+            Nenosiri linapaswa kuwa na angalau herufi kubwa moja.
+        {% else %}
+            Password should contain at least one uppercase letter.
+        {% endif %}
+    </div>
+    <div id="password-lowercase-error" class="text-danger" style="display: none;">
+        {% if session['lang'] == "sw" %}
+            Nenosiri linapaswa kuwa na angalau herufi ndogo moja.
+        {% else %}
+            Password should contain at least one lowercase letter.
+        {% endif %}
+    </div>
+</div>
 
-            <!-- Password field with toggle icon -->
-            <div class="mb-3">
-                <label for="password" class="form-label subtext">
-                    {% if session['lang'] == "sw" %}
-                        Nenosiri<span class="required-field">*</span>
-                    {% else %}
-                        Password<span class="required-field">*</span>
-                    {% endif %}
-                </label>
-                <div class="password-wrapper">
-                    <input type="password" name="password" id="password" class="custom-form-control" placeholder="{% if session['lang'] == 'sw' %}nenosiri{% else %}Password{% endif %}" minlength="6" maxlength="128" required>
-                    <i class="fas fa-eye password-icon" onclick="togglePasswordVisibility('password', this)"></i>
-                </div>
-            </div>
+<!-- Confirm Password field with toggle icon -->
+<div class="mb-3">
+    <label for="confirm_password" class="form-label subtext">
+        {% if session['lang'] == "sw" %}Thibitisha Nenosiri{% else %}Confirm Password{% endif %}
+    </label>
+    <div class="password-wrapper">
+        <input type="password" name="confirm_password" id="confirm_password" class="custom-form-control" placeholder="{% if session['lang'] == 'sw' %}thibitisha nenosiri{% else %}Confirm Password{% endif %}" minlength="6" maxlength="128" required>
+        <i class="fas fa-eye toggle-password" onclick="togglePasswordVisibility('confirm_password')"></i>
+    </div>
+    <div id="password-confirm-error" class="text-danger" style="display: none;">
+        {% if session['lang'] == "sw" %}
+            Nenosiri hazilingani.
+        {% else %}
+            Passwords do not match.
+        {% endif %}
+    </div>
+</div>
 
-            <!-- Confirm Password field with toggle icon -->
-            <div class="mb-3">
-                <label for="confirm_password" class="form-label subtext">
-                    {% if session['lang'] == "sw" %}
-                        Thibitisha Nenosiri<span class="required-field">*</span>
-                    {% else %}
-                        Confirm Password<span class="required-field">*</span>
-                    {% endif %}
-                </label>
-                <div class="password-wrapper">
-                    <input type="password" name="confirm_password" id="confirm_password" class="custom-form-control" placeholder="{% if session['lang'] == 'sw' %}thibitisha nenosiri{% else %}Confirm Password{% endif %}" minlength="6" maxlength="128" required>
-                    <i class="fas fa-eye password-icon" onclick="togglePasswordVisibility('confirm_password', this)"></i>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <!-- Additional form fields can be added here -->
-            </div>
+<style>
+    .toggle-password {
+        color: #007bff; /* Set the color to #007bff (blue) */
+        cursor: pointer;
+    }
+</style>
 
             <div class="mb-3">
                 {% if session["lang"] == "sw" %}
@@ -142,26 +191,4 @@
         </form>
     </div>
 </div>
-
-<script>
-    
-        
-    function togglePasswordVisibility(fieldId, icon) {
-        var field = document.getElementById(fieldId);
-        if (field.type === "password") {
-            field.type = "text";
-            icon.classList.remove('fa-eye');
-            icon.classList.add('fa-eye-slash');
-        } else {
-            field.type = "password";
-            icon.classList.remove('fa-eye-slash');
-            icon.classList.add('fa-eye');
-        }
-    }
-</script>
-
-
-
-{% endblock content %}
-
-{% set curr_page="register" %}
+{% endblock %}

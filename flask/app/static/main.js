@@ -183,3 +183,109 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+// Function to validate age as the user types
+document.getElementById("age").addEventListener("input", function () {
+  var ageInput = this.value;
+  var ageError = document.getElementById("age-error");
+  
+  if (ageInput < 13 || ageInput > 99) {
+      ageError.style.display = "block";
+      this.setCustomValidity("Invalid age");
+  } else {
+      ageError.style.display = "none";
+      this.setCustomValidity("");
+  }
+});
+
+// Toggle password visibility
+function togglePasswordVisibility(inputId) {
+  var passwordField = document.getElementById(inputId);
+  var passwordType = passwordField.getAttribute('type');
+  if (passwordType === 'password') {
+    passwordField.setAttribute('type', 'text');
+  } else {
+    passwordField.setAttribute('type', 'password');
+  }
+}
+
+var passwordField = document.getElementById("password");
+var confirmPasswordField = document.getElementById("confirm_password");
+var passwordLengthError = document.getElementById("password-length-error");
+var passwordNumberError = document.getElementById("password-number-error");
+var passwordUppercaseError = document.getElementById("password-uppercase-error");
+var passwordLowercaseError = document.getElementById("password-lowercase-error");
+var passwordConfirmError = document.getElementById("password-confirm-error");
+
+passwordField.addEventListener("input", function () {
+  var password = passwordField.value;
+
+  // Check password length
+  if (password.length < 6) {
+      passwordLengthError.style.display = "block";
+  } else {
+      passwordLengthError.style.display = "none";
+  }
+
+  // Check if password contains at least one number
+  if (!/\d/.test(password)) {
+      passwordNumberError.style.display = "block";
+  } else {
+      passwordNumberError.style.display = "none";
+  }
+
+  // Check if password contains at least one uppercase letter
+  if (!/[A-Z]/.test(password)) {
+      passwordUppercaseError.style.display = "block";
+  } else {
+      passwordUppercaseError.style.display = "none";
+  }
+
+  // Check if password contains at least one lowercase letter
+  if (!/[a-z]/.test(password)) {
+      passwordLowercaseError.style.display = "block";
+  } else {
+      passwordLowercaseError.style.display = "none";
+  }
+
+  // Check if passwords match
+  if (password !== confirmPasswordField.value) {
+      passwordConfirmError.style.display = "block";
+  } else {
+      passwordConfirmError.style.display = "none";
+  }
+});
+
+confirmPasswordField.addEventListener("input", function () {
+  // Check if passwords match
+  if (passwordField.value !== confirmPasswordField.value) {
+      passwordConfirmError.style.display = "block";
+  } else {
+      passwordConfirmError.style.display = "none";
+  }
+});
+
+// Logic for handling checkbox changes
+document.addEventListener('DOMContentLoaded', function() {
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  const categories = new Set();
+
+  checkboxes.forEach(function(checkbox) {
+      checkbox.addEventListener('change', function() {
+          const category = this.getAttribute('data-category');
+
+          if (this.checked) {
+              categories.add(category);
+          } else {
+              categories.delete(category);
+          }
+
+          checkboxes.forEach(function(otherCheckbox) {
+              if (!categories.has(otherCheckbox.getAttribute('data-category'))) {
+                  otherCheckbox.disabled = categories.size > 0;
+              } else {
+                  otherCheckbox.disabled = false;
+              }
+          });
+      });
+  });
+});
