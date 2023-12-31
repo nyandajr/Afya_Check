@@ -46,7 +46,7 @@ def create_gauge_chart(score, max_score=27, assessment_name="Assessment", select
 
     # Enhancements
     if score <= 0.3 * max_score:
-        level_text = "Low Level Score"
+        level_text = "Low Level "
         emoji = "👏👏👏"  # Sad emoji for low score
         if selected_language == "Swahili":
             level_text = "Alama ya  Chini"
@@ -134,7 +134,6 @@ def age_group_from_age(age:int):
 
 def initialize_openai():
     api_key = os.environ.get("API_KEY")
-    print("API Key from os.environ:", api_key)  # Debugging line
     openai.api_key = api_key
 
 
@@ -166,6 +165,8 @@ def get_gpt3_response(prompt, language="English", temperature=0.3):
             return "Samahani, tatizo limejitokeza. Tafadhali jaribu tena baadae."
         return "Sorry, there was an issue fetching a response. Please try again later."
     
+
+
 
     
 def gpt_response_to_html(gpt_response):
@@ -260,7 +261,7 @@ Please provide a response that is both informative and supportive, guiding me to
 
             """
     elif assessment["title"] == "ASRS-v1.1 Assessment (Adult ADHD Self-Report Scale)":
-        return f"""
+        return f""" 
             "After completing the ASRS-v1.1 (Adult ADHD Self-Report Scale) assessment, my score is {score} out of {assessment['max_score']}. I'm seeking:
 1. An interpretation of my ASRS-v1.1 score to understand if it is high, moderate, or low, and the implications for my ADHD symptoms.
 2. An explanation of ADHD, its symptoms in adults, and the potential consequences of leaving it unmanaged.
@@ -270,7 +271,7 @@ Your response should be prompt and provide me with clear, empathetic guidance ba
 
             """
     elif assessment["title"] == "Psychosis Screening Questionnaire (PSQ) Assessment":
-        return f'''
+        return f'''gpt3_prompt = f"""
         As a knowledgeable mental health assistant:
         I have taken  a schizophrenia assessment and achieved a score of {score} out of a maximum possible score of {assessment['max_score']}. 
 
@@ -281,25 +282,22 @@ Your response should be prompt and provide me with clear, empathetic guidance ba
         Lastly, acknowledge my  initiative in taking the assessment and emphasize the importance of mental well-being.
         '''
     elif assessment["title"] == "Depression Assessment (PHQ-9)":
-        return f'''"Having completed the Depression(sonona) PHQ-9 assessment, my score is {score} out of a potential 27. Could you:
+      return f'''gpt3_prompt = f"""
+    "Having completed the Depression(sonona) PHQ-9 assessment, my score is {score} out of a potential 27. Could you:
                         1. Interpret my PHQ-9 score with empathy, indicating if it's considered high, moderate, or low, and explain the nature of depression along with its potential consequences if neglected.
                         2. Provide natural coping strategies and culturally sensitive advice for supporting someone with depression in Tanzania.
                         3. Recognize my effort in taking this step towards mental wellness, and if necessary, guide me on seeking professional help, especially if my score is on the higher end."
 
         '''
-    elif assessment["title"] == "IQCODE Assessment":
-        return f'''gpt3_prompt = f"""
+    else:
+       return f'''gpt3_prompt = f"""
         As a knowledgeable mental health assistant:
-        I have completed the IQCODE(Cognitive Decline)  assessment for my relative, scoring {score} out of {assessment['max_score']}, indicating: '{result_text}'.
-        1. Provide an empathetic response based on their score.
-        2. Explain the concept of cognitive decline.
-        3. List  common signs especially early signs of cognitive decline and their impact on daily life.
-        4. Offer tips for maintaining cognitive health.
-        5. Commend the user for taking the assessment.
-        6. Suggest 10 strategies for supporting individuals with cognitive decline.
-        7. Highlight dos and don'ts when interacting with someone experiencing cognitive decline and emphasize on going to the hospital
-        """
-        gpt3_response = get_gpt3_response(gpt3_prompt, selected_language)
+        I have completed the IQCODE(Cognitive Decline)  Dementia assessment for my relative, scoring {score} out of 48'.
+        1. Interpret my score by telling me if it is high or low
+        2. Explain the concept of dementia, what is it and how can it be avoided and natural ways to help my relative.
+        3. Encourage the person to go to the hospital if the score is high
+        
+              
         '''
 
 def create_result_text(assessment, score, selected_language="English"):
@@ -486,13 +484,13 @@ def create_result_text(assessment, score, selected_language="English"):
             return interpretations[selected_language][4]
 
 
-    elif assessment["title"] == "IQCODE Assessment":
+    else:  # This now handles the Dementia Assessment by default
         if selected_language == "English":
             if score <= 15:
                 return "Your score suggests minimal or no cognitive decline."
             elif score <= 30:
                 return "Your score suggests mild cognitive decline."
-            elif score <= 45:
+            elif score <= 48:
                 return "Your score suggests moderate cognitive decline."
             else:
                 return "Your score suggests severe cognitive decline."
@@ -501,7 +499,7 @@ def create_result_text(assessment, score, selected_language="English"):
                 return "Kiwango cha chini au kisicho na kuzorota kwa akili."
             elif score <= 30:
                 return "Kuzorota kwa wastani kwa akili."
-            elif score <= 45:
+            elif score <= 48:
                 return "Kuzorota kwa akili kwa kiasi kikubwa."
             else:
                 return "Kuzorota kwa akili kwa kiasi kikubwa sana."

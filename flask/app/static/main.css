@@ -522,7 +522,7 @@ input[type="checkbox"]:checked{
 }
 
 .disclaimer-box::before {
-    content: '⚠️'; /* Example: Adding a warning icon */
+    content: '✔️'; /* Example: Adding a warning icon */
     padding-right: 8px; /* Space between icon and text */
     font-size: 1.2em; /* Slightly larger icon size */
 }
