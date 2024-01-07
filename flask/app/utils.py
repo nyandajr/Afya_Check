@@ -133,17 +133,13 @@ def age_group_from_age(age:int):
         return "55+"
 
 def initialize_openai():
-    api_key = os.environ.get("API_KEY")
+    api_key = os.environ.get("OPENAI_API_KEY")
     openai.api_key = api_key
-
-
-
 
 def get_gpt3_response(prompt, language="English", temperature=0.3):
     if language == "Swahili":
         prompt += " Please respond in Swahili."
 
-   
     try:
         # Use the chat model endpoint for GPT-3.5 Turbo
         response = openai.ChatCompletion.create(
@@ -151,11 +147,11 @@ def get_gpt3_response(prompt, language="English", temperature=0.3):
             temperature=temperature,
             messages=[
                 {"role": "system", "content":'''You are a mental health assistant with knowledge about various mental health conditions. Provide responses that are sensitive, empathetic, and non-diagnostic
-                 in your responses don't forget to encourage users to seek help from mental facilities and hospitals in tanzania such as , Mirembe hospital, Amana Hospital, 
+                 in your responses don't forget to encourage users to seek help from mental facilities and hospitals in Tanzania such as, Mirembe hospital, Amana Hospital, 
                  Temeke, Muhimbili and you must mention other therapy facilities in Tanzania. 
                  
-                 Encourage me that the condition am facing can be cured so i should not feel stigmatized
-                 And for a particula condition mention some practical examples of the symptoms of that condition'''},
+                 Encourage me that the condition am facing can be cured so I should not feel stigmatized
+                 And for a particular condition mention some practical examples of the symptoms of that condition'''},
                 {"role": "user", "content": prompt}
             ]
         )
@@ -164,9 +160,6 @@ def get_gpt3_response(prompt, language="English", temperature=0.3):
         if language == "Swahili":
             return "Samahani, tatizo limejitokeza. Tafadhali jaribu tena baadae."
         return "Sorry, there was an issue fetching a response. Please try again later."
-    
-
-
 
     
 def gpt_response_to_html(gpt_response):
