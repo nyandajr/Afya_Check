@@ -112,15 +112,31 @@
 </div>
 
 <script>
-    document.getElementById("age").addEventListener("input", function() {
-        var age = parseInt(this.value);
+    document.getElementById("checkInForm").addEventListener("submit", function (event) {
+        var age = document.getElementById("age").value;
+        var gender = document.getElementById("gender").value;
         var ageError = document.getElementById("age-error");
-        if (age < 13 || age > 99) {
+
+        // Reset error messages
+        ageError.style.display = "none";
+
+        // Perform additional client-side validation if needed
+
+        // Check if age is provided and within a valid range
+        if (!age || isNaN(age) || !(13 <= parseInt(age) && parseInt(age) <= 99)) {
             ageError.style.display = "block";
-        } else {
-            ageError.style.display = "none";
+            event.preventDefault();  // Prevent form submission
         }
+
+        // Check if gender is provided
+        if (!gender) {
+            alert("Gender is required.");  // You can replace this with a better way of displaying errors
+            event.preventDefault();  // Prevent form submission
+        }
+
+        // Add other client-side validations as needed
     });
 </script>
+
 
 {% endblock content %}

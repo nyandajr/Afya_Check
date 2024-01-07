@@ -101,13 +101,13 @@ $(document).ready(function() {
 
 
 // Function to activate dark theme
-function darkThemeOn() {
+function activateDarkTheme() {
   document.body.classList.add('dark-theme'); // Add the dark-theme class to the body
   localStorage.setItem('theme', 'dark'); // Update local storage
 }
 
 // Function to deactivate dark theme
-function darkThemeOff() {
+function deactivateDarkTheme() {
   document.body.classList.remove('dark-theme'); // Remove the dark-theme class from the body
   localStorage.setItem('theme', 'light'); // Update local storage
 }
@@ -115,42 +115,38 @@ function darkThemeOff() {
 // Initial theme check and setting
 let themeState = localStorage.getItem('theme'); // Get the current theme state from local storage
 if (themeState === 'dark') {
-  darkThemeOn();
+  activateDarkTheme();
 } else {
-  darkThemeOff();
+  deactivateDarkTheme();
 }
 
 // Theme switch button click event
 document.getElementById('themeSwitch').addEventListener('click', () => {
   themeState = localStorage.getItem('theme'); // Get the current theme state from local storage
   if (themeState === 'dark') {
-    darkThemeOff();
+    deactivateDarkTheme();
   } else {
-    darkThemeOn();
+    activateDarkTheme();
   }
 });
 
+// detect language change
+$("#language").change(() => {
+  switchLang($("#language").val());
+});
 
-
-  // detect language change
-  $("#language").change(()=>{
-      switchLang($("#language").val());
-  })
-
-
-function darkThemeOn(){
-  localStorage.setItem("theme", "dark")
-  $("#themeIcon").removeClass("bi-moon-stars-fill")
-  $("#themeIcon").addClass("bi-brightness-high-fill")
-  $("body").removeClass("theme-light")
+function activateDarkTheme() {
+  localStorage.setItem("theme", "dark");
+  $("#themeIcon").removeClass("bi-moon-stars-fill").addClass("bi-brightness-high-fill");
+  $("body").removeClass("theme-light");
 }
 
-function darkThemeOff(){
-  localStorage.setItem("theme", "light")
-  $("#themeIcon").addClass("bi-moon-stars-fill")
-  $("#themeIcon").removeClass("bi-brightness-high-fill")
-  $("body").addClass("theme-light")
+function deactivateDarkTheme() {
+  localStorage.setItem("theme", "light");
+  $("#themeIcon").addClass("bi-moon-stars-fill").removeClass("bi-brightness-high-fill");
+  $("body").addClass("theme-light");
 }
+
 
 function switchLang(lang){
   $.get(`/lang/${lang}`, (data)=>{
@@ -290,3 +286,20 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+// Function to switch the logo based on the theme
+function switchLogo() {
+  const lightLogo = document.getElementById('lightLogo');
+  const darkLogo = document.getElementById('darkLogo');
+  const themeState = localStorage.getItem('theme');
+  
+  if (themeState === 'dark') {
+      lightLogo.style.display = 'none';
+      darkLogo.style.display = 'block';
+  } else {
+      lightLogo.style.display = 'block';
+      darkLogo.style.display = 'none';
+  }
+}
+
+// Call switchLogo when the page loads
+document.addEventListener('DOMContentLoaded', switchLogo);
