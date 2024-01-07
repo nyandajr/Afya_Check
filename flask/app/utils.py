@@ -285,8 +285,8 @@ Your response should be prompt and provide me with clear, empathetic guidance ba
     else:
        return f'''gpt3_prompt = f"""
         As a knowledgeable mental health assistant:
-        I have completed the IQCODE(Cognitive Decline)  Dementia assessment for my relative, scoring {score} out of 48'.
-        1. Interpret my score by telling me if it is high or low
+        I have completed the IQCODE(Cognitive Decline)  Dementia assessment for my relative, scoring {score} out of 80 indicating '{result_text}''.
+        1. Interpret my score 
         2. Explain the concept of dementia, what is it and how can it be avoided and natural ways to help my relative.
         3. Encourage the person to go to the hospital if the score is high
         
@@ -480,19 +480,19 @@ def create_result_text(assessment, score, selected_language="English"):
     else:  # This now handles the Dementia Assessment by default
         if selected_language == "English":
             if score <= 15:
-                return "Your score suggests minimal or no cognitive decline."
-            elif score <= 30:
-                return "Your score suggests mild cognitive decline."
-            elif score <= 48:
-                return "Your score suggests moderate cognitive decline."
-            else:
                 return "Your score suggests severe cognitive decline."
+            elif score <= 30:
+                return "Your score suggests moderate cognitive decline."
+            elif score <= 48:
+                return "Your score suggests mild cognitive decline."
+            else:
+                return "Your score suggests minimal or no cognitive decline."
         elif selected_language == "Swahili":
             if score <= 15:
-                return "Kiwango cha chini au kisicho na kuzorota kwa akili."
-            elif score <= 30:
-                return "Kuzorota kwa wastani kwa akili."
-            elif score <= 48:
-                return "Kuzorota kwa akili kwa kiasi kikubwa."
-            else:
                 return "Kuzorota kwa akili kwa kiasi kikubwa sana."
+            elif score <= 30:
+                return "Kuzorota kwa akili kwa kiasi kikubwa."
+            elif score <= 48:
+                return "Kuzorota kwa wastani kwa akili."
+            else:
+                return "Kiwango cha chini au kisicho na kuzorota kwa akili."
