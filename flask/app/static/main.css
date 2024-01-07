@@ -1029,3 +1029,9 @@ input[type="checkbox"]:checked{
     color: #7ed957; /* Lighter shade of green to stand out on dark background */
 }
 
+/* main.css */
+
+.forgot-password-link {
+    margin-top: 25px;  /* You can adjust the top margin as needed */
+    display: block;   /* Ensures the link takes the full width available */
+}

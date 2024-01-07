@@ -54,6 +54,14 @@
                 {% else %}
                     Or &nbsp;<a href="{{ url_for('register') }}" class="custom-btn text">Register</a>
                 {% endif %}
+                 <!-- Link to Forgot Password page with added class for styling -->
+                <a href="{{ url_for('forgot_password') }}" class="custom-btn text forgot-password-link">
+                    {% if session['lang'] == "sw" %}
+                        Umesahau nenosiri?
+                    {% else %}
+                        Forgot Password?
+                    {% endif %}
+                </a>
             </div>
         </form>
     </div>
