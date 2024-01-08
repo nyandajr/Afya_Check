@@ -24,3 +24,4 @@ __pycache__/
 # Sublime Text settings
 .sublime-project
 .sublime-workspace
+"afya_check_venv/" 
