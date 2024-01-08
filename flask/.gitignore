@@ -1,0 +1,26 @@
+# Compiled Python files
+*.pyc
+*.pyo
+
+# Temporary files
+*.pyc
+*~
+\#*\#
+*.swp
+
+# Flask instance folder
+instance/
+
+# Python bytecode
+*.pyc
+__pycache__/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Visual Studio Code settings
+.vscode/
+
+# Sublime Text settings
+.sublime-project
+.sublime-workspace
