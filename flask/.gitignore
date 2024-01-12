@@ -18,8 +18,7 @@ __pycache__/
 # Jupyter Notebook
 .ipynb_checkpoints/
 
-# Visual Studio Code settings
-.vscode/
+
 
 # Sublime Text settings
 .sublime-project
