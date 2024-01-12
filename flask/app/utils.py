@@ -131,7 +131,6 @@ def age_group_from_age(age:int):
         return "45-54"
     elif age >= 55:
         return "55+"
-
 import os
 from openai import OpenAI
 
@@ -154,7 +153,7 @@ def get_gpt3_response(openai_client, prompt, language="English", temperature=0.3
         )
 
         return response["choices"][0]["message"]["content"].strip()
-    except OpenAI.Error as e:
+    except Exception as e:
         print(f"OpenAI API error: {e}")
         if language == "Swahili":
             return "Samahani, tatizo limejitokeza. Tafadhali jaribu tena baadae."
