@@ -1,8 +1,8 @@
 """ functions ive stollen from the original code"""
 
 import os
-import joblib
 import openai
+import joblib
 from dotenv import load_dotenv
 import plotly.graph_objs as go
 from plotly.graph_objects import Layout
@@ -135,35 +135,35 @@ def age_group_from_age(age:int):
 import os
 from openai import OpenAI
 
-def initialize_openai():
-    api_key = os.environ.get("OPENAI_API_KEY")
-    return OpenAI(api_key=api_key)
+# Initialize the OpenAI client
+openai_client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
-def get_gpt3_response(openai_client, prompt, language="English", temperature=0.3):
+def get_gpt3_response(prompt, language="English", temperature=0.3):
     if language == "Swahili":
         prompt += " Please respond in Swahili."
 
     try:
-        response = openai_client.chat.completions.create(
+        # Use the chat model endpoint for GPT-3.5 Turbo
+        response = openai_client.ChatCompletion.create(
             model="gpt-3.5-turbo",
             temperature=temperature,
             messages=[
-                {"role": "system", "content": '''Your system message here'''},
+                {"role": "system", "content":'''You are a mental health assistant with knowledge about various mental health conditions. Provide responses that are sensitive, empathetic, and non-diagnostic
+                 in your responses don't forget to encourage users to seek help from mental facilities and hospitals in Tanzania such as, Mirembe hospital, Amana Hospital, 
+                 Temeke, Muhimbili and you must mention other therapy facilities in Tanzania. 
+                 
+                 Encourage me that the condition am facing can be cured so I should not feel stigmatized
+                 And for a particular condition mention some practical examples of the symptoms of that condition'''},
                 {"role": "user", "content": prompt}
             ]
         )
-
-        return response['choices'][0]['message']['content'].strip()
-    except Exception as e:
-        print(f"OpenAI API error: {e}")
+        return response.choices[0].message['content'].strip()
+    except openai.error.OpenAIError as e:
         if language == "Swahili":
             return "Samahani, tatizo limejitokeza. Tafadhali jaribu tena baadae."
         return "Sorry, there was an issue fetching a response. Please try again later."
 
-# Usage example:
-openai_client = initialize_openai()
-result = get_gpt3_response(openai_client, "Your prompt here")
-print(result)
+
 
 
     
