@@ -4,11 +4,14 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt  # Import Bcrypt
+import os
 
 app = Flask(__name__)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///afya_check.db"
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///afya_check.db"
+#app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///afya_check.db"
+app.config["SQLALCHEMY_DATABASE_URI"] =os.environ.get("DATABASE_URL")
+
+#postgres://afya_check_user:3ZuYV9VQPrrd1LmPrXmJORgs7tWVybOX@dpg-cmgdn0gl5elc73fs5330-a.oregon-postgres.render.com/afya_check
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 app.config["SECRET_KEY"] = "secret_key_from_env"
 

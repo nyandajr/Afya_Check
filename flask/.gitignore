@@ -24,4 +24,9 @@ __pycache__/
 # Sublime Text settings
 .sublime-project
 .sublime-workspace
-"afya_check_venv/" 
+
+# Virtual environment
+afya_check_venv/
+
+# Database file
+*.db
