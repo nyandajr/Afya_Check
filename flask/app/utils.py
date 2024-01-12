@@ -133,7 +133,7 @@ def age_group_from_age(age:int):
         return "55+"
 
 import os
-from openai import OpenAI, error
+from openai import OpenAI
 
 def initialize_openai():
     api_key = os.environ.get("OPENAI_API_KEY")
@@ -154,11 +154,16 @@ def get_gpt3_response(openai_client, prompt, language="English", temperature=0.3
         )
 
         return response["choices"][0]["message"]["content"].strip()
-    except error.OpenAIError as e:
+    except OpenAI.Error as e:
         print(f"OpenAI API error: {e}")
         if language == "Swahili":
             return "Samahani, tatizo limejitokeza. Tafadhali jaribu tena baadae."
         return "Sorry, there was an issue fetching a response. Please try again later."
+
+# Usage example:
+openai_client = initialize_openai()
+result = get_gpt3_response(openai_client, "Your prompt here")
+print(result)
 
     
 def gpt_response_to_html(gpt_response):
