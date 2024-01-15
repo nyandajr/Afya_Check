@@ -36,7 +36,7 @@
                         <!-- Scores and Logout links for logged-in users -->
 <li>
     <li>
-        <a href="{{url_for('scores')}}" class="nv-link text custom-btn scores-btn {% if curr_page=='scores' %}active{% endif %}" style="border-radius: 100px; background-color: #007bff; color: white !important;">
+        <a href="{{url_for('scores')}}" class="nv-link text custom-btn scores-btn {% if curr_page=='scores' %}active{% endif %}" style="border-radius: 100px; background-color: #007bff; color: white ;">
 
             <i class="bi bi-file-check-fill"></i>
             {% if session['lang'] == "sw" %}Majibu{% else %}Scores{% endif %}
