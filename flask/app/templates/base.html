@@ -21,44 +21,42 @@
             <h1 class="title">Akili Check</h1>
             <nav>
                 <ul class="navbar">
-                    
-                    </li><!-- Home link with inline style for border-radius -->
+                    <!-- Home link with inline style for border-radius -->
                     <li>
                         <a href="{{ url_for('index') }}" class="nv-link text custom-btn {% if curr_page=='home' %}active{% endif %}" style="border-radius: 100px; background-color: #007bff; color: white;">
                             <i class="bi bi-house-door-fill"></i>
                             {% if session['lang'] == "sw" %}Karibu{% else %}Home{% endif %}
                         </a>
-                        
                     </li>
-
+                   
                     <!-- Conditional links based on authentication status -->
                     {% if current_user.is_authenticated %}
-                    <li class="user-info">
-                        <i class="bi bi-person-fill"></i>
-                        <span>{{ current_user.username }}</span>
-                    </li>
-                    <!-- Rest of the navigation items for logged-in users -->
-                    <li>
-                        <a href="{{url_for('scores')}}" class="nv-link text custom-btn scores-btn {% if curr_page=='scores' %}active{% endif %}" style="border-radius: 100px; background-color: #007bff; color: white;">
-                            <i class="bi bi-file-check-fill"></i>
-                            {% if session['lang'] == "sw" %}Majibu{% else %}Scores{% endif %}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{url_for('logout')}}" class="nv-link text custom-btn {% if curr_page=='logout' %}active{% endif %}" style="border-radius: 100px; background-color: #007bff; color: white;">
-                            <i class="bi bi-box-arrow-right"></i>
-                            {% if session['lang'] == "sw" %}Ondoka{% else %}Logout{% endif %}
-                        </a>
-                    </li>
-                {% else %}
-                    <!-- Navigation items for users who are not logged in -->
-                    <li>
-                        <a href="{{ url_for('login') }}" class="nv-link text custom-btn {% if curr_page=='login' %}active{% endif %}" style="border-radius: 100px; background-color: #007bff; color: white;">
-                            <i class="bi bi-box-arrow-in-right"></i> {% if session['lang'] == "sw" %}Ingia{% else %}Login{% endif %}
-                        </a>
-                    </li>
-                {% endif %}
-                
+                    
+                        
+                        <!-- Rest of the navigation items for logged-in users -->
+                        <li style="display: inline-block;">
+                            <a href="{{url_for('scores')}}" class="nv-link text custom-btn scores-btn {% if curr_page=='scores' %}active{% endif %}" style="border-radius: 100px; background-color: #007bff; color: white;">
+                                <i class="bi bi-bar-chart-fill"></i>
+                                {% if session['lang'] == "sw" %}Alama Zako{% else %}Your scores{% endif %} - {{ current_user.username }}
+                            </a>
+                        </li>
+                        
+                        
+                        <li style="display: inline-block;">
+                            <a href="{{url_for('logout')}}" class="nv-link text custom-btn {% if curr_page=='logout' %}active{% endif %}" style="border-radius: 100px; background-color: #007bff; color: white;">
+                                <i class="bi bi-box-arrow-right"></i>
+                                {% if session['lang'] == "sw" %}Ondoka{% else %}Logout{% endif %}
+                            </a>
+                        </li>
+                    {% else %}
+                        <!-- Display login link if not authenticated -->
+                        
+                        <li style="display: inline-block;">
+                            <a href="{{ url_for('login') }}" class="nv-link text custom-btn {% if curr_page=='login' %}active{% endif %}" style="border-radius: 100px; background-color: #007bff; color: white;">
+                                <i class="bi bi-box-arrow-in-right"></i> {% if session['lang'] == "sw" %}Ingia{% else %}Login{% endif %}
+                            </a>
+                        </li>
+                    {% endif %}
                 </ul>
             </nav>
         </div>
