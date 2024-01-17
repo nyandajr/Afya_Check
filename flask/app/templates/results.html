@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
-
 {% extends 'base.html' %}
 
 {% block content %}
@@ -13,16 +12,16 @@
 <div class="my-3">
     {{res.result_text}}
 </div>
-<div id="loading" class="alert alert-warning p-2">
 
-
-    <i class="fa fa-spinner fa-spin"></i>
-    {% if session['lang'] == "sw" %}
-        Inapakua tafadhali subiri ufafanuzi wa majibu yako
-    {% else %}
-        Loading..Please wait for the interpretation of your results.
-    {% endif %}
-
+<div id="loading" class="loading-container">
+    <div class="loading-content">
+        <div class="loading-spinner"></div>
+        {% if session['lang'] == "sw" %}
+            <p class="loading-text">Inapakua tafadhali subiri ufafanuzi wa majibu yako</p>
+        {% else %}
+            <p class="loading-text">Loading... Please wait for the interpretation of your results.</p>
+        {% endif %}
+    </div>
 </div>
 
 {% endblock content %}
@@ -32,8 +31,24 @@
 
 {% block script %}
 <script>
-    $(window).on('load', function() {
-        $("#loading").hide()
-    })
+    $(document).ready(function() {
+        // Hide the loading animation initially
+        $("#loading").hide();
+
+        // Submit form event
+        $("form").submit(function() {
+            // Show the loading animation when the form is submitted
+            $("#loading").show();
+
+            // You may want to submit the form using AJAX here to fetch the results
+
+            // Simulating a delay (you can replace this with your actual form submission logic)
+            setTimeout(function() {
+                // Hide the loading animation when the results are ready
+                $("#loading").hide();
+            }, 7000); // 7000 milliseconds (7 seconds) - replace with your actual delay
+        });
+    });
 </script>
 {% endblock script %}
+
