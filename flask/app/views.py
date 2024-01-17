@@ -106,7 +106,7 @@ def assessments():
     
     ass = [
         "ADHD", "Alcohol", "Anxiety", "Bipolar", "Depression",
-        "Dementia", "Drug", "OCD", "PSQ", "PTSD",
+        "Dementia", "Drug", "OCD", "PSQ", "PTSD","Procrastination", "Sleep Disorder" 
     ]
     return render_template('assessments.html', title=title, ass=ass)
 
@@ -171,7 +171,6 @@ def results():
     gpt3_prompt = create_gpt_prompt(ass, score, result_text, selected_language=language)
     
     def generate_content():
-        # Initially, send html page
         yield render_template(
             'results.html', 
             title="Majibu ya Tathmini" if session["lang"]=="sw" else "Assessment Score", 

@@ -213,6 +213,30 @@ Your response should be compassionate and actionable, guiding me towards the app
 
         """
         '''
+    elif assessment["title"] == "Procrastination Assessment":
+        return f''' gpt3_prompt = f"""
+    As an expert mental health assistant, after completing the procrastination assessment with a score of {score} out of 64, I need a response that:
+    1. Provides empathetic support reflecting on the procrastination score and briefly describes procrastination, including typical experiences.
+    2. Outlines the risks of untreated procrastination and natural coping strategies in a concise manner.
+    
+
+    The response should be swift yet empathetic, combining comfort with essential guidance, and highlight the importance of professional health advice.
+
+
+    """
+    '''
+    
+
+    elif assessment["title"] == "Sleep Disorder Assessment":
+        return f''' gpt3_prompt = f"""
+    As an expert mental health assistant, after completing the Sleep Disorder Assessment with a score of {score} out of 80, I need a response that:
+    1. Provides empathetic support reflecting on the Sleep Disorder Assessment score and briefly describes Sleep Disorder Assessment, including typical experiences.
+    2. Outlines the risks of untreated Sleep Disorder Assessment and natural coping strategies in a concise manner.
+    The response should be swift yet empathetic, combining comfort with essential guidance, and highlight the importance of professional health advice.
+
+
+    """
+    '''
     elif assessment["title"] == "AUDIT (Alcohol Use Disorders Identification Test)":
        return f''' gpt3_prompt = f"""
      As an experienced mental health assistant, I've taken the AUDIT assessment score of {score} out of 40:
@@ -349,6 +373,8 @@ def create_result_text(assessment, score, selected_language="English"):
             else:
                 return "Your score suggests Very High level of alcohol problems or dependence."
         elif selected_language == "Swahili":
+        
+        
             if score <= 7:
                 return "Alama zako zinaonyesha kiwango cha chini cha uraibu wa pombe."
             elif score <= 15:
@@ -357,6 +383,57 @@ def create_result_text(assessment, score, selected_language="English"):
                 return "Alama zako zinaonyesha kiwango cha juu cha uraibu."
             else:
                 return "Alama zako zinaonyesha kiwango cha juu sana cha uraibu."
+    
+    
+    elif assessment["title"] == "Procrastination Assessment":
+        if selected_language == "English":
+            if score == 0:
+                return "Your score suggests no problem related to procrastination."
+            elif score <= 20:
+                return "Your score suggests a low level of procrastination."
+            elif score <= 40:
+                return "Your score suggests a moderate level of procrastination."
+            elif score <= 60:
+                return "Your score suggests a substantial level of procrastination."
+            else:
+                return "Your score suggests a severe level of procrastination."
+            
+        elif selected_language == "Swahili":
+            if score == 0:
+                return "Alama zako zinaonyesha hakuna tatizo linalohusiana na kupanga mambo mbele."
+            elif score <= 20:
+                return "Alama zako zinaonyesha kiwango cha chini cha kupanga mambo mbele."
+            elif score <= 40:
+                return "Alama zako zinaonyesha kiwango cha wastani cha kupanga mambo mbele."
+            elif score <= 60:
+                return "Alama zako zinaonyesha kiwango kikubwa cha kupanga mambo mbele."
+            else:
+                return "Alama zako zinaonyesha kiwango cha juu sana cha kupanga mambo mbele."
+            
+    elif assessment["title"] == "Sleep Disorder Assessment":
+        if selected_language == "English":
+            if score == 0:
+                return "Your score suggests no problem related to Sleep Disorder."
+            elif score <= 20:
+                return "Your score suggests a low level of Sleep Disorder."
+            elif score <= 60:
+                return "Your score suggests a moderate level of Sleep Disorder."
+            elif score <= 80:
+                return "Your score suggests a substantial level of Sleep Disorder."
+            else:
+                return "Your score suggests a severe level of Sleep Disorder."
+            
+        elif selected_language == "Swahili":
+            if score == 0:
+                return "Alama zako zinaonyesha hakuna tatizo linalohusiana na Usingizi."
+            elif score <= 20:
+                return "Alama zako zinaonyesha kiwango cha chini cha tatizo la Usingizi."
+            elif score <= 60:
+                return "Alama zako zinaonyesha kiwango cha wastani cha tatizo la Usingizi."
+            elif score <= 60:
+                return "Alama zako zinaonyesha kiwango kikubwa cha tatizo la Usingizi."
+            else:
+                return "Alama zako zinaonyesha kiwango cha juu sana cha tatizo la Usingizi."
 
 
     elif assessment["title"] == "OCD Assessment (Y-BOCS)":
