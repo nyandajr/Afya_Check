@@ -400,15 +400,15 @@ def create_result_text(assessment, score, selected_language="English"):
             
         elif selected_language == "Swahili":
             if score == 0:
-                return "Alama zako zinaonyesha hakuna tatizo linalohusiana na kupanga mambo mbele."
+                return "Alama zako zinaonyesha hakuna tatizo linalohusiana na Kuahirisha mambo (Procrastination)."
             elif score <= 20:
-                return "Alama zako zinaonyesha kiwango cha chini cha kupanga mambo mbele."
+                return "Alama zako zinaonyesha kiwango cha chini cha Kuahirisha mambo (Procrastination)."
             elif score <= 40:
-                return "Alama zako zinaonyesha kiwango cha wastani cha kupanga mambo mbele."
+                return "Alama zako zinaonyesha kiwango cha wastani cha Kuahirisha mambo (Procrastination)."
             elif score <= 60:
-                return "Alama zako zinaonyesha kiwango kikubwa cha kupanga mambo mbele."
+                return "Alama zako zinaonyesha kiwango kikubwa cha Kuahirisha mambo (Procrastination)."
             else:
-                return "Alama zako zinaonyesha kiwango cha juu sana cha kupanga mambo mbele."
+                return "Alama zako zinaonyesha kiwango cha juu sana cha Kuahirisha mambo (Procrastination)."
             
     elif assessment["title"] == "Sleep Disorder Assessment":
         if selected_language == "English":
