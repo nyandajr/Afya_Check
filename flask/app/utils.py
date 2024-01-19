@@ -229,7 +229,7 @@ Your response should be compassionate and actionable, guiding me towards the app
 
     elif assessment["title"] == "Sleep Disorder Assessment":
         return f''' gpt3_prompt = f"""
-    As an expert mental health assistant, after completing the Sleep Disorder Assessment with a score of {score} out of 80, I need a response that:
+    As an expert mental health assistant, after completing the Sleep Disorder Assessment with a score of {score} out of 80, indicating: '{result_text}'. I need a response that:
     1. Provides empathetic support reflecting on the Sleep Disorder Assessment score and briefly describes Sleep Disorder Assessment, including typical experiences.
     2. Outlines the risks of untreated Sleep Disorder Assessment and natural coping strategies in a concise manner.
     The response should be swift yet empathetic, combining comfort with essential guidance, and highlight the importance of professional health advice.
