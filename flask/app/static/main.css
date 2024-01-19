@@ -7,7 +7,6 @@
     --input-border-color: #d1d1d1; /* Input field border */
 }
 
-
 .theme-light {
     --bg-color: white; /* Light background for light theme */
     --primary-color: #007bff; /* Primary color for light theme */
@@ -17,7 +16,7 @@
     --input-border-color: #d1d1d1; /* Input field border for light theme */
     --primary-color-hover: #000000; /* Hover color for light theme */
 }
-
+ 
 body {
     color: var(--white-color) !important; /* Ensures all text uses the white color variable */
 }
@@ -39,6 +38,7 @@ body {
     font-size: 1.1rem;
     font-weight: bold;
     margin: 4px;
+    
 
 }
 
@@ -1067,6 +1067,7 @@ input[type="checkbox"]:checked{
     display: block;   /* Ensures the link takes the full width available */
 }
 
+
 .loading-content {
     text-align: center;
 }
@@ -1120,10 +1121,22 @@ input[type="checkbox"]:checked{
 }
 
 
+
+.theme-switch {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.theme-switch-text {
+    margin-left: 5px; /* Adjust the margin as needed for proper spacing */
+}
+
+
 /* Custom Navbar Styling */
 
-/* Navbar Background Color */
-/* Navbar Background Color */
+
+
 .navbar {
     background-color: #0883fe !important; /* Dark background color */
 }
@@ -1146,7 +1159,7 @@ input[type="checkbox"]:checked{
 
 /* Navbar Brand Hover Effect (excluding logo and Akili Check title) */
 .navbar:hover .navbar-brand {
-    color: #ffffff; /* Text color for brand */
+    color: #000000 !important; /* Text color for brand */
 }
 
 /* Navbar Brand Hover Effect (excluding logo and Akili Check title) */
@@ -1156,7 +1169,7 @@ input[type="checkbox"]:checked{
 
 /* Navbar Links Hover Effect */
 .navbar-nav .nav-link:hover {
-    color: #007bff !important; /* Change text color on hover */
+    color: #000000 !important; /* Change text color on hover */
 }
 
 /* Active Link Styling */
@@ -1193,7 +1206,7 @@ input[type="checkbox"]:checked{
 
 /* Navbar Toggler Icon Color */
 .navbar-toggler-icon {
-    background-color: #1c1414; /* Toggler icon color */
+    background-color: #000000; /* Toggler icon color */
 }
 
 /* Mobile Navbar Background Color */
