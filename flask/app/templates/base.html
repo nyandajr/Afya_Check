@@ -12,67 +12,75 @@
     {% block styles %}{% endblock %}
 </head>
 <body class="custom-bg-dark mx-2 theme-light pt-0 mt-0">
-    <div class="theme-switch" id="themeSwitch">
-        <i class="bi bi-brightness-high-fill" id="themeIcon"></i>
-    </div>
-    <div class="col-12 col-md-10 col-lg-9 mx-auto">
-        <div class="text-center">
-            <img src="{{url_for('static', filename='images/akili_logo1.png')}}" class="logo mt-3" alt="Akili Check Logo" style="width: 250px; height: auto;">
-            <h1 class="title">Akili Check</h1>
-            <nav>
-                <ul class="navbar">
-                    <!-- Home link with inline style for border-radius -->
-                    <li>
-                        <a href="{{ url_for('index') }}" class="nv-link text custom-btn {% if curr_page=='home' %}active{% endif %}" style="border-radius: 100px; background-color: #007bff; color: white;">
-                            <i class="bi bi-house-door-fill"></i>
-                            {% if session['lang'] == "sw" %}Karibu{% else %}Home{% endif %}
-                        </a>
-                    </li>
-                   
-                    <!-- Conditional links based on authentication status -->
-                    {% if current_user.is_authenticated %}
-                    
-                        
-                        <!-- Rest of the navigation items for logged-in users -->
-                        <li style="display: inline-block;">
-                            <a href="{{url_for('scores')}}" class="nv-link text custom-btn scores-btn {% if curr_page=='scores' %}active{% endif %}" style="border-radius: 100px; background-color: #007bff; color: white;">
-                                <i class="bi bi-bar-chart-fill"></i>
-                                {% if session['lang'] == "sw" %}Alama Zako{% else %}Your scores{% endif %} - {{ current_user.username }}
-                            </a>
-                        </li>
-                        
-                        
-                        <li style="display: inline-block;">
-                            <a href="{{url_for('logout')}}" class="nv-link text custom-btn {% if curr_page=='logout' %}active{% endif %}" style="border-radius: 100px; background-color: #007bff; color: white;">
-                                <i class="bi bi-box-arrow-right"></i>
-                                {% if session['lang'] == "sw" %}Ondoka{% else %}Logout{% endif %}
-                            </a>
-                        </li>
-                    {% else %}
-                        <!-- Display login link if not authenticated -->
-                        
-                        <li style="display: inline-block;">
-                            <a href="{{ url_for('login') }}" class="nv-link text custom-btn {% if curr_page=='login' %}active{% endif %}" style="border-radius: 100px; background-color: #007bff; color: white;">
-                                <i class="bi bi-box-arrow-in-right"></i> {% if session['lang'] == "sw" %}Ingia{% else %}Login{% endif %}
-                            </a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </nav>
+
+<!-- Navigation Bar -->
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{ url_for('index') }}">
+            <img src="{{url_for('static', filename='images/akili_logo1.png')}}" class="logo" alt="Akili Check Logo" style="width: 50px; height: auto;">
+            Akili Check
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <!-- Home, Change Language, and Login buttons on the left -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link {% if curr_page=='home' %}active{% endif %}" href="{{ url_for('index') }}">
+                        <i class="bi bi-house-door-fill"></i>
+                        {% if session['lang'] == "sw" %}Karibu{% else %}Home{% endif %}
+                    </a>
+                </li>
+                <li class="nav-item ms-2">
+                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#languageModal">
+                        <i class="bi bi-globe"></i> {% if session['lang'] == "sw" %}Chagua lugha{% else %}Choose Language{% endif %}
+                    </a>
+                </li>
+                <li class="nav-item ms-2">
+                    <a class="nav-link {% if current_user.is_authenticated %}disabled{% endif %}" href="{{ url_for('login') }}">
+                        <i class="bi bi-box-arrow-in-right"></i> {% if session['lang'] == "sw" %}Ingia{% else %}Login{% endif %}
+                    </a>
+                </li>
+            </ul>
+            <!-- Change Theme item right after the logo and Akili Check words -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item ms-2">
+                    <div class="nav-link theme-switch" id="themeSwitch">
+                        <i class="bi bi-lightbulb" id="themeIcon"></i>
+                    </div>
+                </li>
+            </ul>
         </div>
-        
-        <div class="my-3">
-            <div class="border-green flexy">
-                <label for="language" class="form-label subtext">
-                    {% if session['lang'] == "sw" %}Chagua lugha yako:{% else %}Choose your language:{% endif %}
-                </label>
+    </div>
+</nav>
+
+<!-- Language Selection Modal -->
+<div class="modal fade" id="languageModal" tabindex="-1" aria-labelledby="languageModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="languageModalLabel">{% if session['lang'] == "sw" %}Chagua lugha yako{% else %}Choose your language{% endif %}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Language Selection Dropdown -->
                 <select name="language" id="language" class="custom-form-select-sm">
                     <option value="en" {% if session['lang'] == "en" %}selected{% endif %}>English</option>
                     <option value="sw" {% if session['lang'] == "sw" %}selected{% endif %}>Kiswahili</option>
                 </select>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% if session['lang'] == "sw" %}Funga{% else %}Close{% endif %}</button>
+            </div>
         </div>
+    </div>
+</div>
 
+    <!-- Content Section -->
+    <div class="col-12 col-md-10 col-lg-9 mx-auto">
+        <!-- Your existing content goes here -->
         {% block content %}{% endblock %}
 
         {% block sponsors %}

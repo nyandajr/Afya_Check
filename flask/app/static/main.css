@@ -1119,3 +1119,86 @@ input[type="checkbox"]:checked{
     }
 }
 
+
+/* Custom Navbar Styling */
+
+/* Navbar Background Color */
+/* Navbar Background Color */
+.navbar {
+    background-color: #0883fe !important; /* Dark background color */
+}
+
+
+/* Navbar Brand (Logo and Akili Check) */
+.navbar-brand {
+    color: #ffffff; /* Text color for brand */
+    font-weight: bold;
+}
+
+
+/* Navbar Links (Home, Login) */
+.navbar-nav .nav-link {
+    color: #ffffff; /* Text color for links */
+    margin: 0 10px; /* Adjust spacing between links */
+}
+
+
+
+/* Navbar Brand Hover Effect (excluding logo and Akili Check title) */
+.navbar:hover .navbar-brand {
+    color: #ffffff; /* Text color for brand */
+}
+
+/* Navbar Brand Hover Effect (excluding logo and Akili Check title) */
+.navbar:not(.navbar-brand:hover) .navbar-brand:hover {
+    color: inherit; /* Inherit the text color for brand when not hovered */
+}
+
+/* Navbar Links Hover Effect */
+.navbar-nav .nav-link:hover {
+    color: #007bff !important; /* Change text color on hover */
+}
+
+/* Active Link Styling */
+.navbar-nav .nav-link.active {
+    background-color: #007bff; /* Background color for active link */
+    color: #ffffff; /* Text color for active link */
+}
+
+/* Disabled Link Styling (Login) */
+.navbar-nav .nav-link.disabled {
+    color: #ffffff; /* Text color for disabled link */
+    cursor: not-allowed; /* Show not-allowed cursor for disabled link */
+}
+
+/* Theme Switch Styling */
+.theme-switch {
+    cursor: pointer;
+}
+
+/* Theme Switch Icon Styling */
+.theme-switch #themeIcon {
+    color: #ffc107; /* Icon color */
+    font-size: 1.5rem; /* Icon size */
+    margin-right: 80px; /* Adjust the right margin */
+}
+
+
+/* Theme Switch Text Styling */
+.theme-switch-text {
+    color: #ffffff; /* Text color for theme switch */
+    font-size: 0.875rem; /* Text size for theme switch */
+    margin-left: 5px; /* Adjust spacing between icon and text */
+}
+
+/* Navbar Toggler Icon Color */
+.navbar-toggler-icon {
+    background-color: #1c1414; /* Toggler icon color */
+}
+
+/* Mobile Navbar Background Color */
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        background-color: #343a40; /* Dark background color for mobile dropdown */
+    }
+}
