@@ -1924,7 +1924,7 @@ input[type="checkbox"]:checked{
 
 .welcome-box {
     background-color: #eef3f8; /* A light blue background */
-    border-left: 4px solid #007bff; /* A softer primary color for the border */
+    border-left: 4px solid #165069; /* A softer primary color for the border */
     box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* Slightly more pronounced shadow */
     padding: 20px; /* Increased padding */
     margin-bottom: 20px; /* Slightly more bottom margin */
@@ -2315,9 +2315,6 @@ input[type="checkbox"]:checked{
 
 
 
-.navbar {
-    background-color: #0883fe !important; /* Dark background color */
-}
 
 
 /* Navbar Brand (Logo and Akili Check) */
