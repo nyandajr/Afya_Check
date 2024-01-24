@@ -19,6 +19,8 @@
  
 body {
     color: var(--white-color) !important; /* Ensures all text uses the white color variable */
+    margin: 0 px;
+
 }
 
 .custom-bg-dark {
@@ -2314,12 +2316,17 @@ input[type="checkbox"]:checked{
 /* Custom Navbar Styling */
 
 
+/* Reduce font size for navbar links */
+.navbar-nav .nav-link {
+    font-size: 13px; /* Adjust the font size as needed */
+    font-weight: bold;
+}
 
 
 
 /* Navbar Brand (Logo and Akili Check) */
 .navbar-brand {
-    color: #ffffff; /* Text color for brand */
+    color: #c7baba; /* Text color for brand */
     font-weight: bold;
 }
 
@@ -2390,3 +2397,4 @@ input[type="checkbox"]:checked{
         background-color: #343a40; /* Dark background color for mobile dropdown */
     }
 }
+
