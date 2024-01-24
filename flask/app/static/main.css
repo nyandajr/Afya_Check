@@ -1,7 +1,7 @@
 :root {
     --bg-color: rgb(21, 32, 43); /* Dark background */
-    --primary-color: #007bff; /* Primary color */
-    --primary-color-dark: #007bff; /* Darker primary color */
+    --primary-color:#165069; /* Primary color */
+    --primary-color-dark:#165069; /* Darker primary color */
     --white-color: #ffffff; /* White text color */
     --input-bg-color: rgb(45, 52, 65); /* Input field background */
     --input-border-color: #d1d1d1; /* Input field border */
@@ -9,8 +9,8 @@
 
 .theme-light {
     --bg-color: white; /* Light background for light theme */
-    --primary-color: #007bff; /* Primary color for light theme */
-    --primary-color-dark: #007bff; /* Darker primary color for light theme */
+    --primary-color:#165069; /* Primary color for light theme */
+    --primary-color-dark:#165069; /* Darker primary color for light theme */
     --white-color: rgb(0, 0, 0); /* Text color for light theme, which is black */
     --input-bg-color: rgb(223, 226, 231); /* Input field background for light theme */
     --input-border-color: #d1d1d1; /* Input field border for light theme */
@@ -59,8 +59,8 @@ body {
     outline: none;
 }:root {
     --bg-color: rgb(21, 32, 43); /* Dark background */
-    --primary-color: #007bff; /* Primary color */
-    --primary-color-dark: #007bff; /* Darker primary color */
+    --primary-color:#165069; /* Primary color */
+    --primary-color-dark:#165069; /* Darker primary color */
     --white-color: #ffffff; /* White text color */
     --input-bg-color: rgb(45, 52, 65); /* Input field background */
     --input-border-color: #d1d1d1; /* Input field border */
@@ -68,8 +68,8 @@ body {
 
 .theme-light {
     --bg-color: white; /* Light background for light theme */
-    --primary-color: #007bff; /* Primary color for light theme */
-    --primary-color-dark: #007bff; /* Darker primary color for light theme */
+    --primary-color:#165069; /* Primary color for light theme */
+    --primary-color-dark:#165069; /* Darker primary color for light theme */
     --white-color: rgb(0, 0, 0); /* Text color for light theme, which is black */
     --input-bg-color: rgb(223, 226, 231); /* Input field background for light theme */
     --input-border-color: #d1d1d1; /* Input field border for light theme */
@@ -441,7 +441,7 @@ input[type="checkbox"]:checked{
 }
 
 .custom-bg-color {
-    background-color: #007bff !important;
+    background-color:#165069 !important;
     position: bottom;
     left: 0;
     right: 0;
@@ -729,7 +729,7 @@ input[type="checkbox"]:checked{
 
 /* Table Header Styling */
 .table thead th {
-    background-color: #007bff; /* Primary color for header */
+    background-color:#165069; /* Primary color for header */
     color: white; /* White text for header */
     padding: 10px;
     border-bottom: 2px solid #dee2e6; /* Solid bottom border */
@@ -832,7 +832,7 @@ input[type="checkbox"]:checked{
     --text-color: rgb(21, 32, 43); /* dark text */
     --input-background-color: #eee; /* light grey input background */
     --input-text-color:rgb(21, 32, 43); /* dark text for input */
-    --button-background-color: #007bff; /* blue button background */
+    --button-background-color:#165069; /* blue button background */
     --button-text-color: #fff; /* white text for buttons */
     --alert-background-color: #f8d7da; /* light red for alert background */
     --alert-text-color: #721c24; /* dark red for alert text */
@@ -901,7 +901,7 @@ input[type="checkbox"]:checked{
     --text-color: rgb(197, 155, 3); /* Default dark text */
     --input-background-color: #eee; /* Default light grey input background */
     --input-text-color: rgb(21, 32, 43); /* Default dark text for input */
-    --button-background-color: #007bff; /* Default blue button background */
+    --button-background-color:#165069; /* Default blue button background */
     --button-text-color: #fff; /* Default white text for buttons */
     --alert-background-color: #f8d7da; /* Default light red for alert background */
     --alert-text-color: #721c24; /* Default dark red for alert text */
@@ -1022,7 +1022,7 @@ input[type="checkbox"]:checked{
 }
 
 .user-count {
-    color: #007bff; /* Set the text color to a shade of blue */
+    color:#165069; /* Set the text color to a shade of blue */
     font-size: 24px; /* Increase the font size for emphasis */
 }
 
@@ -1560,7 +1560,7 @@ input[type="checkbox"]:checked{
 }
 
 .custom-bg-color {
-    background-color: #007bff !important;
+    background-color:#165069 !important;
     position: bottom;
     left: 0;
     right: 0;
@@ -1690,7 +1690,7 @@ input[type="checkbox"]:checked{
 
 .disclaimer-box {
     background-color: #eef3f8; /* A light blue background */
-    border-left: 4px solid #007bff; /* A softer primary color for the border */
+    border-left: 4px solid#165069; /* A softer primary color for the border */
     box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* Slightly more pronounced shadow */
     padding: 20px; /* Increased padding */
     margin-bottom: 20px; /* Slightly more bottom margin */
@@ -1841,7 +1841,7 @@ input[type="checkbox"]:checked{
 }
 
 .nv-link {
-    background-color: #007bff;
+    background-color:#165069;
     color: var(--white-color); /* Assuming you want the text to be white */
     padding: 10px 15px; /* Or any other padding you prefer */
     border-radius: 50px; /* If you want rounded corners */
@@ -1872,7 +1872,7 @@ input[type="checkbox"]:checked{
 
 /* Table Header Styling */
 .table thead th {
-    background-color: #007bff; /* Primary color for header */
+    background-color:#165069; /* Primary color for header */
     color: white; /* White text for header */
     padding: 10px;
     border-bottom: 2px solid #dee2e6; /* Solid bottom border */
@@ -1975,7 +1975,7 @@ input[type="checkbox"]:checked{
     --text-color: rgb(21, 32, 43); /* dark text */
     --input-background-color: #eee; /* light grey input background */
     --input-text-color:rgb(21, 32, 43); /* dark text for input */
-    --button-background-color: #007bff; /* blue button background */
+    --button-background-color:#165069; /* blue button background */
     --button-text-color: #fff; /* white text for buttons */
     --alert-background-color: #f8d7da; /* light red for alert background */
     --alert-text-color: #721c24; /* dark red for alert text */
@@ -2044,7 +2044,7 @@ input[type="checkbox"]:checked{
     --text-color: rgb(197, 155, 3); /* Default dark text */
     --input-background-color: #eee; /* Default light grey input background */
     --input-text-color: rgb(21, 32, 43); /* Default dark text for input */
-    --button-background-color: #007bff; /* Default blue button background */
+    --button-background-color:#165069; /* Default blue button background */
     --button-text-color: #fff; /* Default white text for buttons */
     --alert-background-color: #f8d7da; /* Default light red for alert background */
     --alert-text-color: #721c24; /* Default dark red for alert text */
@@ -2165,7 +2165,7 @@ input[type="checkbox"]:checked{
 }
 
 .user-count {
-    color: #007bff; /* Set the text color to a shade of blue */
+    color:#165069; /* Set the text color to a shade of blue */
     font-size: 24px; /* Increase the font size for emphasis */
 }
 
@@ -2230,7 +2230,7 @@ input[type="checkbox"]:checked{
 
 /* Ensure strong text stands out in dark mode */
 .dark-theme .gpt3-response-container strong {
-    color: #007bff; /* Bright color for strong text in dark mode */
+    color:#165069; /* Bright color for strong text in dark mode */
 }
 
 /* Adjusting the color for text-green class in dark mode for better visibility */
@@ -2349,7 +2349,7 @@ input[type="checkbox"]:checked{
 
 /* Active Link Styling */
 .navbar-nav .nav-link.active {
-    background-color: #007bff; /* Background color for active link */
+ 
     color: #ffffff; /* Text color for active link */
 }
 
