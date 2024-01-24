@@ -2232,7 +2232,7 @@ input[type="checkbox"]:checked{
 
 /* Ensure strong text stands out in dark mode */
 .dark-theme .gpt3-response-container strong {
-    color:#165069; /* Bright color for strong text in dark mode */
+    color:#165069; 
 }
 
 /* Adjusting the color for text-green class in dark mode for better visibility */
@@ -2394,7 +2394,7 @@ input[type="checkbox"]:checked{
 /* Mobile Navbar Background Color */
 @media (max-width: 991.98px) {
     .navbar-collapse {
-        background-color: #343a40; /* Dark background color for mobile dropdown */
+        background-color: #165069; /* Dark background color for mobile dropdown */
     }
 }
 
