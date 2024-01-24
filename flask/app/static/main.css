@@ -57,7 +57,1185 @@ body {
     border: none;
     border-radius: 8px;
     outline: none;
+}:root {
+    --bg-color: rgb(21, 32, 43); /* Dark background */
+    --primary-color: #007bff; /* Primary color */
+    --primary-color-dark: #007bff; /* Darker primary color */
+    --white-color: #ffffff; /* White text color */
+    --input-bg-color: rgb(45, 52, 65); /* Input field background */
+    --input-border-color: #d1d1d1; /* Input field border */
 }
+
+.theme-light {
+    --bg-color: white; /* Light background for light theme */
+    --primary-color: #007bff; /* Primary color for light theme */
+    --primary-color-dark: #007bff; /* Darker primary color for light theme */
+    --white-color: rgb(0, 0, 0); /* Text color for light theme, which is black */
+    --input-bg-color: rgb(223, 226, 231); /* Input field background for light theme */
+    --input-border-color: #d1d1d1; /* Input field border for light theme */
+    --primary-color-hover: #000000; /* Hover color for light theme */
+}
+ 
+body {
+    color: var(--white-color) !important; /* Ensures all text uses the white color variable */
+}
+
+.custom-bg-dark {
+    background-color: var(--bg-color); /* Dark background for elements with this class */
+    color: var(--white-color); /* Ensures text is white in dark mode elements */
+}
+
+
+.custom-btn {
+    background-color: #165069 !important;
+    color: var(--white-color);
+    text-decoration: none;
+    padding: 0.6rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 100px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 4px;
+    
+
+}
+
+.custom-btn:hover {
+    background-color: var(--primary-color-hover);
+    color: rgb(0, 0, 0) !important;
+}
+
+.custom-form-select {
+    background-color: var(--input-bg-color);
+    color: var(--white-color);
+    border: 1px solid var(--input-border-color);
+    font-size: 1.1rem;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+}
+
+.custom-form-select-sm {
+    background-color: var(--input-bg-color);
+    color: var(--white-color);
+    border: 3px solid var(--input-border-color);
+    font-size: 0.9rem;
+    width: 100%;
+    padding: 7px;
+    border: none;
+    border-radius: 46px;
+    outline: none;
+}
+
+.custom-form-control {
+    background-color: var(--input-bg-color);
+    color: var(--white-color);
+    font-size: 1.1rem;
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+}
+
+.custom-form-control:focus {
+    outline: var(--primary-color) solid 1px;
+}
+
+.border-green {
+    border: 2px solid var(--primary-color);
+    padding: 10px;
+    border-radius: 10px;
+    margin: 5px 0px;
+}
+
+.title {
+    font-size: 3.5rem;
+    font-weight: bolder;
+    margin: 24px 0px;
+}
+
+.subtitle{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 6px 0px;
+    
+}
+
+.text{
+    font-size: 1.2rem;
+}
+
+.subtext{
+    font-size: 0.9rem;
+}
+
+input[type="checkbox"]{
+    width: 18px;
+    height: 18px;
+    background-color: var(--input-bg-color);
+    border-color: var(--input-border-color);
+}
+
+input[type="checkbox"]:checked{
+    background-color: var(--primary-color);
+    border: var(--primary-color);
+}
+
+.link {
+    /* text-decoration: none; */
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.link:hover{
+    color: var(--primary-color-dark);
+}
+
+.nv-link {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.nv-link:hover {
+    color: var(--primary-color-dark);
+}
+
+.active {
+    color: var(--primary-color-dark) !important;
+}
+
+.text-green {
+    color: var(--primary-color);
+}
+
+.flexy {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+}
+
+.flexy label {
+    white-space: nowrap;
+}
+
+.theme-switch {
+    margin: 12px 12px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    float: right;
+}
+
+.annotation-text {
+    color: #327434 !important;
+}
+
+#loading .fa-spinner {
+    font-size: 30px;  /* Change as needed */
+    margin-right: 10px; /* Space between spinner and text */
+    color:#007bff; /* This is a standard green color */
+
+}
+
+
+.main-heading {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-color-dark);
+}
+
+.main-text {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: #333;  /* A shade of grey for better readability */
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+.disclaimer-text {
+    font-size: 0.9rem;
+    color: #555;  /* Slightly lighter grey for disclaimers */
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+
+
+.highlighted-text {
+    font-size: 1.4rem; 
+    font-weight: 500;  
+    color: var(--primary-color);
+}
+
+
+.text-center .main-heading.bold-black-text {
+    color: black;
+    font-weight: bold;
+}
+
+
+/* For screens larger than 992px */
+@media (min-width: 992px) {
+    .img-fluid {
+        max-width: 200px;
+    }
+}
+
+/* For screens smaller than 992px */
+@media (max-width: 992px) {
+    .img-fluid {
+        max-width: 100px;
+    }
+}
+
+
+.img-fluid {
+    max-width: 150px; 
+}
+
+
+.navbar {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbar li {
+    margin: 0 10px;  
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #333; 
+    padding: 10px 20px;
+    border: 1px solid #333;
+    border-radius: 4px; 
+    transition: background-color 0.3s;
+}
+
+.navbar a:hover {
+    background-color: #f5f5f5; 
+}
+
+
+@media only screen and (max-width: 600px) {
+    .nv-link {
+        display: block;
+        margin-bottom: 20px;
+    }
+}
+
+.highlighted-text {
+    border: 1px solid #000; 
+    padding: 5px; 
+    border-radius: 5px; 
+}
+
+.disclaimer-text {
+    border: 1px solid #000; 
+    padding: 10px; 
+   
+}
+
+
+.text-green {
+    color: green;
+    font-weight: bold;
+    /* Add any other styles you want */
+}
+
+@media (max-width: 768px) {
+    .main-text p {
+        font-size: 14px;
+    }
+}
+
+/* For your main headings (h1, h2, etc.) */
+.main-heading {
+    font-family: sans-serif;
+}
+
+/* For paragraphs and regular text */
+.main-text {
+    font-family: sans-serif;
+}
+
+/* For highlighted text or disclaimer-text */
+.highlighted-text {
+    font-family:  sans-serif;
+}
+
+/* For navigation links */
+.nv-link {
+    font-family:  sans-serif;
+}
+
+/* For custom buttons */
+.custom-btn {
+    font-family:  sans-serif;
+}
+
+
+/* For  main headings */
+.main-heading {
+    font-size: 24px; 
+}
+
+/* For main text */
+.main-text {
+    font-size: 20px; 
+}
+
+/* For custom buttons */
+.custom-btn {
+    font-size: 18px; 
+}
+
+
+/* For the bordered texts with a smaller font size */
+.disclaimer-text {
+    font-size: 20px; 
+}
+
+
+/* CSS for the marquee effect */
+.marquee-text {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+
+
+
+
+/* CSS class for the custom background color */
+.custom-bg-color {
+
+    padding: 10px; 
+    border-radius: 40px; 
+    text-align: center; 
+    color: #ffffff; 
+}
+
+.custom-bg-color {
+    background-color: #007bff !important;
+    position: bottom;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 180px;
+}
+
+
+    .marquee {
+        overflow: hidden;
+        white-space: nowrap;
+        animation: marquee 30s linear infinite;
+    }
+    
+    @keyframes marquee {
+        0% {
+            transform: translateX(100%);
+            font-size: 28px; 
+        }
+        100% {
+            transform: translateX(-100%);
+            font-size: 28px; 
+        }
+    }
+    
+/* Position the Login button at the top right */
+.text-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+/* custom.css */
+.login-button {
+    position: absolute;
+    top: -10px;
+    right: 10px;
+}
+
+
+
+
+/* custom.css */
+.home-button {
+    position: absolute;
+    top: -100px;
+    left: -340px;
+}
+
+
+
+/* custom.css */
+.title-top {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 20px; 
+}
+
+
+
+
+.footer {
+    background-color: rgb(255, 255, 255);
+    color: #000000;
+    padding: 20px 0;
+}
+
+.features {
+    padding: 30px 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 128px;
+}
+
+.sponsors {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* This will spread the logos evenly */
+    align-items: center;
+    gap: 10px;
+}
+
+.sponsor-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 10px;
+    margin: 0 20px; /* This gives space on the left and right of each logo */
+}
+
+.sponsor-item img {
+    width: 100%;
+    max-width: 120px; /* Adjust as necessary */
+    height: auto;
+}
+
+.sponsor-item a,
+.sponsor-item p,
+.sponsor-item span {
+    display: block;
+    margin-top: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    color: inherit;
+}
+
+@media (max-width: 768px) {
+    .sponsors {
+        justify-content: space-between; /* This maintains spacing on smaller screens */
+    }
+    .sponsor-item {
+        flex: 0 1 auto; /* This prevents the item from growing to take the full width */
+        margin: 0 10px; /* Reduced margin for smaller screens */
+    }
+}
+
+
+.disclaimer-box {
+    background-color: #eef3f8; /* A light blue background */
+    border-left: 4px solid #165069; /* A softer primary color for the border */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* Slightly more pronounced shadow */
+    padding: 20px; /* Increased padding */
+    margin-bottom: 20px; /* Slightly more bottom margin */
+    border-radius: 50px; /* Slightly more rounded corners */
+    font-size: 1.1rem; /* Slightly larger font size */
+    font-weight: 500; /* Semi-bold font weight */
+}
+
+.disclaimer-box::before {
+    content: '✔️'; /* Example: Adding a warning icon */
+    padding-right: 8px; /* Space between icon and text */
+    font-size: 1.2em; /* Slightly larger icon size */
+}
+
+@media (max-width: 768px) {
+    .disclaimer-box {
+        padding: 15px; /* Adjust padding for mobile screens */
+    }
+}
+
+
+.disclaimer-title {
+    font-weight: bold;
+    margin-bottom: 8px; /* space after title */
+}
+
+.disclaimer-text {
+    line-height: 1.6; /* improved line spacing */
+}
+
+.disclaimer-action {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px; /* rounded button */
+    text-align: center;
+    margin-top: 8px; /* space before button/link */
+    text-decoration: none; /* remove underline from links */
+}
+
+/* Example for icon usage */
+.disclaimer-icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px; /* space after the icon */
+}
+
+/* Base layout for buttons */
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* Allow items to wrap if needed */
+    gap: 10px;
+}
+
+.navbar li {
+    list-style-type: none; /* Remove bullet points */
+}
+
+/* Specific styles for non-logged in state */
+.navbar.logged-out a.custom-btn {
+    padding: 0.6rem 1.2rem; /* Adjust padding as needed */
+    font-size: 1rem; /* Adjust font size as needed */
+    text-align: center; /* Center text in the button */
+    margin-bottom: 10px; /* Space between buttons */
+}
+
+
+/* Media query for larger screens */
+@media (min-width: 769px) {
+    .navbar {
+        justify-content: flex-start; /* Aligns buttons to the start of the navbar */
+    }
+
+    .navbar li {
+        flex-basis: auto; /* Allows button width to auto adjust */
+    }
+
+    .navbar a.custom-btn {
+        width: auto; /* Allow the width to be auto-adjusted */
+    }
+}
+
+
+.custom-bg-dark .main-text,
+.custom-bg-dark .main-text h1,
+.custom-bg-dark .main-text p {
+    color: var(--white-color) !important; /* Ensures text is white in elements with this class */
+}
+
+/* main.css */
+.required-field {
+    color: red; /* Change the color to match your design */
+    margin-left: 5px; /* Adjust the spacing as needed */
+}
+/* main.css */
+.gender-select {
+    border: 2px solid #3498db; /* Customize the border color as needed */
+    border-radius: 5px; /* Add rounded corners if desired */
+    padding: 5px; /* Adjust padding for spacing */
+    /* You can add other styles as needed */
+}
+
+.custom-btn {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    /* Rest of your styles */
+    border-radius: 30px; /* Adjust as necessary for roundness */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+}
+
+.custom-btn:hover {
+    background-color: var(--primary-color-dark); /* Darken the button on hover */
+    color: var(--white-color); /* Keep text white on hover */
+    /* Rest of your styles */
+}
+
+
+.custom-btn.active {
+    background-color: var(--primary-color-dark); /* Optionally darken button color */
+    color: var(--white-color); /* Keep text color white */
+}
+
+.nv-link {
+
+    color: var(--white-color); /* Assuming you want the text to be white */
+    padding: 10px 15px; /* Or any other padding you prefer */
+    border-radius: 50px; /* If you want rounded corners */
+    display: inline-block; /* If you want padding to take effect */
+    margin-right: 80px;
+    
+}
+
+/* To maintain the background color change when hovering */
+.nv-link:hover {
+    background-color: rgb(255, 255, 255); /* Same background color on hover */
+    
+}
+
+
+
+/* Table Base Styling */
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+}
+
+/* Zebra Striping for Rows */
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(237, 242, 247, 0.5); /* Lighter shade for odd rows */
+}
+
+/* Table Header Styling */
+.table thead th {
+    background-color: #007bff; /* Primary color for header */
+    color: white; /* White text for header */
+    padding: 10px;
+    border-bottom: 2px solid #dee2e6; /* Solid bottom border */
+}
+
+/* Table Row and Cell Styling */
+.table td, .table th {
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+/* Hover Effect on Rows */
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.1); /* Subtle blue on hover */
+}
+
+/* Responsive Table */
+@media screen and (max-width: 600px) {
+    .table-responsive {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Enhance Text Readability */
+.table td, .table th {
+    text-align: left;
+    font-size: 0.9rem; /* Adjust font size */
+    color: #333; /* Dark text for better readability */
+}
+
+/* Right align for numeric values */
+.table td.numeric, .table th.numeric {
+    text-align: right;
+}
+
+/* Adjusting for smaller screens */
+@media (max-width: 768px) {
+    .table td, .table th {
+        padding: 10px; /* More padding on smaller screens */
+    }
+}
+.nv-link.active {
+    color: black !important;
+}
+
+.welcome-box {
+    background-color: #eef3f8; /* A light blue background */
+    border-left: 4px solid#165069; /* A softer primary color for the border */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* Slightly more pronounced shadow */
+    padding: 20px; /* Increased padding */
+    margin-bottom: 20px; /* Slightly more bottom margin */
+    border-radius: 50px; /* Slightly more rounded corners */
+    font-size: 1.1rem; /* Slightly larger font size */
+    font-weight: 500; /* Semi-bold font weight */
+}
+
+.welcome-box strong {
+    color: #000; /* Black text for strong emphasis */
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.custom-form-control {
+    flex-grow: 1;
+    padding-right: 30px; /* Make space for the icon */
+}
+
+.password-icon {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+
+/* Define your color variables for light mode */
+:root {
+    --background-color: #fff; /* white background */
+    --text-color: rgb(21, 32, 43); /* dark text */
+    --input-background-color: #eee; /* light grey input background */
+    --input-text-color:rgb(21, 32, 43); /* dark text for input */
+    --button-background-color: #007bff; /* blue button background */
+    --button-text-color: #fff; /* white text for buttons */
+    --alert-background-color: #f8d7da; /* light red for alert background */
+    --alert-text-color: #721c24; /* dark red for alert text */
+}
+
+/* Define color variables for dark mode */
+.theme-dark {
+    --background-color: rgb(21, 32, 43); /* very dark grey background */
+    --text-color: #ffffff; /* light grey text */
+    --input-background-color: rgb(21, 32, 43); /* dark grey input background */
+    --input-text-color: #ddd; /* light grey text for input */
+    --button-background-color: #0d6efd; /* brighter blue button background */
+    --button-text-color: #fff; /* white text for buttons */
+    --alert-background-color: #c12f2f; /* dark red for alert background */
+    --alert-text-color: #f5c2c7; /* light red for alert text */
+}
+
+.login-box {
+  
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 20px !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    background-color: var(--input-bg-color) !important; /* Adjust according to your theme */
+}
+
+@media (max-width: 768px) {
+    .login-box {
+        max-width: 100% !important;
+        padding: 15px !important;
+    }
+}
+
+
+/* Styles for the custom form controls */
+.custom-form-control {
+    background-color: var(--input-background-color);
+    color: var(--input-text-color);
+    /* Add other styles as needed */
+}
+
+/* Styles for custom buttons */
+.custom-btn {
+    background-color: var(--button-background-color);
+    color: var(--button-text-color);
+    /* Add other styles as needed */
+}
+
+/* Styles for alerts */
+.alert {
+    background-color: var(--alert-background-color);
+    color: var(--alert-text-color);
+    /* Add other styles as needed */
+}
+
+/* Specific icon styles within the password field */
+.password-icon {
+    cursor: pointer;
+    /* Style as needed, e.g., positioning inside the input */
+}
+
+/* ADMIN DASHBOARD STYLES */
+
+:root {
+    --background-color: #fff; /* Default white background */
+    --text-color: rgb(197, 155, 3); /* Default dark text */
+    --input-background-color: #eee; /* Default light grey input background */
+    --input-text-color: rgb(21, 32, 43); /* Default dark text for input */
+    --button-background-color: #007bff; /* Default blue button background */
+    --button-text-color: #fff; /* Default white text for buttons */
+    --alert-background-color: #f8d7da; /* Default light red for alert background */
+    --alert-text-color: #721c24; /* Default dark red for alert text */
+}
+
+/* Define color variables for dark mode */
+.theme-dark {
+    --background-color: rgb(21, 32, 43); /* Very dark grey background */
+    --text-color:  rgb(197, 155, 3); /* Light grey text */
+    --input-background-color: rgb(21, 32, 43); /* Dark grey input background */
+    --input-text-color: #ddd; /* Light grey text for input */
+    --button-background-color: #0d6efd; /* Brighter blue button background */
+    --button-text-color: #fff; /* White text for buttons */
+    --alert-background-color: #c12f2f; /* Dark red for alert background */
+    --alert-text-color: #f5c2c7; /* Light red for alert text */
+}
+
+/* Style for the content area in the admin dashboard */
+.content {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    padding: 20px;
+    border: 1px solid #4d1212;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Style for the table in the admin dashboard */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 8px 12px;
+    text-align: left;
+    border: 1px solid #ddd; /* Light theme cell borders */
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+/* Changes for improved dark mode readability in the admin dashboard: */
+.theme-dark .table tbody tr:nth-child(even) {
+    background-color: #3a3a3a; /* Darker background for even rows in dark mode */
+    color: #eee; /* Set text color for even rows in dark mode */
+}
+
+.theme-dark .table tbody tr:nth-child(odd) {
+    background-color: #4a4a4a; /* Slightly lighter background for odd rows in dark mode */
+    color: #eee; /* Set text color for odd rows in dark mode */
+}
+
+/* Increase font size slightly for better legibility in the admin dashboard */
+.table th,
+.table td {
+    font-size: 16px;
+}
+
+/* Apply the above changes to header in the admin dashboard */
+.theme-dark .table th {
+    background-color: #222; /* Dark theme header background */
+    color: #ffffff;
+}
+
+/* Zebra striping for even rows in the admin dashboard */
+.table tbody tr:nth-child(even) {
+    background-color: #cac8bd; /* Light theme even rows */
+}
+
+/* Style table rows on hover in the admin dashboard */
+.table tbody tr:hover {
+    background-color: #187db7; /* Light theme hover color */
+}
+
+/* Dark theme styles for the admin dashboard */
+.theme-dark .content {
+    border-color: #555; /* Dark theme border color */
+}
+
+/* Zebra striping for even rows in the admin dashboard */
+.theme-dark .table tbody tr:nth-child(even) {
+    background-color: #444; /* Dark theme even rows */
+}
+
+.theme-dark .table tbody tr:hover {
+    background-color: #666; /* Dark theme hover color */
+}
+
+/* Style for the "Delete Account" button in the admin dashboard */
+.delete-account {
+    text-align: center; /* Center align the button */
+}
+
+.delete-account button {
+    background-color: red; /* Set the background color to red */
+    color: white; /* Set the text color to white */
+    border: none; /* Remove the button border */
+    padding: 5px 10px; /* Add some padding to the button */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    border-radius: 30px;
+}
+
+.delete-account button:hover {
+    background-color: darkred; /* Change background color on hover */
+}
+
+
+.content-description {
+    font-size: 18px; /* Adjust the font size to your preference */
+    font-weight: bold; /* Make the text bold */
+    margin-bottom: 20px; /* Add some space below the text */
+    position: center;
+    
+}
+
+.user-count {
+    color: #007bff; /* Set the text color to a shade of blue */
+    font-size: 24px; /* Increase the font size for emphasis */
+}
+
+@media (max-width: 768px) {
+    /* Responsive style for smaller screens (e.g., mobile) */
+    .content-description {
+        font-size: 16px;
+    }
+}
+.spinner {
+    animation: spin 5s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+
+.custom-container {
+    width: 90%; /* or 100vw */
+    max-width: 1200px; /* a larger max-width than before */
+    margin: 0 auto; /* this will center the container */
+    padding: 1em; /* adjust padding as needed */
+}
+
+/* GPT responses stylings */
+/* Light Theme Styles */
+.gpt3-response-container {
+    border: 2px solid #ccc; /* Solid border for the box */
+    background-color: #f9f9f9; /* Light background for the content */
+    padding: 20px; /* Padding inside the box */
+    margin-top: 20px; /* Margin above the box */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    color: #333; /* Dark text for readability */
+}
+
+.gpt3-response-content,
+.reminder-content {
+    margin-bottom: 15px; /* Space at the bottom of each section */
+}
+
+/* Dark Theme Styles */
+.dark-theme .gpt3-response-container {
+    border-color: #555; /* Lighter border color for visibility in dark mode */
+    background-color: #2c2f33; /* Dark background for the content in dark mode */
+    color: #f8f8f8; /* Brighter text color for readability in dark mode */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* More pronounced shadow for depth in dark mode */
+}
+
+.dark-theme .gpt3-response-content,
+.dark-theme .reminder-content {
+    color: #ccc; /* Lighter text color for readability in dark mode */
+}
+
+/* Ensure strong text stands out in dark mode */
+.dark-theme .gpt3-response-container strong {
+    color: #165069; /* Bright color for strong text in dark mode */
+}
+
+
+
+
+
+.forgot-password-link {
+    margin-top: 25px;  /* You can adjust the top margin as needed */
+    display: block;   /* Ensures the link takes the full width available */
+}
+
+
+.loading-content {
+    text-align: center;
+}
+
+.loading-spinner {
+    display: inline-block;
+    width: 90px;
+    height: 90px;
+    border-radius: 100%;
+    border: 9px solid #3498db;
+    border-top: 4px solid transparent;
+    animation: pulse 1.5s ease-in-out infinite;
+    margin-top: 10px;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.8);
+        border-color: #3498db;
+    }
+    50% {
+        transform: scale(1.2);
+        border-color: transparent;
+    }
+    100% {
+        transform: scale(0.8);
+        border-color: #3498db;
+    }
+}
+
+.loading-text {
+    font-size: 34px; /* Adjust the font size as needed */
+    color: #f3a217;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Mobile styles */
+@media only screen and (max-width: 600px) {
+    .loading-spinner {
+        width: 110px;
+        height: 110px;
+        border-width: 3px;
+    }
+
+    .loading-text {
+        font-size: 30px;
+        font-weight: bold;
+        margin-top: 15px;
+    }
+}
+
+
+
+.theme-switch {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.theme-switch-text {
+    margin-left: 5px; /* Adjust the margin as needed for proper spacing */
+}
+
+
+/* Custom Navbar Styling */
+
+/* Navbar Brand (Logo and Akili Check) */
+.navbar-brand {
+    color: #000000 !important; /* Text color for brand */
+    background-color:white ;
+    font-weight: bold;
+    
+}
+
+
+/* Navbar Links (Home, Login) */
+.navbar-nav .nav-link {
+    color: #000000 ; /* Text color for links */
+    margin: 0 10px; /* Adjust spacing between links */
+}
+
+
+
+
+
+/* Navbar Brand Hover Effect (excluding logo and Akili Check title) */
+.navbar:not(.navbar-brand:hover) .navbar-brand:hover {
+    color: inherit; /* Inherit the text color for brand when not hovered */
+}
+
+/* Navbar Links Hover Effect */
+.navbar-nav .nav-link:hover {
+    color: #000000 !important; /* Change text color on hover */
+}
+
+/* Active Link Styling */
+.navbar-nav .nav-link.active {
+    background-color: #1d3250; /* Background color for active link */
+    color: #ffffff; /* Text color for active link */
+}
+
+/* Disabled Link Styling (Login) */
+.navbar-nav .nav-link.disabled {
+    color: #ffffff; /* Text color for disabled link */
+    cursor: not-allowed; /* Show not-allowed cursor for disabled link */
+}
+
+/* Theme Switch Styling */
+.theme-switch {
+    cursor: pointer;
+}
+
+/* Theme Switch Icon Styling */
+.theme-switch #themeIcon {
+    color: #ffc107; /* Icon color */
+    font-size: 1.5rem; /* Icon size */
+    margin-right: 190px; /* Adjust the right margin */
+  
+}
+
+
+/* Theme Switch Text Styling */
+.theme-switch-text {
+    color: #ffffff; /* Text color for theme switch */
+    font-size: 0.875rem; /* Text size for theme switch */
+    margin-left: 5px; /* Adjust spacing between icon and text */
+}
+
+/* Navbar Toggler Icon Color */
+.navbar-toggler-icon {
+    background-color: #000000; /* Toggler icon color */
+}
+
+/* Mobile Navbar Background Color */
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        background-color: #343a40; /* Dark background color for mobile dropdown */
+    }
+}
+
 
 .custom-form-select-sm {
     background-color: var(--input-bg-color);
@@ -522,7 +1700,7 @@ input[type="checkbox"]:checked{
 }
 
 .disclaimer-box::before {
-    content: '✔️'; /* Example: Adding a warning icon */
+    content: '🔼'; /* Example: Adding a warning icon */
     padding-right: 8px; /* Space between icon and text */
     font-size: 1.2em; /* Slightly larger icon size */
 }

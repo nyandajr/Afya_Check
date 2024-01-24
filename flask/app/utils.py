@@ -1,4 +1,3 @@
-""" functions ive stollen from the original code"""
 
 import os
 import openai
@@ -203,7 +202,7 @@ Your response should be compassionate and actionable, guiding me towards the app
         '''
     elif assessment["title"] == "Anxiety Assessment (GAD-7)":
         return f''' gpt3_prompt = f"""
-       As an expert mental health assistant, after completing the GAD-7 anxiety assessment with a score of {score} out of 21, I need a response that:
+       As an expert mental health assistant, after completing the GAD-7 anxiety assessment with a score of {score} out of 21,indictaing '{result_text}' I need a response that:
         1. Provides empathetic support reflecting on the anxiety score and briefly describes anxiety, including typical experiences.
         2. Outlines the risks of untreated anxiety and natural coping strategies in a concise manner.
         3. Lists notable mental health facilities in Tanzania, like Mirembe, Amana, and Temeke hospitals, for additional help.
@@ -215,7 +214,7 @@ Your response should be compassionate and actionable, guiding me towards the app
         '''
     elif assessment["title"] == "Procrastination Assessment":
         return f''' gpt3_prompt = f"""
-    As an expert mental health assistant, after completing the procrastination assessment with a score of {score} out of 64, I need a response that:
+    As an expert mental health assistant, after completing the procrastination assessment with a score of {score} out of 64, indicating '{result_text}' I need a response that:
     1. Provides empathetic support reflecting on the procrastination score and briefly describes procrastination, including typical experiences.
     2. Outlines the risks of untreated procrastination and natural coping strategies in a concise manner.
     
@@ -229,7 +228,7 @@ Your response should be compassionate and actionable, guiding me towards the app
 
     elif assessment["title"] == "Sleep Disorder Assessment":
         return f''' gpt3_prompt = f"""
-    As an expert mental health assistant, after completing the Sleep Disorder Assessment with a score of {score} out of 80, indicating: '{result_text}'. I need a response that:
+    As an expert mental health assistant, after completing the Sleep Disorder Assessment with a score of {score} out of 80 indicating'{result_text}', I need a response that:
     1. Provides empathetic support reflecting on the Sleep Disorder Assessment score and briefly describes Sleep Disorder Assessment, including typical experiences.
     2. Outlines the risks of untreated Sleep Disorder Assessment and natural coping strategies in a concise manner.
     The response should be swift yet empathetic, combining comfort with essential guidance, and highlight the importance of professional health advice.
@@ -239,14 +238,14 @@ Your response should be compassionate and actionable, guiding me towards the app
     '''
     elif assessment["title"] == "AUDIT (Alcohol Use Disorders Identification Test)":
        return f''' gpt3_prompt = f"""
-     As an experienced mental health assistant, I've taken the AUDIT assessment score of {score} out of 40:
+     As an experienced mental health assistant, I've taken the AUDIT assessment score of {score} out of 40 indicating '{result_text}'
     1. Analyse or Interpret my score, with a straightforward categorization as high, moderate, or low, including a strong recommendation for a hospital visit if the score is high. Combine this with a clear definition of Substance Alcohol Use Disorder and its early signs.
     2. Highlight the negative impacts of unchecked alcohol addiction.
     3. Suggest a range of coping strategies to combat alcohol addiction, commend the proactive step of taking the assessment.'''
     
     elif assessment["title"] == "OCD Assessment (Y-BOCS)":
         return f'''gpt3_prompt = f"""
-       As an expert mental health assistant, I've scored {score} on the OCD assessment out of the maximum 40 . Please provide a response that:
+       As an expert mental health assistant, I've scored {score} on the OCD assessment out of the maximum 40 indicating '{result_text}' . Please provide a response that:
         1. Combines an empathetic acknowledgement of my score level (high, moderate, or low) with clear guidance, especially advising hospital visitation if the score is high.
         2. Offers a concise explanation of Obsessive-Compulsive Disorder, including typical early symptoms with exampleskjl and briefly touches on the potential daily life impacts if left unmanaged.
         3. Proposes natural coping strategies for OCD and commends my proactive approach in taking the assessment.
@@ -270,7 +269,7 @@ Your reply should be empathetic, succinct, and directive, prioritizing immediate
         '''
     elif assessment["title"] == "DAST-10 Assessment (Drug Abuse Screening Test)":
         return f"""
-            "Having completed the DAST-10 drug abuse assessment with a score of {score} out of {assessment['max_score']}, I'm seeking:
+            "Having completed the DAST-10 drug abuse assessment with a score of {score} out of {assessment['max_score']} indicating '{result_text}', I'm seeking:
             1. An immediate understanding of whether my score is considered high, moderate, or low, including direct advice on whether a hospital visit is necessary.
             2. A succinct definition of Drug Abuse Disorder, with an overview of early signs and potential health and life implications if left unaddressed.
             3. Recognition of my initiative in taking this assessment and personalized guidance on coping strategies tailored to my score.
@@ -280,7 +279,7 @@ Please provide a response that is both informative and supportive, guiding me to
             """
     elif assessment["title"] == "ASRS-v1.1 Assessment (Adult ADHD Self-Report Scale)":
         return f""" 
-            "After completing the ASRS-v1.1 (Adult ADHD Self-Report Scale) assessment, my score is {score} out of {assessment['max_score']}. I'm seeking:
+            "After completing the ASRS-v1.1 (Adult ADHD Self-Report Scale) assessment, my score is {score} out of {assessment['max_score']} indicating '{result_text}'. I'm seeking:
 1. An interpretation of my ASRS-v1.1 score to understand if it is high, moderate, or low, and the implications for my ADHD symptoms.
 2. An explanation of ADHD, its symptoms in adults, and the potential consequences of leaving it unmanaged.
 3. Acknowledgment of my initiative in taking the ASRS-v1.1 assessment and personalized advice for coping with ADHD.
@@ -291,7 +290,7 @@ Your response should be prompt and provide me with clear, empathetic guidance ba
     elif assessment["title"] == "Psychosis Screening Questionnaire (PSQ) Assessment":
         return f'''gpt3_prompt = f"""
         As a knowledgeable mental health assistant:
-        I have taken  a schizophrenia assessment and achieved a score of {score} out of a maximum possible score of {assessment['max_score']}. 
+        I have taken  a schizophrenia assessment and achieved a score of {score} out of a maximum possible score of {assessment['max_score']} indicating '{result_text}'. 
 
         1) Tell me if my score is high or low
         2) What is schizophrenia and what are the symptoms and early signs.
@@ -301,7 +300,7 @@ Your response should be prompt and provide me with clear, empathetic guidance ba
         '''
     elif assessment["title"] == "Depression Assessment (PHQ-9)":
       return f'''gpt3_prompt = f"""
-    "Having completed the Depression(sonona) PHQ-9 assessment, my score is {score} out of a potential 27. Could you:
+    "Having completed the Depression(sonona) PHQ-9 assessment, my score is {score} out of a potential 27 indicating '{result_text}'. Could you:
                         1. Interpret my PHQ-9 score with empathy, indicating if it's considered high, moderate, or low, and explain the nature of depression along with its potential consequences if neglected.
                         2. Provide natural coping strategies and culturally sensitive advice for supporting someone with depression in Tanzania.
                         3. Recognize my effort in taking this step towards mental wellness, and if necessary, guide me on seeking professional help, especially if my score is on the higher end."
@@ -400,15 +399,15 @@ def create_result_text(assessment, score, selected_language="English"):
             
         elif selected_language == "Swahili":
             if score == 0:
-                return "Alama zako zinaonyesha hakuna tatizo linalohusiana na Kuahirisha mambo (Procrastination)."
+                return "Alama zako zinaonyesha hakuna tatizo linalohusiana na kupanga mambo mbele."
             elif score <= 20:
-                return "Alama zako zinaonyesha kiwango cha chini cha Kuahirisha mambo (Procrastination)."
+                return "Alama zako zinaonyesha kiwango cha chini cha kupanga mambo mbele."
             elif score <= 40:
-                return "Alama zako zinaonyesha kiwango cha wastani cha Kuahirisha mambo (Procrastination)."
+                return "Alama zako zinaonyesha kiwango cha wastani cha kupanga mambo mbele."
             elif score <= 60:
-                return "Alama zako zinaonyesha kiwango kikubwa cha Kuahirisha mambo (Procrastination)."
+                return "Alama zako zinaonyesha kiwango kikubwa cha kupanga mambo mbele."
             else:
-                return "Alama zako zinaonyesha kiwango cha juu sana cha Kuahirisha mambo (Procrastination)."
+                return "Alama zako zinaonyesha kiwango cha juu sana cha kupanga mambo mbele."
             
     elif assessment["title"] == "Sleep Disorder Assessment":
         if selected_language == "English":
