@@ -64,7 +64,13 @@
           <i class="bi bi-lightbulb"></i> {% if session['lang'] == "sw" %}Badili muonekano{% else %}Change Theme{% endif %}
         </a>
       </li>
-      
+      <!-- New "Get Connected with Specialist" button -->
+<li class="nav-item ms-2">
+    <a class="nav-link" href="{{ url_for('specialists') }}" style="border-radius: 100px; color: white; font-weight: bold;">
+        <i class="bi bi-person"></i> {% if session['lang'] == "sw" %}Unganishwa na Wataalamu{% else %}Get Connected with Specialist{% endif %}
+    </a>
+</li>
+
     </ul>
   </div>
 </div>

@@ -1,94 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Akili Check | Admin</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akili Check | Admin</title>
 
-	<link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
-	{% block styles %}
-	{% endblock styles %}
+    <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
+    {% block styles %}
+    {% endblock styles %}
 </head>
 
 <body class="custom-bg-dark mx-2 theme-light">
-	<div class="theme-switch" id="themeSwitch">
-		<!-- <i class="bi bi-moon-stars-fill"></i> -->
-		<i class="bi bi-brightness-high-fill" id="themeIcon"></i>
-	</div>
-	<div class="col-lg-9 col-md-10 mt-5 mx-auto">
-		<div class="text-center">
-			<h1 class="title">Akili Check Admin Panel</h1>
-			{% if current_user.is_authenticated %}
-                {% if current_user.role == "admin" %}
-					<a href="{{url_for('admin')}}" class="nv-link text {% if curr_page=='users' %}active{% endif %}">
-						<i class="bi bi-person-fill"></i>
-						{% if session['lang'] == "sw" %} Watumiaji {% else %} Users {% endif %}
-					</a>
-					<span class="mx-2 fw-bold">|</span>
-                    <a href="{{url_for('admin_scores')}}" class="nv-link text {% if curr_page=='scores' %}active{% endif %}">
-                        <i class="bi bi-graph-down-arrow"></i>
-                        {% if session['lang'] == "sw" %} Majibu {% else %} Scores {% endif %}
-                    </a>
-                    <span class="mx-2 fw-bold">|</span>
-                    <a href="{{url_for('logout')}}" class="nv-link text {% if curr_page=='logout' %}active{% endif %}">
-                        <i class="bi bi-box-arrow-right"></i>
-                        {% if session['lang'] == "sw" %} Ondoka {% else %} Logout {% endif %}
-                    </a>
-                {% endif %}
-			{% endif %}
-		</div>
-		<div class="my-3">
-			<div class="border-green flexy">
-				<label for="language" class="form-label subtext">
-					{% if session['lang'] == "sw" %}
-						Chagua lugha yako:
-					{% else %}
-						Choose your language:
-					{% endif %}
-				</label>
-				<select name="language" id="language" class="custom-form-select-sm">
-					<option value="en" {% if session['lang'] == "en" %} selected {%endif%}>
-						English
-					</option>
-					<option value="sw" {% if session['lang'] == "sw" %} selected {%endif%}>
-						Kiswahili
-					</option>
-				</select>
-			</div>
-		</div>
-		{% block content %}
-		{% endblock content %}
-	</div>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-	<script src="{{url_for('static', filename='main.js')}}"></script>
-	{% block script %}
-	{% endblock script %}
+    <div class="theme-switch" id="themeSwitch">
+        <i class="bi bi-brightness-high-fill" id="themeIcon"></i>
+    </div>
 
-	{% block sponsors %}
-	<div class="mt-4 border-top">
-		<p class="text pt-1">Sponsored By:</p>
-		<div class="sponsors">
-			<div class="sponsor-item">
-				<img src="{{url_for('static', filename='images/udom-logo.png')}}" alt="UDOM Logo">
-				<a href="https://udom.ac.tz/" target="_blank">UDOM</a>
-			</div>
-			<div class="sponsor-item">
-				<img src="{{url_for('static', filename='images/ai4dlab.png')}}" alt="AI4D Labs Logo">
-				<a href="https://ai4dlab.or.tz/" target="_blank">AI4D Labs</a>
-			</div>
-			<div class="sponsor-item">
-				<img src="{{url_for('static', filename='images/mandela-logo.png')}}" alt="NM-AIST Logo">
-				<a href="https://nm-aist.ac.tz/" target="_blank">NM-AIST</a>
-			</div>
-			<div class="sponsor-item">
-				<img src="{{url_for('static', filename='images/Amana logo.png')}}" alt="Amana hospital Logo">
-				<a href="http://amanarrh.go.tz" target="_blank">Amana </a>
-			</div>
-		</div>
-	</div>
-	{% endblock sponsors %}
+    <nav class="navbar navbar-expand-lg" style="background-color: #165069; color: #ffffff; ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Akili Check Admin Panel</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" style="background-color: #ffffff;"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+					<li class="nav-item {% if curr_page=='users' %}active{% endif %}">
+						<a class="nav-link" href="{{url_for('admin')}}">
+							<i class="bi bi-person-fill"></i>
+							{% if session['lang'] == "sw" %}
+								Watumiaji {{ user_count }} {% if user_count == 1 %}Mtumiaji{% else %}{% endif %}
+							{% else %}
+								Users {{ user_count }} {% if user_count == 1 %}User{% else %}{% endif %}
+							{% endif %}
+						</a>
+					</li>
+					
+                    <li class="nav-item {% if curr_page=='scores' %}active{% endif %}">
+                        <a class="nav-link" href="{{url_for('admin_scores')}}">
+                            <i class="bi bi-graph-down-arrow"></i>
+                            {% if session['lang'] == "sw" %} Majibu {% else %} Scores {% endif %}
+                        </a>
+                    </li>
+                    <li class="nav-item {% if curr_page=='logout' %}active{% endif %}">
+                        <a class="nav-link" href="{{url_for('logout')}}">
+                            <i class="bi bi-box-arrow-right"></i>
+                            {% if session['lang'] == "sw" %} Ondoka {% else %} Logout {% endif %}
+                        </a>
+                    </li>
+				</li>
+				<li>
+				</li>
+				<li>
+					
+				</li>
+				<li>
+				</li>
+				<li>
+				</li>
+				<li>
+				</li>
+				<li>
+				</li>
+				<li>
+				</li>
+				<li>
+					
+				</li>
+				<li>
+					
+				</li>
+				<li>
+				</li>
+				<li>
+				</li>
+				<li>
+					
+                    <!-- Display welcome message for authenticated admin -->
+{% if current_user.is_authenticated and current_user.role == 'admin' %}
+<div class="navbar-text ms-auto ml-3">
+	<i class="bi bi-person-fill"></i> Welcome Admin {{ current_user.username }}
+</div>
+{% endif %}
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="col-lg-9 col-md-10 mt-5 mx-auto">
+        {% block content %}
+        {% endblock content %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename='main.js')}}"></script>
+    {% block script %}
+    {% endblock script %}
+
+    {% block sponsors %}
+    <div class="mt-4 border-top">
+        <p class="text pt-1">Sponsored By:</p>
+        <div class="sponsors">
+            <div class="sponsor-item">
+                <img src="{{url_for('static', filename='images/udom-logo.png')}}" alt="UDOM Logo">
+                <a href="https://udom.ac.tz/" target="_blank">UDOM</a>
+            </div>
+            <div class="sponsor-item">
+                <img src="{{url_for('static', filename='images/ai4dlab.png')}}" alt="AI4D Labs Logo">
+                <a href="https://ai4dlab.or.tz/" target="_blank">AI4D Labs</a>
+            </div>
+            <div class="sponsor-item">
+                <img src="{{url_for('static', filename='images/mandela-logo.png')}}" alt="NM-AIST Logo">
+                <a href="https://nm-aist.ac.tz/" target="_blank">NM-AIST</a>
+            </div>
+            <div class="sponsor-item">
+                <img src="{{url_for('static', filename='images/Amana logo.png')}}" alt="Amana hospital Logo">
+                <a href="http://amanarrh.go.tz" target="_blank">Amana </a>
+            </div>
+        </div>
+    </div>
+    {% endblock sponsors %}
 </body>
 </html>

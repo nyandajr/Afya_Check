@@ -1,0 +1,25 @@
+<!-- specialists.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+    {% if session['lang'] == "sw" %}
+      <h1>Wataalamu Waliothibitishwa</h1>
+      <p>Asante kwa kutembelea ukurasa huu. Lengo letu ni kukusanya orodha kamili ya wataalamu waliothibitishwa wa afya ya akili. Tunaamini kwamba kuunganisha nguvu za Akili  Bandia (Artificial Intelligence) na wataalamu kunaweza kuongeza athari chanya na kusaidia jamii yetu. Tafadhali endelea kufuatilia na rudi tena baadaye. Kwa sasa, unaweza kuendelea kuchunguza vipengele vingine vya programu yetu.</p>
+    {% else %}
+      <h1>Licensed Mental Health Specialists</h1>
+      <p>Thank you for visiting this page. We are dedicated to curating a comprehensive list of licensed mental health specialists. We believe that harnessing the synergy between Artificial Intelligence and mental health experts can amplify positive impact and contribute to the well-being of our society. Please stay tuned and revisit this page later. In the meantime, feel free to explore other features of our application.</p>
+    {% endif %}
+</div>
+
+    <!-- Stylish "COMING SOON" text -->
+    <div class="coming-soon" >
+      <h2>COMING SOON</h2>
+    </div>
+    
+
+ 
+{% endblock %}
+
+
