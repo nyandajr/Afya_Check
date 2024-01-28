@@ -563,3 +563,6 @@ def delete_account(user_id):
     return redirect(url_for("admin"))
 
 
+@app.route('/specialists')
+def specialists():
+    return render_template('specialists.html')
