@@ -15,7 +15,16 @@
 
 <div id="loading" class="loading-container">
     <div class="loading-content">
-        <div class="loading-spinner"></div>
+        <div class="loading">
+            <div class="loading__ring">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+                    <path d="..."></path>
+                </svg>
+            </div>
+            <div class="loading__ring">
+               
+            </div>
+        </div>
         {% if session['lang'] == "sw" %}
             <p class="loading-text">Inapakua tafadhali subiri ufafanuzi wa majibu yako</p>
         {% else %}
@@ -35,20 +44,20 @@
         // Hide the loading animation initially
         $("#loading").hide();
 
-        // Submit form event
-        $("form").submit(function() {
-            // Show the loading animation when the form is submitted
+        // Simulate fetching or processing results
+        function fetchResults() {
+            // Show the loading animation
             $("#loading").show();
 
-            // You may want to submit the form using AJAX here to fetch the results
-
-            // Simulating a delay (you can replace this with your actual form submission logic)
+            // Simulating a delay (replace with your actual asynchronous logic)
             setTimeout(function() {
                 // Hide the loading animation when the results are ready
                 $("#loading").hide();
             }, 7000); // 7000 milliseconds (7 seconds) - replace with your actual delay
-        });
+        }
+
+        // Call fetchResults function when the document is ready
+        fetchResults();
     });
 </script>
 {% endblock script %}
-
