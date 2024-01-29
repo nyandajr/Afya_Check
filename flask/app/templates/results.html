@@ -43,21 +43,22 @@
     $(document).ready(function() {
         // Hide the loading animation initially
         $("#loading").hide();
-
-        // Simulate fetching or processing results
-        function fetchResults() {
-            // Show the loading animation
-            $("#loading").show();
-
-            // Simulating a delay (replace with your actual asynchronous logic)
-            setTimeout(function() {
-                // Hide the loading animation when the results are ready
-                $("#loading").hide();
-            }, 7000); // 7000 milliseconds (7 seconds) - replace with your actual delay
-        }
-
+        
         // Call fetchResults function when the document is ready
         fetchResults();
     });
+
+    // Simulate fetching or processing results
+    function fetchResults() {
+        // Show the loading animation
+        $("#loading").show();
+
+        // This is where you would perform your actual asynchronous logic
+
+        // For demonstration purposes, we're instantly hiding the loading animation
+        // Replace the following line with your actual asynchronous logic
+        $("#loading").hide();
+    }
 </script>
 {% endblock script %}
+
