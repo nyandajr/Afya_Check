@@ -4,71 +4,19 @@
 
 {% block content %}
 <div class="subtitle text-center">
-    {{res.title}}
+    {{ res.title }}
 </div>
 <div class="plot">
     {{ plot | safe }}
 </div>
 <div class="my-3">
-    {{res.result_text}}
+    {{ res.result_text }}
 </div>
 
-<div id="loading" class="loading-container">
-    <div class="loading-content">
-        <div class="loading">
-            <div class="loading__ring">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
-                    <path d="..."></path>
-                </svg>
-            </div>
-            <div class="loading__ring"></div>
-        </div>
-        {% if session['lang'] == "sw" %}
-            <p class="loading-text">Inapakua tafadhali subiri ufafanuzi wa majibu yako</p>
-        {% else %}
-            <p class="loading-text">Loading... Please wait for the interpretation of your results.</p>
-        {% endif %}
-    </div>
-</div>
+
 
 {% endblock content %}
 
 {% block sponsors %}
 {% endblock sponsors %}
 
-{% block script %}
-<script>
-    $(document).ready(function() {
-        // Hide the loading animation initially
-        $("#loading").hide();
-        
-        // Call fetchResults function when the document is ready
-        fetchResults();
-    });
-
-    // Simulate fetching or processing results
-    function fetchResults() {
-        // Show the loading animation
-        $("#loading").show();
-
-        // Replace this part with your actual asynchronous logic
-        $.ajax({
-            url: '/your-api-endpoint',  // Replace with your actual API endpoint
-            type: 'GET',
-            success: function(response) {
-                // Process the response here
-                console.log(response);
-
-                // Hide the loading animation when the results are ready
-                $("#loading").hide();
-            },
-            error: function(error) {
-                console.error('Error fetching data:', error);
-
-                // Hide the loading animation in case of an error
-                $("#loading").hide();
-            }
-        });
-    }
-</script>
-{% endblock script %}
