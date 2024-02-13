@@ -1,7 +1,7 @@
 :root {
     --bg-color: rgb(21, 32, 43); /* Dark background */
-    --primary-color:#165069; /* Primary color */
-    --primary-color-dark:#165069; /* Darker primary color */
+    --primary-color:#0374ff; /* Primary color */
+    --primary-color-dark:#0374ff; /* Darker primary color */
     --white-color: #ffffff; /* White text color */
     --input-bg-color: rgb(45, 52, 65); /* Input field background */
     --input-border-color: #d1d1d1; /* Input field border */
@@ -9,8 +9,8 @@
 
 .theme-light {
     --bg-color: white; /* Light background for light theme */
-    --primary-color:#165069; /* Primary color for light theme */
-    --primary-color-dark:#165069; /* Darker primary color for light theme */
+    --primary-color:#0374ff; /* Primary color for light theme */
+    --primary-color-dark:#0374ff; /* Darker primary color for light theme */
     --white-color: rgb(0, 0, 0); /* Text color for light theme, which is black */
     --input-bg-color: rgb(223, 226, 231); /* Input field background for light theme */
     --input-border-color: #d1d1d1; /* Input field border for light theme */
@@ -61,8 +61,8 @@ body {
     outline: none;
 }:root {
     --bg-color: rgb(21, 32, 43); /* Dark background */
-    --primary-color:#165069; /* Primary color */
-    --primary-color-dark:#165069; /* Darker primary color */
+    --primary-color:#0374ff; /* Primary color */
+    --primary-color-dark:#0374ff; /* Darker primary color */
     --white-color: #ffffff; /* White text color */
     --input-bg-color: rgb(45, 52, 65); /* Input field background */
     --input-border-color: #d1d1d1; /* Input field border */
@@ -70,8 +70,8 @@ body {
 
 .theme-light {
     --bg-color: white; /* Light background for light theme */
-    --primary-color:#165069; /* Primary color for light theme */
-    --primary-color-dark:#165069; /* Darker primary color for light theme */
+    --primary-color:#0374ff; /* Primary color for light theme */
+    --primary-color-dark:#0374ff; /* Darker primary color for light theme */
     --white-color: rgb(0, 0, 0); /* Text color for light theme, which is black */
     --input-bg-color: rgb(223, 226, 231); /* Input field background for light theme */
     --input-border-color: #d1d1d1; /* Input field border for light theme */
@@ -89,7 +89,7 @@ body {
 
 
 .custom-btn {
-    background-color: #165069 !important;
+    background-color: #0374ff !important;
     color: var(--white-color);
     text-decoration: none;
     padding: 0.6rem;
@@ -327,9 +327,6 @@ input[type="checkbox"]:checked{
     transition: background-color 0.3s;
 }
 
-.navbar a:hover {
-    background-color: #f5f5f5; 
-}
 
 
 @media only screen and (max-width: 600px) {
@@ -443,7 +440,7 @@ input[type="checkbox"]:checked{
 }
 
 .custom-bg-color {
-    background-color:#165069 !important;
+    background-color:#0374ff !important;
     position: bottom;
     left: 0;
     right: 0;
@@ -469,14 +466,7 @@ input[type="checkbox"]:checked{
         }
     }
     
-/* Position the Login button at the top right */
-.text-right {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin-top: 10px;
-    margin-right: 10px;
-}
+
 
 /* custom.css */
 .login-button {
@@ -573,7 +563,7 @@ input[type="checkbox"]:checked{
 
 .disclaimer-box {
     background-color: #eef3f8; /* A light blue background */
-    border-left: 4px solid #165069; /* A softer primary color for the border */
+    border-left: 4px solid #0374ff; /* A softer primary color for the border */
     box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* Slightly more pronounced shadow */
     padding: 20px; /* Increased padding */
     margin-bottom: 20px; /* Slightly more bottom margin */
@@ -731,7 +721,7 @@ input[type="checkbox"]:checked{
 
 /* Table Header Styling */
 .table thead th {
-    background-color:#165069; /* Primary color for header */
+    background-color:#0374ff; /* Primary color for header */
     color: white; /* White text for header */
     padding: 10px;
     border-bottom: 2px solid #dee2e6; /* Solid bottom border */
@@ -783,7 +773,7 @@ input[type="checkbox"]:checked{
 
 .welcome-box {
     background-color: #eef3f8; /* A light blue background */
-    border-left: 4px solid#165069; /* A softer primary color for the border */
+    border-left: 4px solid#0374ff; /* A softer primary color for the border */
     box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* Slightly more pronounced shadow */
     padding: 20px; /* Increased padding */
     margin-bottom: 20px; /* Slightly more bottom margin */
@@ -834,7 +824,7 @@ input[type="checkbox"]:checked{
     --text-color: rgb(21, 32, 43); /* dark text */
     --input-background-color: #eee; /* light grey input background */
     --input-text-color:rgb(21, 32, 43); /* dark text for input */
-    --button-background-color:#165069; /* blue button background */
+    --button-background-color:#0374ff; /* blue button background */
     --button-text-color: #fff; /* white text for buttons */
     --alert-background-color: #f8d7da; /* light red for alert background */
     --alert-text-color: #721c24; /* dark red for alert text */
@@ -903,7 +893,7 @@ input[type="checkbox"]:checked{
     --text-color: rgb(197, 155, 3); /* Default dark text */
     --input-background-color: #eee; /* Default light grey input background */
     --input-text-color: rgb(21, 32, 43); /* Default dark text for input */
-    --button-background-color:#165069; /* Default blue button background */
+    --button-background-color:#0374ff; /* Default blue button background */
     --button-text-color: #fff; /* Default white text for buttons */
     --alert-background-color: #f8d7da; /* Default light red for alert background */
     --alert-text-color: #721c24; /* Default dark red for alert text */
@@ -1024,7 +1014,7 @@ input[type="checkbox"]:checked{
 }
 
 .user-count {
-    color:#165069; /* Set the text color to a shade of blue */
+    color:#0374ff; /* Set the text color to a shade of blue */
     font-size: 24px; /* Increase the font size for emphasis */
 }
 
@@ -1084,7 +1074,7 @@ input[type="checkbox"]:checked{
 
 /* Ensure strong text stands out in dark mode */
 .dark-theme .gpt3-response-container strong {
-    color: #165069; /* Bright color for strong text in dark mode */
+    color: #0374ff; /* Bright color for strong text in dark mode */
 }
 
 
@@ -1183,21 +1173,12 @@ input[type="checkbox"]:checked{
 
 
 
-/* Navbar Brand Hover Effect (excluding logo and Akili Check title) */
-.navbar:not(.navbar-brand:hover) .navbar-brand:hover {
-    color: inherit; /* Inherit the text color for brand when not hovered */
-}
 
 /* Navbar Links Hover Effect */
 .navbar-nav .nav-link:hover {
     color: #000000 !important; /* Change text color on hover */
 }
 
-/* Active Link Styling */
-.navbar-nav .nav-link.active {
-    background-color: #1d3250; /* Background color for active link */
-    color: #ffffff; /* Text color for active link */
-}
 
 /* Disabled Link Styling (Login) */
 .navbar-nav .nav-link.disabled {
@@ -1234,7 +1215,7 @@ input[type="checkbox"]:checked{
 /* Mobile Navbar Background Color */
 @media (max-width: 991.98px) {
     .navbar-collapse {
-        background-color: #343a40; /* Dark background color for mobile dropdown */
+        background-color: #0080ff; /* Dark background color for mobile dropdown */
     }
 }
 
@@ -1447,7 +1428,7 @@ input[type="checkbox"]:checked{
 }
 
 .navbar a:hover {
-    background-color: #f5f5f5; 
+    background-color: #9fabb9; 
 }
 
 
@@ -1562,7 +1543,7 @@ input[type="checkbox"]:checked{
 }
 
 .custom-bg-color {
-    background-color:#165069 !important;
+    background-color:#0374ff !important;
     position: bottom;
     left: 0;
     right: 0;
@@ -1588,14 +1569,7 @@ input[type="checkbox"]:checked{
         }
     }
     
-/* Position the Login button at the top right */
-.text-right {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin-top: 10px;
-    margin-right: 10px;
-}
+
 
 /* custom.css */
 .login-button {
@@ -1692,7 +1666,7 @@ input[type="checkbox"]:checked{
 
 .disclaimer-box {
     background-color: #eef3f8; /* A light blue background */
-    border-left: 4px solid#165069; /* A softer primary color for the border */
+    border-left: 4px solid#0374ff; /* A softer primary color for the border */
     box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* Slightly more pronounced shadow */
     padding: 20px; /* Increased padding */
     margin-bottom: 20px; /* Slightly more bottom margin */
@@ -1843,7 +1817,7 @@ input[type="checkbox"]:checked{
 }
 
 .nv-link {
-    background-color:#165069;
+
     color: var(--white-color); /* Assuming you want the text to be white */
     padding: 10px 15px; /* Or any other padding you prefer */
     border-radius: 50px; /* If you want rounded corners */
@@ -1874,7 +1848,7 @@ input[type="checkbox"]:checked{
 
 /* Table Header Styling */
 .table thead th {
-    background-color:#165069; /* Primary color for header */
+    background-color:#0374ff; /* Primary color for header */
     color: white; /* White text for header */
     padding: 10px;
     border-bottom: 2px solid #dee2e6; /* Solid bottom border */
@@ -1926,7 +1900,7 @@ input[type="checkbox"]:checked{
 
 .welcome-box {
     background-color: #eef3f8; /* A light blue background */
-    border-left: 4px solid #165069; /* A softer primary color for the border */
+    border-left: 4px solid #0374ff; /* A softer primary color for the border */
     box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* Slightly more pronounced shadow */
     padding: 20px; /* Increased padding */
     margin-bottom: 20px; /* Slightly more bottom margin */
@@ -1977,7 +1951,7 @@ input[type="checkbox"]:checked{
     --text-color: rgb(21, 32, 43); /* dark text */
     --input-background-color: #eee; /* light grey input background */
     --input-text-color:rgb(21, 32, 43); /* dark text for input */
-    --button-background-color:#165069; /* blue button background */
+    --button-background-color:#0374ff; /* blue button background */
     --button-text-color: #fff; /* white text for buttons */
     --alert-background-color: #f8d7da; /* light red for alert background */
     --alert-text-color: #721c24; /* dark red for alert text */
@@ -2134,7 +2108,7 @@ input[type="checkbox"]:checked{
 
 /* Ensure strong text stands out in dark mode */
 .dark-theme .gpt3-response-container strong {
-    color:#165069; /* Bright color for strong text in dark mode */
+    color:#0374ff; /* Bright color for strong text in dark mode */
 }
 
 /* Adjusting the color for text-green class in dark mode for better visibility */
@@ -2226,11 +2200,6 @@ input[type="checkbox"]:checked{
 
 
 
-/* Navbar Brand (Logo and Akili Check) */
-.navbar-brand {
-    color: #c7baba; /* Text color for brand */
-    font-weight: bold;
-}
 
 
 /* Navbar Links (Home, Login) */
@@ -2241,15 +2210,7 @@ input[type="checkbox"]:checked{
 
 
 
-/* Navbar Brand Hover Effect (excluding logo and Akili Check title) */
-.navbar:hover .navbar-brand {
-    color: #000000 !important; /* Text color for brand */
-}
 
-/* Navbar Brand Hover Effect (excluding logo and Akili Check title) */
-.navbar:not(.navbar-brand:hover) .navbar-brand:hover {
-    color: inherit; /* Inherit the text color for brand when not hovered */
-}
 
 /* Navbar Links Hover Effect */
 .navbar-nav .nav-link:hover {
@@ -2290,13 +2251,13 @@ input[type="checkbox"]:checked{
 
 /* Navbar Toggler Icon Color */
 .navbar-toggler-icon {
-    background-color: #000000; /* Toggler icon color */
+    background-color: #0374ff !important; /* Toggler icon color */
 }
 
 /* Mobile Navbar Background Color */
 @media (max-width: 991.98px) {
     .navbar-collapse {
-        background-color: #165069; /* Dark background color for mobile dropdown */
+        background-color: #ffffff; /* white background color for mobile dropdown */
     }
 
     .navbar-nav .nav-link {
@@ -2362,7 +2323,7 @@ input[type="checkbox"]:checked{
   .countdown-box-inner {
     width: 80px;
     height: 80px;
-    background-color: #165069; /* Change to your desired color */
+    background-color: #0374ff; /* Change to your desired color */
     color: white;
     font-size: 24px;
     font-weight: bold;
@@ -2376,7 +2337,7 @@ input[type="checkbox"]:checked{
     margin-top: 10px;
     font-size: 18px;
     font-weight: bold;
-    color: #165069; /* Change to your desired color */
+    color: #0374ff; /* Change to your desired color */
     margin: 90px;
   }
   
@@ -2389,7 +2350,7 @@ input[type="checkbox"]:checked{
   
   h2 {
     font-size: 36px;
-    color: #165069; /* Change to your desired color */
+    color: #0374ff; /* Change to your desired color */
     margin: 0; /* Remove default margin for better centering */
   }
   
