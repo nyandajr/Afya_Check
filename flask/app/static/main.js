@@ -60,7 +60,7 @@ $(document).ready(function() {
         setTimeout(function() {
           $("#spinnerContainer").hide();
           $("#buttonText").text(lang === "sw" ? "Tathmini" : "Check");
-        }, 2500); // 2-second delay
+        }, 2500); // 1-second delay
       },
       error: function(error) {
         // Handle AJAX errors
@@ -154,30 +154,17 @@ function switchLang(lang){
   })
 }
 
+// Logic for handling checkbox changes
 document.addEventListener('DOMContentLoaded', function() {
   const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-  const categories = new Set();
 
   checkboxes.forEach(function(checkbox) {
       checkbox.addEventListener('change', function() {
-          const category = this.getAttribute('data-category');
-
-          if (this.checked) {
-              categories.add(category);
-          } else {
-              categories.delete(category);
-          }
-
-          checkboxes.forEach(function(otherCheckbox) {
-              if (!categories.has(otherCheckbox.getAttribute('data-category'))) {
-                  otherCheckbox.disabled = categories.size > 0;
-              } else {
-                  otherCheckbox.disabled = false;
-              }
-          });
+          // No need for category-based logic, each checkbox operates independently
       });
   });
 });
+
 
 // Function to validate age as the user types
 document.getElementById("age").addEventListener("input", function () {
@@ -303,3 +290,73 @@ function switchLogo() {
 
 // Call switchLogo when the page loads
 document.addEventListener('DOMContentLoaded', switchLogo);
+
+
+// Function to send a message to the GPT-3 API and display the response
+function sendMessageToGPT(message) {
+  // Prepare the data to send to the server
+  const requestData = {
+      message: message
+  };
+
+  // Send a POST request to the server
+  fetch('/gpt3', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestData)
+  })
+  .then(response => {
+      if (!response.ok) {
+          throw new Error('Network response was not ok');
+      }
+      return response.json();
+  })
+  .then(data => {
+      // Display the response from GPT-3
+      displayGPTResponse(data.response);
+  })
+  .catch(error => {
+      console.error('Error:', error);
+      // Handle error if necessary
+  });
+}
+
+// Function to display the response from GPT-3
+function displayGPTResponse(response) {
+  // Select the chat container element
+  const chatContainer = document.getElementById('chat-container');
+
+  // Create a new message element for the GPT-3 response
+  const messageElement = document.createElement('div');
+  messageElement.classList.add('message', 'user-message');
+  messageElement.textContent = response;
+
+  // Append the message element to the chat container
+  chatContainer.appendChild(messageElement);
+}
+
+// Function to handle sending a message when the send button is clicked
+function handleSendMessage() {
+  // Get the message text from the input field
+  const messageInput = document.getElementById('chat-input');
+  const message = messageInput.value.trim();
+
+  // Clear the input field
+  messageInput.value = '';
+
+  // Send the message to GPT-3
+  sendMessageToGPT(message);
+}
+
+// Add event listener to the send button
+document.getElementById('send-btn').addEventListener('click', handleSendMessage);
+
+// Optional: Allow sending a message when the Enter key is pressed in the input field
+document.getElementById('chat-input').addEventListener('keypress', function(event) {
+  if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent the default form submission
+      handleSendMessage(); // Send the message
+  }
+});

@@ -12,15 +12,31 @@
     {% block styles %}{% endblock %}
 </head>
 <body class="custom-bg-dark mx-2 theme-light pt-0 mt-0">
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Your Page Title</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Font Awesome CSS (for icons) -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <!-- Custom CSS -->
+        <style>
+            /* Add any custom CSS here */
+        </style>
+    </head>
+    <body>
+    
 <!-- Navigation Bar -->
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: white; padding: 0; width: 100vw;">
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: white; padding: 0; width: 100vw;">
     <div class="container-fluid">
- <!-- Logo and Title -->
-<div class="d-flex align-items-center" onclick="window.location.href='{{ url_for('index') }}';" style="cursor: pointer;">
-    <img src="{{url_for('static', filename='images/Akili_Logo.png')}}" alt="Akili Logo" style="width: 60px; height: auto;">
-    <strong style="font-weight: bold; color: black; margin-left: 5px;">Akili Check</strong>
-</div>
-
+        <!-- Logo and Title -->
+        <div class="d-flex align-items-center" onclick="window.location.href='{{ url_for('index') }}';" style="cursor: pointer;">
+            <img src="{{url_for('static', filename='images/Akili_Logo.png')}}" alt="Akili Logo" style="width: 60px; height: auto;">
+            <strong style="font-weight: bold; color: black; margin-left: 5px;">Akili Check</strong>
+        </div>
 
         <!-- Toggle Button -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,41 +58,41 @@
                         <i class="bi bi-globe"></i> {% if session['lang'] == "sw" %}Chagua lugha{% else %}Choose Language{% endif %}
                     </a>
                 </li>
-                {% if current_user.is_authenticated %}
-                <li class="nav-item ms-2">
-                    <a href="{{url_for('scores')}}" class="nav-link nv-link text scores-btn {% if curr_page=='scores' %}active{% endif %}" style="border-radius: 100px; color: black; font-weight: bold;">
-                        <i class="bi bi-bar-chart-fill"></i>
-                        {% if session['lang'] == "sw" %}Alama Zako{% else %}Your scores{% endif %} - {{ current_user.username }}
-                    </a>
-                </li>
-                <li class="nav-item ms-2">
-                    <a href="{{url_for('logout')}}" class="nav-link nv-link text {% if curr_page=='logout' %}active{% endif %}" style="border-radius: 100px; color: black; font-weight: bold;">
-                        <i class="bi bi-box-arrow-right"></i>
-                        {% if session['lang'] == "sw" %}Ondoka{% else %}Logout{% endif %}
-                    </a>
-                </li>
-                {% else %}
                 <li class="nav-item ms-2">
                     <a href="{{ url_for('login') }}" class="nav-link nv-link text {% if curr_page=='login' %}active{% endif %}" style="border-radius: 100px; color: black; font-weight: bold;">
                         <i class="bi bi-box-arrow-in-right"></i> {% if session['lang'] == "sw" %}Ingia{% else %}Login{% endif %}
                     </a>
                 </li>
-                {% endif %}
                 <li class="nav-item ms-2">
                     <a class="nav-link" href="#" id="themeSwitch" style="border-radius: 100px; color: black; font-weight: bold;">
                         <i class="bi bi-lightbulb"></i> {% if session['lang'] == "sw" %}Badili muonekano{% else %}Change Theme{% endif %}
                     </a>
                 </li>
-                <!-- New "Get Connected with Specialist" button -->
                 <li class="nav-item ms-2">
-                    <a class="nav-link" href="{{ url_for('specialists') }}" style="border-radius: 100px; color: black; font-weight: bold;">
-                        <i class="bi bi-person"></i> {% if session['lang'] == "sw" %}Unganishwa na Wataalamu{% else %}Get Connected with Specialist{% endif %}
+                    <a class="nav-link" href="{{ url_for('chatbot') }}" style="border-radius: 100px; color: black; font-weight: bold;">
+                        <i class="bi bi-person"></i> {% if session['lang'] == "sw" %}Chat na Mtaalam wa AI{% else %}Chat with AI Specialist{% endif %}
                     </a>
                 </li>
+                <!-- Include other navigation links here -->
             </ul>
         </div>
     </div>
 </nav>
+
+
+    <!-- Your content goes here -->
+    
+    <!-- Bootstrap JS (optional, only if you need JavaScript features) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script>
+        // Add any custom JavaScript here
+    </script>
+    </body>
+    </html>
+    
 <!-- Language Selection Modal -->
 <div class="modal fade" id="languageModal" tabindex="-1" aria-labelledby="languageModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -111,7 +127,8 @@
 
     {% block sponsors %}
     <div class="mt-4 border-top">
-        <p class="text pt-1">Sponsored By:</p>
+        <p class="text pt-1 title">Sponsors and Partners:</p>
+
         <div class="sponsors">
             <div class="sponsor-item">
                 <img src="{{url_for('static', filename='images/udom-logo.png')}}" alt="UDOM Logo">
@@ -126,8 +143,29 @@
                 <a href="https://nm-aist.ac.tz/" target="_blank">NM-AIST</a>
             </div>
             <div class="sponsor-item">
+                <img src="{{url_for('static', filename='images/ai4d_africa_logo.png')}}" alt="IDRC Logo">
+                <a href="https://africa.ai4d.ai" target="_blank">AI4D AFRICA </a>
+            </div>
+            
+            <div class="sponsor-item">
+                <img src="{{url_for('static', filename='images/sida_logo.png')}}" alt="Sida  Logo">
+                <a href="https://www.sida.se/en">SIDA </a>
+            </div>
+            <div class="sponsor-item">
+               <img src="{{url_for('static', filename='images/idrc_logo.png')}}" alt="IDRC Logo" style="width: 170px;">
+                <a href="https://idrc-crdi.ca/en/initiative/artificial-intelligence-development-africa" target="_blank">IDRC </a>
+            </div>
+            <div class="sponsor-item">
                 <img src="{{url_for('static', filename='images/Amana logo.png')}}" alt="Amana hospital Logo">
                 <a href="http://amanarrh.go.tz" target="_blank">Amana </a>
+            </div>
+            <div class="sponsor-item">
+                <img src="{{url_for('static', filename='images/Mirembe_logo.png')}}" alt="MNMH Logo">
+                <a href="https://mnmh.or.tz" target="_blank">MNMH</a>
+            </div>
+            <div class="sponsor-item">
+                <img src="{{url_for('static', filename='images/who_logo.png')}}" alt="WHO Logo">
+                <a href="https://www.who.int" target="_blank">WHO</a>
             </div>
         </div>
     </div>
