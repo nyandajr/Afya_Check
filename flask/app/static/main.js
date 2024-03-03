@@ -100,17 +100,18 @@ $(document).ready(function() {
 
 
 
-// Function to activate dark theme
 function activateDarkTheme() {
   document.body.classList.add('dark-theme'); // Add the dark-theme class to the body
   localStorage.setItem('theme', 'dark'); // Update local storage
+  $(".navbar").addClass('dark-theme'); // Apply dark theme styles to the navbar
 }
 
-// Function to deactivate dark theme
 function deactivateDarkTheme() {
   document.body.classList.remove('dark-theme'); // Remove the dark-theme class from the body
   localStorage.setItem('theme', 'light'); // Update local storage
+  $(".navbar").removeClass('dark-theme'); // Remove dark theme styles from the navbar
 }
+
 
 // Initial theme check and setting
 let themeState = localStorage.getItem('theme'); // Get the current theme state from local storage
@@ -360,3 +361,6 @@ document.getElementById('chat-input').addEventListener('keypress', function(even
       handleSendMessage(); // Send the message
   }
 });
+
+
+
