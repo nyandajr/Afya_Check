@@ -11,7 +11,210 @@
     
     {% block styles %}{% endblock %}
 </head>
-<body class="custom-bg-dark mx-2 theme-light pt-0 mt-0">
+<body class="custom-bg-dark mx-2 theme-light pt-0 mt-0"><!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Akili Check | {{ title }}</title>
+        <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+        
+        {% block styles %}{% endblock %}
+    </head>
+    <body class="custom-bg-dark mx-2 theme-light pt-0 mt-0">
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Your Page Title</title>
+            <!-- Bootstrap CSS -->
+            <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+            <!-- Font Awesome CSS (for icons) -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+            <!-- Custom CSS -->
+            <style>
+                /* Add any custom CSS here */
+            </style>
+        </head>
+        <body>
+            <nav class="navbar navbar-expand-lg" id="navbar" style="padding: 0; width: 100vw;">
+    
+        <div class="container-fluid">
+            <!-- Logo and Title -->
+            <div class="d-flex align-items-center" onclick="window.location.href='{{ url_for('index') }}';" style="cursor: pointer;">
+                <img src="{{url_for('static', filename='images/Akili_Logo.png')}}" alt="Akili Logo" style="width: 60px; height: auto;">
+                <strong style="font-weight: bold; margin-left: 5px;">Akili Check</strong>
+            </div>
+    
+            <!-- Toggle Button with Font Awesome "bars" icon -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="fa fa-bars"></span>
+    </button>
+    
+    
+            <!-- Navigation Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto"> <!-- Pushes the buttons to the right -->
+                    <!-- Home, Change Language, and Login buttons on the left -->
+                    <li class="nav-item">
+                        <a class="nav-link {% if curr_page=='home' %}active{% endif %}" href="{{ url_for('index') }}" style="border-radius: 100px; font-weight: bold;">
+                            <i class="bi bi-house-door-fill"></i>
+                            {% if session['lang'] == "sw" %}Karibu{% else %}Home{% endif %}
+                        </a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <a class="nav-link" href="#" id="themeSwitch" style="border-radius: 100px; font-weight: bold;">
+                            <i class="bi bi-lightbulb"></i> {% if session['lang'] == "sw" %}Badili muonekano{% else %}Change Theme{% endif %}
+                        </a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#languageModal" style="border-radius: 100px; font-weight: bold;">
+                            <i class="bi bi-globe"></i> {% if session['lang'] == "sw" %}Chagua lugha{% else %}Choose Language{% endif %}
+                        </a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <a class="nav-link" href="{{ url_for('chatbot') }}" style="border-radius: 100px; font-weight: bold;">
+                            <i class="bi bi-person"></i> {% if session['lang'] == "sw" %}Chat na Mtaalam wa AI{% else %}Chat with AI Specialist{% endif %}
+                        </a>
+                    </li>
+                    {% if current_user.is_authenticated %}
+                        <!-- Scores and Logout buttons for authenticated users -->
+                        <li class="nav-item ms-2">
+                            <a href="{{ url_for('scores') }}" class="nav-link nv-link text {% if curr_page=='scores' %}active{% endif %}" style="border-radius: 100px; font-weight: bold;color:#007bff !important  ">
+    
+                                <i class="bi bi-file-check-fill"></i>
+                                Your Scores {{ current_user.username }}
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item ms-2">
+                            <a href="{{ url_for('logout') }}" class="nav-link nv-link text {% if curr_page=='logout' %}active{% endif %}" style="border-radius: 100px; font-weight: bold; ">
+                                <i class="bi bi-box-arrow-right"></i> {% if session['lang'] == "sw" %}Ondoka{% else %}Logout{% endif %}
+                            </a>
+                        </li>
+                    {% else %}
+                        <!-- If user is not authenticated, show login button -->
+                        <li class="nav-item ms-2">
+                            <a href="{{ url_for('login') }}" class="nav-link nv-link text {% if curr_page=='login' %}active{% endif %}" style="border-radius: 100px; font-weight: bold;">
+                                <i class="bi bi-door-open-fill"></i> {% if session['lang'] == "sw" %}Ingia{% else %}Login{% endif %}
+                            </a>
+                        </li>
+                        
+                    {% endif %}
+                   
+                    
+                    <!-- Include other navigation links here -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    
+    
+    
+        <!-- Your content goes here -->
+        
+        <!-- Bootstrap JS (optional, only if you need JavaScript features) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <!-- Custom JavaScript -->
+        <script>
+            // Add any custom JavaScript here
+        </script>
+        </body>
+        </html>
+        
+    <!-- Language Selection Modal -->
+    <div class="modal fade" id="languageModal" tabindex="-1" aria-labelledby="languageModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="languageModalLabel">{% if session['lang'] == "sw" %}Chagua lugha yako{% else %}Choose your language{% endif %}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Language Selection Dropdown -->
+                    <select name="language" id="language" class="custom-form-select-sm">
+                        <option value="en" {% if session['lang'] == "en" %}selected{% endif %}>English</option>
+                        <option value="sw" {% if session['lang'] == "sw" %}selected{% endif %}>Kiswahili</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% if session['lang'] == "sw" %}Funga{% else %}Close{% endif %}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+            </div>
+        </div>
+    </div>
+    
+    <!-- Content Section -->
+    <div class="col-12 col-md-10 col-lg-9 mx-auto mt-4">
+        <!-- Your existing content goes here -->
+        {% block content %}{% endblock %}
+    
+        {% block sponsors %}
+        <div class="mt-4 border-top">
+            <p class="text pt-1 title">Sponsors and Partners:</p>
+    
+            <div class="sponsors">
+                <div class="sponsor-item">
+                    <img src="{{url_for('static', filename='images/udom-logo.png')}}" alt="UDOM Logo">
+                    <a href="https://udom.ac.tz/" target="_blank">UDOM</a>
+                </div>
+                <div class="sponsor-item">
+                    <img src="{{url_for('static', filename='images/ai4dlab.png')}}" alt="AI4D Labs Logo">
+                    <a href="https://ai4dlab.or.tz/" target="_blank">AI4D Labs</a>
+                </div>
+                <div class="sponsor-item">
+                    <img src="{{url_for('static', filename='images/mandela-logo.png')}}" alt="NM-AIST Logo">
+                    <a href="https://nm-aist.ac.tz/" target="_blank">NM-AIST</a>
+                </div>
+                <div class="sponsor-item">
+                    <img src="{{url_for('static', filename='images/ai4d_africa_logo.png')}}" alt="IDRC Logo">
+                    <a href="https://africa.ai4d.ai" target="_blank">AI4D AFRICA </a>
+                </div>
+                
+                <div class="sponsor-item">
+                    <img src="{{url_for('static', filename='images/sida_logo.png')}}" alt="Sida  Logo">
+                    <a href="https://www.sida.se/en">SIDA </a>
+                </div>
+                <div class="sponsor-item">
+                   <img src="{{url_for('static', filename='images/idrc_logo.png')}}" alt="IDRC Logo" style="width: 170px;">
+                    <a href="https://idrc-crdi.ca/en/initiative/artificial-intelligence-development-africa" target="_blank">IDRC </a>
+                </div>
+                <div class="sponsor-item">
+                    <img src="{{url_for('static', filename='images/Amana logo.png')}}" alt="Amana hospital Logo">
+                    <a href="http://amanarrh.go.tz" target="_blank">Amana </a>
+                </div>
+                <div class="sponsor-item">
+                    <img src="{{url_for('static', filename='images/Mirembe_logo.png')}}" alt="MNMH Logo">
+                    <a href="https://mnmh.or.tz" target="_blank">MNMH</a>
+                </div>
+                <div class="sponsor-item">
+                    <img src="{{url_for('static', filename='images/who_logo.png')}}" alt="WHO Logo">
+                    <a href="https://www.who.int" target="_blank">WHO</a>
+                </div>
+            </div>
+        </div>
+        {% endblock sponsors %}
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename='main.js')}}"></script>
+    {% block script %}{% endblock %}
+    </body>
+    </html>
+    
     <!DOCTYPE html>
     <html lang="en">
     <head>
