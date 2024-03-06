@@ -12,7 +12,7 @@
     --primary-color:#0374ff; /* Primary color for light theme */
     --primary-color-dark:#0374ff; /* Darker primary color for light theme */
     --white-color: rgb(0, 0, 0); /* Text color for light theme, which is black */
-    --input-bg-color: rgb(223, 226, 231); /* Input field background for light theme */
+    --input-bg-color: #0374ff !important; /* Input field background for light theme */
     --input-border-color: #d1d1d1; /* Input field border for light theme */
     --primary-color-hover: #000000; /* Hover color for light theme */
 }
@@ -1669,7 +1669,7 @@ input[type="checkbox"]:checked{
 }
 
 .navbar li {
-    list-style-type: none; /* Remove bullet points */
+    list-style-type: none; 
     flex-basis: 100%; /* Forces each button to full width */
 }
 
@@ -1749,7 +1749,7 @@ input[type="checkbox"]:checked{
 .custom-btn:hover {
     background-color: var(--primary-color-dark); /* Darken the button on hover */
     color: var(--white-color); /* Keep text white on hover */
-    /* Rest of your styles */
+    
 }
 
 
@@ -2156,8 +2156,8 @@ input[type="checkbox"]:checked{
 }
 
 /* Navbar Toggler Icon Color */
-.navbar-toggler-icon {
-    background-color: #0374ff !important; /* Toggler icon color */
+.fa-bars {
+    color: #0374ff !important; /* Icon color */
 }
 
 /* Mobile Navbar Background Color */
