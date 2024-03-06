@@ -12,7 +12,7 @@
     --primary-color:#0374ff; /* Primary color for light theme */
     --primary-color-dark:#0374ff; /* Darker primary color for light theme */
     --white-color: rgb(0, 0, 0); /* Text color for light theme, which is black */
-    --input-bg-color: #0374ff !important; /* Input field background for light theme */
+    --input-bg-color: #0374ff; /* Input field background for light theme */
     --input-border-color: #d1d1d1; /* Input field border for light theme */
     --primary-color-hover: #000000; /* Hover color for light theme */
 }
