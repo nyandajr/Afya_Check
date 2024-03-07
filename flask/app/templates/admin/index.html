@@ -2,14 +2,11 @@
 
 {% block content %}
 <div class="main-text" style="padding: 20px;">
+  <h class="title"></h>
 
-  
-  <h class="title">
-   
-  
   <div class="card-deck mt-3">
     {% for user in users %}
-      <div class="card">
+      <div class="card {% if theme == 'dark' %}text-light{% endif %}">
         <div class="card-body">
           <h5 class="card-title">{{ user.username }}</h5>
           <p class="card-text">{{ user.age }} years old</p>
@@ -29,5 +26,3 @@
 
 </div>
 {% endblock content %}
-
-{% set curr_page = "users" %}
