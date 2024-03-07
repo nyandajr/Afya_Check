@@ -111,12 +111,7 @@ body,
     outline: var(--primary-color) solid 1px;
 }
 
-.border-green {
-    border: 2px solid var(--primary-color);
-    padding: 10px;
-    border-radius: 10px;
-    margin: 5px 0px;
-}
+
 
 .title {
     font-size: 3.5rem;
@@ -199,16 +194,7 @@ input[type="checkbox"]:checked{
     float: right;
 }
 
-.annotation-text {
-    color: #327434 !important;
-}
 
-#loading .fa-spinner {
-    font-size: 30px;  /* Change as needed */
-    margin-right: 10px; /* Space between spinner and text */
-    color:#007bff; /* This is a standard green color */
-
-}
 
 
 .main-heading {
@@ -686,7 +672,7 @@ input[type="checkbox"]:checked{
         display: block;
         width: 100%;
         overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
+        
     }
 }
 
@@ -1771,7 +1757,7 @@ input[type="checkbox"]:checked{
 /* To maintain the background color change when hovering */
 .nv-link:hover {
     background-color: rgb(255, 255, 255); /* Same background color on hover */
-    /* ... any other hover styles ... */
+    
 }
 
 
@@ -1814,7 +1800,7 @@ input[type="checkbox"]:checked{
         display: block;
         width: 100%;
         overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
+      
     }
 }
 
@@ -2171,5 +2157,14 @@ input[type="checkbox"]:checked{
     }
 }
 
-
-
+/*Caution message for Early Check in Page */
+.caution-message {
+    /* Add your styles here */
+    background-color: #174d73 !important; /* Yellow background */
+    border-color: #ffeeba; /* Border color */
+    color: white !important; /* Text color */
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+    font-size:small;
+}

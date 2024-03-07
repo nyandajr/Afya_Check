@@ -53,7 +53,7 @@
                         {% if session['lang'] == "sw" %}Karibu{% else %}Home{% endif %}
                     </a>
                 </li>
-                <li class="nav-item ms-2">
+                <li class="nav-item">
                     <a class="nav-link" href="#" id="themeSwitch" style="border-radius: 100px; font-weight: bold;">
                         <i class="bi bi-lightbulb"></i> {% if session['lang'] == "sw" %}Badili muonekano{% else %}Change Theme{% endif %}
                     </a>
@@ -71,7 +71,7 @@
                 {% if current_user.is_authenticated %}
                     <!-- Scores and Logout buttons for authenticated users -->
                     <li class="nav-item ms-2">
-                        <a href="{{ url_for('scores') }}" class="nav-link nv-link text {% if curr_page=='scores' %}active{% endif %}" style="border-radius: 100px; font-weight: bold;color:#007bff !important  ">
+                        <a class="nav-link" href="{{ url_for('scores') }}"  {% if curr_page=='scores' %}active{% endif %}" style="border-radius: 100px; font-weight: bold;  ">
 
                             <i class="bi bi-file-check-fill"></i>
                             Your Scores {{ current_user.username }}

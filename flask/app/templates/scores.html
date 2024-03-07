@@ -2,14 +2,18 @@
 
 {% block content %}
 <div class="subtitle text-center my-2">
-    Previous Assessment Scores
+    {% if session['lang'] == "sw" %}
+        Rekodi za Tathmini Zilizopita
+    {% else %}
+        Previous Assessment Scores
+    {% endif %}
 </div>
 <div>
     {% if session['lang'] == "sw" %}
         <p>
             Habari, {{ current_user.username }}.
             {% if scores %}
-                Ufuatao ni  ufupisho wa tathmini ulizofanya hadi sasa:
+                Ufuatao ni ufupisho wa tathmini ulizofanya hadi sasa. Taarifa hizi zimehifadhiwa kwa manufaa yako tu na hazitashirikishwa na mtu yeyote nje ya jukwaa hili.
             {% else %}
                 Hujafanya tathmini yeyote bado.
             {% endif %}
@@ -18,7 +22,7 @@
         <p>
             Hello, {{ current_user.username }}. 
             {% if scores %}
-                Here is a summary of the assessments you've taken so far:
+                Here is a summary of the assessments you've taken so far. These records are kept solely for your benefit and will not be shared with anyone outside this platform.
             {% else %}
                 You have not taken any assessments yet.
             {% endif %}
@@ -55,4 +59,3 @@
 {% endblock content %}
 
 {% set curr_page="scores" %}
-

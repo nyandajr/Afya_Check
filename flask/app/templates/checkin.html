@@ -9,6 +9,15 @@
             Early Check-in
         {% endif %}
     </div>
+
+    <div class="alert alert-warning caution-message" role="alert">
+        {% if session['lang'] == "sw" %}
+            Sehemu hii inajumuisha makundi ya dalili za magonjwa ya afya ya kiakili ambazo zinaweza kubainisha hali ya awali ya afya yako ya kiakili. Data za dalili zimepitishwa katika teknolojia ya Akili Bandia/Mnemba ili kufanya utabiri. Tafadhali elewa kuwa utabiri uliofanywa si uchunguzi wa mwisho bali ni kwa ajili ya uchunguzi wa awali tu. Watumiaji wanashauriwa kuzingatia hilo.
+        {% else %}
+            This section includes categories of mental health symptoms that may indicate the early status of your mental well-being. The symptoms data are trained using Artificial intelligence algorithms to make predictions. Please understand that the predictions made are not final diagnoses but are for preliminary screening only. Users are advised to be cautious.
+        {% endif %}
+    </div>
+    
     <form action="{{url_for('check_in')}}" method="post" id="checkInForm">
         {% if not current_user.is_authenticated %}
             <div class="mt-3">
