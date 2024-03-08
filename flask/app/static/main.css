@@ -643,7 +643,7 @@ input[type="checkbox"]:checked{
 
 /* Zebra Striping for Rows */
 .table-striped tbody tr:nth-of-type(odd) {
-    background-color: rgba(237, 242, 247, 0.5); /* Lighter shade for odd rows */
+    background-color: rgba(0, 117, 235, 0.5); /* Lighter shade for odd rows */
 }
 
 /* Table Header Styling */
@@ -658,7 +658,7 @@ input[type="checkbox"]:checked{
 .table td, .table th {
     padding: .75rem;
     vertical-align: top;
-    border-top: 1px solid #dee2e6;
+    border-top: 1px solid #0064c9;
 }
 
 /* Hover Effect on Rows */
@@ -672,7 +672,6 @@ input[type="checkbox"]:checked{
         display: block;
         width: 100%;
         overflow-x: auto;
-        
     }
 }
 
@@ -680,7 +679,7 @@ input[type="checkbox"]:checked{
 .table td, .table th {
     text-align: left;
     font-size: 0.9rem; /* Adjust font size */
-    color: #333; /* Dark text for better readability */
+    color: #000000; /* Dark text for better readability */
 }
 
 /* Right align for numeric values */
@@ -694,8 +693,34 @@ input[type="checkbox"]:checked{
         padding: 10px; /* More padding on smaller screens */
     }
 }
-.nv-link.active {
-    color: black !important;
+
+/* Pagination Styling */
+.pagination {
+    margin-top: 20px;
+}
+
+.pagination .page-item.disabled .page-link {
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+    color: #6c757d;
+}
+
+.pagination .page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.pagination .page-link {
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
 }
 
 .welcome-box {
@@ -863,40 +888,37 @@ input[type="checkbox"]:checked{
     text-align: left;
     border: 1px solid #ddd; /* Light theme cell borders */
     background-color: var(--background-color);
-    color: var(--text-color);
+    color: white;
 }
 
-/* Changes for improved dark mode readability in the admin dashboard: */
-.theme-dark .table tbody tr:nth-child(even) {
-    background-color: #3a3a3a; /* Darker background for even rows in dark mode */
-    color: #eee; /* Set text color for even rows in dark mode */
-}
+
 
 .theme-dark .table tbody tr:nth-child(odd) {
     background-color: #4a4a4a; /* Slightly lighter background for odd rows in dark mode */
-    color: #eee; /* Set text color for odd rows in dark mode */
+    color: #ffffff; /* Set text color for odd rows in dark mode */
 }
 
 /* Increase font size slightly for better legibility in the admin dashboard */
 .table th,
 .table td {
     font-size: 16px;
+    font-weight: 500;
+    color:black !important;
 }
 
-/* Apply the above changes to header in the admin dashboard */
-.theme-dark .table th {
-    background-color: #222; /* Dark theme header background */
-    color: #ffffff;
-}
 
 /* Zebra striping for even rows in the admin dashboard */
 .table tbody tr:nth-child(even) {
-    background-color: #cac8bd; /* Light theme even rows */
+    background-color: #0374ff; /* Updated to a blue shade for even rows */
+   
+}   
+.table tbody tr:nth-child(odd) {
+    background-color: #ffffff; 
+    
 }
-
 /* Style table rows on hover in the admin dashboard */
 .table tbody tr:hover {
-    background-color: #187db7; /* Light theme hover color */
+    background-color: #de051b; /* Light theme hover color */
 }
 
 /* Dark theme styles for the admin dashboard */
@@ -906,12 +928,13 @@ input[type="checkbox"]:checked{
 
 /* Zebra striping for even rows in the admin dashboard */
 .theme-dark .table tbody tr:nth-child(even) {
-    background-color: #444; /* Dark theme even rows */
+    background-color: #0070e0; /* Dark theme even rows */
 }
 
 .theme-dark .table tbody tr:hover {
-    background-color: #666; /* Dark theme hover color */
+    background-color: #555; /* Dark theme hover color */
 }
+
 
 /* Style for the "Delete Account" button in the admin dashboard */
 .delete-account {
@@ -1943,15 +1966,20 @@ input[type="checkbox"]:checked{
 
 /* ADMIN DASHBOARD STYLES */
 
+/* Common styles for both light and dark themes */
 .card-deck {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    background-color: #000000; /* Set blue background color for card decks */
+    padding: 20px; /* Add padding to card decks */
 }
 
 .card {
     width: 18rem; /* Adjust the card width based on your preference */
     margin-bottom: 20px; /* Add some space between cards */
+    border-radius: 100px; /* Add border radius to cards */
+    background-color: #007bff !important; /* Set white background color for cards */
 }
 
 .card-title {
@@ -1983,6 +2011,20 @@ input[type="checkbox"]:checked{
     100% { transform: rotate(360deg); }
 }
 
+/* Dark theme specific styles */
+.dark .card {
+    background-color: #343a40; /* Set background color for cards in dark theme */
+    color: #ffffff; /* Set text color for cards in dark theme */
+}
+
+.dark .btn-danger {
+    background-color: #dc3545; /* Set button background color for dark theme */
+    color: #ffffff; /* Set button text color for dark theme */
+}
+
+.dark .btn-danger:hover {
+    background-color: #bb2d3b; /* Set button background color on hover for dark theme */
+}
 
 
 .custom-container {
