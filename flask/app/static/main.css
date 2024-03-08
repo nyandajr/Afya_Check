@@ -891,7 +891,11 @@ input[type="checkbox"]:checked{
     color: white;
 }
 
-
+/* Changes for improved dark mode readability in the admin dashboard: */
+.theme-dark .table tbody tr:nth-child(even) {
+    background-color: #3a3a3a; /* Darker background for even rows in dark mode */
+    color: #eee; /* Set text color for even rows in dark mode */
+}
 
 .theme-dark .table tbody tr:nth-child(odd) {
     background-color: #4a4a4a; /* Slightly lighter background for odd rows in dark mode */
@@ -906,19 +910,20 @@ input[type="checkbox"]:checked{
     color:black !important;
 }
 
+/* Apply the above changes to header in the admin dashboard */
+.theme-dark .table th {
+    background-color: #222; /* Dark theme header background */
+    color: #ffffff;
+}
 
 /* Zebra striping for even rows in the admin dashboard */
 .table tbody tr:nth-child(even) {
-    background-color: #0374ff; /* Updated to a blue shade for even rows */
-   
-}   
-.table tbody tr:nth-child(odd) {
-    background-color: #ffffff; 
-    
+    background-color: #cac8bd; /* Light theme even rows */
 }
+
 /* Style table rows on hover in the admin dashboard */
 .table tbody tr:hover {
-    background-color: #de051b; /* Light theme hover color */
+    background-color: #187db7; /* Light theme hover color */
 }
 
 /* Dark theme styles for the admin dashboard */
