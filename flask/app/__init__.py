@@ -9,9 +9,11 @@ import os
 app = Flask(__name__)
 
 #app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///afya_check.db"
-app.config["SQLALCHEMY_DATABASE_URI"] =os.environ.get("DATABASE_URL")
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
+
 
 #postgres://afya_check_user:3ZuYV9VQPrrd1LmPrXmJORgs7tWVybOX@dpg-cmgdn0gl5elc73fs5330-a.oregon-postgres.render.com/afya_check
+#postgres://akilicheck_database_user:Ju5HWhDLsJqnSGnhkjasC1ezjHq3edzf@dpg-cops4tdjm4es73aakde0-a/akilicheck_database
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 app.config["SECRET_KEY"] = "secret_key_from_env"
 
