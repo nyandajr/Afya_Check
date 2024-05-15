@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="text-center">
+	<h3 class="subtitle my-3">
+		{% if session['lang'] == "sw" %}
+			Karibu Akili Check
+		{% else %}
+			Welcome to Akili Check
+		{% endif %}
+	</h3>
+</div>
+<div class="text">
+	<p>
+		{% if session['lang'] == "sw" %}
+			Zana hii imeundwa kukusaidia kuelewa afya yako ya akili kulingana na dalili unazopitia.
+		{% else %}
+			This tool is designed to help you gain insights into your mental well-being based on the 
+			symptoms you report.
+		{% endif %}
+	</p>
+	<p>
+		{% if session['lang'] == "sw" %}
+			<strong>Tafadhali kumbuka</strong> kuwa ufahamu uliotolewa na zana hii unategemea mifumo ya	
+			jumla na haipaswi kuchukuliwa kama hitimisho thabiti. Daima washauriane na mtaalamu wa 
+			matibabu kwa utambuzi sahihi na matibabu.
+		{% else %}
+			<strong>Please note:</strong> The insights provided by this tool are based on general 
+			patterns and should not be considered definitive conclusions. Always consult with a medical 
+			professional for an accurate diagnosis and treatment.	
+		{% endif %}
+	</p>
+	<p>
+		{% if session['lang'] == "sw" %}
+			<strong>Tafadhali</strong> unashauriwa kuanza na tathmini ya awali kisha tathmini ya awali 
+			itakupeleka kwenye tathmini zaidi kulingana na tathminiya awali.
+		{% else %}
+			<strong>We advise</strong> you to begin with the EARLY CHECK-IN. After that, you will be 
+			directed to the respective assessments.
+		{% endif %}
+	</p>
+	<p>
+		{% if session['lang'] == "sw" %}
+			<strong>Zingatia pia</strong> kwamba hatukusanyi taarifa binafsi kama majina yako, sehemu 
+			unapoishi wala chochote kinachokutambua.
+			<i>
+				Unaweza kuchagua kujisajili ili kuweka rekodi ya tathmini zako kwa ajili ya kumbukumbu yako ya baadaye.
+			</i>
+		{% else %}
+			<strong>Please be informed:</strong> This tool does not collect any personally identifiable 
+			information as it aims to maintain your anonymity. <br>
+			<i>
+				You can opt for registration inorder to keep a record of your assessments for personal future reference.
+			</i>
+		{% endif %}
+	</p>
+</div>
+<div class="row mx-auto my-4">
+	<a href="{{url_for('check_in')}}" class="col text-center custom-btn">
+		{% if session['lang'] == "sw" %}
+			Tathmini ya Awali
+		{% else %}
+			Early Check-in
+		{% endif %}
+	</a>
+	<a href="{{url_for('assessments')}}" class="col text-center custom-btn">
+		{% if session['lang'] == "sw" %}
+			Tathmini Zaidi
+		{% else %}
+			Assessment
+		{% endif %}
+	</a>
+</div>
+{% endblock content %}
+
+{% set curr_page="home" %}

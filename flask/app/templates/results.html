@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="subtitle text-center">
+    {{res.title}}
+</div>
+<div class="plot">
+    {{ plot | safe }}
+</div>
+<div class="my-3">
+    {{res.result_text}}
+</div>
+<div id="loading" class="alert alert-warning p-2">
+    {% if session['lang'] == "sw" %}
+        Inapakua...
+    {% else %}
+        Loading... 
+    {% endif %}
+    <i class="bi bi-arrow-repeat"></i>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script>
+    $(window).on('load', function() {
+        $("#loading").hide()
+    })
+</script>
+{% endblock script %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="subtitle text-center">
+    {% if session['lang'] == "sw" %}
+        Ingia
+    {% else %}
+        Login
+    {% endif %}
+</div>
+<div>
+    {% for msg in get_flashed_messages() %}
+        <div class="text-danger my-2 text-center">
+            {{msg}}        
+        </div>
+    {% endfor %}
+    
+    <form method="post" action="{{url_for('login')}}">
+        <div class="mb-3">
+            <label for="username" class="form-label subtext">
+                {% if session['lang'] == "sw" %}
+                    Jina la mtumiaji
+                {% else %}
+                    Username
+                {% endif %}
+            </label>
+            <input type="text" name="username" id="username" class="custom-form-control" placeholder="George Russel">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label subtext">
+                {% if session['lang'] == "sw" %}
+                    Nenosiri
+                {% else %}
+                    Password
+                {% endif %}
+            </label>
+            <input type="password" name="password" id="password" class="custom-form-control" placeholder="password">
+        </div>
+        <div class="mb-3 text-center">
+            <input 
+                type="submit" 
+                value="{% if session['lang'] == 'sw' %}Ingia{% else %}Login{% endif %}" 
+                class="custom-btn px-4 text">
+        </div>
+    </form>
+</div>
+{% endblock content %}
+
+{% set curr_page="login" %}
